@@ -1,0 +1,49 @@
+{
+  "id": "skunk-kush",
+  "name": "Skunk Kush",
+  "aliases": [],
+  "kind": "cultivar",
+  "status": "draft",
+  "summary": "Skunk Kush is a [[kind:cultivar|cultivar]] bred by [[breeder:Sensi Seeds]] from [[hindu-kush|Hindu Kush]] and [[skunk-1|Skunk #1]]. Sensi describes the Hindu Kush side as pure Afghan genetics. It is indica-leaning with a short flowering time both indoors and out, and the breeder gives no release year.",
+  "born": {
+    "unknown": true,
+    "display": "undated"
+  },
+  "origin": {
+    "place": "Netherlands (Sensi Seeds)",
+    "country": "NL",
+    "lat": 52.1,
+    "lon": 5.3
+  },
+  "breeder": "Sensi Seeds",
+  "parents": [
+    "hindu-kush",
+    "skunk-1"
+  ],
+  "traditional_label": "hybrid",
+  "growing": {
+    "environment": "both",
+    "flowering_weeks": {
+      "min": 7,
+      "max": 9
+    }
+  },
+  "sources": [
+    {
+      "title": "Skunk Kush (regular seeds) product page",
+      "publisher": "Sensi Seeds",
+      "category": "breeder",
+      "url": "https://sensiseeds.com/en/regular-seeds/sensi/skunk-kush",
+      "accessed": "2026-09-24"
+    },
+    {
+      "title": "'Skunk Weed': A Beginner's Guide to Skunk",
+      "publisher": "Sensi Seeds",
+      "category": "breeder",
+      "url": "https://sensiseeds.com/en/blog/what-is-skunk-weed-a-beginners-guide-to-skunk/",
+      "accessed": "2026-09-24",
+      "note": "Sensi lists this among the Skunk #1 hybrids it developed from genetics it received in the Netherlands in 1982."
+    }
+  ],
+  "updated": "2026-09-24"
+}

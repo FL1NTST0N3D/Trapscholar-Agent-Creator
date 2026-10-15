@@ -1,0 +1,22 @@
+{
+  "name": "cannabis-mcp-server",
+  "version": "1.0.0",
+  "description": "Cannabis Regulatory Intelligence MCP Server — State-level testing limits, UN INCB scheduling, EU drug precursors, Health Canada regulations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Shahar Ben-David <rootsbybenda@gmail.com> (https://rootsbybenda.com)",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20260313.1",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "agents": "^0.7.6",
+    "csv-parse": "^6.1.0",
+    "wrangler": "^4.73.0",
+    "xlsx": "^0.18.5",
+    "zod": "^4.3.6"
+  }
+}

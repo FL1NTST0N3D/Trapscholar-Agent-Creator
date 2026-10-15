@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "resolveJsonModule": true
+    },
+    "references": [
+        { "path": "apps/web" },
+        { "path": "packages/ai-core" },
+        { "path": "packages/ui" }
+    ],
+    "include": [],
+    "exclude": ["node_modules"]
+}

@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "jsx": "react-jsx",
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": true,
+        "outDir": "dist",
+        "tsBuildInfoFile": "./dist/.tsbuildinfo",
+        "rootDir": "src",
+        "composite": true
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

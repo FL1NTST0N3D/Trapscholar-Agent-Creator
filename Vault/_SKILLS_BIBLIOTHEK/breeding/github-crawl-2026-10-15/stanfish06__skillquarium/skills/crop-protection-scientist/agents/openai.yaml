@@ -1,0 +1,4 @@
+interface:
+  display_name: "Crop Protection Scientist"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $crop-protection-scientist for this task."

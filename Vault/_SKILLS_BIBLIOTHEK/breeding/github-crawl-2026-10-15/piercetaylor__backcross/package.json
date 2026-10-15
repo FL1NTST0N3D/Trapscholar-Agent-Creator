@@ -1,0 +1,58 @@
+{
+  "name": "backcross",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Browser-based characterization and QC of near-isogenic lines against their recurrent and donor parents from SNP genotype files, with chromosome schemes for thirteen crops and the same analysis core as a Node CLI.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.19"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/check-bundle.mjs",
+    "build:cli": "node scripts/build-cli.mjs",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run --project node",
+    "test:browser": "vitest run --project browser",
+    "test:bench": "vitest run --project bench --silent=false --reporter=verbose",
+    "test:watch": "vitest",
+    "fixture": "node scripts/make-fixture.mjs",
+    "contract": "node scripts/make-contract.mjs",
+    "brapi:record": "node scripts/brapi-record.mjs",
+    "a11y:lighthouse": "node scripts/lighthouse-a11y.mjs",
+    "smoke:dist": "node scripts/smoke-dist.mjs dist",
+    "cli": "node src/cli.ts"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "react": "^19.3.0",
+    "react-aria-components": "1.21.1",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/browser-playwright": "5.0.2",
+    "axe-core": "4.13.0",
+    "chrome-launcher": "1.2.1",
+    "esbuild": "0.28.2",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.12.0",
+    "lighthouse": "13.5.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.9",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.1",
+    "vitest": "5.0.2",
+    "vitest-browser-react": "^2.3.0"
+  }
+}

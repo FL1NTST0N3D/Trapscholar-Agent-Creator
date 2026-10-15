@@ -1,0 +1,120 @@
+---
+title: green-cannabis-grow-bible-flowering-phase-and-harvest Cannabis
+created: 2026-04-26
+updated: 2026-04-23
+sources:
+  - "Cervantes - Marijuana Horticulture"
+type: concept
+tags: [cannabis]
+---
+
+## Flowering Phase Cannabis
+
+The flowering phase is the reproductive stage of cannabis growth, triggered by switching
+the [[hps-grow-lights]]
+
+## Water Needs During Flowering
+
+Flowering marijuana uses high levels of water to carry on rapid floral formation. Irrigate
+larger plants in the vegetative and flowering stages when soil is dry one-half inch
+below the surface.
+
+## Common Problems During Flowering
+
+- **Hermaphroditism:** Light leaks or stress can cause female plants to develop male
+  pollen sacs, leading to seeded buds (sinsemilla lost)
+- **Bud mold (botrytis):** High humidity during late flowering causes [[cannabis-nutrient-burn-and-toxicity]]:** Overfeeding during flowering can affect taste and harshen smoke
+- **[[flushing-nutrients]] with plain water or a
+clearing solution to remove residual fertilizers from the growing medium and plant
+tissue. This improves the taste and smoothness of the final product.
+
+## Resin Production
+
+Trichomes (resin glands) develop on calyxes, leaves, and stems during flowering.
+These tiny mushroom-shaped glands produce the cannabinoids (THC, CBD, etc.) and
+terpenes that give cannabis its potency and aroma. Trichome production increases
+throughout flowering, peaking near harvest. Dense resin production is a sign of plant
+health and proper growing conditions.
+
+## Male Plants During Flowering
+
+Male plants flower too, producing pollen sacs that open to release pollen. Males must
+be removed from the grow space before pollen release to prevent fertilization of
+female plants. Once a male plant is identified, it should be removed or isolated
+immediately. Some breeders collect and store male pollen for deliberate breeding
+programs.
+
+## Branching Changes During Flowering
+
+Branching changes when a seedling enters the flowering stage. The vegetative plant
+pattern of opposite phyllotaxy may shift as the plant redirects energy toward flower
+production. Understanding this transition helps growers plan canopy management and
+predict final plant structure.
+
+## Practical Applications
+
+The principles and techniques discussed here have wide-ranging applications
+across multiple disciplines and contexts. Practitioners and researchers
+continue to explore new ways to integrate these concepts into modern practice,
+adapting traditional knowledge to contemporary challenges and opportunities.
+
+## Key Considerations
+
+Several important factors influence the effectiveness and outcomes described
+in this topic. Understanding these considerations helps practitioners make
+informed decisions and avoid common pitfalls. Environmental conditions,
+timing, and material selection all play critical roles.
+
+## Historical Context
+
+The historical development of this subject reflects centuries of accumulated
+knowledge and practical experience. From traditional methods passed down
+through generations to modern scientific approaches, the evolution continues
+to inform current best practices and research directions.
+
+## Common Challenges
+
+Practitioners frequently encounter several challenges when working with
+these concepts. Climate variability, resource limitations, and knowledge
+gaps can all affect outcomes. Addressing these challenges requires patience,
+observation, and a willingness to adapt approaches based on results.
+
+## See Also
+- [[cho-plant-growth-stage-treatment-protocols]]
+- [[hps-grow-lights]] -- preferred lighting for flowering
+- [[green-cannabis-grow-bible-flowering-phase-and-harvest]]
+- [[cannabis-nutrient-phase-management]]
+- [[green-cannabis-grow-bible-vegetative-phase-management]]
+## Practical Applications
+The principles discussed here have direct applications in agricultural systems, ecological restoration, and sustainable resource management.
+Practitioners have demonstrated successful implementation across diverse climates and soil conditions.
+Adaptation to local conditions and careful observation remain central to effective application.
+
+## Research Directions
+Current research explores the intersections between traditional knowledge and modern scientific understanding.
+Comparative studies across different bioregions provide valuable insights into generalizable principles.
+Long-term monitoring and documentation continue to build the evidence base for these approaches.
+Collaborative research networks facilitate knowledge exchange and accelerate innovation.
+
+## Key Considerations
+Context-specific implementation requires attention to local ecology, climate patterns, and community needs.
+Integration with existing systems often yields better results than complete replacement strategies.
+Monitoring and adaptive management are essential for long-term success and continuous improvement.
+
+## Integration Strategies
+Successful implementation often draws on multiple complementary approaches working in concert.
+Scale-appropriate solutions range from backyard gardens to broadacre agricultural systems.
+Knowledge sharing between practitioners accelerates collective learning and refinement of methods.
+
+## Implementation Notes
+Start with small-scale trials before expanding to larger operations.
+Maintain detailed records of conditions, inputs, and outcomes for iterative refinement.
+## Practical Considerations
+Successful implementation requires attention to detail and adaptation to local conditions.
+Field experience and systematic observation remain the most reliable guides for practitioners.
+Documentation of results enables continuous improvement and knowledge sharing.
+
+## Future Directions
+Emerging research continues to validate and refine traditional approaches.
+Integration with modern technology offers new possibilities for monitoring and optimization.
+Collaborative networks facilitate rapid dissemination of innovations and best practices.

@@ -1,0 +1,614 @@
+/* SPDX-License-Identifier: MIT */
+/* Copyright (c) 2026 The Cannabis Landrace Atlas contributors */
+
+:root {
+  --paper: #f6f4ef;
+  --ink: #23211c;
+  --muted: #6f6b61;
+  --line: #d9d5cc;
+  --green: #4f7a43;
+  --green-dark: #3c5f33;
+  --panel-w: 33vw;
+  --ribbon-h: 60px;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { font-family: var(--sans); color: var(--ink); background: var(--paper); }
+
+/* ---- Ribbon ---- */
+.ribbon {
+  height: var(--ribbon-h);
+  display: flex; align-items: center; gap: 18px;
+  padding: 0 20px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  position: relative; z-index: 1500; /* above Leaflet controls (z-index 1000) */
+}
+.wordmark {
+  font-family: var(--serif); font-size: 20px; letter-spacing: 0.02em;
+  color: var(--ink); white-space: nowrap; flex: 0 0 auto;
+}
+.search-group { display: flex; align-items: center; gap: 8px; flex: 1 1 auto; max-width: 440px; margin: 0 auto; }
+.search { position: relative; flex: 1 1 auto; }
+#search-input {
+  width: 100%; padding: 9px 12px; font-size: 14px; font-family: var(--sans);
+  color: var(--ink); background: #fff;
+  border: 1px solid var(--line); border-radius: 6px; outline: none;
+}
+#search-input:focus { border-color: var(--green); }
+
+
+/* Hamburger menu */
+.menu-btn {
+  flex: 0 0 auto; font-size: 18px; line-height: 1; cursor: pointer;
+  background: none; border: 1px solid var(--line); border-radius: 6px;
+  padding: 6px 10px; color: var(--ink);
+}
+.menu-btn:hover { border-color: var(--green); background: #eef0e9; }
+.app-menu {
+  position: absolute; top: calc(var(--ribbon-h) - 6px); left: 16px; z-index: 1200;
+  background: #fff; border: 1px solid var(--line); border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1); padding: 4px; min-width: 160px;
+  display: flex; flex-direction: column;
+  /* Scroll rather than overflow the viewport on short/landscape screens, so the lower items
+     (Heat Maps submenu, License, …) stay reachable. */
+  max-height: calc(100vh - var(--ribbon-h) - 16px);
+  max-height: calc(100dvh - var(--ribbon-h) - 16px);
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.app-menu[hidden] { display: none; }
+.app-menu-item {
+  text-align: left; background: none; border: none; padding: 8px 12px;
+  font: inherit; cursor: pointer; border-radius: 4px; color: var(--ink);
+}
+.app-menu-item:hover { background: #eef0e9; color: var(--green-dark); }
+.app-menu-divider { height: 1px; margin: 4px -4px; background: var(--line); }
+/* Checkable menu items (Labels, States, Rivers, Terrain): a left-side marker so the row
+   reads as toggleable in both states — a grey ✕ when off, a green ✓ when on. */
+.app-menu-check { display: flex; align-items: center; gap: 8px; }
+.app-menu-check::before {
+  content: '✕'; flex: 0 0 auto; width: 1em; text-align: center; color: var(--muted);
+}
+.app-menu-check.on::before { content: '✓'; color: var(--green-dark); }
+/* Heat-map submenu: a parent row (caret) that expands the four heat-map choices in place. */
+.app-menu-sub-toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.app-menu-sub-toggle::after {
+  content: '▸'; flex: 0 0 auto; color: var(--muted); font-size: 11px; transition: transform 0.12s ease;
+}
+.app-menu-sub-toggle[aria-expanded="true"]::after { transform: rotate(90deg); }
+.app-menu-sub-toggle.on { color: var(--green-dark); }
+.app-menu-sub-items { display: flex; flex-direction: column; }
+.app-menu-sub-items[hidden] { display: none; }
+.app-menu-sub-items .app-menu-item { padding-left: 22px; }
+
+/* Menu modal content */
+.modal-note { color: var(--muted); font-size: 13px; }
+.modal-dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0 0 10px; }
+.modal-dl dt { color: var(--muted); } .modal-dl dd { margin: 0; }
+.modal-refs { padding-left: 18px; font-size: 14px; line-height: 1.5; margin: 8px 0; }
+.modal-refs a { color: var(--green-dark); }
+.index-facet { margin: 2px 0; border-top: 1px solid var(--line); padding-top: 4px; }
+summary.index-h1 { font-family: var(--serif); font-size: 17px; cursor: pointer; padding: 4px 0; }
+.index-group { margin: 2px 0 2px 16px; }
+summary.index-h2 { font-size: 14px; color: var(--green-dark); cursor: pointer; padding: 3px 0; }
+.index-list { list-style: none; margin: 2px 0 8px 18px; padding: 0; }
+/* Variety rows mirror the facet-list rows (.modal-list-link): name + place, hover highlight. */
+.index-variety {
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  width: 100%; text-align: left; font: inherit; cursor: pointer; color: var(--ink);
+  background: none; border: none; border-bottom: 1px solid var(--line); padding: 7px 4px;
+}
+.index-variety:hover { background: #eef0e9; }
+
+/* Range/multi-select facets (Height, Flowering Time) in the Index */
+.slider-facet { margin: 6px 0 6px 16px; }
+/* Height: a checkbox per named height, shown across the top of the facet. */
+.height-checks { display: flex; flex-wrap: wrap; gap: 5px 14px; margin: 4px 0 10px; }
+.height-check { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--green-dark); cursor: pointer; }
+.height-check input { cursor: pointer; margin: 0; }
+.height-check:has(input:disabled) { color: var(--muted); cursor: default; }
+.dual-slider { position: relative; height: 32px; margin: 30px 11px 4px 9px; }
+.ds-track {
+  position: absolute; top: 13px; left: 0; right: 0; height: 6px; border-radius: 999px;
+  background: #e6e3da; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+/* Value bubble that floats above each thumb and follows it. */
+.ds-bubble {
+  position: absolute; top: -22px; transform: translateX(-50%);
+  background: var(--green); color: #fff; font-size: 11px; line-height: 1.5;
+  padding: 0 7px; border-radius: 999px; white-space: nowrap; pointer-events: none;
+  min-width: 18px; text-align: center; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.ds-bubble::after {
+  content: ''; position: absolute; left: 50%; top: 100%; transform: translateX(-50%);
+  border: 4px solid transparent; border-top-color: var(--green);
+}
+.ds-fill {
+  position: absolute; top: 0; bottom: 0; border-radius: 999px;
+  background: linear-gradient(var(--green), var(--green-dark));
+}
+.ds-input {
+  position: absolute; top: 0; left: 0; width: 100%; height: 32px; margin: 0;
+  background: none; pointer-events: none; -webkit-appearance: none; appearance: none;
+}
+/* Modern circular knob thumbs: white with a green ring + soft elevation; halo on hover/focus */
+.ds-input::-webkit-slider-thumb {
+  -webkit-appearance: none; pointer-events: auto; cursor: grab;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--green); box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28); margin-top: 0;
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+.ds-input::-moz-range-thumb {
+  pointer-events: auto; cursor: grab;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--green); box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+.ds-input::-webkit-slider-thumb:hover { box-shadow: 0 0 0 6px rgba(79, 122, 67, 0.15), 0 1px 3px rgba(0, 0, 0, 0.28); }
+.ds-input::-moz-range-thumb:hover { box-shadow: 0 0 0 6px rgba(79, 122, 67, 0.15), 0 1px 3px rgba(0, 0, 0, 0.28); }
+.ds-input:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.08); box-shadow: 0 0 0 8px rgba(79, 122, 67, 0.2), 0 1px 3px rgba(0, 0, 0, 0.28); }
+.ds-input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(79, 122, 67, 0.35); }
+.ds-input:active::-moz-range-thumb { cursor: grabbing; transform: scale(1.08); box-shadow: 0 0 0 8px rgba(79, 122, 67, 0.2), 0 1px 3px rgba(0, 0, 0, 0.28); }
+.ds-input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px rgba(79, 122, 67, 0.35); }
+.ds-input::-webkit-slider-runnable-track { background: none; height: 32px; }
+.ds-input::-moz-range-track { background: none; height: 32px; }
+
+/* Ribbon icon button (Index) */
+.icon-btn {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px;
+  cursor: pointer; color: var(--ink);
+}
+.icon-btn:hover { border-color: var(--green); background: #eef0e9; color: var(--green-dark); }
+
+/* Index-heading search results */
+.search-result.search-heading { color: var(--green-dark); font-size: 13px; font-style: italic; }
+
+.search-results {
+  list-style: none; margin: 4px 0 0; padding: 4px;
+  position: absolute; top: 100%; right: 0; left: 0; z-index: 1100;
+  background: #fff; border: 1px solid var(--line); border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06); max-height: 60vh; overflow-y: auto;
+}
+.search-result {
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  padding: 8px 10px; border-radius: 4px; cursor: pointer;
+}
+.search-result:hover, .search-result:focus, .search-result.active { background: #eef0e9; outline: none; }
+.r-name { font-weight: 600; }
+.r-place { color: var(--muted); font-size: 12px; text-align: right; }
+.search-empty { padding: 8px 10px; color: var(--muted); }
+
+/* ---- Layout ---- */
+.layout { height: calc(100% - var(--ribbon-h)); display: flex; }
+.map { flex: 1 1 auto; height: 100%; background: #cfe9ec; } /* aqua ocean */
+.map-error {
+  display: flex; height: 100%; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 15px;
+}
+
+/* ---- Panel ---- */
+.panel {
+  flex: 0 0 0; width: 0; height: 100%; overflow-y: auto;
+  background: #fff; border-left: 1px solid var(--line);
+  transition: flex-basis 0.22s ease, width 0.22s ease;
+  padding: 0;
+}
+body.panel-open .panel { flex-basis: var(--panel-w); width: var(--panel-w); padding: 0 24px 40px; }
+
+/* Keeps the close button + title pinned to the top of the panel while the body scrolls under them.
+   The panel's top padding lives here so the bar sticks flush to the top edge. */
+.panel-header {
+  position: sticky; top: 0; z-index: 2;
+  background: #fff; display: flow-root; /* contain the floated close button */
+  padding: 20px 0 8px; box-shadow: 0 1px 0 var(--line);
+}
+.panel-close {
+  float: right; border: none; background: none; cursor: pointer;
+  font-size: 26px; line-height: 1; color: var(--muted);
+}
+.panel-close:hover { color: var(--ink); }
+.panel-name { font-family: var(--serif); font-size: 24px; margin: 4px 0 2px; }
+.panel-place { color: var(--muted); margin: 0 0 12px; font-size: 14px; }
+.panel-badge {
+  display: inline-block; font-size: 12px; letter-spacing: 0.03em;
+  padding: 3px 9px; border-radius: 999px;
+  background: #eef0e9; color: var(--green-dark); border: 1px solid #d6ddcf;
+}
+/* Classification badges (morphotype + vernacular type): same purple styling for both. */
+.panel-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.panel-badges .panel-badge { background: #f0ecf5; color: #5a3b86; border-color: #d8cfe6; }
+.facet-badge { font-family: inherit; cursor: pointer; }
+.facet-badge:hover { background: var(--green); color: #fff; border-color: var(--green); }
+.panel-badges .facet-badge:hover { background: #6b3fa0; color: #fff; border-color: #6b3fa0; }
+/* Fast custom tooltip (body-anchored, never clipped by panel scroll) */
+.tooltip {
+  position: fixed; z-index: 3000; max-width: 260px;
+  background: #2b2b2b; color: #fff; font-size: 12px; line-height: 1.45;
+  padding: 7px 9px; border-radius: 6px; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+.tooltip[hidden] { display: none; }
+.facet-badge[data-tip], .panel-traits dd[data-tip] { cursor: help; }
+.panel-traits { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 14px 0; font-size: 14px; }
+.panel-traits dt { color: var(--muted); }
+.panel-traits dd { margin: 0; }
+.panel-note { color: var(--muted); font-size: 12px; margin: 2px 0 0; }
+
+/* Clickable fact value (faceted filter) */
+.facet {
+  display: inline; text-align: left; background: none; border: none; padding: 0;
+  margin: 0; font: inherit; cursor: pointer;
+  color: var(--green-dark); text-decoration: underline dotted;
+}
+.facet:hover { color: var(--green); text-decoration: underline; }
+
+/* Link-styled button (e.g. License link in About) */
+.linklike {
+  background: none; border: none; padding: 0; font: inherit; cursor: pointer;
+  color: var(--green-dark); text-decoration: underline;
+}
+.linklike:hover { color: var(--green); }
+
+/* Submission form (Suggest an Addition / Suggest Corrections) */
+.submit-form { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.submit-field { display: flex; flex-direction: column; gap: 3px; }
+.submit-label { font-size: 12px; color: var(--muted); }
+.submit-form input:not([type="range"]),
+.submit-form select,
+.submit-form textarea {
+  font: inherit; font-size: 14px; padding: 6px 8px;
+  border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink);
+}
+.submit-form textarea { resize: vertical; }
+/* Corrections form: an edited field is marked by turning its label green (a coloured box
+   around the field clashed with the focus outline). */
+.submit-field.changed > .submit-label { color: var(--green); }
+.loc-coord.changed { color: var(--green); }
+
+/* Inline diff overlay: free-text fields paint added/changed words green. A backdrop div
+   renders the same text behind a transparent-text field (a native input can't colour part
+   of its own text); the two must share identical box metrics so the text lines up. */
+.hl { position: relative; }
+/* Keep the input (and its focus ring + caret) painting above the backdrop; its transparent
+   background still lets the diff text show through when diffing. */
+.hl-input { box-sizing: border-box; width: 100%; line-height: 1.4; position: relative; z-index: 1; }
+.hl-backdrop {
+  position: absolute; inset: 0; margin: 0; box-sizing: border-box; z-index: 0;
+  padding: 6px 8px; border: 1px solid transparent; border-radius: 6px;
+  font: inherit; font-size: 14px; line-height: 1.4;
+  color: var(--ink); background: #fff; pointer-events: none;
+  white-space: pre; overflow: hidden;
+}
+.hl--multiline .hl-backdrop { white-space: pre-wrap; overflow-wrap: break-word; word-break: break-word; }
+.hl.diffing .hl-input { color: transparent; background: transparent; caret-color: var(--ink); }
+.hl:not(.diffing) .hl-backdrop { display: none; }
+.hl-backdrop .added { color: var(--green); }
+
+/* URL-list submission (Photos / Seed Sources / Forum Discussions / References) */
+.url-list { display: flex; flex-direction: column; gap: 6px; }
+.url-row { display: flex; align-items: center; gap: 6px; }
+.link-name { flex: 1 1 38%; min-width: 0; }
+.url-input { flex: 1 1 62%; min-width: 0; }
+.url-input.invalid { border-color: #c0392b; background: #fdf3f2; }
+.url-remove {
+  flex: 0 0 auto; width: 28px; height: 28px; line-height: 1; font-size: 18px;
+  background: #fff; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; color: var(--muted);
+}
+.url-remove:hover { border-color: #c0392b; color: #c0392b; }
+.submit-form .panel-submit { margin-top: 6px; align-self: flex-start; }
+/* Reserve space so the form doesn't jump when the Turnstile widget renders. */
+.turnstile-box { margin-top: 6px; min-height: 65px; }
+
+/* Location picker (Latitude / Longitude) */
+.submit-hint { font-size: 12px; color: var(--muted); margin: -1px 0 1px; }
+.loc-picker { display: flex; flex-direction: column; gap: 6px; }
+.loc-map { height: 220px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.loc-coords { display: flex; align-items: flex-end; gap: 10px; }
+.loc-coord { display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--muted); }
+.loc-coord input { width: 7.5em; }
+
+/* Related-variety exploration links */
+.related-list { font-size: 14.5px; line-height: 1.75; margin: 6px 0 4px; }
+.related-item { white-space: nowrap; }
+.related-link {
+  background: none; border: none; padding: 0; margin: 0; font: inherit;
+  cursor: pointer; color: var(--green-dark);
+}
+.related-link:hover { text-decoration: underline; }
+
+/* ---- Write-up (rendered markdown) ---- */
+.writeup { margin: 18px 0 8px; border-top: 1px solid var(--line); padding-top: 6px; }
+.writeup-status { color: var(--muted); font-style: italic; font-size: 14px; }
+.writeup h2 {
+  font-family: var(--serif); font-size: 16px; margin: 20px 0 6px;
+  padding-bottom: 3px; border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.add-link {
+  flex: 0 0 auto; width: 26px; height: 26px; line-height: 1; padding: 0; margin-left: 6px;
+  display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+  border: 1px solid #d6ddcf; border-radius: 50%; background: #eef0e9;
+  color: var(--green-dark); font-size: 17px; cursor: pointer;
+}
+.add-link:hover { background: var(--green); color: #fff; border-color: var(--green); }
+/* Touch devices (phones/tablets): make the + an obvious, comfortable tap target. */
+@media (pointer: coarse) {
+  .add-link { width: 40px; height: 40px; font-size: 24px; }
+}
+.writeup h3 { font-family: var(--serif); font-size: 14.5px; margin: 14px 0 4px; }
+.writeup p { font-size: 14.5px; line-height: 1.58; margin: 8px 0; }
+.writeup ul, .writeup ol { font-size: 14.5px; line-height: 1.55; padding-left: 20px; margin: 8px 0; }
+.writeup a { color: var(--green-dark); }
+.writeup img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; margin: 6px 0; }
+.writeup blockquote {
+  margin: 0 0 12px; padding: 8px 12px;
+  background: #f0efe9; border-left: 3px solid var(--green);
+  color: var(--muted); font-size: 13px; font-style: italic;
+}
+.writeup blockquote p { margin: 0; font-size: 13px; }
+.writeup em { color: var(--muted); }
+
+/* Real links injected into Photos / Seed Sources / Forum Discussions */
+.section-links { font-size: 14.5px; line-height: 1.6; margin: 8px 0; }
+.section-links a { color: var(--green-dark); }
+/* Seed Sources / Forum Discussions / References: one entry per line */
+.section-linklist a { display: block; padding: 1px 0; }
+.section-photo { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; margin: 4px 0; }
+
+/* Section "sources" footnote marker */
+
+/* ---- Structured links / embeds ---- */
+.panel-links-title { font-family: var(--serif); font-size: 16px; margin: 18px 0 8px; }
+.panel-link a, .panel-embed-fallback a { color: var(--green-dark); }
+.panel-embed { margin: 0 0 16px; }
+.panel-embed iframe { width: 100%; height: 320px; border: 1px solid var(--line); border-radius: 6px; }
+.panel-embed-cap { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.panel-embed-fallback { color: var(--muted); font-size: 13px; }
+
+/* ---- Panel submit button ---- */
+.panel-submit {
+  display: block; width: 100%; margin: 24px 0 0; padding: 11px 14px;
+  font-family: var(--sans); font-size: 13.5px; cursor: pointer;
+  color: var(--green-dark); background: #eef0e9;
+  border: 1px solid #d6ddcf; border-radius: 6px;
+}
+.panel-submit:hover { background: #e4e8db; border-color: var(--green); }
+
+/* ---- Reset-view control (stacks below +/- zoom, same size) ---- */
+.reset-control a { display: flex; align-items: center; justify-content: center; color: var(--ink); }
+.reset-control a:hover { color: var(--green-dark); }
+
+/* ---- Map toggle controls (top-left, stacked under the zoom/reset buttons) ---- */
+/* `.map-toggles a` (class+type) ties Leaflet's `.leaflet-bar a` specificity and wins by source
+   order, so the flex centering actually applies (a bare `.map-toggle` would lose to Leaflet). */
+.map-toggles a { display: flex; align-items: center; justify-content: center; color: var(--ink); }
+.map-toggle:hover { color: var(--green-dark); }
+/* Keep an active toggle green through Leaflet's :hover AND :focus (both grey, specificity
+   0,2,1) — without the :focus rule, clicking then moving the cursor left it stuck grey.
+   The :hover rule is listed last so a hovered+focused active button still darkens. */
+.map-toggle.active, .map-toggle.active:focus { background: var(--green); color: #fff; }
+.map-toggle.active:hover { background: var(--green-dark); color: #fff; }
+
+/* Control icons are CSS masks tinted by `currentColor` rather than inline SVGs, which
+   intermittently fail to repaint inside Leaflet controls during map compositing. The glyph is
+   an inline-block ::before, centred by the Leaflet button's own text-align/line-height (the
+   button computes to display:block), so it lines up exactly like the old inline SVG did. The
+   masks are inlined as data-URIs so there is no separate file fetch to flash blank on load. */
+.map-toggle::before, .reset-control a::before {
+  content: ''; display: block; width: 16px; height: 16px;
+  background-color: currentColor;
+  -webkit-mask: var(--mt-icon) center / 16px 16px no-repeat;
+          mask: var(--mt-icon) center / 16px 16px no-repeat;
+}
+.map-toggle--graticule { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2218%22%20height%3D%2218%22%20rx%3D%222.5%22%2F%3E%3Cpath%20d%3D%22M3%2012h18M12%203v18%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--labels { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M20.6%2013.4%2013.4%2020.6a2%202%200%200%201-2.8%200l-7.2-7.2a2%202%200%200%201-.6-1.4V4a1%201%200%200%201%201-1h7.8a2%202%200%200%201%201.4.6l7.6%207.6a2%202%200%200%201%200%202.8z%22%2F%3E%3Ccircle%20cx%3D%227.5%22%20cy%3D%227.5%22%20r%3D%221.1%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--states { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M9%204%203%206v14l6-2%206%202%206-2V4l-6%202-6-2z%22%2F%3E%3Cpath%20d%3D%22M9%204v14M15%206v14%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--rivers { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%206.5c2.4%200%202.4%202%204.8%202s2.4-2%204.8-2%202.4%202%204.8%202%202.4-2%204.8-2%22%2F%3E%3Cpath%20d%3D%22M2%2012c2.4%200%202.4%202%204.8%202s2.4-2%204.8-2%202.4%202%204.8%202%202.4-2%204.8-2%22%2F%3E%3Cpath%20d%3D%22M2%2017.5c2.4%200%202.4%202%204.8%202s2.4-2%204.8-2%202.4%202%204.8%202%202.4-2%204.8-2%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--terrain { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%2020%209.5%207l4.5%207.5L17%2010l5%2010z%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--flowering { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(0.0%2012%209.5)%22%2F%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(51.4%2012%209.5)%22%2F%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(102.9%2012%209.5)%22%2F%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(154.3%2012%209.5)%22%2F%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(205.7%2012%209.5)%22%2F%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(257.1%2012%209.5)%22%2F%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%225.3%22%20rx%3D%221.4%22%20ry%3D%222.6%22%20transform%3D%22rotate(308.6%2012%209.5)%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%229.5%22%20r%3D%221.5%22%20fill%3D%22%23000%22%2F%3E%3Cpath%20d%3D%22M12%2022v-6.5%22%2F%3E%3Cpath%20d%3D%22M12%2018.5c-2.2%200-3.4-1.3-3.6-3%201.9-.1%203.4%201%203.6%203z%22%20fill%3D%22%23000%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--temp { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M14%2014.76V5a2%202%200%200%200-4%200v9.76a4%204%200%201%200%204%200z%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--rain { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203c0%200-6%206.5-6%2011a6%206%200%200%200%2012%200c0-4.5-6-11-6-11z%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--daylight { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%2020.5h20%22%2F%3E%3Cpath%20d%3D%22M5%2020.5a7%207%200%200%201%2014%200%22%2F%3E%3Cpath%20d%3D%22M12%2011.9L12%204.5M16.93%2013.46L19.74%209.44M7.07%2013.46L4.26%209.44M20.08%2017.56L22.15%2016.81M3.92%2017.56L1.85%2016.81%22%2F%3E%3C%2Fsvg%3E"); }
+.map-toggle--solar { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%224.2%22%2F%3E%3Cpath%20d%3D%22M12%202.5v2M12%2019.5v2M4.6%204.6l1.4%201.4M18%2018l1.4%201.4M2.5%2012h2M19.5%2012h2M4.6%2019.4%206%2018M18%206l1.4-1.4%22%2F%3E%3C%2Fsvg%3E"); }
+.reset-control a { --mt-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%229%22%2F%3E%3Cpath%20d%3D%22M3%2012h18M12%203c2.5%202.6%202.5%2015.4%200%2018M12%203c-2.5%202.6-2.5%2015.4%200%2018%22%2F%3E%3C%2Fsvg%3E"); }
+
+/* ---- Flowering heat map legend ---- */
+/* Shown only while the heat toggle is on (the JS sets [hidden]); bottom-left so it clears the
+   bottom-right Leaflet attribution. The gradient mirrors the ramp in js/heat.js exactly. */
+.heat-legend {
+  position: absolute; left: 10px; bottom: 22px; z-index: 700;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 6px;
+  padding: 5px 8px; pointer-events: none;
+  background: rgba(255, 255, 255, 0.9); border: 1px solid var(--line);
+  border-radius: 6px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  font-size: 11px; color: var(--ink);
+}
+.heat-legend[hidden] { display: none; }
+/* Stops are the js/heat.js ramp composited over the basemap land fill (#e9e6df) at the layer's max
+   alpha (0.45), so the swatch reads like the actual on-map tint. The bar is linear in weeks
+   (LO_WEEKS at 0% → HI_WEEKS+ at 100%), matching valueToT's absolute scale. */
+.heat-legend-bar {
+  width: 90px; height: 8px; border-radius: 999px;
+  background: linear-gradient(to right,
+    #9ab0dc 0%, #c5a3d5 25%, #e19bb8 50%, #ee9197 75%, #f38784 100%);
+}
+.heat-legend-cap { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 10px; }
+
+/* ---- Map labels overlay ---- */
+/* Each label marker is a zero-size anchor at the place point; the text/dot are absolutely
+   positioned children so they centre on the point without fighting Leaflet's transform.
+   A paper-tinted halo keeps names legible over borders and leaf markers. */
+.lbl { width: 0 !important; height: 0 !important; background: none; border: none; }
+.lbl .lbl-t {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  white-space: nowrap; user-select: none;
+  text-shadow: -1px -1px 1.5px #f2efe8, 1px -1px 1.5px #f2efe8,
+               -1px 1px 1.5px #f2efe8, 1px 1px 1.5px #f2efe8, 0 0 2px #f2efe8;
+}
+.lbl-country .lbl-t {
+  font-family: var(--serif); font-variant: small-caps; letter-spacing: 0.07em;
+  font-size: 11px; color: #6b6760;
+}
+/* States/provinces: subordinate to countries — smaller and lighter small-caps. */
+.lbl-state .lbl-t {
+  font-family: var(--serif); font-variant: small-caps; letter-spacing: 0.04em;
+  font-size: 10px; color: #8a857c;
+}
+.lbl-water .lbl-t {
+  font-family: var(--serif); font-style: italic; font-size: 11px; color: #2f8a9c; /* aqua ink */
+}
+/* Lakes & rivers: italic aqua, like the other water labels (lakes a touch stronger). */
+.lbl-lake .lbl-t { font-family: var(--serif); font-style: italic; font-size: 10.5px; color: #2f8a9c; }
+.lbl-river .lbl-t { font-family: var(--serif); font-style: italic; font-size: 10px; color: #3f9aae; }
+.lbl-city .lbl-dot {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  width: 3px; height: 3px; border-radius: 50%; background: #6b6760;
+}
+.lbl-city .lbl-t { left: 5px; transform: translateY(-50%); font-size: 10.5px; color: #57534b; }
+/* Declutter flip: text on the LEFT of the dot (right-aligned) when the default right side collides
+   with a state/province label (see declutter() in labels.js). */
+.lbl-city.lbl-flip .lbl-t { left: auto; right: 5px; }
+/* Mountains: range/peak name labels (the triangles themselves are drawn on the relief canvas).
+   Ranges as muted, letter-spaced brown serif; peak names offset to clear their triangle. */
+.lbl-range .lbl-t {
+  font-family: var(--serif); font-style: italic; letter-spacing: 0.12em;
+  font-size: 10.5px; color: #8a6f57;
+}
+.lbl-peak .lbl-t { left: 7px; transform: translateY(-50%); font-size: 10px; color: #6b5b48; }
+/* Landform regions (Terrain): deserts / plateaus / basins / deltas — muted earthy serif. */
+.lbl-desert .lbl-t, .lbl-plateau .lbl-t, .lbl-basin .lbl-t, .lbl-delta .lbl-t {
+  font-family: var(--serif); font-style: italic; letter-spacing: 0.06em; font-size: 10.5px;
+}
+.lbl-desert .lbl-t { color: #b58a44; font-variant: small-caps; letter-spacing: 0.1em; } /* sandy */
+.lbl-plateau .lbl-t { color: #8a7a5c; }
+.lbl-basin .lbl-t { color: #7e8a6a; }
+.lbl-delta .lbl-t { color: #5f9aa0; } /* deltas read as wet — a touch aqua */
+/* Triangle-relief canvas: non-interactive overlay, positioned by Leaflet. */
+.relief-canvas { position: absolute; left: 0; top: 0; pointer-events: none; }
+
+/* ---- Marker (shared green leaf SVG image) ---- */
+.leaf-marker { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3)); }
+.leaf-marker:hover { filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5)); z-index: 1000 !important; }
+/* Subtle scale-up on hover signals the marker is interactive (Leaflet drives the outer
+   element's position transform, so we scale the inner image instead). */
+.leaf-marker .leaf-img { display: block; transition: transform 0.12s ease; transform-origin: bottom center; }
+.leaf-marker:hover .leaf-img { transform: scale(1.28); }
+
+/* Selected variety: the leaf turned white inside a purple circle */
+.leaf-marker-selected { background: none; border: none; }
+.leaf-marker-selected .sel-leaf {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #6b3fa0; box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.leaf-marker-selected .sel-leaf-img { display: block; filter: brightness(0) invert(1); }
+
+/* About dialog: branded cover card, centered at the top */
+.about-cover {
+  display: block; width: 240px; max-width: 70%; margin: 2px auto 18px;
+  border-radius: 12px; border: 1px solid var(--line);
+}
+/* Version tucked into the bottom-right corner of the About dialog */
+.about-version { text-align: right; font-size: 11px; color: var(--muted); margin: 10px 0 0; }
+
+/* Marker name tooltip — match the paper/ink palette */
+.leaflet-tooltip {
+  background: var(--paper); color: var(--ink); border: 1px solid var(--line);
+  font-family: var(--sans); font-size: 12px; padding: 3px 7px; border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.leaflet-tooltip-top::before { border-top-color: var(--line); }
+
+/* ---- Modal ---- */
+.modal { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; }
+.modal[hidden] { display: none; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(35,33,28,0.38); }
+.modal-card {
+  position: relative; z-index: 1; width: min(460px, 90vw);
+  background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  padding: 24px 26px 26px; box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  max-height: 85vh; overflow-y: auto;
+}
+.modal-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.modal-list-link {
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  width: 100%; text-align: left; font: inherit; cursor: pointer; color: var(--ink);
+  background: none; border: none; border-bottom: 1px solid var(--line); padding: 8px 2px;
+}
+.modal-list-link:hover { background: #eef0e9; }
+
+.modal-close {
+  position: absolute; top: 10px; right: 14px; border: none; background: none;
+  font-size: 24px; line-height: 1; color: var(--muted); cursor: pointer;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-title { font-family: var(--serif); font-size: 19px; margin: 0 0 10px; }
+.modal-body { font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+
+/* Pin the title + × over a scrolling body (the form dialogs and the Index). The card itself
+   no longer scrolls, so the absolute × stays put; the horizontal padding lives on the title
+   and body (not the card) so the body's scrollbar sits in the right-side gutter rather than
+   over the fields. `--pad-x` is the shared side padding (phones shrink it). */
+.modal.headbar .modal-card {
+  --pad-x: 32px;
+  overflow: hidden; display: flex; flex-direction: column;
+  padding-left: 0; padding-right: 0;
+}
+.modal.headbar .modal-title { flex: 0 0 auto; margin: 0 0 14px; padding: 0 var(--pad-x); }
+.modal.headbar .modal-body { flex: 1 1 auto; overflow-y: auto; padding: 0 var(--pad-x); }
+
+/* Full-bleed divider under the title bar (forms + About / License / References). Headbar cards
+   have no side padding so the title already spans the card; plain cards use negative margins. */
+.modal.divider .modal-title { border-bottom: 1px solid var(--ink); padding-bottom: 12px; }
+.modal.divider:not(.headbar) .modal-title { margin: 0 -26px 14px; padding-left: 26px; padding-right: 26px; }
+
+/* Index: the current H1 (facet) and H2 (value group) headers pin below the title as you
+   scroll; each is confined to its <details>, so the next one pushes it out. */
+.modal.index-sticky summary.index-h1 { position: sticky; top: 0; z-index: 2; background: #fff; }
+.modal.index-sticky summary.index-h2 { position: sticky; top: var(--idx-h1-h, 30px); z-index: 1; background: #fff; }
+
+/* ---- Responsive: phones & tablets (desktop > 860px is unchanged) ---- */
+@media (max-width: 860px) {
+  /* Page becomes a column so the ribbon stays a single, uncrowded row. */
+  body { display: flex; flex-direction: column; }
+  .ribbon { height: auto; min-height: var(--ribbon-h); flex-wrap: wrap; padding: 8px 12px; gap: 8px 10px; }
+  .layout { height: auto; flex: 1 1 auto; min-height: 0; }
+  .map { height: 100%; }
+  .wordmark { font-size: 16px; }
+  /* Condense the ribbon: the Suggest/Contact icon buttons are reached via the hamburger
+     (always listed there), so the row stays just ☰ + (wordmark) + search. */
+  #submit-btn, #contact-btn { display: none; }
+  .search-group { flex: 1 1 auto; max-width: none; margin: 0; }
+
+  /* Labels themselves shrink slightly for density on small screens. (The toggle lives in
+     the top-left control stack and in the ☰ menu, both reachable on mobile.) */
+  .lbl-country .lbl-t, .lbl-water .lbl-t { font-size: 10px; }
+  .lbl-state .lbl-t, .lbl-city .lbl-t, .lbl-lake .lbl-t, .lbl-river .lbl-t,
+  .lbl-range .lbl-t, .lbl-peak .lbl-t,
+  .lbl-desert .lbl-t, .lbl-plateau .lbl-t, .lbl-basin .lbl-t, .lbl-delta .lbl-t { font-size: 9.5px; }
+
+  /* Panel becomes a bottom sheet. */
+  .panel {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto;
+    width: 100%; height: 0; border-left: none; border-top: 1px solid var(--line);
+    border-radius: 14px 14px 0 0; transition: height 0.22s ease;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12); z-index: 1500;
+  }
+  body.panel-open .panel { width: 100%; height: 80vh; padding: 0 18px 40px; }
+}
+
+/* Phones: reclaim width by dropping the wordmark. */
+@media (max-width: 520px) {
+  .wordmark { display: none; }
+  body.panel-open .panel { height: 85vh; }
+  /* Give the form dialogs more usable width (the Turnstile widget is ~300px) by widening
+     the card and trimming the side padding. */
+  .modal-card { width: min(460px, 94vw); }
+  .modal.headbar .modal-card { --pad-x: 16px; }
+}

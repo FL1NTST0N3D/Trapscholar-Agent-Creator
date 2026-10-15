@@ -1,0 +1,48 @@
+{
+  "id": "acapulco-gold",
+  "name": "Acapulco Gold",
+  "aliases": [
+    "Hierba Dorada"
+  ],
+  "kind": "landrace",
+  "status": "draft",
+  "summary": "Acapulco Gold is a [[kind:landrace|landrace]] traditionally grown in the mountains of Guerrero, [[country:MX|Mexico]], named for the brownish-gold color of its cured flowers. It was first recorded in the United States in 1964, and is one of the three parents of [[skunk-1|Skunk #1]]. Some sources place its origin in neighboring Oaxaca; others describe it as a cross with [[nepalese|Nepalese]] stock.",
+  "born": {
+    "unknown": true,
+    "display": "traditional"
+  },
+  "origin": {
+    "place": "Guerrero, Mexico (around Acapulco)",
+    "country": "MX",
+    "lat": 16.9,
+    "lon": -99.9
+  },
+  "breeder": null,
+  "parents": [],
+  "traditional_label": "sativa",
+  "sources": [
+    {
+      "title": "Acapulco Gold strain page (cites Novak, Marijuana in the Lives of America; and Cannabis Pharmacy)",
+      "publisher": "Cannigma",
+      "category": "database",
+      "url": "https://cannigma.com/strains/acapulco-gold/",
+      "accessed": "2026-09-23"
+    },
+    {
+      "title": "Acapulco Gold",
+      "publisher": "Wikipedia",
+      "category": "database",
+      "url": "https://en.wikipedia.org/wiki/Acapulco_Gold",
+      "accessed": "2026-09-24",
+      "note": "Places traditional cultivation in the Guerrero mountains outside Acapulco, citing a 2011 newspaper; notes the first US record in 1964, citing Novak (1979)."
+    },
+    {
+      "title": "Acapulco Gold Strain: Mexico's Legendary Golden Landrace",
+      "publisher": "Black Cannabis Magazine",
+      "category": "publication",
+      "url": "https://blackcannabismagazine.com/acapulco-gold/",
+      "accessed": "2026-09-23"
+    }
+  ],
+  "updated": "2026-09-24"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "web-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "WEBUI_DEV_PORT=$(../scripts/worktree-port) vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "biome check . && eslint .",
+    "lint:biome": "biome check .",
+    "lint:eslint": "eslint .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "knip": "knip --config invariants/knip.json"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "@tanstack/react-query": "^5.99.2",
+    "@tanstack/react-router": "^1.168.23",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.12",
+    "@eslint/js": "^10.0.1",
+    "@tanstack/eslint-plugin-router": "^1.161.6",
+    "@tanstack/router-plugin": "^1.167.22",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.2.1",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-boundaries": "^6.0.2",
+    "jiti": "^2.6.1",
+    "jsdom": "^26.1.0",
+    "knip": "^6.5.0",
+    "openapi-fetch": "^0.17.0",
+    "openapi-typescript": "^7.13.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.0",
+    "vite": "^8.0.4",
+    "vitest": "^4.1.4"
+  }
+}

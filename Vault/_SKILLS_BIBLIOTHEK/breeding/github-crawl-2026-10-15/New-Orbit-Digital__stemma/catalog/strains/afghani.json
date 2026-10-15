@@ -1,0 +1,43 @@
+{
+  "id": "afghani",
+  "name": "Afghani",
+  "aliases": [
+    "Afghan",
+    "Afghan landrace"
+  ],
+  "kind": "landrace",
+  "status": "draft",
+  "summary": "Afghani is a [[kind:landrace|landrace]] of broad-leaflet drug cannabis traditionally grown in [[country:AF|Afghanistan]] and neighboring Pakistan and Central Asia, long used for hash. Botanists group it apart from the narrow-leaflet drug types of South Asia, Africa, and Latin America. Western breeders later used it as the stocky, fast-flowering half of many hybrids; the name covers a regional population, not one fixed variety.",
+  "born": {
+    "unknown": true,
+    "display": "traditional"
+  },
+  "origin": {
+    "place": "Afghanistan and neighbouring Pakistan / Central Asia",
+    "country": "AF",
+    "lat": 33.9,
+    "lon": 67.7
+  },
+  "breeder": null,
+  "parents": [],
+  "traditional_label": "indica",
+  "sources": [
+    {
+      "title": "Genetic evidence for speciation in Cannabis (Cannabaceae) — K.W. Hillig, Genetic Resources and Crop Evolution 52:161–180 (2005)",
+      "publisher": "Springer",
+      "category": "publication",
+      "url": "https://link.springer.com/article/10.1007/s10722-003-4452-y",
+      "accessed": "2026-09-24",
+      "note": "Allozyme study: wide-leafleted drug accessions came from Afghanistan and Pakistan."
+    },
+    {
+      "title": "A classification of endangered high-THC cannabis (Cannabis sativa subsp. indica) domesticates and their wild relatives — J.M. McPartland & E. Small, PhytoKeys 144:81–112 (2020)",
+      "publisher": "Pensoft",
+      "category": "publication",
+      "url": "https://doi.org/10.3897/phytokeys.144.46700",
+      "accessed": "2026-09-24",
+      "note": "Classifies the Central Asian domesticate (Afghanistan, Pakistan, Turkestan) as var. afghanica."
+    }
+  ],
+  "updated": "2026-09-24"
+}

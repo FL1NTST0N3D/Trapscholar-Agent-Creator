@@ -1,0 +1,30 @@
+{
+    "name": "@cannaguide/ui",
+    "version": "0.2.0",
+    "private": true,
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./src/index.ts"
+        },
+        "./tailwind-preset": {
+            "default": "./src/tailwind-preset.cjs"
+        },
+        "./tokens.css": {
+            "default": "./src/tokens.css"
+        }
+    },
+    "files": [
+        "src",
+        "dist",
+        "CHANGELOG.md"
+    ],
+    "scripts": {
+        "typecheck": "tsc --noEmit",
+        "build": "tsc -b",
+        "clean": "rm -rf dist tsconfig.tsbuildinfo"
+    }
+}

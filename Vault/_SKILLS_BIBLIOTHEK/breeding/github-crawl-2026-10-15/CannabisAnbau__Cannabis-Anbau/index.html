@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>420Forum.de – Online Grower-Rechner: Stromkosten, Cal/Mag, Nährstoffe & Zeltplanung</title>
+<meta name="description" content="Kostenlose Online-Rechner für Indoor Grower: Stromkostenrechner, Cal/Mag Rechner, Nährstoffrechner und Zeltflächen-Rechner. Berechne Verbrauch, Dünger und Platzbedarf schnell im Browser.">
+<meta name="keywords" content="Grower Rechner, Stromkostenrechner, Cal/Mag Rechner, Nährstoff Rechner, Zeltfläche berechnen, Indoor Grow Tools">
+<meta name="robots" content="index, follow">
+<style>
+:root{--bg:#07120f;--card:#0f1816;--muted:#98a79d;--accent:#37e57c;--accent-2:#9af7b6;}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#eaf6ee;}
+header{text-align:center;padding:30px 15px;position:relative;}
+h1{font-size:clamp(24px,5vw,42px);margin:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;color:transparent;}
+h1 a{text-decoration:none;color:inherit;}
+p.lead{color:var(--muted);max-width:700px;margin:10px auto 0;font-size:1rem;}
+
+.smoke-wrap{position:absolute;left:50%;top:5%;transform:translateX(-50%);width:90%;height:200px;pointer-events:none;z-index:0}
+.smoke-stack{position:relative;width:100%;height:100%}
+.puff{position:absolute;left:50%;bottom:0;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,0.16), rgba(255,255,255,0) 70%);filter:blur(10px);opacity:0;transform:translateX(-50%) scale(0.6);mix-blend-mode:screen}
+.puff:nth-child(1){width:220px;height:120px;animation:rise 11s linear infinite;--dx:-40px}
+.puff:nth-child(2){width:180px;height:90px;animation:rise 9s linear 1.8s infinite;--dx:36px}
+.puff:nth-child(3){width:260px;height:140px;animation:rise 13s linear 3.2s infinite;--dx:-12px}
+.puff:nth-child(4){width:140px;height:80px;animation:rise 8.6s linear 4.6s infinite;--dx:22px}
+.puff:nth-child(5){width:200px;height:110px;animation:rise 10.4s linear 5.4s infinite;--dx:-28px}
+@keyframes rise{0%{transform:translateX(-50%) translateY(0) scale(0.6);opacity:0}8%{opacity:0.28}60%{opacity:0.22}100%{transform:translateX(calc(-50% + var(--dx))) translateY(-140%) scale(1.8);opacity:0}}
+
+main{width:min(800px,94%);margin:20px auto;display:flex;flex-direction:column;gap:20px;}
+.widget{background:var(--card);border-radius:12px;padding:15px;box-shadow:0 8px 20px rgba(0,0,0,0.6);}
+.widget h2{margin-top:0;color:var(--accent-2);font-size:18px;}
+.widget p{font-size:0.9rem;color:var(--muted);}
+iframe{width:100%;height:500px;border:none;border-radius:8px;background:#fff;}
+@media(max-width:640px){iframe{height:520px}}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:15px;}
+</style>
+</head>
+<body>
+<header>
+<h1><a href="https://420forum.de" rel="dofollow" aria-label="Zur Startseite von 420Forum.de">420Forum.de — Online Grower-Rechner</a></h1>
+<p class="lead">Berechne Stromkosten, Cal/Mag Dosierungen, Nährstoffe & Zeltflächen direkt online. Alle Tools sind mobilfreundlich, schnell und diskret.</p>
+<div class="smoke-wrap" aria-hidden="true">
+  <div class="smoke-stack">
+    <div class="puff"></div>
+    <div class="puff"></div>
+    <div class="puff"></div>
+    <div class="puff"></div>
+    <div class="puff"></div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="widget" id="strom">
+  <h2>⚡ Stromkostenrechner</h2>
+  <p>Berechne den Stromverbrauch deiner Geräte und die Kosten für Veg- & Blütephase.</p>
+  <iframe loading="lazy" src="./stromrechner.html" title="Stromkostenrechner" aria-label="Stromkostenrechner"></iframe>
+</div>
+<div class="widget" id="calmag">
+  <h2>🧪 Cal/Mag Rechner</h2>
+  <p>Bestimme die richtige Cal/Mag Dosierung pro Liter Wasser.</p>
+  <iframe loading="lazy" src="./calmag.html" title="CalMag Rechner" aria-label="Cal/Mag Rechner"></iframe>
+</div>
+<div class="widget" id="naehrstoffe">
+  <h2>🌱 Nährstoff-Rechner</h2>
+  <p>Berechne Dünger für deine Pflanzen basierend auf EC-Wert und Phase.</p>
+  <iframe loading="lazy" src="./naehrstoffe.html" title="Nährstoff Rechner" aria-label="Nährstoff Rechner"></iframe>
+</div>
+<div class="widget" id="zelt">
+  <h2>📏 Zeltflächen-Rechner</h2>
+  <p>Plane die Fläche deines Zeltes und finde heraus, wie viele Töpfe hineinpassen.</p>
+  <iframe loading="lazy" src="./zeltflaeche.html" title="Zelt Rechner" aria-label="Zelt Rechner"></iframe>
+</div>
+</main>
+
+<footer>
+© <span id="y"></span> — <a href="https://420forum.de" rel="dofollow" style="color:var(--accent);text-decoration:none">420Forum.de</a> — Tools für Grower
+</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

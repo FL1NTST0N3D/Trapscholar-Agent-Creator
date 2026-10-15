@@ -1,0 +1,64 @@
+# Working notes
+
+Read this, then `PLAN.md`. Everything below is the working agreement; `PLAN.md` is the design.
+
+## What this is
+
+A client-only TypeScript web app that characterises finished soybean near-isogenic lines, with chromosome schemes for twelve other crops, against their recurrent and donor parents from SNP genotype files. Genotype data is parsed and analysed in a Web Worker and never leaves the browser tab. The same pure compute core runs from the command line through `src/cli.ts`.
+
+Open a session **inside this repo**, never in the parent directory. The two siblings, `progeny-selector` (Python) and `field-capture-android` (Gradle), have their own toolchains and their own `PLAN.md`.
+
+## State
+
+The tool was renamed from Isoline Browser to Backcross on 2026-09-16 (docs/adr/0017): the chrome now carries a crop palette, and the Upload screen and `?demo=synthetic` load the synthetic fixture, which the build serves under `demo/synthetic/`. Records written before the rename keep the old name.
+
+**v0.1.0 was released on 2026-09-29** (tag at e4e80d3, release run 36625686297, the same day as progeny-selector v0.1.0); M5, the release milestone, is complete. M0, M1, M2, M2.5, M3 and M4 are complete and verified; each has a dated verification block at the bottom of `PLAN.md` recording what was measured and what was not. M3 shipped browser-mode tests in Chromium and Firefox (docs/adr/0011), the streaming bgzip parse (0012), the shared data contract at 1.2.0 (0013, 0014; 1.2.1 since the rename, wording only), the BrAPI allele-matrix loader (0015) and the accessibility review (axe on every screen, focus order, WCAG 2.4.11 under the sticky header, print media, `npm run a11y:lighthouse`). **M4 is complete (verified 2026-09-22)** from `docs/m4-phases.md`: the genotype view is virtualised, the gutter buttons meet WCAG 2.2 target size, the build splits vendor chunks (0016), and the contract went to 1.3.0 (blank lines and `#` rows, 0018), 1.4.0 (named token profiles, 0019) and 1.5.0 (crop chromosome schemes for soybean and eight other crops, 0020), each mirrored into progeny-selector. First draw of 50K x 200 fell from 10.5 s to 4.9 s in Chromium and from 8.5 s to 6.2 s in Firefox. Nothing in `docs/handoff-m4-phase6.md` is open; the folder was renamed to `backcross` on 2026-09-23. Contract 1.6.0 (half-missing pairs, 0021), 1.7.0 (crop schemes for cowpea, pea and peanut, 0022), 1.8.0 (a pair of two missing characters, `N/N` or `..`, read as missing, 0023) and 1.9.0 (a sunflower scheme, bare `1`..`17` shared by the HA412-HOv2.0 and XRQ assemblies, 0024) followed. Nothing remains on the deferred list at the end of M4's verification block. Contract 1.10.0 (0025, decided 2026-09-26, mirrored 2026-09-27) states the VCF GT grammar: a malformed allele index (`-5/0`, `1e1/0`, `/0`, `0/0/1`, an index outside REF,ALT) is the error kind `genotypes.invalid_gt` where both tools used to misread it without a word. Contract 1.11.0 (0026) states that every text input is UTF-8: a bad byte is `text.invalid_utf8` naming the file, line and byte position, where backcross used to substitute U+FFFD silently; the contract size cap went from 128 to 256 KiB with it. Contract 1.12.0 (0027) lets the soybean scheme read the SoyBase / LIS Data Store names `glyma.Wm82.gnmN.Gm01`. The CLI gained `compare`, `discordant` and `qc`; `qc.csv` is a documented output (docs/adr/0029); the per-line summary CSV records the resolved RPP coverage caps, and docs/adr/0028 fixes the chromosome-end rule and the 2 Mb bp default; the `r-reader` CI job reads all six CLI tables back with readr. Two questions were closed as no-ops on 2026-09-26: the palette question, because the two Okabe-Ito colours ADR 0017 named are not class colours (its dated amendment records the measured distances); and the HapMap allele-table order divergence with progeny-selector, which changes no output (a comment in `src/io/hapmap.ts` records why). The fixture's `##source` header was on that list in error: `8473292` already changed it to `backcross`, and `npm run fixture` reproduces the committed files. M5, the first public release, is specified in docs/m5-phases.md and its decisions are docs/adr/0030. The interface was reworked on 2026-09-29 from docs/ui-rework-phases.md (docs/adr/0009 and 0017, amendments of that date): masthead, footer, landing band, chromosome header; `src/ui/screens/screens.css` is split into `screens.css`, `upload.css` and `genotype.css`.
+
+M2.5 built the interface from `docs/m2.5-phases.md`; the browser-mode tests M3 added now assert the APG grid keyboard pattern, the sticky-header criterion and the print rules that M2.5 could only claim. Still asserted nowhere: screen-reader behaviour and paper output. The genotype view is virtualised (M4 phase 1): the canvas and gutter draw the rows in view, and the overview bins lines into its pixel rows by column majority.
+
+Deferred items are listed at the end of each verification block in `PLAN.md`. The one worth knowing: the build emits an entry chunk of this repository's code plus `vendor-react` and `vendor` chunks, checked by `scripts/check-bundle.mjs` inside `npm run build` (docs/adr/0016). The whole-genome draw cost at 50,000 markers by 200 lines, about 124 ms of binning before virtualisation, was re-measured on 2026-09-27 by the bench as a whole-genome redraw from click to painted tracks: median 67 ms in Chromium and 53 ms in Firefox (headless, five redraws). ADR 0007's minority-class hatch is closed, by the texture overlay of M2.5 phase 3.
+
+## Gates: all of these must pass before every commit
+
+```
+npm run lint          # eslint + prettier --check
+npm run typecheck     # tsc --noEmit
+npm test              # vitest, node project only
+npm run test:browser  # vitest browser mode, Chromium and Firefox (docs/adr/0011)
+npm run build
+```
+
+Plus `npm run fixture` and `npm run contract` followed by `git diff --exit-code -- tests/fixtures contract`: the generators are deterministic and CI fails if a regenerated file differs from the committed one.
+
+Per milestone, not per commit: `npm run test:bench` (it prints the figures), the 50K x 200 load in both browsers, and `npm run a11y:lighthouse`, the Lighthouse accessibility audit of the built landing page (exit 0 means above 90). Record the bench's printed wall-clock and memory figures and the Lighthouse score and versions in the milestone's verification block and compare them with the previous ones.
+
+## Rules that are not negotiable
+
+- **Never commit real genotype data.** The fixture under `tests/fixtures/synthetic/` is generated by `scripts/make-fixture.mjs`. Edit the generator, never the generated files, and keep that directory under 200 KB.
+- **The input contract is shared.** `contract/data-contract.md` (chromosome names, genotype files, `samples.csv`, `markers.csv`, class codes) is mirrored byte for byte into `progeny-selector`, with its cases under `contract/cases/` generated by `scripts/make-contract.mjs`; `docs/data-formats.md` keeps the parameters and outputs. Ask the user before changing any documented column, token, parameter name or output format, and say which sibling file is affected. Any change under `contract/` bumps `contract/VERSION` (major for a changed or removed column, token or rule, minor for an additive optional one, patch for wording; docs/adr/0013), and `node scripts/check-contract-mirror.mjs ../progeny-selector` must then pass (CI runs it as `contract-mirror`).
+- **No AI attribution in commits or pull requests.** No `Co-Authored-By`, no generated-with footer.
+- **Decisions go in `docs/adr/`** as MADR records. `0030` is the most recent. `0009` carries dated amendments at its end for decisions taken during M2.5, the M3 accessibility review and the 2026-09-16 crop palette. If you find a recorded decision is wrong, say so and stop rather than quietly working around it.
+- Conventional Commits; user-visible changes get a `CHANGELOG.md` entry under `[Unreleased]`.
+
+## How the work is done
+
+Milestone by milestone from `PLAN.md`. For each milestone: state the acceptance criteria you are targeting, implement, make the tests pass, commit.
+
+Self-contained modules are delegated to subagents with a written spec naming inputs, outputs, edge cases and the test that must pass. The main session holds the architecture, the data contracts and the review. Before every commit an adversarial reviewer attacks the genetics (parent-of-origin edge cases, missing data, heterozygotes, uninformative markers), the contract validation and the test coverage; it does not write code. Report what it found and what changed.
+
+Expectations for the fixture are computed by a **second, independent implementation inside `scripts/make-fixture.mjs`**, so a fixture test compares two implementations rather than a function against itself. Preserve that when adding a metric. Note that independence of code is not independence of interpretation: if both implementations share a reading of the rule, a fixture test cannot catch it, so hand-built cases carry that weight.
+
+## Environment gotchas
+
+- `core.autocrlf` is `true` on the maintainer's machine. `.gitattributes` pins the repo to LF; without it a regenerated fixture differs from the committed one and CI fails.
+- `python` is Python 2 here; use `python3`.
+- Node 24 locally, Node 22 in CI.
+- Browser-mode tests need the Playwright browsers once per machine: `npx playwright install chromium firefox`. They go to the user cache, never into the repository. On the maintainer's machine the default cache (`%LOCALAPPDATA%\ms-playwright`) cannot launch browsers (a Windows side-by-side configuration error on byte-identical binaries, cause unknown), so the user environment variable `PLAYWRIGHT_BROWSERS_PATH` points at `%USERPROFILE%\.cache\ms-playwright`; a shell opened before 2026-09-12 must be restarted to see it. Run locally, the tests open headed windows; CI runs them headless. A headed Firefox window loses focus when anything else on the desktop takes it, and its clicks then time out after 30 s in files that have nothing to do with the change; set `CI=true` to run the browser tests headless, as CI does (observed 2026-09-15, when a headed run failed 11 Firefox tests and a headless run passed all 30).
+- `npm run a11y:lighthouse` finds Chromium through Playwright's `chromium.executablePath()`, so it needs the same `PLAYWRIGHT_BROWSERS_PATH`; `CHROME_PATH` overrides it. It builds into `lighthouse/` (gitignored) and never touches `dist/`.
+- The Pages deploy job is gated on a repository variable `ENABLE_PAGES`. `actions/deploy-pages` returns 404 and fails rather than skipping when Pages is off, which marked every push to main as failed. Pages was enabled with the GitHub Actions source and the variable set to `true` on 2026-09-16; the site is https://piercetaylor.github.io/backcross/.
+
+## Layout
+
+`src/core/` is pure functions over typed arrays: no DOM, no filesystem, no fetch. `src/io/` parses and validates at the boundary; everything downstream trusts `Dataset`. `src/workers/` is message plumbing only. `src/ui/` displays worker results and computes nothing; `src/ui/tokens.css` holds every colour and dimension, and a component file may contain neither (eslint enforces it). `src/export/` serialises. Only the worker calls `fetch`: `src/io/brapi.ts` for a BrAPI server, and the worker's own `fetchImpl` for the site's demo files (docs/adr/0017).
+
+Two boundary rules learned the hard way in M2: the worker owns the genotype matrix and never sends it back (ADR 0001), so an exporter that names markers must run **inside** the worker; and a presentation function should take the few facts it needs rather than a whole `Dataset`, or a caller will synthesise a fake one. Each module's header comment states its responsibility and interface. Keep it current.

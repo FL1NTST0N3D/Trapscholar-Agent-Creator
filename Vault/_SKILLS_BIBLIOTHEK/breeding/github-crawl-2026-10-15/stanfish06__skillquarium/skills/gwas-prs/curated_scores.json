@@ -1,0 +1,87 @@
+{
+  "_note": "SYNTHETIC demo scores. Weights in data/ and the reference mean/SD below are illustrative values for offline demos, not PGS Catalog scores, and percentiles derived from them are not interpretable. Use --pgs-id or --trait to fetch a real score.",
+  "DEMO001": {
+    "name": "Synthetic demo score — type 2 diabetes",
+    "trait": "Type 2 diabetes",
+    "trait_id": "EFO_0001360",
+    "variants_count": 8,
+    "synthetic": true,
+    "publication": "none — synthetic demo data, not a published score",
+    "reference_distribution": {
+      "mean": 1.12,
+      "sd": 0.3,
+      "population": "EUR",
+      "synthetic": true
+    }
+  },
+  "DEMO002": {
+    "name": "Synthetic demo score — atrial fibrillation",
+    "trait": "Atrial fibrillation",
+    "trait_id": "EFO_0000275",
+    "variants_count": 12,
+    "synthetic": true,
+    "publication": "none — synthetic demo data, not a published score",
+    "reference_distribution": {
+      "mean": 0.65,
+      "sd": 0.23,
+      "population": "EUR",
+      "synthetic": true
+    }
+  },
+  "DEMO003": {
+    "name": "Synthetic demo score — coronary artery disease",
+    "trait": "Coronary artery disease",
+    "trait_id": "EFO_0001645",
+    "variants_count": 46,
+    "synthetic": true,
+    "publication": "none — synthetic demo data, not a published score",
+    "reference_distribution": {
+      "mean": 2.84,
+      "sd": 0.28,
+      "population": "EUR",
+      "synthetic": true
+    }
+  },
+  "DEMO004": {
+    "name": "Synthetic demo score — breast cancer",
+    "trait": "Breast cancer",
+    "trait_id": "EFO_0000305",
+    "variants_count": 77,
+    "synthetic": true,
+    "publication": "none — synthetic demo data, not a published score",
+    "reference_distribution": {
+      "mean": 4.23,
+      "sd": 0.54,
+      "population": "EUR",
+      "synthetic": true
+    }
+  },
+  "DEMO005": {
+    "name": "Synthetic demo score — prostate cancer",
+    "trait": "Prostate cancer",
+    "trait_id": "EFO_0001663",
+    "variants_count": 147,
+    "synthetic": true,
+    "publication": "none — synthetic demo data, not a published score",
+    "reference_distribution": {
+      "mean": 7.11,
+      "sd": 0.56,
+      "population": "EUR",
+      "synthetic": true
+    }
+  },
+  "DEMO006": {
+    "name": "Synthetic demo score — body mass index",
+    "trait": "Body mass index",
+    "trait_id": "EFO_0004340",
+    "variants_count": 97,
+    "synthetic": true,
+    "publication": "none — synthetic demo data, not a published score",
+    "reference_distribution": {
+      "mean": 2.89,
+      "sd": 0.25,
+      "population": "EUR",
+      "synthetic": true
+    }
+  }
+}

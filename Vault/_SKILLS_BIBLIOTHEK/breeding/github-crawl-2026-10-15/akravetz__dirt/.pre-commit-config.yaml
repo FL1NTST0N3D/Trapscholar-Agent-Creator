@@ -1,0 +1,119 @@
+# Pre-commit hooks. All hooks are `language: system` — they invoke
+# already-installed project tooling (uv, pnpm) rather than letting
+# pre-commit manage their versions. Each hook declares a `files:` regex
+# so it only runs when a staged file matches: a pure web-ui change
+# skips ruff/pytest-apps; a pure apps/ change skips eslint/biome/knip.
+# Failures dump the hook's stdout/stderr inline in the commit output so
+# the agent/developer sees the failure reason without digging.
+repos:
+  - repo: local
+    hooks:
+      # Python: format + lint. Both run in write-mode — when a hook
+      # modifies a file, pre-commit aborts with a "files were modified"
+      # message and the developer/agent re-stages + re-commits. That's a
+      # one-step recovery instead of "hook said no, now run the right
+      # --write incantation yourself, then re-stage". `scripts/agent-fix`
+      # runs both up front so the first commit usually goes through.
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --locked ruff format
+        language: system
+        files: '\.py$'
+        pass_filenames: false
+
+      - id: ruff-check
+        name: ruff check --fix
+        entry: uv run --locked ruff check --fix
+        language: system
+        files: '\.py$'
+        pass_filenames: false
+
+      # Architectural invariants. Cross-cutting — run on ANY code change
+      # (apps/ or web-ui/) because some invariants assert against the
+      # web-ui shims via `tsc --showConfig` / `eslint --print-config`.
+      - id: invariants
+        name: pytest invariants (architectural)
+        entry: uv run --locked pytest apps/tests/invariants/ -q
+        language: system
+        files: '^(apps/|web-ui/|pyproject\.toml|\.claude/settings\.json|\.claude/hooks/)'
+        pass_filenames: false
+
+      # Per-app Python suites. Excludes invariants (they run above).
+      # App-local changes run only that app's suite. Shared-package or
+      # dependency changes fan out through the apps that import dirt-shared.
+      - id: pytest-hwd
+        name: pytest apps/hwd
+        entry: uv run --locked pytest apps/hwd -q
+        language: system
+        files: '^(apps/(hwd|shared)/|pyproject\.toml|uv\.lock)'
+        pass_filenames: false
+
+      - id: pytest-shared
+        name: pytest apps/shared
+        entry: uv run --locked pytest apps/shared -q
+        language: system
+        files: '^(apps/shared/|pyproject\.toml|uv\.lock)'
+        pass_filenames: false
+
+      - id: pytest-voice
+        name: pytest apps/voice
+        entry: uv run --locked pytest apps/voice -q
+        language: system
+        files: '^(apps/(voice|shared)/|pyproject\.toml|uv\.lock)'
+        pass_filenames: false
+
+      - id: pytest-control-plane
+        name: pytest apps/control-plane
+        entry: uv run --locked pytest apps/control-plane -q
+        language: system
+        files: '^(apps/(control-plane|shared)/|cloud/migrations/|pyproject\.toml|uv\.lock)'
+        pass_filenames: false
+
+      - id: pytest-gateway
+        name: pytest apps/gateway
+        entry: uv run --locked pytest apps/gateway -q
+        language: system
+        files: '^(apps/(gateway|shared)/|pyproject\.toml|uv\.lock)'
+        pass_filenames: false
+
+      # web-ui: Biome (format + fast lint). Write-mode so cosmetic drift
+      # (quote style, organize-imports) is fixed in place rather than
+      # bounced. The npm `lint:biome` script stays read-only for CI /
+      # human verification — this hook reaches Biome directly so the
+      # script and the hook can have different defaults.
+      - id: biome
+        name: pnpm biome check --write
+        entry: pnpm --dir web-ui exec biome check --write
+        language: system
+        files: '^web-ui/.*\.(ts|tsx|js|jsx|json|css)$'
+        pass_filenames: false
+
+      # web-ui: ESLint (architectural rules — boundaries, no-restricted-syntax,
+      # custom rules). Kept separate from Biome per docs/references/
+      # modern-idiomatic-typescript. Write-mode (--fix) handles the safe
+      # auto-fixable rules (import order, simple style); architectural
+      # rules without auto-fixers still report as errors and abort.
+      - id: eslint
+        name: pnpm eslint --fix
+        entry: pnpm --dir web-ui exec eslint --fix .
+        language: system
+        files: '^web-ui/.*\.(ts|tsx)$|^web-ui/(eslint\.config\.ts|invariants/)'
+        pass_filenames: false
+
+      # web-ui: TypeScript strict typecheck. Strict flags live in the
+      # protected invariants/tsconfig.base.json.
+      - id: typecheck
+        name: pnpm tsc --noEmit
+        entry: pnpm --dir web-ui run typecheck
+        language: system
+        files: '^web-ui/.*\.(ts|tsx)$|^web-ui/tsconfig.*\.json$'
+        pass_filenames: false
+
+      # web-ui: knip — unused files / exports / deps. Uses the project's
+      # knip script which points at invariants/knip.json.
+      - id: knip
+        name: pnpm knip
+        entry: pnpm --dir web-ui exec knip --config invariants/knip.json --no-progress
+        language: system
+        files: '^web-ui/'
+        pass_filenames: false

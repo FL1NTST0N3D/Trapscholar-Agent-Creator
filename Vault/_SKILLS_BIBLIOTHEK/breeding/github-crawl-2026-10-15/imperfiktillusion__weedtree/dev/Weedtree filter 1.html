@@ -1,0 +1,805 @@
+<html><head><base href="https://websim.example.com/">
+<title>Strain Filter</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    overflow: hidden;
+  }
+  #filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 10px;
+  }
+  #filter-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: calc(100% - 160px);
+    overflow-y: auto;
+    column-width: 200px;
+    column-gap: 20px;
+  }
+  #filter-list li {
+    padding: 0;
+    margin: 1px 0;
+    display: flex;
+    align-items: center;
+    break-inside: avoid-column;
+  }
+  .strain-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #434343;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+  }
+  .strain-checkbox:hover {
+    background-color: rgba(67, 67, 67, 0.1);
+  }
+  .strain-checkbox:checked {
+    background-color: #434343;
+  }
+  .strain-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  #strain-count {
+    margin-bottom: 5px;
+    display: block;
+  }
+  .filter-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    gap: 5px;
+  }
+  #filter-input {
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+  }
+  .filter-button {
+    background-color: #434343;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 4px 13px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+    font-size: 11.7px;
+  }
+  .filter-button:hover {
+    background-color: #666;
+  }
+  .dominance-buttons, .attribute-buttons, .brand-buttons, .special-buttons, .terpenes-buttons, .cannabinoids-buttons, .origin-buttons {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .dominance-button, .attribute-button, .brand-button, .special-button, .terpenes-button, .cannabinoids-button, .origin-button {
+    background-color: transparent;
+    color: #434343;
+    border: 1px solid #434343;
+    border-radius: 18px;
+    padding: 4px 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+    font-size: 11.7px;
+  }
+  .dominance-button.active, .attribute-button.active, .brand-button.active, .special-button.active, .terpenes-button.active, .cannabinoids-button.active, .origin-button.active {
+    color: black;
+    background-color: #e0e0e0;
+  }
+  #indica-button.active {
+    background-color: #adcbc9ff;
+    border-color: #adcbc9ff;
+  }
+  #sativa-button.active {
+    background-color: #ebdc70ff;
+    border-color: #ebdc70ff;
+  }
+  #hybrid-button.active {
+    background-color: #ccd094ff;
+    border-color: #ccd094ff;
+  }
+  #non-irradiated-button.active, #nz-prescribable-button.active {
+    background-color: #434343;
+    color: white;
+  }
+  .brand-button, .terpenes-button, .cannabinoids-button, .origin-button {
+    background-color: #cccccc;
+    color: #333;
+  }
+  .brand-button.active, .terpenes-button.active, .cannabinoids-button.active, .origin-button.active {
+    background-color: #a6a6a6;
+    color: black;
+  }
+  #attribute-buttons-row {
+    display: none;
+  }
+  #output-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+  }
+  #output-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 1001;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+  }
+  #output-popup h2 {
+    margin-top: 0;
+  }
+  #output-popup pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  #close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .mystrain-buttons {
+    display: flex;
+    gap: 1px;
+    margin-right: 2px;
+  }
+  .mystrain-button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 0px solid;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+    background-color: white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+  }
+  .mystrain-button.smile {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="%23808080" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="%23808080"/><circle cx="16" cy="9" r="1.5" fill="%23808080"/><path d="M7 14.5C8 16.5 10 18 12 18s4-1.5 5-3.5" fill="none" stroke="%23808080" stroke-width="1" stroke-linecap="round"/></svg>');
+  }
+  .mystrain-button.meh {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="%23808080" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="%23808080"/><circle cx="16" cy="9" r="1.5" fill="%23808080"/><line x1="8" y1="15" x2="16" y2="15" stroke="%23808080" stroke-width="1" stroke-linecap="round"/></svg>');
+  }
+  .mystrain-button.sad {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="%23808080" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="%23808080"/><circle cx="16" cy="9" r="1.5" fill="%23808080"/><path d="M7 16.5C8 14.5 10 13 12 13s4 1.5 5 3.5" fill="none" stroke="%23808080" stroke-width="1" stroke-linecap="round"/></svg>');
+  }
+  .mystrain-button.smile.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><path d="M7 14.5C8 16.5 10 18 12 18s4-1.5 5-3.5" fill="none" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+    background-color: #8cd82d;
+  }
+  .mystrain-button.meh.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><line x1="8" y1="15" x2="16" y2="15" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+    background-color: lightgray;
+  }
+  .mystrain-button.sad.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><path d="M7 16.5C8 14.5 10 13 12 13s4 1.5 5 3.5" fill="none" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+    background-color: lightskyblue;
+  }
+  .strain-name {
+    flex-grow: 1;
+    padding-top: 1px;
+  }
+  .my-strain-filter-button {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 0px solid;
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-left: 3px;
+  }
+  #my-strain-good-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><path d="M7 14.5C8 16.5 10 18 12 18s4-1.5 5-3.5" fill="none" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+  }
+  #my-strain-meh-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><line x1="8" y1="15" x2="16" y2="15" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+  }
+  #my-strain-bad-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><path d="M7 16.5C8 14.5 10 13 12 13s4 1.5 5 3.5" fill="none" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+  }
+  #my-strain-good-button.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><path d="M7 14.5C8 16.5 10 18 12 18s4-1.5 5-3.5" fill="none" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+    background-color: #8cd82d;
+  }
+  #my-strain-meh-button.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><line x1="8" y1="15" x2="16" y2="15" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+    background-color: lightgray;
+  }
+  #my-strain-bad-button.active {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="black" stroke-width="1"/><circle cx="8" cy="9" r="1.5" fill="black"/><circle cx="16" cy="9" r="1.5" fill="black"/><path d="M7 16.5C8 14.5 10 13 12 13s4 1.5 5 3.5" fill="none" stroke="black" stroke-width="1" stroke-linecap="round"/></svg>');
+    background-color: lightskyblue;
+  }
+  .my-strain-filter-buttons {
+    display: flex;
+    gap: 2px;
+  }
+  #font-size-control {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+  #font-size-slider {
+    width: 100px;
+  }
+  .mystrain-group {
+    margin-bottom: 10px;
+  }
+  .mystrain-group-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  #loading-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+</style>
+</head>
+<body>
+<div id="filter">
+  <div class="special-buttons">
+    <button id="nz-prescribable-button" class="special-button" onclick="filterNZPrescribable()">Prescribable in NZ</button>
+    <button id="show-all-button" class="special-button" onclick="showAllStrains()">Show all strains</button>
+  </div>
+  <div id="attribute-buttons-row">
+    <div class="attribute-buttons">
+      <button id="non-irradiated-button" class="attribute-button" onclick="filterByAttribute('Treated', 'Non-irradiated')">Non-irradiated only</button>
+      <button id="by-brand-button" class="attribute-button" onclick="toggleAttributeButtons('Brand')">By Brand</button>
+      <button id="by-cannabinoids-button" class="attribute-button" onclick="toggleAttributeButtons('Cannabinoids')">By Cannabinoids</button>
+      <button id="by-terpenes-button" class="attribute-button" onclick="toggleAttributeButtons('Terpenes')">By Terpenes</button>
+      <button id="by-origin-button" class="attribute-button" onclick="toggleAttributeButtons('Origin')">By Origin</button>
+    </div>
+  </div>
+  <div id="brand-buttons" class="brand-buttons" style="display: none;"></div>
+  <div id="cannabinoids-buttons" class="cannabinoids-buttons" style="display: none;"></div>
+  <div id="terpenes-buttons" class="terpenes-buttons" style="display: none;"></div>
+  <div id="origin-buttons" class="origin-buttons" style="display: none;"></div>
+  <div class="dominance-buttons">
+    <button id="indica-button" class="dominance-button" onclick="filterByDominance('Indica dominant')">Indicas only</button>
+    <button id="sativa-button" class="dominance-button" onclick="filterByDominance('Sativa dominant')">Sativas only</button>
+    <button id="hybrid-button" class="dominance-button" onclick="filterByDominance('Balanced hybrid')">Hybrids only</button>
+    <div class="my-strain-filter-buttons">
+      <button id="my-strain-good-button" class="my-strain-filter-button" onclick="filterMyStrain('Good')"></button>
+      <button id="my-strain-meh-button" class="my-strain-filter-button" onclick="filterMyStrain('Meh')"></button>
+      <button id="my-strain-bad-button" class="my-strain-filter-button" onclick="filterMyStrain('Bad')"></button>
+    </div>
+  </div>
+  <div class="filter-controls">
+    <input type="text" id="filter-input" placeholder="Filter strains...">
+    <button class="filter-button" onclick="selectAll()">Select All</button>
+    <button class="filter-button" onclick="deselectAll()">Deselect All</button>
+    <div id="font-size-control">
+      <label for="font-size-slider">Font Size:</label>
+      <input type="range" id="font-size-slider" min="8" max="18" value="10" step="1">
+    </div>
+  </div>
+  <span id="strain-count">0 selected of 0 filtered strains</span>
+  <ul id="filter-list"></ul>
+</div>
+
+<button id="output-button" class="filter-button" onclick="showOutputPopup()">Show Output Data</button>
+
+<div id="output-popup">
+  <span id="close-popup" onclick="hideOutputPopup()">&times;</span>
+  <h2>Output Data</h2>
+  <h3>Selected Strain Data Array</h3>
+  <pre id="strain-data-content"></pre>
+  <pre id="output-content"></pre>
+
+</div>
+
+<div id="loading-message" style="display: none;">Loading strains...</div>
+
+<script>
+let strainData = [];
+let filteredData = [];
+let attributes = [];
+let activeDominanceFilter = null;
+let activeAttributeFilters = {};
+let activeAttributeValues = {
+  Brand: [],
+  Terpenes: [],
+  Cannabinoids: [],
+  Origin: []
+};
+let selectedStrains = new Set();
+let showNZPrescribable = false;
+let activeMyStrainFilters = new Set();
+
+function fetchData() {
+  document.getElementById('loading-message').style.display = 'block';
+  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSoTjN6psMidKhKOaAxqcZQQ_ArKkUTuRgn65c3ncNqjdLASER0J-Z3WYxFNuhFX_gDVoyHyH1PcCZy/pubhtml?gid=1070299978&single=true')
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const table = doc.querySelector('table');
+      if (!table) {
+        showError("No table found in the spreadsheet.");
+        return;
+      }
+      const rows = Array.from(table.querySelectorAll('tr')).filter(row => row.textContent.trim() !== '');
+      if (rows.length < 2) {
+        showError("Not enough data in the spreadsheet.");
+        return;
+      }
+      
+      const headerRowIndex = rows.findIndex(row => row.querySelector('td').textContent.trim() === 'Strain');
+      if (headerRowIndex === -1) {
+        showError("Could not find a row starting with 'Strain'.");
+        return;
+      }
+      
+      attributes = Array.from(rows[headerRowIndex].querySelectorAll('td')).map(td => td.textContent.trim());
+      strainData = rows.slice(headerRowIndex + 1).map(row => {
+        let obj = {};
+        Array.from(row.querySelectorAll('td')).forEach((td, index) => {
+          obj[attributes[index]] = td.textContent.trim();
+        });
+        if (!obj.MyStrain) obj.MyStrain = ''; // Initialize MyStrain attribute if not present
+        return obj;
+      }).filter(obj => Object.values(obj).some(val => val !== ''));
+
+      // Load MyStrain attributes from localStorage
+      loadMyStrainAttributes();
+      
+      // Select all strains with a 'special' attribute
+      strainData.forEach(strain => {
+      if (strain.Special && strain.Special.trim() !== '') {
+      selectedStrains.add(strain.Strain);
+      }
+      });
+      filteredData = [...strainData];
+      updateFilterList();
+      adjustFilterInputWidth();
+      createAttributeButtons();
+      document.getElementById('loading-message').style.display = 'none';
+    })
+    .catch(error => {
+      showError("Error fetching data: " + error);
+      document.getElementById('loading-message').style.display = 'none';
+    });
+}
+
+function showError(message) {
+  document.getElementById('filter').innerHTML = `<p style="color: red; font-weight: bold;">${message}</p>`;
+}
+
+function updateFilterList() {
+  const filterList = document.getElementById('filter-list');
+  filterList.innerHTML = '';
+  
+  let groupedData = {};
+  if (activeMyStrainFilters.size > 0) {
+    groupedData = filteredData.reduce((acc, strain) => {
+      if (!acc[strain.MyStrain]) {
+        acc[strain.MyStrain] = [];
+      }
+      acc[strain.MyStrain].push(strain);
+      return acc;
+    }, {});
+  } else {
+    groupedData[''] = filteredData;
+  }
+  
+  for (let [group, strains] of Object.entries(groupedData)) {
+    if (group !== '') {
+      const groupDiv = document.createElement('div');
+      groupDiv.className = 'mystrain-group';
+      const groupTitle = document.createElement('div');
+      groupTitle.className = 'mystrain-group-title';
+      groupTitle.textContent = `${group} Strains`;
+      groupDiv.appendChild(groupTitle);
+      filterList.appendChild(groupDiv);
+    }
+    
+    // Sort strains based on Product attribute if showing NZ Prescribable, otherwise sort by Strain
+    strains.sort((a, b) => {
+      if (showNZPrescribable && a.Product && b.Product) {
+        return a.Product.localeCompare(b.Product);
+      } else {
+        return a.Strain.localeCompare(b.Strain);
+      }
+    }).forEach(strain => {
+      const li = document.createElement('li');
+      
+      // Add MyStrain buttons
+      const myStrainButtons = document.createElement('div');
+      myStrainButtons.className = 'mystrain-buttons';
+      
+      const createMyStrainButton = (type, value) => {
+        const button = document.createElement('button');
+        button.className = `mystrain-button ${type}`;
+        button.onclick = () => setMyStrain(strain.Strain, value);
+        if (strain.MyStrain === value) button.classList.add('active');
+        return button;
+      };
+      
+      myStrainButtons.appendChild(createMyStrainButton('smile', 'Good'));
+      myStrainButtons.appendChild(createMyStrainButton('meh', 'Meh'));
+      myStrainButtons.appendChild(createMyStrainButton('sad', 'Bad'));
+      
+      li.appendChild(myStrainButtons);
+      
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'strain-checkbox';
+      checkbox.checked = selectedStrains.has(strain.Strain);
+      checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          selectedStrains.add(strain.Strain);
+        } else {
+          selectedStrains.delete(strain.Strain);
+        }
+        updateStrainCount();
+        updateSelectedStrainDataArray();
+      });
+      li.appendChild(checkbox);
+      
+      const span = document.createElement('span');
+      span.className = 'strain-name';
+      span.textContent = showNZPrescribable && strain.Product ? `${strain.Product} (${strain.Strain})` : strain.Strain;
+      li.appendChild(span);
+      
+      filterList.appendChild(li);
+    });
+  }
+  
+  updateStrainCount();
+  updateSelectedStrainDataArray();
+}
+
+function setMyStrain(strainName, value) {
+  const strain = strainData.find(s => s.Strain === strainName);
+  if (strain) {
+    if (strain.MyStrain === value) {
+      // If the button is already active, deselect it
+      strain.MyStrain = '';
+    } else {
+      strain.MyStrain = value;
+    }
+    saveMyStrainAttributes();
+    applyFilters();
+  }
+}
+
+function updateStrainCount() {
+  const totalStrains = filteredData.length;
+  const selectedStrains = document.querySelectorAll('#filter-list li input:checked').length;
+  document.getElementById('strain-count').textContent = `${selectedStrains} selected of ${totalStrains} filtered strains`;
+}
+
+function selectAll() {
+  filteredData.forEach(strain => {
+    selectedStrains.add(strain.Strain);
+  });
+  updateFilterList();
+}
+
+function deselectAll() {
+  selectedStrains.clear();
+  updateFilterList();
+}
+
+function filterStrains() {
+  const filterValue = document.getElementById('filter-input').value.toLowerCase();
+  applyFilters(filterValue);
+}
+
+function adjustFilterInputWidth() {
+  const filterInput = document.getElementById('filter-input');
+  const longestStrainName = strainData.reduce((longest, strain) => {
+    const mainStrainLength = strain.Strain.length;
+    const aliasesLength = strain['Also known as'] ? Math.max(...strain['Also known as'].split(',').map(s => s.trim().length)) : 0;
+    return Math.max(longest, mainStrainLength, aliasesLength);
+  }, 0);
+
+  filterInput.style.width = `${longestStrainName * 10}px`;
+  filterInput.style.maxWidth = '300px';
+}
+
+function filterByDominance(dominance) {
+  const button = document.querySelector(`.dominance-button[onclick*="${dominance}"]`);
+  
+  if (activeDominanceFilter === dominance) {
+    activeDominanceFilter = null;
+    button.classList.remove('active');
+  } else {
+    activeDominanceFilter = dominance;
+    document.querySelectorAll('.dominance-button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  }
+  
+  applyFilters();
+}
+
+function filterByAttribute(attribute, value = null) {
+  const button = document.querySelector(`.attribute-button[onclick*="${attribute}"]`);
+  
+  if (value) {
+    if (activeAttributeFilters[attribute] === value) {
+      delete activeAttributeFilters[attribute];
+      button.classList.remove('active');
+    } else {
+      activeAttributeFilters[attribute] = value;
+      button.classList.add('active');
+    }
+  } else {
+    // For buttons without specific values, toggle active state
+    if (button.classList.contains('active')) {
+      button.classList.remove('active');
+      delete activeAttributeFilters[attribute];
+    } else {
+      button.classList.add('active');
+      activeAttributeFilters[attribute] = true;
+    }
+  }
+  
+  applyFilters();
+}
+
+function applyFilters(searchValue = '') {
+  filteredData = strainData.filter(strain => {
+    if (activeDominanceFilter && strain.Dominance !== activeDominanceFilter) {
+      return false;
+    }
+    
+    for (const [attribute, value] of Object.entries(activeAttributeFilters)) {
+      if (value === true) continue; // Skip non-specific attribute filters
+      if (strain[attribute] !== value) {
+        return false;
+      }
+    }
+    
+    for (const [attribute, values] of Object.entries(activeAttributeValues)) {
+      if (values.length > 0) {
+        const strainValues = strain[attribute].split(',').map(v => v.trim());
+        if (!values.some(value => strainValues.includes(value))) {
+          return false;
+        }
+      }
+    }
+    
+    if (showNZPrescribable && (strain.Special !== 'NZ Medical' || !strain.Product)) {
+      return false;
+    }
+    
+    if (activeMyStrainFilters.size > 0 && !activeMyStrainFilters.has(strain.MyStrain)) {
+      return false;
+    }
+    
+    if (searchValue) {
+      const strainName = showNZPrescribable && strain.Product ? `${strain.Product} (${strain.Strain})` : strain.Strain;
+      return strainName.toLowerCase().includes(searchValue.toLowerCase());
+    }
+    
+    return true;
+  });
+  
+  updateFilterList();
+}
+
+function createAttributeButtons() {
+  const attributes = ['Brand', 'Cannabinoids', 'Terpenes', 'Origin'];
+  attributes.forEach(attribute => {
+    const buttonContainer = document.getElementById(`${attribute.toLowerCase()}-buttons`);
+    const values = [...new Set(strainData.flatMap(strain => strain[attribute].split(',').map(v => v.trim())))].filter(value => value !== "");
+    
+    // Sort values alphabetically
+    values.sort((a, b) => a.localeCompare(b));
+    
+    values.forEach(value => {
+      const button = document.createElement('button');
+      button.textContent = value;
+      button.className = `${attribute.toLowerCase()}-button`;
+      button.onclick = () => toggleAttributeFilter(attribute, value);
+      buttonContainer.appendChild(button);
+    });
+  });
+}
+
+function toggleAttributeFilter(attribute, value) {
+  const index = activeAttributeValues[attribute].indexOf(value);
+  if (index > -1) {
+    activeAttributeValues[attribute].splice(index, 1);
+  } else {
+    activeAttributeValues[attribute].push(value);
+  }
+  
+  document.querySelectorAll(`.${attribute.toLowerCase()}-button`).forEach(button => {
+    if (button.textContent === value) {
+      button.classList.toggle('active');
+    }
+  });
+  
+  applyFilters();
+}
+
+function toggleAttributeButtons(attribute) {
+  const buttonContainer = document.getElementById(`${attribute.toLowerCase()}-buttons`);
+  const toggleButton = document.getElementById(`by-${attribute.toLowerCase()}-button`);
+  
+  if (buttonContainer.style.display === 'none') {
+    buttonContainer.style.display = 'flex';
+    toggleButton.classList.add('active');
+  } else {
+    buttonContainer.style.display = 'none';
+    toggleButton.classList.remove('active');
+    activeAttributeValues[attribute] = [];
+    document.querySelectorAll(`.${attribute.toLowerCase()}-button`).forEach(button => button.classList.remove('active'));
+  }
+  
+  applyFilters();
+}
+
+function filterNZPrescribable() {
+  showNZPrescribable = !showNZPrescribable;
+  const button = document.getElementById('nz-prescribable-button');
+  button.classList.toggle('active');
+  document.getElementById('attribute-buttons-row').style.display = showNZPrescribable ? 'block' : 'none';
+  applyFilters();
+}
+
+function filterMyStrain(value) {
+  const button = document.getElementById(`my-strain-${value.toLowerCase()}-button`);
+  if (activeMyStrainFilters.has(value)) {
+    activeMyStrainFilters.delete(value);
+    button.classList.remove('active');
+  } else {
+    activeMyStrainFilters.add(value);
+    button.classList.add('active');
+  }
+  applyFilters();
+}
+
+function showAllStrains() {
+  // Reset all filters
+  activeDominanceFilter = null;
+  activeAttributeFilters = {};
+  Object.keys(activeAttributeValues).forEach(key => {
+    activeAttributeValues[key] = [];
+  });
+  showNZPrescribable = false;
+  activeMyStrainFilters.clear();
+
+  // Reset all button states
+  document.querySelectorAll('.dominance-button, .attribute-button, .special-button, .brand-button, .terpenes-button, .cannabinoids-button, .origin-button, .my-strain-filter-button').forEach(button => {
+    button.classList.remove('active');
+  });
+
+  document.getElementById('attribute-buttons-row').style.display = 'none';
+  document.querySelectorAll('.brand-buttons, .cannabinoids-buttons, .terpenes-buttons, .origin-buttons').forEach(container => {
+    container.style.display = 'none';
+  });
+
+  // Clear the search input
+  document.getElementById('filter-input').value = '';
+
+  // Reset the filtered data to show all strains
+  filteredData = [...strainData];
+  updateFilterList();
+}
+
+function showOutputPopup() {
+  const popup = document.getElementById('output-popup');
+  const outputContent = document.getElementById('output-content');
+  const strainDataContent = document.getElementById('strain-data-content');
+  
+  // Generate output string
+  let output = '';
+  filteredData.forEach(strain => {
+    if (selectedStrains.has(strain.Strain)) {
+      output += `${strain.Strain}\n`;
+    }
+  });
+  
+  // Generate selected strain data array
+  const selectedStrainData = filteredData.filter(strain => selectedStrains.has(strain.Strain));
+  
+  outputContent.textContent = output;
+  strainDataContent.textContent = JSON.stringify(selectedStrainData, null, 2);
+  popup.style.display = 'block';
+}
+
+function hideOutputPopup() {
+  document.getElementById('output-popup').style.display = 'none';
+}
+
+function updateSelectedStrainDataArray() {
+  const selectedStrainData = filteredData.filter(strain => selectedStrains.has(strain.Strain));
+  const strainDataContent = document.getElementById('strain-data-content');
+  strainDataContent.textContent = JSON.stringify(selectedStrainData, null, 2);
+}
+
+function saveMyStrainAttributes() {
+  const myStrainData = strainData.reduce((acc, strain) => {
+    if (strain.MyStrain) {
+      acc[strain.Strain] = strain.MyStrain;
+    }
+    return acc;
+  }, {});
+  localStorage.setItem('myStrainAttributes', JSON.stringify(myStrainData));
+}
+
+function loadMyStrainAttributes() {
+  const savedMyStrainData = localStorage.getItem('myStrainAttributes');
+  if (savedMyStrainData) {
+    const myStrainData = JSON.parse(savedMyStrainData);
+    strainData.forEach(strain => {
+      if (myStrainData[strain.Strain]) {
+        strain.MyStrain = myStrainData[strain.Strain];
+      }
+    });
+  }
+}
+
+document.getElementById('filter-input').addEventListener('input', filterStrains);
+
+const fontSizeSlider = document.getElementById('font-size-slider');
+fontSizeSlider.addEventListener('input', () => {
+  const fontSize = fontSizeSlider.value;
+  document.getElementById('filter-list').style.fontSize = `${fontSize}px`;
+});
+
+fetchData();
+</script>
+</body>
+</html>

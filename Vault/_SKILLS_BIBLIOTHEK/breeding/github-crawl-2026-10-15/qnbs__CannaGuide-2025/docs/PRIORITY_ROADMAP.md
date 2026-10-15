@@ -1,0 +1,132 @@
+# Audit-Driven Priority Roadmap
+
+> Prioritized action plan derived from the Deep Audit (2026-Q2).
+> For version-based feature roadmap, see [ROADMAP.md](../ROADMAP.md).
+> For full finding details, see [AUDIT_BACKLOG.md](AUDIT_BACKLOG.md).
+
+---
+
+## Immediate (Sprint 1)
+
+| ID   | Finding                      | Effort | Status |
+| ---- | ---------------------------- | ------ | ------ |
+| C-02 | Automated release workflow   | Low    | Done   |
+| C-01 | Changelog generation         | Low    | Done   |
+| P-02 | Bundle size budget           | Medium | Done   |
+| K-01 | Package boundary enforcement | Medium | Done   |
+| I-01 | Translation completeness CI  | Low    | Done   |
+
+## Short-term (Sprint 2)
+
+| ID   | Finding                       | Effort | Status |
+| ---- | ----------------------------- | ------ | ------ |
+| S-01 | Prompt injection allow-list   | Low    | Done   |
+| A-01 | AI response validation        | Medium | Done   |
+| A-04 | RAG context window management | Medium | Done   |
+| S-04 | Key rotation warning UI       | Low    | Done   |
+| F-04 | Data export/backup            | Medium | Done   |
+| U-01 | Keyboard navigation audit     | Medium | Done   |
+| U-02 | Screen reader testing         | Medium | Done   |
+
+## Medium-term (Sprint 3)
+
+| ID   | Finding                               | Effort | Status |
+| ---- | ------------------------------------- | ------ | ------ |
+| T-01 | Mutation testing pilot                | High   | Done   |
+| T-03 | Visual regression testing             | Medium | Done   |
+| T-04 | Multi-browser E2E coverage            | Medium | Done   |
+| T-05 | AI contract tests                     | Medium | Done   |
+| A-02 | Local AI model versioning             | Medium | Done   |
+| P-03 | Image optimization pipeline           | Medium | Done   |
+| F-05 | Multi-grow management                 | High   | Done   |
+| D-01 | API documentation                     | High   | Done   |
+| R-01 | Streaming generalization              | Medium | Done   |
+| R-02 | GPU resource manager v2 (N consumers) | Medium | Done   |
+| R-03 | WebLLM preload UX (progress bar)      | Low    | Done   |
+
+## Long-term (Backlog)
+
+| ID   | Finding                          | Effort | Status                                                                  |
+| ---- | -------------------------------- | ------ | ----------------------------------------------------------------------- |
+| S-03 | CSP nonce implementation         | Medium | Won't Fix (strict-dynamic infeasible, S70)                              |
+| C-04 | Deployment preview validation    | Medium | Done (Session 84)                                                       |
+| F-02 | Social sharing                   | Medium | Done (Session 113 -- GrowStatsDashboard + StrainLookup)                 |
+| F-06 | Offline sync conflict resolution | High   | Done (Session 87 -- CRDT sync + SyncConflictModal)                      |
+| I-02 | RTL language preparation         | Medium | Deferred v2.0 (no RTL languages on roadmap)                             |
+| A-03 | AI cost tracking                 | Medium | Done (Session 83)                                                       |
+| W-01 | WorkerBus per-worker rate limit  | Medium | Done (Session 94 -- sliding-window limiter)                             |
+| W-02 | WorkerBus priority preemption    | High   | Done (ADR-0007 -- AbortController preemption + re-queue)                |
+| W-03 | WorkerBus external telemetry     | Low    | Done (Session 94 -- exportTelemetry + Sentry context)                   |
+| W-04 | WorkerBus cross-worker comms     | High   | Done (ADR-0008 -- MessageChannel + generic typed dispatch)              |
+| W-05 | Lock-free ring buffer            | Medium | Done (SPSC ring buffer on SAB, 256 capacity, progressive enhancement)   |
+| W-06 | Dynamic worker pool              | High   | Done (ADR-0010 -- lazy spawning, idle timeout, SAB hot-path, telemetry) |
+| W-07 | SAB streaming expansion          | Medium | Planned v2.0 (voice waveform, MPMC queue, advanced lock-free)           |
+| D-01 | Desktop modular capabilities     | Medium | Done (Session 172 -- 9 capability files, FS scopes, ADR-0012)           |
+| D-02 | Desktop window-state plugin      | Low    | Done (Session 172 -- persistent window size/position)                   |
+| D-03 | Desktop store plugin             | Low    | Done (Session 172 -- theme/AI-model persistence)                        |
+| D-04 | Desktop auto-updater config      | Medium | Done (Session 172 -- signing key generated, CI-ready)                   |
+| D-05 | Desktop code signing             | High   | Planned (requires Apple/Windows developer accounts)                     |
+| D-06 | Desktop E2E testing              | High   | Planned v2.0 (Tauri test framework integration)                         |
+
+## Already Resolved
+
+| ID    | Finding                           | Resolution                                                    |
+| ----- | --------------------------------- | ------------------------------------------------------------- |
+| S-01  | Prompt injection allow-list       | 5-layer sanitization pipeline in geminiService                |
+| S-04  | Key rotation warning UI           | GeminiSecurityCard w/ age label + badge (S69)                 |
+| S-05  | SRI for CDN assets                | N/A -- no external CDN scripts (S69)                          |
+| K-03  | Service dependency cycles         | import/no-cycle ESLint error + CI (S41/S62)                   |
+| K-04  | Worker error propagation          | WorkerBusError class + 10-code enum (S69)                     |
+| T-01  | Mutation testing pilot            | Stryker baseline + 2 new slice tests (Session 63)             |
+| R-01  | Streaming generalization          | useStreamingResponse.ts hook (Session 47)                     |
+| R-02  | GPU resource manager v2           | gpuResourceManager.ts with priority queue (S48)               |
+| S-02  | Tailwind CDN                      | PostCSS build-time compilation already active                 |
+| P-01  | Tailwind CDN (duplicate)          | Same as S-02                                                  |
+| T-02  | Coverage thresholds               | v8 provider + thresholds in vite.config.ts                    |
+| C-02  | Release workflow                  | Manual releases via release-gate.yml (release-please removed) |
+| K-02  | Lazy hydration                    | React.lazy + Suspense + shell pattern                         |
+| S-06  | Dependency pinning                | All CI actions use pinned SHA hashes                          |
+| D-03  | Architecture Decision Records     | ADR template + ADR-0001 in docs/adr/                          |
+| F-01  | iCal export                       | Implemented                                                   |
+| F-03  | Push notifications                | Wave 5/6: proactiveCoach + nativeBridge                       |
+| R-04  | Local AI service extraction       | Decomposed into 15 service modules                            |
+| R-05  | Redux scope reduction             | Zustand stores for all transient UI state                     |
+| R-06  | Worker architecture consolidation | workerBus with 9 typed workers                                |
+| IoT-1 | IoT real-time dashboard           | IotDashboardView with sparklines/gauges/telemetry             |
+| V-01  | 3D interactive OrbitControls      | GrowRoom3D with auto-orbit + IoT badge                        |
+| AI-R1 | Strain recommendation scoring     | Daily Strains match % badge (0-100 relevance)                 |
+| U-03  | Mobile responsiveness             | mobile-chrome Playwright project + 3 E2E tests (S70)          |
+| S-03  | CSP nonce                         | Won't Fix: strict-dynamic infeasible for static PWA (S70)     |
+| A-01  | AI response validation            | Zod safeParse in aiService + localAiPromptHandlers (S74)      |
+| A-04  | RAG context window management     | dynamicLimit + slidingWindow in growLogRagService             |
+| A-05  | AI fallback telemetry             | recordFallbackEvent + getFallbackBreakdown (S74)              |
+| P-02  | Bundle size budget                | check-bundle-budget.mjs in CI                                 |
+| P-03  | Image optimization pipeline       | browser-image-compression in imageService                     |
+| P-05  | IndexedDB storage monitoring      | DataManagementTab storage bar + indexedDbMonitorService       |
+| I-01  | Translation completeness CI       | check-i18n-completeness.mjs in ci.yml (S72)                   |
+| F-04  | Data export/backup                | DataManagementTab export/import/auto-backup                   |
+| U-01  | Keyboard navigation audit         | Touch target fixes + mobile E2E tests (S70)                   |
+| U-02  | Screen reader testing             | 40+ ARIA attributes + 14 landmarks audit (S70)                |
+| U-04  | Error state UX                    | ErrorBoundary retry button + 3 recovery options (S76)         |
+| C-03  | CI pipeline caching               | 3-layer cache: Turbo + NPM + Playwright (S76)                 |
+| T-03  | Visual regression testing         | Expanded to 9 themes (45 baselines) (S76)                     |
+| T-04  | Multi-browser E2E coverage        | Firefox enabled in CI with extended timeouts (S76)            |
+| A-02  | Local AI model versioning         | WebLlmModel version/releaseDate + catalog v1.0.0 (S76)        |
+| R-03  | WebLLM preload UX                 | Global WebLlmPreloadBanner toast component (S76)              |
+
+## v1.9.x — Full-Scale Audit (2026-06-29)
+
+| ID     | Finding                                | Status                     |
+| ------ | -------------------------------------- | -------------------------- |
+| S-08   | AI prompt sanitization (all paths)     | Done                       |
+| A-01a  | SettingsView god-file split            | Done (348 LOC)             |
+| A-01b  | DataManagementTab modular split        | Done (110 LOC)             |
+| F-01   | Strain catalog versioning + CI         | Done (ADR-0014)            |
+| S-10   | `undici` override (jsdom)              | Done                       |
+| DOC-01 | Stale doc references + metrics sync    | Done (`docs:sync-metrics`) |
+| ADR-15 | UI state bridge documented             | Done                       |
+| T-01   | Critical-path coverage ≥80%            | In progress                |
+| A-01c  | BreedingLab / Genealogy / StrainDetail | Open (god-files)           |
+| P-01   | Local AI battery UX warnings           | Open                       |
+
+Closure: [audits/AUDIT-CLOSURE-2026-06-29.md](audits/AUDIT-CLOSURE-2026-06-29.md)

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🌱 Nährstoff-Rechner — 420Forum.de</title>
+<style>
+body { font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; }
+h1 { color:#37e57c; }
+label { display:block; margin-top:10px; }
+input { width:100%; padding:8px; border-radius:6px; border:1px solid #333; margin-top:5px; background:#1a1a1a; color:#eee; }
+button { margin-top:15px; padding:10px; width:100%; border:none; border-radius:6px; background:#37e57c; color:#000; font-weight:bold; }
+.result { margin-top:15px; padding:10px; background:#1a1a1a; border-radius:6px; }
+</style>
+</head>
+<body>
+<h1>🌱 Nährstoff-Rechner</h1>
+<label>Gewünschte EC (mS/cm):</label>
+<input type="number" step="0.01" id="ec" placeholder="z. B. 1.8">
+
+<label>Aktuelle EC des Wassers:</label>
+<input type="number" step="0.01" id="ec_water" placeholder="z. B. 0.3">
+
+<label>Konzentration Dünger (EC pro ml/L):</label>
+<input type="number" step="0.01" id="ec_per_ml" placeholder="z. B. 0.1">
+
+<button onclick="calc()">Berechnen</button>
+
+<div class="result" id="res"></div>
+
+<script>
+function calc(){
+  let ec = parseFloat(document.getElementById('ec').value) || 0;
+  let ec_water = parseFloat(document.getElementById('ec_water').value) || 0;
+  let ec_per_ml = parseFloat(document.getElementById('ec_per_ml').value) || 0.1;
+
+  let diff = ec - ec_water;
+  let ml = diff / ec_per_ml;
+
+  document.getElementById('res').innerHTML = 
+    `<b>Benötigte Düngerzugabe:</b> ${ml.toFixed(2)} ml pro Liter Wasser`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Botanist"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $botanist for this task."

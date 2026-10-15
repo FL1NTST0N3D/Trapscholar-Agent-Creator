@@ -1,0 +1,126 @@
+---
+title: blesching-cannabis-health-index-autoimmune-conditions blesching-cannabis-chi-scoring-evidence-based-medicine
+created: 2026-05-08
+source: "blesching-cannabis-health-index-autoimmune-conditions, North Atlantic Books, 2015"
+tags:
+  - chi-scoring
+  - cannabis-health-index
+  - evidence-based-medicine
+  - medical-cannabis
+  - research-methodology
+  - set-and-setting
+  - mindfulness
+  - self-assessment
+---
+
+## Cannabis Health Index (CHI) Scoring Methodology
+
+The Cannabis Health Index (CHI) is an evidence-based rating system developed
+by Uwe Blesching, PhD, that shows degrees of confidence in cannabis as an
+effective treatment for specific conditions. The [[metzner-ayahuasca-therapeutic-potential]] of cannabis across more than one hundred chronic
+symptoms and diseases.
+
+## How CHI Scores Are Calculated
+
+Each experiment reviewed is scored based on study type, receiving a base value
+between 1 and 5. This base value is multiplied by +1 if the study concluded
+cannabis was effective, or by -1 if it concluded cannabis was ineffective.
+Studies with inconclusive or mixed results may be referenced but do not
+contribute to the overall disease CHI score. All individual study scores for a
+given disease are summed to create a combined CHI value, which is then divided
+by the total number of studies, yielding a final CHI score on a scale from 0
+to 5 (represented by up to five leaf symbols).
+
+## Evidence Quality Rating System
+
+The CHI assigns different base values to different types of research studies,
+following standard evidence-based medicine conventions:
+
+- **+/-5**: Double-blind, placebo-controlled, clinical human trials and
+  double-blind, placebo-controlled, crossover human trials — the strongest
+  evidence, most likely to determine truth.
+- **+/-4**: Clinical human trials and cohort studies — strong evidence
+  without the rigorous controls of double-blind designs.
+- **+/-3**: Reviews of relevant literature and studies, plus individual human
+  case studies — synthesize multiple studies and are highly respected.
+- **+/-2**: Animal studies — useful preliminary evidence not directly
+  extrapolated to human physiology without further research.
+- **+/-1**: Laboratory studies (in vitro) — demonstrate cellular mechanisms
+  but represent the least convincing evidence for clinical use.
+
+## Interpreting CHI Scores
+
+A high total score reflects the amount of available published research more
+than the degree of efficacy. Higher overall CHI numbers indicate that more
+research has been conducted for that condition.
+
+- **3.5 to 5**: Solid evidence that cannabis may be useful. Patients may wish
+  to share these citations with their doctor.
+- **1.5 to 3.4**: Probable evidence of therapeutic value. Not conclusive but
+  suggests promise; worth discussing with a healthcare practitioner.
+- **0 to 1.5**: Possible evidence, or results were nonexistent, mixed, or
+  inconclusive. More research is needed.
+
+## Strain-Specific Considerations
+
+Different [[cannabis-thc-cbd-ratio-guide-for-conditions]],
+favoring CB1 receptor activation. Indicas and indica-dominant strains have a
+lower THC to CBD ratio, favoring CB2 receptor activation. Selecting the
+appropriate strain is important for targeting specific receptor pathways. Most
+medical dispensaries provide laboratory-tested cannabinoid profiles for each
+strain, enabling informed selection based on therapeutic goals.
+
+## Form-Specific Considerations
+
+The form of consumption significantly affects [[cannabis-leaf-morphology-and-phyllotaxy]], CBD and THC exist as non-psychoactive cannabinoid acids.
+Once heated, dried, or stored, decarboxylation occurs: CBD remains non-
+psychoactive while THC-acid becomes psychoactive THC. Raw cannabis allows
+patients to benefit from therapeutic properties without altering consciousness.
+Research also suggests raw THC-acid has unique anti-inflammatory properties,
+including inhibition of tumor necrosis factor alpha (TNF-alpha). William L.
+Courtney, MD, notes that unheated cannabis leaf can be tolerated at doses 60
+times higher than heated cannabis, with ten to twenty large fan leaves juiced
+daily as a commonly recommended dose.
+
+## See Also
+
+- [[cannabis-health-index-methodology]]
+
+- [[cannabis-health-cbd-cannabidiol]]
+- [[cannabis-health-index]]
+- [[ayahuasca]]
+- [[uwe-blesching]]
+## Practical Applications
+The principles discussed here have direct applications in agricultural systems, ecological restoration, and sustainable resource management.
+Practitioners have demonstrated successful implementation across diverse climates and soil conditions.
+Adaptation to local conditions and careful observation remain central to effective application.
+
+## Research Directions
+Current research explores the intersections between traditional knowledge and modern scientific understanding.
+Comparative studies across different bioregions provide valuable insights into generalizable principles.
+Long-term monitoring and documentation continue to build the evidence base for these approaches.
+Collaborative research networks facilitate knowledge exchange and accelerate innovation.
+
+## Key Considerations
+Context-specific implementation requires attention to local ecology, climate patterns, and community needs.
+Integration with existing systems often yields better results than complete replacement strategies.
+Monitoring and adaptive management are essential for long-term success and continuous improvement.
+
+## Integration Strategies
+Successful implementation often draws on multiple complementary approaches working in concert.
+Scale-appropriate solutions range from backyard gardens to broadacre agricultural systems.
+Knowledge sharing between practitioners accelerates collective learning and refinement of methods.
+## Practical Considerations
+Successful implementation requires attention to detail and adaptation to local conditions.
+Field experience and systematic observation remain the most reliable guides for practitioners.
+
+## Future Directions
+Emerging research continues to validate and refine traditional approaches.
+Integration with modern technology offers new possibilities for monitoring and optimization.
+## Further Considerations
+Ongoing research and field trials continue to expand our understanding of this subject.
+Practical experience combined with systematic observation yields the most reliable insights.
+
+## Future Directions
+Emerging approaches and technologies offer new opportunities for advancement.
+Collaborative knowledge sharing accelerates progress across related domains.

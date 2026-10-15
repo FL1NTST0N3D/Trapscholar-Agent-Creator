@@ -1,0 +1,46 @@
+# Backcross
+
+Backcross characterizes near-isogenic lines from SNP genotype calls. It compares each line with its recurrent and donor parents, estimates recurrent-parent genome recovery, locates donor segments, checks target regions, and flags genotype quality concerns. The browser app displays graphical genotypes and exports CSV tables and an HTML report. A Node command-line interface uses the same analysis core.
+
+**Status:** version 0.1.0 (see [Releases](https://github.com/piercetaylor/backcross/releases)). [Open the app](https://piercetaylor.github.io/backcross/) or [load the synthetic demo](https://piercetaylor.github.io/backcross/?demo=synthetic). The demo contains six generated lines and 500 markers; it does not represent a breeding program.
+
+## Data and interpretation
+
+The app accepts VCF, HapMap, and wide CSV genotype files, a `samples.csv` manifest naming one recurrent and one donor parent, and an optional `markers.csv` genetic map. BrAPI v2.1 allele-matrix loading is also available. Crop-specific chromosome conventions cover soybean, maize, rice, sorghum, wheat, barley, oat, common bean, cotton, cowpea, pea, peanut, and sunflower. [The input contract](contract/data-contract.md) and [coding reference](docs/input-coding.md) specify accepted fields and calls.
+
+Results describe the supplied markers and parent calls. Sparse or uneven marker coverage leaves segment breakpoints uncertain and can change genome-recovery estimates; the report includes the parameters used. Files selected from disk are analyzed in the browser tab. A BrAPI load requests genotype data from the server the user selects. No real genotype dataset is included in this repository.
+
+## Run locally
+
+Node.js 22.19 or newer is required.
+
+```sh
+npm ci
+npm run dev
+```
+
+Open the local address printed by Vite. For batch output, the synthetic fixture provides a working CLI example:
+
+```sh
+node src/cli.ts summarize --genotypes tests/fixtures/synthetic/genotypes.vcf --samples tests/fixtures/synthetic/samples.csv --markers tests/fixtures/synthetic/markers.csv --out summary.csv
+```
+
+Every GitHub Release also carries `backcross-cli-<version>.mjs`, a single file that needs only Node 22.19: `node backcross-cli-<version>.mjs summarize ...` with the same options.
+
+The `segments`, `targets` and `qc` commands produce separate CSV files; `compare` and `discordant` write the pairwise comparison and discordant-marker CSVs for one pair of sample ids given as `--a` and `--b` (`--mode informative`, the default, or `all`). Every command takes `--crop ID` (one of the thirteen chromosome schemes, default `soybean`) and `--profile ID|FILE` (a token profile for HapMap and wide CSV, or a JSON file of the same shape); run `node src/cli.ts` for the full option list. `npm run build` creates a static site in `dist/`.
+
+## Verification and documentation
+
+`npm test`, `npm run typecheck`, `npm run lint`, and `npm run test:browser` check the analysis and interface. The synthetic fixture has independently generated expected values; [the plan](PLAN.md) records measured performance and remaining verification limits. [The user guide](docs/user-guide.md), the [docs index](docs/README.md), [data formats and exports](docs/data-formats.md), [design decisions](docs/adr/), and the [archived README](docs/legacy-readme.md) provide detail.
+
+## Cite
+
+DOI for all versions: [10.5281/zenodo.23051345](https://doi.org/10.5281/zenodo.23051345) (version 0.1.0: [10.5281/zenodo.23051346](https://doi.org/10.5281/zenodo.23051346)).
+
+Cite the version you used: `CITATION.cff` carries the metadata GitHub's "Cite this repository" button and Zenodo read, and every CSV export and HTML report record the release and commit that produced them (`tool_version`, `tool_commit`; docs/data-formats.md). The software is available under the [MIT license](LICENSE).
+
+## Sibling tool
+
+Backcross characterises finished near-isogenic lines; [progeny-selector](https://github.com/piercetaylor/progeny-selector) ranks progeny during the programme, generation by generation. Both read input data contract 1.12.0 (`contract/data-contract.md`), so genotype, `samples.csv` and `markers.csv` files move between them unchanged.
+
+Contributions follow [CONTRIBUTING.md](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md); vulnerabilities go through [SECURITY.md](SECURITY.md).

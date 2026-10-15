@@ -1,0 +1,120 @@
+---
+title: comparison-cannabis-cloning-vs-seed-starting-indoors and cannabis cloning rooting cuttings method clarke Detailed Method (Clarke)
+created: 2026-04-18
+updated: 2026-04-18
+type: concept
+tags: [cannabis, cultivation]
+sources:
+  - raw/papers/marijuana-botany-robert-connell-clarke.md
+---
+
+## Cannabis Cloning and Rooting Cuttings Detailed Method (Clarke)
+
+## Principle of Asexual Propagation
+
+Asexual propagation (cloning) preserves genotype because only normal cell division (mitosis) occurs during growth and regeneration. Every [[fungal-single-cell-protein-production]], because every cell possesses the genetic information necessary to regenerate a complete plant.
+
+## Advantages of Cloning
+
+- Preserves unique characteristics of the parent plant
+- Because of the heterozygous nature of Cannabis, valuable traits lost by sexual propagation can be preserved
+- Propagation of nearly identical populations of all-pistillate, fast growing, evenly maturing Cannabis
+- Genetic uniformity provides a control for experiments measuring environmental effects
+- Theoretically can preserve a genotype forever
+
+## Risks of Cloning
+
+- If a population of clones is subjected to sudden environmental stress, pests, or disease for which it has no defense, every member will be affected and the entire population may be lost
+- No genetic diversity within the clone means no adaptation to new stresses through recombination
+- Vigor may slowly decline due to poor selection of clone material or constant disease/environmental pressure
+- Mutations in vegetative cells that divide and pass on mutated genes will permanently affect genotype
+
+## Root Initiation: Three Stages
+
+1. **Initiation**: Meristematic cells located just outside and between vascular bundles become root initials
+2. **Differentiation**: Meristematic cells differentiate into root primordia
+3. **Emergence**: New roots grow by rupturing old stem tissue and establishing vascular connections with the shoot
+
+Initiation usually begins within a week; young roots appear within four weeks. An irregular mass of white cells (callus tissue) often forms on the stem surface adjacent to root initiation areas. Callus has no influence on root formation but indicates conditions are favorable for root initiation.
+
+## Hormonal Control of Rooting
+
+### Auxins
+- Most influential growth substance for root initiation
+- Naturally occurring auxin (indoleacetic acid, IAA) formed mainly in apical shoot meristem and young leaves
+- Moves downward from growing shoot tip
+- Synthetic auxins with proven activity: napthaleneacetic acid (NAA), indolebutyric acid (IBA), 2,4-dichlorophenoxyacetic acid (2,4 DPA)
+- High auxin levels promote root growth; low levels favor shoots
+- Application of auxin stimulates adventitious root formation in stem cuttings
+
+### Cytokinins
+- Stimulate cell growth but suppress root growth and stimulate bud growth
+- Opposite reaction to auxins; natural balance of the two regulates normal plant growth
+- Solutions of equal concentrations of auxins and cytokinins promote undifferentiated callus tissue growth
+
+## Selection of Rooting Material
+
+- **Best**: Young, firm, vegetative shoots, 3-7 mm (1/8 to 1/4 inch) in diameter
+- **Avoid**: Weak, unhealthy plants; large woody branches; reproductive tissues (slower to root)
+- **Key factor**: High carbohydrate content stems root most easily; high nitrogen content cuttings root more poorly
+- **Iodine starch test**: Cut ends immersed in weak iodine/potassium iodide solution; darkest stain = highest starch content
+- **Staminate plants** have higher average carbohydrate levels; **pistillate plants** have higher nitrogen levels
+- Cuttings should be from sections that have ceased elongating and begun radial growth
+
+## Optimizing Carbohydrate-to-Nitrogen Ratio
+
+### Method 1: Reduce Nitrogen Supply
+- Leach soil with large amounts of fresh water
+- Withhold nitrogenous fertilizer
+- Allow stock plants to grow in full sunlight
+- Crowd roots to reduce excessive [[cannabis-cloning-and-mother-plants]] - Modern cloning techniques
+- [[cannabis-breeding-techniques-acclimatization-trait-fixing-clarke]]
+- [[cannabis-seed-selection-and-strain-types]]
+
+## Practical Applications
+
+The principles and techniques discussed here have wide-ranging applications
+across multiple disciplines and contexts. Practitioners and researchers
+continue to explore new ways to integrate these concepts into modern practice,
+adapting traditional knowledge to contemporary challenges and opportunities.
+
+## Key Considerations
+
+Several important factors influence the effectiveness and outcomes described
+in this topic. Understanding these considerations helps practitioners make
+informed decisions and avoid common pitfalls. Environmental conditions,
+timing, and material selection all play critical roles.
+
+## Historical Context
+
+The historical development of this subject reflects centuries of accumulated
+knowledge and practical experience. From traditional methods passed down
+through generations to modern scientific approaches, the evolution continues
+to inform current best practices and research directions.
+
+## Common Challenges
+
+Practitioners frequently encounter several challenges when working with
+these concepts. Climate variability, resource limitations, and knowledge
+gaps can all affect outcomes. Addressing these challenges requires patience,
+observation, and a willingness to adapt approaches based on results.
+
+## See Also
+- [[det]]
+- [[spore]]
+- [[sterilization]]
+## Practical Applications
+The principles discussed here have direct applications in agricultural systems, ecological restoration, and sustainable resource management.
+Practitioners have demonstrated successful implementation across diverse climates and soil conditions.
+Adaptation to local conditions and careful observation remain central to effective application.
+
+## Research Directions
+Current research explores the intersections between traditional knowledge and modern scientific understanding.
+Comparative studies across different bioregions provide valuable insights into generalizable principles.
+Long-term monitoring and documentation continue to build the evidence base for these approaches.
+Collaborative research networks facilitate knowledge exchange and accelerate innovation.
+
+## Key Considerations
+Context-specific implementation requires attention to local ecology, climate patterns, and community needs.
+Integration with existing systems often yields better results than complete replacement strategies.
+Monitoring and adaptive management are essential for long-term success and continuous improvement.

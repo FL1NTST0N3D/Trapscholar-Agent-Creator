@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stemma.neworbitdigital.com/schema/strain.schema.json",
+  "title": "Stemma strain card v2",
+  "description": "Reference only. tools/validate.py (stdlib) enforces the rules in docs/schema.md, which is authoritative.",
+  "type": "object",
+  "required": ["id", "name", "kind", "status", "updated"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "aliases": { "type": "array", "items": { "type": "string" } },
+    "kind": { "enum": ["landrace", "cultivar", "cut"] },
+    "status": { "enum": ["stub", "draft", "reviewed"] },
+    "summary": {
+      "type": "string",
+      "description": "At most 400 visible characters: the [[...]] link markup is reduced to its display text first, so a raw string may be longer. tools/validate.py (E11) is the check; JSON Schema cannot express it."
+    },
+    "born": { "$ref": "#/$defs/born" },
+    "origin": { "$ref": "#/$defs/origin" },
+    "breeder": { "type": ["string", "null"] },
+    "parents": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" } },
+    "traditional_label": { "enum": ["indica", "sativa", "hybrid", "unknown"] },
+    "growing": { "$ref": "#/$defs/growing" },
+    "chemotype": { "$ref": "#/$defs/chemotype" },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+  },
+  "$defs": {
+    "born": {
+      "type": "object",
+      "required": ["display"],
+      "properties": {
+        "unknown": { "const": true },
+        "year_min": { "type": "integer", "minimum": 1900 },
+        "year_max": { "type": "integer", "minimum": 1900 },
+        "display": { "type": "string", "minLength": 1 }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "properties": {
+        "unknown": { "const": true },
+        "place": { "type": "string", "minLength": 1 },
+        "country": {
+          "type": "string",
+          "minLength": 1,
+          "description": "ISO 3166-1 alpha-2, and a key in tools/countries.py (E14)."
+        },
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lon": { "type": "number", "minimum": -180, "maximum": 180 }
+      }
+    },
+    "growing": {
+      "type": "object",
+      "required": ["environment", "flowering_weeks"],
+      "properties": {
+        "environment": { "enum": ["indoor", "outdoor", "both", "unknown"] },
+        "flowering_weeks": {
+          "type": "object",
+          "required": ["min", "max"],
+          "properties": { "min": { "type": "number" }, "max": { "type": "number" } }
+        }
+      }
+    },
+    "chemotype": {
+      "type": "object",
+      "description": "At least one of thc, cbd, dominant_terpenes must be set (E15). JSON Schema could say that with anyOf; tools/validate.py is the check either way.",
+      "minProperties": 1,
+      "properties": {
+        "thc": { "$ref": "#/$defs/cannabinoid" },
+        "cbd": { "$ref": "#/$defs/cannabinoid" },
+        "dominant_terpenes": {
+          "type": "array",
+          "description": "Ordered, most-dominant first.",
+          "items": { "$ref": "#/$defs/terpene" }
+        }
+      }
+    },
+    "cannabinoid": {
+      "type": "object",
+      "description": "Percent by dry weight, shaped like born. min <= max and at most 1 decimal place are tools/validate.py's checks (E15).",
+      "required": ["display"],
+      "properties": {
+        "unknown": { "const": true },
+        "min": { "type": "number", "minimum": 0, "maximum": 100 },
+        "max": { "type": "number", "minimum": 0, "maximum": 100 },
+        "display": { "type": "string", "minLength": 1 }
+      }
+    },
+    "terpene": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "description": "The common name, lowercase." },
+        "percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percent by dry weight, at most 2 decimal places (E16). Optional: a source does not always give one."
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["title", "category"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "publisher": { "type": "string" },
+        "category": { "enum": ["breeder", "publication", "database", "community"] },
+        "url": { "type": "string" },
+        "accessed": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+---
+title: fungi in the environment fungal species recognition phylogenetics and Phylogenetics
+tags:
+  - mycology
+  - species-concept
+  - phylogenetics
+  - multilocus-sequence-typing
+  - MLST
+  - molecular-systematics
+  - cryptic-species
+  - fungal-taxonomy
+date: 2026-04-28
+updated: 2026-04-28
+sources:
+created: 2026-04-28
+type: concept
+---
+
+## Fungal Species Recognition and Phylogenetics
+
+Fungal species concepts have undergone profound changes with the advent of molecular methods. Traditional morphology-based species recognition has been challenged by the discovery that morphologically similar fungi may comprise multiple genetically isolated lineages. The application of multilocus sequencing and phylogenetic analysis has revealed extensive cryptic diversity and reshaped our understanding of fungal speciation, biogeography, and evolution.
+
+## The Challenge of Fungal Species Recognition
+
+Historically, fungal species were recognized solely by morphology. Where morphological species were broad and the need to distinguish species was great, mycologists employed other phenotypic characters such as substrate utilization and growth rates on different media at different temperatures. However, the realization that multiple fungal species can share easily observed phenotypes yet remain genetically isolated created a fundamental taxonomic challenge.
+
+Biological Species Recognition (BSR) through mating compatibility tests provides one alternative, but is limited because only approximately 11% of fungal species have been cultivated, and about 20% do not reproduce sexually in cultivation. These constraints led to the adoption of molecular Phylogenetic Species Recognition (PSR) as a broadly applicable solution.
+
+## Phylogenetic Species Recognition (PSR)
+
+PSR uses the concordance of multiple gene genealogies to recognize species. The approach relies on a fundamental population genetic principle:
+
+- **Concordance among gene genealogies** indicates that ancestral variation has been lost through lineage-specific processes following genetic isolation, suggesting distinct species.
+- **Conflict among gene genealogies** indicates ongoing recombination within populations, suggesting a single species.
+
+Careful implementation of PSR requires:
+- Identifying several genomic regions with sufficient polymorphism for well-supported gene genealogies
+- Assembling collections of individuals from throughout the geographic range of the fungus
+- Comparing the resulting gene trees to detect the transition from concordance to conflict
+
+### The Coccidioides Paradigm
+
+The first application of PSR in mycology involved *[[environmental-dna-sequencing-fungi]] captures all variable positions.
+- **Scalability**: As more researchers contribute, the power and resolution of the scheme increase.
+
+### Practical Applications of MLST
+
+MLST has been particularly impactful for medically and agriculturally important fungi. In *Coccidioides*, MLST confirmed the existence of two species and revealed population structure within each: at least two populations in *C. immitis* and at least three in *C. posadasii*. New isolates can be assigned to populations using assignment methods, which has proven clinically useful for patients who lived far from endemic areas but whose travel histories indicated exposure.
+
+### A Cautionary Note
+
+Most socially important fungi appear to rely heavily on clonal reproduction, which may limit the generalizability of findings about species recognition and population structure. Studying fungi that are not human pathogens and are not overly clonal, such as outbreeding *Neurospora* species, provides essential complementary perspectives.
+
+## Microsatellites and Population Genetics
+
+Fungal microsatellites provide higher-resolution markers for intraspecific variation studies. While valuable for population characterization, microsatellites have limitations:
+
+- **Hypervariability and homoplasy**: Single microsatellite loci can be misleading due to convergent evolution of repeat number. This has been demonstrated in comparisons with sequence data for both *Coccidioides* and *Neurospora*.
+- **Best used in combination**: Microsatellites are most powerful when used to extend multilocus sequence studies from species-level into population-level analysis. If the aim is simultaneous species recognition and population characterization, many microsatellite loci should be employed; Fisher and colleagues used 20 in their study of *[[fungal-taxonomy]]
+
+The application of molecular methods has had a transformative effect on [[extremophilic-fungi]] for [[fungal-decomposition-nutrient-cycling-ecosystems-dighton]] for ecological context of fungal populations
+
+## Key Considerations
+
+Several important factors influence the effectiveness and outcomes described
+in this topic. Understanding these considerations helps practitioners make
+informed decisions and avoid common pitfalls. Environmental conditions,
+timing, and material selection all play critical roles.
+
+## Historical Context
+
+The historical development of this subject reflects centuries of accumulated
+knowledge and practical experience. From traditional methods passed down
+through generations to modern scientific approaches, the evolution continues
+to inform current best practices and research directions.
+
+## Common Challenges
+
+Practitioners frequently encounter several challenges when working with
+these concepts. Climate variability, resource limitations, and knowledge
+gaps can all affect outcomes. Addressing these challenges requires patience,
+observation, and a willingness to adapt approaches based on results.
+
+## See Also
+- [[cryptic-species]]
+- [[mycology]]
+- [[decomposition]]
+## Practical Applications
+The principles discussed here have direct applications in agricultural systems, ecological restoration, and sustainable resource management.
+Practitioners have demonstrated successful implementation across diverse climates and soil conditions.
+Adaptation to local conditions and careful observation remain central to effective application.
+Field trials provide essential data for validating theoretical approaches and refining methodologies.
+
+## Research Directions
+Current research explores the intersections between traditional knowledge and modern scientific understanding.
+Comparative studies across different bioregions provide valuable insights into generalizable principles.
+Long-term monitoring and documentation continue to build the evidence base for these approaches.
+Collaborative research networks facilitate knowledge exchange and accelerate innovation.
+Peer-reviewed publications and practitioner reports contribute complementary perspectives.
+
+## Key Considerations
+Context-specific implementation requires attention to local ecology, climate patterns, and community needs.
+Integration with existing systems often yields better results than complete replacement strategies.
+Monitoring and adaptive management are essential for long-term success and continuous improvement.
+
+## Integration Strategies
+Successful implementation often draws on multiple complementary approaches working in concert.
+Scale-appropriate solutions range from backyard gardens to broadacre agricultural systems.
+Knowledge sharing between practitioners accelerates collective learning and refinement of methods.
+Regional networks and demonstration sites play crucial roles in technology transfer.
+
+## Implementation Notes
+Start with small-scale trials before expanding to larger operations.
+Maintain detailed records of conditions, inputs, and outcomes for iterative refinement.
+Regular review and adjustment of strategies based on observed results ensures continuous improvement.
+## Further Considerations
+Ongoing research and field trials continue to expand our understanding of this subject.
+Practical experience combined with systematic observation yields the most reliable insights.
+
+## Future Directions
+Emerging approaches and technologies offer new opportunities for advancement.
+Collaborative knowledge sharing accelerates progress across related domains.

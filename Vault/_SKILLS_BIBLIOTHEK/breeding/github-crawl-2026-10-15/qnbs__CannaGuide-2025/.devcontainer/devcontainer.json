@@ -1,0 +1,54 @@
+{
+    "name": "CannaGuide 2025 (Lite Mode)",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "remoteUser": "root",
+    "hostRequirements": {
+        "cpus": 4,
+        "memory": "8gb",
+        "storage": "32gb"
+    },
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+    "postStartCommand": "bash .devcontainer/start.sh",
+    "forwardPorts": [5173, 3001],
+    "portsAttributes": {
+        "5173": {
+            "label": "Vite Dev Server",
+            "onAutoForward": "openBrowser"
+        },
+        "3001": {
+            "label": "ESP32 Sensor Mock",
+            "onAutoForward": "silent"
+        }
+    },
+    "containerEnv": {
+        "VITE_ESP32_URL": "http://localhost:3001"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.eslint": "explicit"
+                },
+                "typescript.tsdk": "node_modules/typescript/lib",
+                "files.eol": "\n",
+                "json.schemaDownload.enable": false,
+                "security.workspace.trust.enabled": true,
+                "git.allowForcePush": false
+            },
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "ms-playwright.playwright",
+                "bradlc.vscode-tailwindcss",
+                "github.copilot",
+                "github.copilot-chat",
+                "github.vscode-github-actions"
+            ]
+        }
+    }
+}

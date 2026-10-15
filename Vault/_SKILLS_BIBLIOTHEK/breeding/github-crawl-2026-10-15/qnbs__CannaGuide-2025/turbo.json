@@ -1,0 +1,116 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": ["tsconfig.json", "pnpm-lock.yaml"],
+    "tasks": {
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"],
+            "env": ["BUILD_BASE_PATH", "VITE_*"],
+            "inputs": [
+                "package.json",
+                "src/**",
+                "components/**",
+                "stores/**",
+                "services/**",
+                "hooks/**",
+                "data/**",
+                "locales/**",
+                "workers/**",
+                "utils/**",
+                "types/**",
+                "lib/**",
+                "public/**",
+                "constants.ts",
+                "types.ts",
+                "i18n.ts",
+                "styles.css",
+                "securityHeaders.ts",
+                "simulation.worker.ts",
+                "vite.config.ts",
+                "tsconfig.json",
+                "tailwind.config.cjs",
+                "postcss.config.cjs",
+                "index.html",
+                "index.tsx",
+                "bootstrap/**"
+            ]
+        },
+        "dev": {
+            "dependsOn": ["^build"],
+            "cache": false,
+            "persistent": true
+        },
+
+        "build:gh": {
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"],
+            "env": ["BUILD_BASE_PATH", "VITE_*"],
+            "inputs": [
+                "package.json",
+                "src/**",
+                "components/**",
+                "stores/**",
+                "services/**",
+                "hooks/**",
+                "data/**",
+                "locales/**",
+                "workers/**",
+                "utils/**",
+                "types/**",
+                "lib/**",
+                "public/**",
+                "constants.ts",
+                "types.ts",
+                "i18n.ts",
+                "styles.css",
+                "securityHeaders.ts",
+                "simulation.worker.ts",
+                "vite.config.ts",
+                "tsconfig.json",
+                "tailwind.config.cjs",
+                "postcss.config.cjs",
+                "index.html",
+                "index.tsx",
+                "bootstrap/**"
+            ]
+        },
+        "test": {
+            "dependsOn": ["^build"],
+            "outputs": ["coverage/**"]
+        },
+        "test:run": {
+            "dependsOn": ["^build"],
+            "outputs": ["coverage/**"]
+        },
+        "test:e2e": {
+            "dependsOn": ["build"],
+            "outputs": ["test-results/**"]
+        },
+        "lint": {
+            "dependsOn": ["^build"]
+        },
+        "lint:full": {
+            "dependsOn": ["^build"]
+        },
+        "typecheck": {
+            "dependsOn": ["^build"],
+            "inputs": ["**/*.ts", "**/*.tsx", "tsconfig.json", "tsconfig.*.json"]
+        },
+        "lint:changed": {
+            "cache": false
+        },
+        "lint:scopes": {
+            "cache": false
+        },
+        "lint:i18n": {
+            "cache": false
+        },
+        "test:coverage": {
+            "dependsOn": ["^build"],
+            "outputs": ["coverage/**"]
+        },
+        "security:trojan-source": {
+            "cache": false
+        }
+    }
+}

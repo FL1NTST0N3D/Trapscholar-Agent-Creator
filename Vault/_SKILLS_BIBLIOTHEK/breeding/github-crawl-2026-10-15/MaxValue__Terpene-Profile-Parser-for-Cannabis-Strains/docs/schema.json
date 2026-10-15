@@ -1,0 +1,37 @@
+{
+	"labs": {
+		"LABIDENTIFIER": {
+			"Processed": [
+				{
+					"Sample Name": "SAMPLENAME",
+					"Sample Type": "SAMPLETYPE",
+
+					"delta-Limonene": 99.99
+				}
+			],
+			"Unprocessed": [
+				{
+					"Sample Name": "SAMPLENAME",
+					"Sample Type": "SAMPLETYPE",
+					"delta-Limonene": 99.99
+				}
+			]
+		}
+	},
+	"components": {
+		"terpenes": [
+			{
+				"id": "",
+				"name": "",
+				"color": "",
+			}
+		],
+		"cannabinoids": [
+			{
+				"id": "",
+				"name": "",
+				"color": "",
+			}
+		]
+	}
+}

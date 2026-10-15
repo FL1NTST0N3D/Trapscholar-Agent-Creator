@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.rootsbymenda/cannabis-regulatory",
+  "description": "Cannabis compliance: US state testing, INCB, Health Canada, EU precursors. Free.",
+  "repository": {
+    "url": "https://github.com/rootsbymenda/cannabis-mcp-server",
+    "source": "github"
+  },
+  "version": "1.0.2",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://cannabis-mcp-server.rootsbybenda.workers.dev/mcp"
+    },
+    {
+      "type": "sse",
+      "url": "https://cannabis-mcp-server.rootsbybenda.workers.dev/sse"
+    }
+  ]
+}

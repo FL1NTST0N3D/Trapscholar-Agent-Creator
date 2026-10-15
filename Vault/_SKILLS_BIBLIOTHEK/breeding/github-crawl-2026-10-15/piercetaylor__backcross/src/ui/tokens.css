@@ -1,0 +1,232 @@
+/*
+ * Design tokens: the single source of every colour and dimension the
+ * interface uses. A component file (src/App.tsx and every .tsx under
+ * src/ui/) names a token and never a literal; the mechanical gate is the
+ * no-restricted-syntax block in eslint.config.js.
+ *
+ * The twelve-step neutral ramp is hueless (r = g = b) with luminance
+ * strictly decreasing, roles assigned the way Radix assigns them:
+ * backgrounds at the light end, component fills next, borders above those,
+ * text at the dark end. Step 8 measures 2.96:1 and 2.69:1 against steps 4
+ * and 5, so it cannot outline a control sitting on a hovered or selected
+ * fill; strong borders are step 9. tests/tokens.test.ts reads this file as
+ * text and re-derives every contrast claim from src/core/contrast.ts.
+ *
+ * Role aliases exist so a ramp step can be retuned in one place. Class
+ * colours are deliberately absent: they are data owned by
+ * src/core/palette.ts and imported by whoever needs them.
+ *
+ * The crop palette (docs/adr/0017, amending docs/adr/0009 on 2026-09-16)
+ * colours the chrome only: page and rail surfaces, text, links, the primary
+ * button, the focus ring and the Upload screen's intro band. Nothing drawn
+ * inside the genotype canvas reads a --crop-* token, and none of them is an
+ * Okabe-Ito member. Wheat gold is decorative only (it clears 3:1 on neither
+ * parchment surface), so it never carries text, a border that conveys state,
+ * or the focus ring. tests/tokens.test.ts re-derives every pair.
+ * The 2026-09-29 rework (docs/adr/0009, amendment of that date) added the masthead surface, the panel surface, the chromosome-header greys and the landing's display sizes; wheat gold is now unused on screen and kept only so ADR 0017's enumeration stays true.
+ */
+
+:root {
+  /* Neutral ramp */
+  --neutral-1: #ffffff;
+  --neutral-2: #f7f7f7;
+  --neutral-3: #efefef;
+  --neutral-4: #e6e6e6;
+  --neutral-5: #dcdcdc;
+  --neutral-6: #d0d0d0;
+  --neutral-7: #bdbdbd;
+  --neutral-8: #858585;
+  --neutral-9: #757575;
+  --neutral-10: #5f5f5f;
+  --neutral-11: #454545;
+  --neutral-12: #1c1c1c;
+
+  /* Crop palette: leaf green, soil brown, wheat gold, parchment */
+  --crop-parchment-50: #fbf8f1;
+  --crop-parchment-100: #f3ecdc;
+  --crop-soil-900: #2e2419;
+  --crop-soil-700: #5b4a39;
+  --crop-leaf-100: #e3eedc;
+  --crop-leaf-700: #2f6b3b;
+  --crop-leaf-800: #255a30;
+  --crop-leaf-900: #1b4424;
+  --crop-wheat-500: #c99a2e;
+  /* Two more soil steps (docs/adr/0009, amended 2026-09-29): the masthead's hover fill and its muted text. */
+  --crop-soil-800: #3e3225;
+  --crop-soil-300: #b9ac98;
+
+  /* Role aliases: backgrounds */
+  --color-bg: var(--crop-parchment-50);
+  --color-bg-subtle: var(--crop-parchment-100);
+  --color-bg-control: var(--neutral-3);
+  --color-bg-control-hover: var(--neutral-4);
+  --color-bg-control-active: var(--neutral-5);
+  --color-bg-row-hover: var(--neutral-2);
+  --color-bg-row-selected: var(--neutral-4);
+  --color-bg-row-selected-hover: var(--neutral-5);
+  --color-bg-solid: var(--neutral-12);
+  --color-text-on-solid: var(--neutral-1);
+  --color-bg-alert: var(--crop-parchment-100);
+  --color-bg-hero: var(--crop-parchment-100);
+  --color-bg-rail-current: var(--crop-leaf-100);
+  --color-bg-primary: var(--crop-leaf-700);
+  --color-bg-primary-hover: var(--crop-leaf-800);
+  --color-text-on-primary: var(--neutral-1);
+  /* The masthead: the one dark chrome surface. Text on it is parchment; its focus ring is parchment too, since leaf-900 vanishes on soil. */
+  --color-bg-masthead: var(--crop-soil-900);
+  --color-bg-masthead-hover: var(--crop-soil-800);
+  --color-text-on-dark: var(--crop-parchment-50);
+  --color-text-on-dark-muted: var(--crop-soil-300);
+  --color-focus-ring-on-dark: var(--crop-parchment-50);
+  /* Panels (marker detail, dataset facts) lift one step off the parchment page. */
+  --color-bg-panel: var(--neutral-1);
+  --color-bg-plot: var(--crop-parchment-50);
+
+  /*
+   * The one reserved hue. ADR 0009 holds that chrome carries no hue, because
+   * Okabe-Ito already occupies seven and any accent would collide with a data
+   * class. The maintainer reserved a single exception on 2026-09-11 so that an
+   * error is not carried by position and weight alone. This crimson is not an
+   * Okabe-Ito member; it is hue-shifted away from donor vermilion, which leans
+   * orange, and the two never appear together because this colour is forbidden
+   * inside the genotype canvas. It is 7.31:1 on --crop-parchment-50 and 6.59:1
+   * on --crop-parchment-100, so it carries text as well as the alert bar. Red rather than
+   * indigo or violet, which docs/design-brief.md rules out on other grounds.
+   */
+  --hue-alert: #a4161a;
+
+  /* Role aliases: borders */
+  --color-border-subtle: var(--neutral-6);
+  --color-border: var(--neutral-7);
+  --color-border-strong: var(--neutral-9);
+  --color-border-disabled: var(--neutral-8);
+  --color-border-alert: var(--hue-alert);
+
+  /* Role aliases: text and marks */
+  --color-text: var(--crop-soil-900);
+  --color-text-secondary: var(--crop-soil-700);
+  --color-text-tertiary: var(--neutral-10);
+  --color-text-disabled: var(--neutral-8);
+  --color-text-alert: var(--hue-alert);
+  --color-focus-ring: var(--crop-leaf-900);
+  --color-link: var(--crop-leaf-800);
+  --color-brand: var(--crop-leaf-800);
+  --color-rail-indicator: var(--crop-leaf-700);
+  --color-accent: var(--crop-wheat-500);
+  --color-selected-indicator: var(--neutral-12);
+  --color-swatch-border: var(--neutral-12);
+  --color-chart-bar: var(--neutral-10);
+  --color-canvas-label: var(--neutral-12);
+  /* The chromosome header over the genotype canvas: ideogram, ruler and frame stay on the neutral ramp (docs/adr/0007). */
+  --color-ideogram-fill: var(--neutral-2);
+  --color-ideogram-stroke: var(--neutral-9);
+  --color-ruler: var(--neutral-9);
+  --color-ruler-label: var(--neutral-10);
+  --color-plot-frame: var(--neutral-7);
+
+  /* Overlays and shadow: dialogs, menus and popovers only */
+  --color-overlay-fill: rgb(28 28 28 / 0.15);
+  --color-overlay-stroke: rgb(28 28 28 / 0.8);
+  --shadow-floating: 0 2px 8px 0 rgb(0 0 0 / 0.16);
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-ui: 13px;
+  --text-body: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --leading-tight: 1.25;
+  --leading-ui: 1.4;
+  --leading-body: 1.5;
+  --leading-display: 1.15;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --numeric: tabular-nums slashed-zero;
+  --tracking-tight: -0.01em;
+  --tracking-caps: 0.06em;
+  --measure-prose: 62ch;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Sizes */
+  --row-height-compact: 28px;
+  --row-height-default: 32px;
+  --row-height-comfortable: 40px;
+  --row-height: var(--row-height-default);
+  --cell-padding-x: var(--space-3);
+  --control-height: 32px;
+  --control-height-sm: 28px;
+  --control-padding-x: var(--space-3);
+  --checkbox-size: 16px;
+  --swatch-size: 12px;
+  /* WCAG 2.2 SC 2.5.8 minimum pointer target; the canvas row period must reach it (tests/tokens.test.ts). */
+  --target-min: 24px;
+  --rail-width: 240px;
+  --logo-size: 24px;
+  --masthead-height: 48px;
+  --hero-column-min: 320px;
+  --step-number-size: 28px;
+  --field-min: 200px;
+  --rail-width-collapsed: 48px;
+  --content-padding: var(--space-4);
+  --gutter-width: 120px;
+  --detail-panel-width: 240px;
+  --overview-height: 48px;
+  --geno-scroll-max-height: 60vh;
+  --chromosome-strip-height: 56px;
+  --ideogram-height: 8px;
+  --ruler-height: 16px;
+  /* Smallest pixel gap between two ruler ticks; src/ui/canvas/ruler.ts picks the 1-2-5 step that clears it. */
+  --ruler-tick-min-gap: 56px;
+  --chart-height: 120px;
+  --canvas-row-height: 20px;
+  --canvas-row-gap: 4px;
+  --canvas-chrom-gap: 6px;
+
+  /* Borders, radii and focus */
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-3: 3px;
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* Stacking */
+  --z-rail: 10;
+  --z-sticky: 20;
+  --z-floating: 100;
+  --z-skip-link: 1000;
+
+  /* Motion */
+  --duration-1: 120ms;
+  --easing-1: ease-out;
+}
+
+/*
+ * Density switch. Row height is the token; cell padding is not. A cell is
+ * height: var(--row-height); padding: 0 var(--cell-padding-x);
+ * line-height: var(--leading-ui) with vertical centring, which gives the
+ * brief's 7/6 px at 32px and scales to 28 and 40 without a second table.
+ */
+[data-density='compact'] {
+  --row-height: var(--row-height-compact);
+  --control-height: var(--control-height-sm);
+}
+
+[data-density='comfortable'] {
+  --row-height: var(--row-height-comfortable);
+}

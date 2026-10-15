@@ -1,0 +1,37 @@
+{
+    "name": "@cannaguide/ai-core",
+    "version": "0.3.0",
+    "private": true,
+    "type": "module",
+    "main": "./src/index.ts",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./src/index.ts"
+        },
+        "./ml": {
+            "types": "./dist/ml.d.ts",
+            "default": "./src/ml.ts"
+        }
+    },
+    "files": [
+        "src",
+        "dist",
+        "CHANGELOG.md"
+    ],
+    "scripts": {
+        "typecheck": "tsc --noEmit",
+        "build": "tsc -b",
+        "clean": "rm -rf dist tsconfig.tsbuildinfo"
+    },
+    "dependencies": {
+        "@google/genai": "^2.27.0",
+        "zod": "^4.4.2"
+    },
+    "optionalDependencies": {
+        "@mlc-ai/web-llm": "*",
+        "@xenova/transformers": "*",
+        "onnxruntime-web": "^1.30.0"
+    }
+}

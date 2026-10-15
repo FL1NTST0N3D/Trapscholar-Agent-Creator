@@ -1,0 +1,1751 @@
+---
+title: Activity Log
+type: log
+created: 2026-04-06
+updated: 2026-06-09
+order: chronological — oldest entries at top, newest appended at bottom. Do NOT insert entries out of date order.
+---
+
+# Activity Log
+
+## [2026-04-06] init | Wiki initialized
+- Created folder structure and initial files
+- Awaiting raw documentation seed from user
+
+## [2026-04-06] ingest | Full initial ingestion from raw/
+- **Raw materials processed:**
+  - `raw/chat-history/all-chat-summary.md` — 24 chat sessions, Mar 16 – Apr 5, 2026
+  - `raw/chat-history/bible.md` — Grow bible: equipment, strain, timeline, training reference
+  - `raw/chat-history/first-progress.md` — Early progress log (Mar 15 – Mar 20)
+  - `raw/chat-history/memory.md` — Project memory: current state, phenotype ranking, key learnings
+  - `raw/photos/` — 40 JPEG photos across 8 date clusters (Mar 27, Mar 29, Mar 30, Apr 1, Apr 2, Apr 3, Apr 5, Apr 6)
+  - No sensor log files found in `raw/sensor-logs/` (directory empty beyond .gitkeep)
+  - No reference files found in `raw/references/` (directory empty beyond .gitkeep)
+- **Daily entries created:** 9
+  - wiki/daily/2026-03-27.md (Day 13 — pre-transplant)
+  - wiki/daily/2026-03-29.md (Day 15 — transplant day)
+  - wiki/daily/2026-03-30.md (Day 16 — post-transplant, runoff management)
+  - wiki/daily/2026-03-31.md (Day 17 — purple phenotype first spotted, plants labeled A–D)
+  - wiki/daily/2026-04-01.md (Day 18 — anthocyanin confirmed, priority shift)
+  - wiki/daily/2026-04-02.md (Day 19 — training plan established, AirBase disc discovery)
+  - wiki/daily/2026-04-03.md (Day 20 — routine check, RH/temp concerns)
+  - wiki/daily/2026-04-05.md (Day 22 — nutrient burn on Plant A, Plant C flagged)
+  - wiki/daily/2026-04-06.md (Day 23 — photos only, no chat session)
+- **Plant pages updated:** 4 (plant-a through plant-d)
+- **Environment pages created:** 3 (temperature, humidity, nutrients)
+- **Concept pages created:** 6 (anthocyanin, lst, scrog, coco-coir, autopot, vpd)
+- **Decision pages created:** 2 (medium-and-training, anthocyanin-priority)
+- **overview.md rewritten** with current status, plant table, active action items, milestones
+- **index.md updated** with all new page links
+- **Linter results:** 5/6 checks passing after fixes
+  - Fixed: Index sync (added log.md to index)
+  - Fixed: Photo coverage (merged Mar 31 event into Mar 30 daily which has photos)
+  - Acceptable known gaps: Timeline continuity — missing Mar 28, Mar 31, Apr 4 (real data gaps: no photos or chat sessions on those dates; Mar 31 merged into Mar 30 intentionally)
+- **Known gaps:** No daily entries for Mar 28 (no photo/chat data), Mar 31 (merged into Mar 30), Apr 4 (no data). Photos mentioned in Chat 19 for Mar 31 were not uploaded to raw/photos/.
+
+## [2026-04-06] query-filed | Plant training methods overview
+- Created `wiki/concepts/plant-training-methods.md` — comprehensive overview of all training techniques (LST, topping, FIMing, mainlining, super cropping, SCROG, SOG) with pros/cons, relevance to this grow, research notes on stress-induced trichome development, and our training sequence table
+- Source: PMC12771868 (BRC1 gene / sucrose flooding mechanism; trichome research gap)
+- Added backlink from `wiki/concepts/lst.md` and `wiki/concepts/scrog.md`
+- Updated `wiki/index.md` with new concept entry
+
+## [2026-04-07] query-filed | VPD concept expanded
+- Rewrote `wiki/concepts/vpd.md` — added SVP/AVP formula, correct optimal ranges by stage, current grow situation (73–76% RH / 25°C → 0.79 kPa, low for veg), low-VPD consequences, closet remediation strategies, leaf temp note, coco interaction, light interaction
+- Added cross-links to `wiki/concepts/coco-coir.md` and new `wiki/concepts/dli-light-management.md`
+
+## [2026-04-07] query-filed | Autopot float valve activation guide
+- Expanded `wiki/concepts/autopot.md` — added detailed activation timing (transplant Mar 29 → window Apr 12–19), readiness signals, step-by-step transition procedure, common first-activation mistakes table, coco-specific valve cycling note
+
+## [2026-04-07] query-filed | DLI & Light Management concept created
+- Created `wiki/concepts/dli-light-management.md` — DLI formula, PPFD/DLI targets by stage, 18→12 flip math, Fold-650 ramp plan by phase, CO2 ceiling note (~900 PPFD practical max), VPD and nutrient interaction notes
+- Updated `wiki/index.md` with new concept entry
+- Added cross-links from VPD page to DLI page
+
+## [2026-04-07] query-filed | Four concept pages created from internet-grounded research
+- **trichome-stages.md** — Trichome types (bulbous, capitate-sessile, capitate-stalked), three ripening stages (clear/cloudy/amber), harvest timing targets by desired effect, how to check (30–60x loupe, calyx focus), pheno hunt integration, amber vs. anthocyanin visual interaction note. Sources: Oregon Hemp Flower, Blimburn Seeds, PMC8488169, Alchimia.
+- **lollipopping-defoliation.md** — Lollipopping (bottom-third removal at flip, SCROG integration procedure) vs. defoliation (selective fan-leaf removal for light/airflow); timing table with week 3 hard stop; combined approach for this grow at flip. Sources: Grow Weed Easy, Royal Queen Seeds, Paradise Seeds.
+- **flushing.md** — Flush debate (mixed science; anecdotal support); coco-specific protocol (3–7 days, not 2 weeks); runoff EC monitoring targets; Autopot flush procedure (close float valve, revert to hand-water); signs of successful flush (natural senescence). Sources: Coco For Cannabis, CannaCon, EatHealthy365.
+- **damping-off.md** — Pathogens (Pythium, Phytophthora, Fusarium, Rhizoctonia); pre- and post-emergence symptoms; risk assessment for this grow (ELEVATED — RH 73–76%); prevention checklist; treatment (no cure; isolation + airflow). Sources: Cannoptikum, Royal Queen Seeds, Herbies Seeds, Humboldt Seeds.
+- Updated wiki/index.md with all four new concept entries.
+
+## [2026-04-12] query-filed | Reservoir stand decision recorded
+- Created `wiki/decisions/2026-04-11-reservoir-stand.md` — oak step stool 6" height for FlexiTank Pro (208 lbs full, 21"×21" base); rationale (gravity-feed needs minimal head pressure for 8–10ft runs); monitoring plan (watch furthest pot tray in first 48hrs); alternatives table (plant caddies too low, wire rack too bulky, DIY unaesthetic)
+- Updated `wiki/concepts/autopot.md` — added reservoir stand to Setup section with link to decision; updated related links
+- Updated `wiki/index.md` — decision entry added
+
+## [2026-04-11] daily | Day 28 — Plant A vigor leader; EC too high; topping imminent; float valve window opens
+- Created `wiki/daily/2026-04-11.md` — Day 28 (Day 13 post-transplant); 4 photos (PXL_20260411_*); Plant A confirmed vigor leader with 5th node emerging; topping trigger met, recommended Apr 13–15; EC at 920 ppm (~1.84) flagged as too high for early veg; float valve activation window opens Apr 12; VPD 0.94 kPa (best reading to date)
+- Updated plant timelines: plant-a.md (current state rewritten — vigor + purple leader, topping imminent), plant-b/c/d.md (timeline entries added)
+- Plant C current state updated — runoff pH/EC test noted as overdue
+- Plant D current state updated — A now vigor leader; D still strong primary keeper
+- Updated `wiki/environment/nutrients.md` — EC incident logged (920 ppm / EC ~1.84)
+- Rewrote `wiki/overview.md` — Day 28, updated plant table, EC flagged 🔴, topping milestone promoted
+- Updated `wiki/index.md` — Day 28 daily entry added; Plant A description updated
+
+## [2026-04-08] daily | Day 25 — Plant C worsening; VPD swing incident; topping imminent
+- **Known gap:** No daily for 2026-04-07 (Day 24) — no photos or observations taken that day.
+- **Pending:** 2026-04-08.md photo sources use placeholder filenames; update `sources:` frontmatter once actual photos are added to raw/photos/ and EXIF filenames are known.
+- Created `wiki/daily/2026-04-08.md` — Day 25 (Day 10 post-transplant); full per-plant observations; VPD swing incident documented (42%→70% RH, 2.03→0.89 kPa); Plant C escalated with differential diagnosis table (pH lockout most likely); topping window flagged as imminent (3–7 days); light ramp recommended (30%→40%)
+- Updated plant timelines and Current State: plant-a.md, plant-b.md, plant-c.md, plant-d.md
+- Plant C purple signal field updated: stress-induced (concurrent with illness), NOT genetic
+- Updated environment trend logs: temperature.md, humidity.md, nutrients.md
+- Rewrote wiki/overview.md — updated to Day 25, new plant status table, escalated Plant C action item, revised milestones
+- Updated wiki/index.md — added Day 25 daily entry, updated Plant C index description
+
+## [2026-04-07] llm-lint | Contradiction detection, concept gap analysis, overview accuracy check
+
+### Contradictions fixed:
+- **plant-a.md**: Removed phantom Day 1 / 2026-03-15 timeline entry (no daily exists for that date; link incorrectly pointed to 2026-03-27.md; all other plants start their timelines on Mar 27)
+- **plant-d.md**: Corrected Mar 30 (Day 16) timeline entry — falsely claimed "purple stem/leaf undersides noted (initial observation)." Canonical 2026-03-30 daily explicitly states "Plant D | No purple noted yet." Fixed to "no purple expression at this stage."
+- **concepts/anthocyanin.md**: Corrected plant A first observation from "Day 17" → Day 16 (Mar 30). Corrected plant D first confirmation from "Day 17" → Day 18 (Apr 1).
+- **concepts/plant-training-methods.md**: Training sequence table incorrectly listed Topping as "Active" and LST as "Active." Neither has been executed as of Day 23. Fixed to "Imminent" and "Planned" respectively.
+- **concepts/autopot.md**: Removed stale "Estimated activation: ~1–2 weeks from April 2 (Days 20–23 range)" from AirBase Disc section — that window has passed; current estimate (Apr 12–19) is in the updated Float Valve Activation section.
+- **concepts/lst.md** and **concepts/scrog.md**: Fixed broken `related` links pointing to non-existent `wiki/decisions/2026-03-16-training-approach.md`; corrected to `wiki/decisions/2026-03-16-medium-and-training.md`.
+
+### Contradictions flagged (not auto-resolved — require user decision):
+- **Float valve activation timing gap**: overview.md says "Days 24–28 (this week)" while autopot.md says "Apr 12–19" (a ~5-day difference). The autopot page's estimate is based on 2–3 weeks post-Mar 29 transplant; the overview was written Apr 6 and may be optimistic. User should confirm readiness signals before activating.
+- **wiki/log.md ingest entry**: Claims `wiki/daily/2026-03-31.md (Day 17)` was created during initial ingest, but that file does not exist (events were merged into 2026-03-30.md). Log is append-only; flagged here for awareness.
+
+### Concept gaps identified (no concept pages exist for these referenced topics):
+- **Lollipopping + Defoliation** — referenced in 2026-04-02 training plan table ("Lollipopping + defoliation | Early flower") but no concept page
+- **Flushing (coco)** — referenced in environment/nutrients.md EC table ("Late Flower / Flush | 0.0") but no page explaining when/how/why
+- **Trichome stages** — referenced in plant-training-methods.md (stress-induced trichome development) and is a primary evaluation criterion for pheno selection; no concept page
+- **Damping off** — mentioned as a risk in 5+ daily entries and environment pages but no concept page explaining symptoms, causes, prevention
+
+### Overview accuracy:
+- Overview is broadly accurate against current dailies and plant pages.
+- Minor understatement: "All 4 plants healthy" in Current Stage — Plant A has cosmetic foliar burn, Plant C has unresolved lighter green/edge spotting. The Plant Status table (which is accurate) contradicts this sentence.
+
+## [2026-04-12] structural | Wiki migrated into dirt repo; expanded for hardware tracking
+- **Migration:** Grow wiki (`wiki/`, `raw/`, `outputs/`, `scripts/`) moved from standalone `marijuana` repo into the `dirt` monitoring repo. Wiki and monitoring app now live together.
+- **CLAUDE.md merged:** Wiki conventions integrated into dirt's existing CLAUDE.md — single source of agent instructions for both the grow wiki and the monitoring codebase.
+- **New wiki section: `wiki/hardware/`** — for documenting deployed monitoring infrastructure (sensors, cameras, controllers). Each system gets its own page with type `hardware`.
+- **`concepts/` scope broadened** — now covers both growing knowledge and technical/hardware concepts relevant to the grow.
+- **`overview.md` expanded** — added System Status table tracking deployed and planned monitoring components.
+- **`index.md` expanded** — added Hardware section.
+- **New epics scaffolded** in `docs/epics/`:
+  - `ptz-camera` — Pan-tilt-zoom camera for remote plant inspection
+  - `additional-sensors` — CO2, soil moisture, reservoir level sensors
+  - `live-audio` — Always-on mic + speaker for voice interaction with Claude
+- **Dependency added:** `pillow` added to dirt's `pyproject.toml` (required by wiki lint script for EXIF extraction).
+- **Lint result:** 5/6 checks pass (same as before migration — timeline continuity gaps are pre-existing data gaps, not migration issues).
+
+## [2026-04-12] decisions | Hardware architecture and component selections finalized
+- **4 decision records created:**
+  - `decisions/2026-04-12-distributed-sensor-architecture.md` — Split to ESP32-C3 per-plant nodes (soil moisture, WiFi, USB-C powered) + Arduino Nano tent-level hub (DHT22, CO2, reservoir level). Driven by cabling problem: 8+ wires across tent made plant access difficult.
+  - `decisions/2026-04-12-ptz-camera-selection.md` — OBSBOT Tiny 2 Lite (4K PTZ, SDK + OSC control). Replaces static C920. Enables Claude to autonomously inspect plants.
+  - `decisions/2026-04-12-audio-hardware-selection.md` — Jabra Speak 410 USB speakerphone. Single device for mic + speaker, sits outside tent.
+  - `decisions/2026-04-12-telegram-mobile-interface.md` — Telegram bot for mobile Claude interaction. Lowest friction option vs WhatsApp/SMS/custom PWA.
+- **Epics updated:**
+  - `sensor-hardware` rewritten for distributed architecture (ESP32-C3 + Nano)
+  - `additional-sensors` absorbed into `sensor-hardware` (removed as separate epic)
+  - `ptz-camera` updated with OBSBOT Tiny 2 Lite specs and SDK details
+  - `live-audio` updated with Jabra Speak 410 details
+  - `telegram-bot` epic created for mobile chat interface
+- **Hardware purchased:**
+  - OBSBOT Tiny 2 Lite (4K PTZ webcam)
+  - Jabra Speak 410 (USB speakerphone)
+  - ESP32-C3 SuperMini 5-pack (4 per-plant + 1 spare)
+  - Capacitive soil moisture sensor v1.2 x4 (already owned)
+  - RSHTECH 10-port powered USB hub (60W)
+  - Silicone conformal coating (120ml, for flower phase board protection)
+- **wiki/index.md updated** with 4 new decision entries
+
+## [2026-04-12] structural | Agent architecture finalized; session logging added
+- **ADR 005 created:** `docs/adrs/005-agent-architecture.md` — Ephemeral agent loops via Claude Agent SDK, running inside FastAPI process. Follows OpenClaw's pattern: persistent gateway, ephemeral per-request agent loops. Wiki is the memory, not conversation history.
+- **Decision record created:** `wiki/decisions/2026-04-12-agent-architecture.md`
+- **Session logging introduced:** `sessions/` directory added at repo root with `telegram/` and `voice/` subdirectories. Append-only JSONL files written by the harness, readable by agent on demand. One file per day per channel (`YYYY-MM-DD.jsonl`).
+- **CLAUDE.md updated:** Three-folder architecture expanded to four-layer data hierarchy (sessions → raw → wiki → outputs) with ownership table.
+- **Telegram epic updated:** Reflects Agent SDK ephemeral loop pattern, session JSONL logging, channel adapter architecture. Channels are Telegram + voice only (no web chat).
+- **wiki/index.md updated** with agent architecture decision entry
+
+## [2026-04-12] llm-lint | Contradiction fixes and concept gap fills
+### Contradictions fixed:
+- **plant-a.md, plant-d.md, overview.md, index.md:** Fixed A/D purple language. Both are now described as "strong purple contenders" with confirmed genetic anthocyanin. Neither is called "leader" or "strongest" — they are co-equal contenders. A is the vigor leader; D is about a day behind A in vigor.
+- **plant-c.md:** Title changed from "Most Vigorous, Monitor pH" to "Secondary, Monitor pH" — A and D are the most vigorous as of Day 28, not C.
+- **plant-b.md:** Current State updated to reference Day 28 (Apr 11) instead of stale Day 25 reference.
+- **plant-a.md:** Day 22 timeline entry fixed — removed confusing "UPGRADED to confirmed" language. Purple was confirmed on Day 18; Day 22 entry now reads "Purple expression continuing (new growth tips + petioles showing color)."
+### Concept pages created (4):
+- **topping.md** — HST technique, procedure, timing for this grow (Plant A imminent Apr 13–15), risks, position in training sequence
+- **ph-lockout.md** — Mechanism, symptoms, pH ranges for coco, diagnosis via runoff testing, correction procedure, Plant C relevance
+- **nutrient-burn.md** — Symptoms, causes, EC targets by stage, diagnosis vs other issues, correction, current EC situation
+- **ec.md** — Units/conversion, targets by stage (Canna A+B), measurement protocol, interaction with VPD/pH, current reading (920 ppm / EC 1.84)
+- **wiki/index.md updated** with 4 new concept entries
+
+## [2026-04-12] daily | Day 29 — Both primaries topped
+- **Plant A topped Apr 11** (Day 28) — cut above node 4; recovery monitoring begins; LST target ~Apr 16–18
+- **Plant D topped Apr 12** (Day 29) — cut above node 4, one day after A; LST target ~Apr 17–19
+- Updated `wiki/daily/2026-04-11.md` — title changed, topping recorded, action item checked off
+- Created `wiki/daily/2026-04-12.md` — Day 29 daily with topping event and recovery monitoring
+- Updated `wiki/plants/plant-a.md` — current state reflects topped status, timeline entry added
+- Updated `wiki/plants/plant-d.md` — current state reflects topped status, timeline entry added
+- Rewrote `wiki/overview.md` — Day 29, both primaries topped, milestones updated, action items revised (topping replaced with recovery monitoring)
+- Updated `wiki/index.md` — daily entries and plant descriptions updated
+- **Plants B and C also topped Apr 12** — all four plants now in recovery
+- Updated `wiki/daily/2026-04-12.md` — expanded to cover all four toppings
+- Updated `wiki/plants/plant-b.md` — topped status, timeline entry added
+- Updated `wiki/plants/plant-c.md` — topped while under pH stress, recovery flagged as high-risk
+- Updated `wiki/overview.md` — all four topped, Plant C risk highlighted, milestones consolidated
+- Updated `wiki/index.md` — B and C descriptions updated
+- **Plant C leaf issue resolved** — diagnosed as foliar nutrient burn from accidental solution splash on leaves, not systemic pH lockout. Same mechanism as Plant A's Day 22 incident. Runoff test confirmed no pH drift. All "overdue runoff test" action items cleared. Plant C page title updated, overview/index updated to reflect resolved status.
+
+## [2026-04-14] decision | Agent runtime: Claude Code CLI shell-out (uses Max subscription)
+- Discovered Claude Agent SDK explicitly prohibits Pro/Max subscription credentials — requires separate API key with pay-per-token billing.
+- **Decided:** shell out to `claude -p` from Python. Uses user's Max subscription (already authenticated locally). Same agent loop, tools, and CLAUDE.md awareness as the SDK.
+- Architecture unchanged — still ephemeral agent loops per-request, wiki as memory, JSONL session logs. Only the invocation mechanism differs.
+- Created `wiki/decisions/2026-04-14-agent-runtime-shell-out.md` with full rationale + migration path
+- Updated `docs/adrs/005-agent-architecture.md` with runtime update note
+- Updated `docs/epics/telegram-bot/README.md` to reflect CLI shell-out approach
+- Updated `wiki/index.md` with new decision entry
+
+## [2026-04-14] plant-a node deployed
+- First ESP32-C3 plant-node live. Reads GPIO3 every 30s, POSTs to `/api/ingest/sensors`.
+- Auto-calibration tracking extrema: currently raw_low=458, raw_high=2805 (from the live sensor's first wet/dry cycle).
+- 2/5 sensors from the current Amazon pack (B0BTHL6M19) working; 3 dead (AOUT stuck at 0V). Need more stock before plants b/c/d can deploy.
+- New hardware page: `hardware/esp32-plant-nodes.md`.
+- Decisions filed: `decisions/2026-04-14-esp32-c3-gpio3-adc.md` (GPIO3 over GPIO4, ESP-IDF driver over Arduino analogRead) and `decisions/2026-04-14-server-side-auto-calibration.md`.
+- Concept page: `concepts/capacitive-soil-moisture.md` — how the 555-timer sensor works, failure modes, multimeter diagnostic.
+- Battery power for plant nodes re-evaluated and declined again: deep-sleep math would make 4+ month runtime feasible on a small USB power bank (Voltaic V50 class or cheap bank + firmware keep-alive pulse), but USB-C wall power is simpler given the tent has a powered USB hub already.
+
+## [2026-04-14 evening] camera presets — overview + 4 plant close-ups (partial)
+- User applied colored stickers to pots and tent walls above each plant: A=yellow, B=orange, C=pink, D=blue.
+- User repositioned the OBSBOT camera (pushed further back in tent, raised higher). Motor↔world-frame mapping changed from 2026-04-14; new motor pitch floor ≈ -55° (was -45°). Plants are now on the negative-yaw side (overview at yaw=-25; old mount had them at yaw=-90).
+- Created `debug/find_sticker.py` — HSV-based sticker detector. Reports centroid, normalized offset, image-thirds position, and pixel count. Enables automated preset tuning without visual review of every frame.
+- Created `debug/presets.json` with 5 entries: `overview`, `plant_a`, `plant_b`, `plant_c`, `plant_d`.
+- Reference captures saved as `debug/plant_<a|b|c|d>_final.jpg`.
+- **Status of presets:**
+  - `overview` (pitch=-50, yaw=-25, zoom=1.0) — ✅ confirmed, all 4 plants + sticker IDs visible.
+  - `plant_a` (pitch=-38, yaw=-55, zoom=1.5) — ✅ user-approved. Canopy fills frame; yellow sticker touches bottom edge (y_norm=0.974).
+  - `plant_b` (pitch=-55, yaw=-25, zoom=1.5) — ⚠ needs refinement. Orange detector false-positives on a red/orange sensor connector; Plant B's actual orange sticker not confirmed in frame.
+  - `plant_c` (pitch=-42, yaw=-11, zoom=1.5) — ⚠ needs refinement. Sticker at bottom edge but plant canopy drifted off-frame left; nudge yaw to -7 or -8.
+  - `plant_d` (pitch=-43, yaw=-25, zoom=1.5) — ⚠ partial. Pot visible with small blue sticker, wall marker just off top. Sticker too small for auto-detection (<30 px).
+- Session ended when grow lights cut off mid-Plant B capture (lights-off schedule). Resume documented in `debug/README.md` under "Open Work / Resume Checklist".
+
+## [2026-04-14 evening] decision | Humidifier closed-loop control ordered
+- Ordered Raydrop 4L ultrasonic humidifier + Omron G3MB-202P solid-state relay (arriving 2026-04-15).
+- Approach: the Raydrop has only a potentiometer knob (no digital control), so gate its mains power with the SSR. Control loop lives on the Arduino Nano tent-hub, using the existing DHT22 reading. Bang-bang hysteresis with target 60% / ±3% deadband; failsafe forces OFF on stale sensor data.
+- Motivation: RH has been chronically off-target (70–76% persistently, with occasional 81–89% overnight spikes and the 2026-04-08 off-state dropout to 42% / VPD 2.03 kPa). Manual knob adjustment does not scale and produces stress-inducing oscillations.
+- New wiki pages: [`hardware/humidifier-control.md`](hardware/humidifier-control.md), [`decisions/2026-04-14-humidifier-relay-control.md`](decisions/2026-04-14-humidifier-relay-control.md).
+- Updated: `environment/humidity.md` (control plan section), `overview.md` (system status row), `index.md` (catalog entries).
+- Alternative deferred: ESP32-based tent-hub controller with server-side setpoints — will revisit once additional actuators (dehumidifier / exhaust modulation / heater) join the control surface.
+
+## [2026-04-15] PTZ camera: daemon + CLI deployed; per-plant presets locked
+- **Per-plant gimbal presets recalibrated** (following physical sticker repositioning and the realization that centering on the sticker ≠ centering on the plant due to pot-radius parallax):
+  - overview: pitch=-50, yaw=-25, zoom=1.0
+  - plant_a: pitch=-38, yaw=-55, zoom=1.5
+  - plant_b: pitch=-60, yaw=-22, zoom=1.4 (zoom reduced because at 1.5 the pot sticker falls below the pitch=-60 floor)
+  - plant_c: pitch=-47, yaw=+10, zoom=1.5
+  - plant_d: pitch=-35, yaw=-24, zoom=1.5
+- **Pitch floor finding:** Previously thought to be -55°; actual physical floor is -60°. Apparent -55° floor was the partial-move quirk — commanding -60° directly from +85° clamps at -55°, but stepping through (-35 → -55 → -60) reaches -60° cleanly.
+- **Shipped `dirt-camera-daemon`** (C++, ~500 LoC) at `services/camera-daemon/`. Persistent OBSBOT SDK session over Unix socket. Handles partial-move auto-retry (step-through via midpoint), hotplug recovery, zoom soft-cap. Vendored libdev_v2.1.0_8 is now version-controlled under `services/camera-daemon/vendor/libdev/`.
+- **Shipped `scripts/camera` CLI** — thin Python client. User-frame commands: `look <preset>`, `nudge <direction> <degrees>`, `zoom <delta>`, `where`. Compound `nudge left=3 up=2` supported (single roundtrip). Never exposes motor coordinates to the agent.
+- **Config** at `~/.config/dirt/camera.json` (template at `config/camera.json.example`): sign map + presets. Sign map encodes mount-specific axis-sign conventions, derived empirically during calibration.
+- **systemd user service** (`systemd/dirt-camera.service`) enabled + started. `loginctl enable-linger akcom` set so the daemon runs at boot without login. User-crontab entry added for weekly `logrotate` (Sundays 03:00, 4-week retention, copytruncate-safe).
+- New hardware page: [`hardware/ptz-camera.md`](hardware/ptz-camera.md). Documents the CLI, daemon, protocol, known quirks, and physical specs.
+
+## [2026-04-15] Jabra Speak 410 deployed; voice pilot proven end-to-end
+- Jabra plugged into the RSHTECH USB hub. Appears as ALSA card 2, sounddevice index 6.
+- PCM volume maxed to 100% (was 55% out of the box); persisted via `sudo alsactl store 2`.
+- Pilot script `debug/deepgram_roundtrip.py` ships: Nova-3 streaming STT from Jabra mic → hardcoded Aura-2 TTS response. Deliberately NOT wired to `claude -p` yet per user direction (agent shape under review).
+- Transcripts are clean over tent fan noise — no noise suppression layer needed for the pilot.
+- New deps: `deepgram-sdk`, `sounddevice`. System package `libportaudio2` also required.
+- `DEEPGRAM_API_KEY` slot added to `.env.example`.
+- **Three gotchas discovered, all filed:**
+  - Deepgram SDK v6 wants string literals `"true"`/`"false"` for bool-shaped query params; Python `True`/`False` causes HTTP 400.
+  - Jabra Speak 410 firmware bug (Red Hat bugzilla #766714): hardware always clocks at 48 kHz regardless of negotiated rate. Sending 16 kHz plays 3× fast. Workaround: always 48 kHz on playback side.
+  - Jabra playback is stereo-only (FL/FR) while mic is mono. TTS output must be duplicated to stereo before `sd.play`.
+- New pages: [`hardware/jabra.md`](hardware/jabra.md) (operator-facing) and [`debug/jabra.md`](../debug/jabra.md) (agent handoff for productionizing `channels/voice.py`).
+
+## [2026-04-15] query-filed | Autopot ongoing drainage cadence (drydown + reservoir change + top-flush)
+- User asked about "drain cadence" on the autopot. Autopot has zero runoff by design, so three distinct maintenance cycles are needed that hand-watering never required. Previously undocumented in the concept page.
+- **Tray drydown — weekly.** Close float valves 24–48h once/week so trays go dry and roots get oxygen. Continuous wet tray = anaerobic root zone = root rot risk.
+- **Reservoir change — 7–10 day cycle.** Full drain + refill, not just top-off. pH drifts, nutrients precipitate, biology grows, selective uptake skews the ratio.
+- **Top-water flush — every 2–4 weeks.** 500ml plain pH 5.8 water per pot from above to push accumulated salts out. Measure runoff EC to detect buildup.
+- Suggested weekly rhythm: Mon reservoir change → Tue–Sat drinking → Sun drydown → Mon next change.
+- Updated: [`concepts/autopot.md`](concepts/autopot.md).
+
+## [2026-04-15] query-filed | Autopot reservoir pH/EC targets + TDS-3 factor resolved
+- User confirmed autopot activation today (reservoir filled, valves about to open).
+- **Resolved pending question from 2026-04-11:** TDS-3 meter uses NaCl / 500 scale (factor 0.5). HM Digital ships all pocket TDS meters with this baked in; no toggle on the unit. So `EC (mS/cm) = ppm / 500`. The 920 ppm reading on 2026-04-11 = EC 1.84 (correct).
+- **Reframed EC targets as autopot reservoir targets.** Continuous feed means reservoir EC ≈ effective root-zone EC, where hand-feed EC runs 20–30% higher (flush-through dilutes). Existing target (0.8–1.0 for early veg) was already autopot-safe.
+- Added post-stress guidance: sit at low end of band during topping / LST / transplant recovery — plants repairing tissue don't tolerate hot nutrients.
+- Added Canna mix-order clarifier: A first, stir, then B. Never combine undiluted (calcium phosphate precipitation). pH correction happens **after** Canna is mixed, not before.
+- Updated: [`environment/nutrients.md`](environment/nutrients.md), [`concepts/ec.md`](concepts/ec.md).
+
+## [2026-04-16] plant-b + plant-c nodes deployed; all 4 plants live
+- Flashed fresh ESP32-C3 SuperMini units with plant-node firmware fw 0.1.1 for plant-b (MAC AC:A7:04:BB:C3:38 → 192.168.1.243) and plant-c (MAC AC:A7:04:BB:D7:B4 → 192.168.1.117, reused from the 2026-04-14 GPIO debugging dev unit). `platformio.ini` got `plant-b`/`plant-b-ota` and `plant-c`/`plant-c-ota` env blocks following the existing pattern.
+- Both units got v2.0 capacitive moisture sensors (user had exhausted the original v1.2 Amazon pack). Plant-a and plant-d stay on v1.2 — fleet now mixed, but auto-calibration normalizes over the generation difference.
+- **Calibration cleanup:** after bring-up, plant-b and plant-c's `sensorcalibration` rows had inflated `raw_high` values (~3800) that were initially suspected as floating-pin spikes. Turned out to be **legitimate ESP32-C3 ADC non-linearity** near the rail — multimeter-verified 2.76 V on AOUT reads as raw ~3800 via `adc1_get_raw()` (no `esp_adc_cal` correction). Still did a clean wipe of plant-b and plant-c calibration + historical readings (backed up `dirt.db` first) so fresh calibrations seeded from measured wet/dry transitions. Current clean values: plant-b 1378/3806, plant-c 1383/3874 — tightly matched, both v2.0 sensors from the same pack behave identically.
+- **New quirks filed:** v1.2 vs v2.0 sensor differences (reseller "2.3V ceiling" claim doesn't match our hardware — ours outputs 2.76V); ESP32-C3 ADC over-reports by 200–400 counts above ~2.5V input; pyserial default DTR assertion resets ESP32-C3 on port open (fix: `s.dtr = False; s.rts = False` before `open()`).
+- New scratch tool: `debug/moisture_report.py` — per-plant snapshot of raw, calibration bounds, and normalized wet%.
+- Updated: [`hardware/esp32-plant-nodes.md`](hardware/esp32-plant-nodes.md), [`concepts/capacitive-soil-moisture.md`](concepts/capacitive-soil-moisture.md), [`overview.md`](overview.md), [`index.md`](index.md).
+
+## [2026-04-16] decision | Voice pipeline: ElevenLabs TTS + openWakeWord wake phrase
+- **TTS provider selected:** ElevenLabs `eleven_multilingual_v2` replaces Deepgram Aura-2. Voice persona is "Claudia" (bilingual English/Spanish). Settings: stability=0.55, similarity_boost=1.0, speed=1.08, +12 dB gain for Jabra playback.
+- **Wake word engine selected:** openWakeWord (Apache 2.0). Custom "hey claudia" model currently being trained via synthetic data. Always-on listener gates STT/LLM/TTS to avoid idle API costs.
+- **STT unchanged:** Deepgram Nova-3 retained.
+- **Architecture:** Jabra mic → openWakeWord (always-on) → trigger → Deepgram STT → LLM → ElevenLabs TTS → Jabra speaker.
+- Pilot: `debug/elevenlabs_tts.py` — ElevenLabs streaming TTS through Jabra proven end-to-end.
+- Dependency added: `elevenlabs` Python SDK.
+- New decision record: [`decisions/2026-04-16-voice-pipeline-selections.md`](decisions/2026-04-16-voice-pipeline-selections.md).
+- Updated: [`hardware/jabra.md`](hardware/jabra.md), [`overview.md`](overview.md), [`index.md`](index.md).
+
+## [2026-04-16] wake-word | Pipeline investigation, diagnostics, retraining strategy
+- **Default Piper-only openWakeWord model tested** via `apps/wake-word/validation/live-test.py` against the Jabra mic. Close-range recall 70–80% at threshold 0.5–0.4; far-range recall collapsed to 40% with many utterances scoring near zero (model blind, not threshold-limited). Deepgram Nova-3 run as a control from the same far spot — about half the utterances came back garbled, confirming acoustic-path degradation is real but still less severe than the model's blindness.
+- **Decision: retrain with voice-matched + environment-matched data**. See [training strategy decision](decisions/2026-04-16-wake-word-training-strategy.md). Rejected alternatives: threshold tuning, Piper+MIT-RIR retrain, LoRA/fine-tune (no hooks, model too small), custom verifier only (precision-not-recall tool).
+- **Captured 9 room impulse responses** via exponential sine sweep + Farina deconvolution. Two-script setup: `apps/wake-word/data-gen/capture-rir-record.py` on the Jabra host, `apps/wake-word/data-gen/capture-rir-play.py` on the laptop at the capture position. Positions: `loft_primary`, `loft_2`, `mid_loft`, `stairs_top`, `couch`, `couch_far`, `kitchen_far`, `next_to_tent`, `tent_far`. All 65–77 dB SNR. Output at `var/wake-word/rirs/*.wav`.
+- **Voice-clone generation**. ElevenLabs clone (voice ID `mjXJZpUEgv69eq6xrhlW`), `eleven_multilingual_v2` model, `pcm_16000` output for direct training-pipeline compatibility. Four phrase variants ("hey claudia", "Hey, Claudia", "hey Clowdia", "Hey, Clowdia") × 500 each via `apps/wake-word/data-gen/elevenlabs-clones-batch.py` (resume-safe: targets-not-deltas semantic). Phonetic spelling "CLAU-dyah" tested and rejected (sounded weird); "Clowdia" retained as it pronounces cleanly. First 2000-sample attempt hit a 4k-credit per-API-key cap; resumed after raising limit.
+- **Three training iterations** in Colab:
+  - **v1**: default Piper-only baseline — rejected (poor recall).
+  - **v2**: voice clones + our RIRs + train/test split. Validation 70% recall, real-world 71% (5/7 at threshold 0.4). Better but conservative.
+  - **v3** (shipped): same data, plus `max_negative_weight=500` (was 1500), `target_recall=0.85` (was 0.25), training_steps=20000. Validation 79% recall, **real-world 89% (8/9)** at threshold 0.4. Clean fires consistently peak 0.95–0.99. Validation FP/hr jumped from ~1.3 → 6.6, but threshold has headroom to raise for deployment precision.
+- **Key training lessons learned**:
+  - Training config's `n_samples` is a trigger for Piper generation, not a deltas semantic — pre-populating `positive_train/` to ≥95% of `n_samples` short-circuits it. Same trick works for `positive_test/`.
+  - **Validation on held-out clones is required** — initial v1 validation measured cross-speaker recall on LibriTTS voices (11%) which was alarming but mostly cosmetic. Moving to an in-distribution train/test split (1500/500 of our voice clones) flipped the number to 70% without changing the model.
+  - Comma in `target_phrase` crashes `generate_adversarial_texts` phoneme lookup. Strip punctuation from targets; commas are only meaningful for ElevenLabs pause insertion.
+  - `--augment_clips` guard only checks `positive_features_train.npy`. If that file exists but the other three don't (crash mid-augment), re-running does nothing — use `--augment_clips --overwrite`.
+  - Two different toolchains convert ONNX to TFLite (`onnx_tf` and `onnx2tf`). Colab's `onnx_tf` path errors but the `onnx2tf` path further down succeeds — ignore the scary `ModuleNotFoundError: No module named 'onnx_tf'` if the `.tflite` file is produced.
+- **Two new concept pages**:
+  - [`concepts/wake-word-detection.md`](concepts/wake-word-detection.md) — openWakeWord three-stage architecture (melspec → pretrained embedding → tiny classifier), why synthetic training works, frame-burst behavior, diagnostic protocol, custom verifier alternative.
+  - [`concepts/room-impulse-response.md`](concepts/room-impulse-response.md) — What IRs are and aren't, why they're useful for augmentation, Farina's sine sweep method, capture setup, caveats (speaker coloration, mouth directivity).
+- **New deps added**: `openwakeword` (also pulled in `onnxruntime`, `scipy`, `scikit-learn`, `protobuf`, etc.).
+- Final model shipped at `var/wake-word/models/current/hey_claudia.onnx`. Archived: `hey_claudia_v1.onnx` (Piper baseline), `hey_claudia_v2.onnx` (conservative).
+- Updated: [`hardware/jabra.md`](hardware/jabra.md), [`index.md`](index.md), [`decisions/2026-04-16-wake-word-training-strategy.md`](decisions/2026-04-16-wake-word-training-strategy.md).
+
+## [2026-04-17] sensors | plant-d moisture dropouts diagnosed and cleaned
+- **Symptom investigated**: `plant-d` `soil_moisture_raw` showing daily clusters of sub-100 raw values (~25% of samples, vs 0–0.7% on a/b/c). Values of 1–6 are below plant-d's calibrated `raw_low=105` — sensor output collapse, not real readings.
+- **Pattern**: dropouts cluster at 04:00–09:00 and 19:00 — the hours where tent temperature / humidity are *transitioning*, not the peak-heat hours (10:00–14:00 had zero dropouts). Signal aligns with dew-point crossings rather than lights/heat.
+- **Likely cause**: plant-d is a v1.2 sensor from the first Amazon pack (40% DOA rate). Hypothesis is marginal conformal coating letting moisture wick into the 555-timer traces during high-RH transitions, collapsing the oscillator. plant-a (also v1.2) does not show this failure, so it's a unit-level defect, not a generational issue.
+- **Data cleanup**: deleted 2,165 rows matching `metric='soil_moisture_raw' AND location='plant-d' AND value < 105` from `dirt.db`. Backup at `dirt.db.bak-before-plantd-cleanup-1776489309`. Post-cleanup plant-d trends coherently: 27.9% → 34.3% → 38.3% wet over 04-16/04-17/04-18.
+- **Open issue**: [#20](https://github.com/akravetz/dirt/issues/20) — fix is to swap plant-d's sensor for a v2.0 unit (matches b/c).
+
+## [2026-04-17] decision | Humidifier actuator switched from SSR to Kasa EP10 smart plug
+- **What changed**: dropped the 2026-04-14 plan to control the Raydrop 4L via a G3MB-202P SSR on the Arduino Nano. Replaced with a **TP-Link Kasa Ultra Mini EP10** smart plug driven from a host-side Python service via [`python-kasa`](https://github.com/python-kasa/python-kasa). No mains wiring, no custom enclosure, no GPIO.
+- **What didn't change**: the control algorithm. Still bang-bang with hysteresis (target 60% RH, ±3% deadband), with a minimum off-time for relay protection and a max-on safety timeout. PID reconfirmed as the wrong tool here — binary actuator, asymmetric transfer function, big dead time, finite relay switch-cycle budget, plants don't need ±1% precision.
+- **Why the switch**: the SSR approach was accepted on 2026-04-14 but hardware was never deployed — installing mains-switching safely (enclosure + strain relief + fused outlet) is higher-friction than a UL-listed sealed smart plug. Same control topology, lower activation energy.
+- **Bonus from the EP10**: energy monitoring. Wattage reporting gives a free ground-truth signal when the humidifier has been unplugged, run dry, or hit its own cutoff despite the plug reporting ON.
+- **Deliverables**: new decision record at [`decisions/2026-04-17-humidifier-kasa-ep10.md`](decisions/2026-04-17-humidifier-kasa-ep10.md); old [`decisions/2026-04-14-humidifier-relay-control.md`](decisions/2026-04-14-humidifier-relay-control.md) marked Superseded; [`hardware/humidifier-control.md`](hardware/humidifier-control.md) fully rewritten for the EP10 path; [`environment/humidity.md`](environment/humidity.md), [`index.md`](index.md), and [`overview.md`](overview.md) updated to match.
+- **Next**: onboard the EP10 (Kasa app + DHCP reservation), then scope the control service on the `dirt` host.
+
+## 2026-04-18 — Production voice channel deployed
+
+First pass at the voice agent (`channels/voice.py`) shipped and running as `dirt-voice.service`. Pipecat v1.0 pipeline: wake-word (openWakeWord) → Deepgram Nova-3 STT → Claude Haiku 4.5 (with 3 tools: `get_current_status`, `get_sensor_trend`, `ask_wiki`) → ElevenLabs `eleven_turbo_v2_5` TTS → Jabra. Custom `SoundDeviceTransport` in callback mode (portaudio ring buffer) to get `latency='low'` + instant barge-in on our asymmetric-endpoint Jabra. Session transcripts append to `sessions/voice/YYYY-MM-DD.jsonl`. PID file at `logs/voice.pid` for reliable external stop.
+
+- New pages: `wiki/hardware/voice-channel.md` (pipeline), `docs/references/pipecat/` (v1.0 anchor pack).
+- Updated: `wiki/hardware/jabra.md` (marked production voice channel deployed, linked out to voice-channel.md), `wiki/index.md`, `CLAUDE.md` (new "Voice Channel (Claudia)" commands block).
+
+## 2026-04-18 — Wake-word v4 plan filed; near-miss audio capture live
+
+v3 (shipped 2026-04-16) solved the far-field recall problem but exposed the next one: precision. In the wild we've seen a meeting false positive (score 0.74 on Zoom audio during a real meeting) and ambiguous-zone misses (legitimate "hey Claudia" attempts scoring 0.47–0.49 from positions further than v3's training RIRs covered). v3's negatives were generic LibriTTS — no environment match.
+
+v4 plan is precision-focused retraining: add in-situ hard negatives, mine meeting audio + transcripts for phonetic neighbors, synthesize more phonetic-neighbor samples via ElevenLabs, capture additional far-field RIRs, and bump `max_negative_weight` 500 → 800 once negatives are representative. Also has runtime-only fallbacks (double-hit confirmation, tiny speaker verifier) if retraining schedule slips.
+
+- New page: `wiki/decisions/2026-04-18-wake-word-v4-plan.md`.
+- Shipped now: `src/dirt/channels/voice.py` keeps a 1.9 s audio ring buffer and dumps a WAV on every wake event and every near-miss with score ≥ 0.3. Lands in `logs/wake_audio/`, intentionally not auto-rotated so we can accumulate for 1–2 weeks before training.
+- Updated: `wiki/index.md` (v4 plan link under Decisions).
+
+## 2026-04-18 — Humidifier closed-loop control deployed
+
+Kasa EP10 smart plug provisioned as `dirt-humidifier` (DHCP-reserved `192.168.1.220`). New service `src/dirt/services/humidifier.py` runs from the FastAPI lifespan and drives the plug via `python-kasa` based on tent DHT22 RH — bang-bang with a ±3% deadband around 60% target, plus 90s min-off, 20-min max-on safety, and failsafe-OFF on stale (>5 min) readings. Per-poll `humidifier_on` (0/1) rows land in `sensorreading` (graphable alongside `humidity_pct`); state transitions land in `logs/humidifier/` with reason + RH.
+
+One snag: stock `python-kasa` 0.10.2 fails KLAP v2 auth on our firmware (1.1.1 Build 250908). Pinned to the fork branch in [PR #1580](https://github.com/python-kasa/python-kasa/pull/1580) until that merges. Also worth knowing: "Remote Control" must be enabled in the Kasa app for LAN auth to work — cloud registration is what provisions the KLAP credentials the plug checks locally.
+
+- Updated: `wiki/hardware/humidifier-control.md` (deployment status, known-issues section, state-logging section), `CLAUDE.md` (new `humidifier` stream in the observability table).
+
+## 2026-04-18 — Reservoir-level sensing planned (submerged pressure transducer)
+
+Net-new design (no prior reservoir-level page existed). For the 25-gal Autopot FlexiTank Pro: submerged hydrostatic pressure transducer (DFRobot KIT0139, 4–20mA, 0–5m, IP68) → 4-20mA-to-voltage converter → ADS1115 16-bit I²C ADC → new dedicated ESP32-C3 SuperMini node (working name `dirt-reservoir.local`, location label `reservoir`) → existing `/api/ingest/sensors` endpoint as `reservoir_depth_cm` at 30 s cadence. ADS1115 chosen over the C3's native ADC because the C3 over-reports near the rail (already-documented quirk) and absolute-accuracy depth conversion can't tolerate that systematic error.
+
+Decision record covers alternatives (float switch, multi-stage float ladder, ultrasonic, capacitive strip, eTape) and why submerged pressure won. Notable trade-off accepted: 0–5m probe on a ~0.5m tank gives ±25 mm absolute accuracy (~5% of tank depth) — fine for "days-until-empty" but worth recording so we don't pretend to mm-class precision later.
+
+Status: parts on roadmap, none assembled yet; firmware project (`firmware/reservoir_node/`) doesn't exist yet. Open items: 4-20mA conversion path (SEN0262 module vs discrete shunt), 12V supply source, lid grommet for cable strain relief.
+
+- New pages: `wiki/hardware/reservoir-level.md`, `wiki/decisions/2026-04-18-reservoir-level-pressure-transducer.md`.
+- Updated: `wiki/index.md` (added under Hardware and Decisions), `wiki/concepts/autopot.md` (new "Reservoir Level Telemetry" section linking out).
+
+Also today: plant-A and plant-D moisture sensors swapped to v2.0; both calibrated via 30-min water soak + air-dry, calibration rows reset (sentinel-then-relearn) to wet ~1370–1376 / dry ~3883–3887. Old v1.2 readings purged from `sensorreading` (8,734 rows) so historical curves don't mix sensor generations.
+
+## [2026-04-18] daily | Day 35 — LST window open; overnight temp/RH flags; A/D sensors upgraded to v2.0
+
+- Created `wiki/daily/2026-04-18.md` — Day 35 (Day 6–7 post-topping recovery); 5 photos (overview + 4 plants, 14:00 MDT); windowed sensor data (overnight/morning/now); all plants healthy and branching; LST due now; overnight temp 63.54°F avg and overnight RH 76.95% avg flagged; Plant B morning drydown (3.57%) noted; A/D sensor gaps explained (v1.2 purged, v2.0 fresh)
+- Updated `wiki/plants/plant-a.md` — timeline entry + Current State rewritten (LST due now)
+- Updated `wiki/plants/plant-b.md` — timeline entry + Current State rewritten (LST due now; morning drydown noted)
+- Updated `wiki/plants/plant-c.md` — timeline entry + Current State rewritten (LST due now; stable moisture)
+- Updated `wiki/plants/plant-d.md` — timeline entry + Current State rewritten (LST due now; v2.0 sensor)
+- Updated `wiki/environment/temperature.md` — trend row + notable event for overnight lights-off dip (63.54°F avg)
+- Updated `wiki/environment/humidity.md` — trend row + notable event for overnight RH spike + day/night VPD swing
+- Rewrote `wiki/overview.md` — Day 35, LST due flag, overnight env flags, plant status table updated, environment last reading updated
+- Updated `wiki/index.md` — Day 35 daily entry added
+- **Known gap:** No daily entries for 2026-04-13 through 2026-04-17 (no photos or sensor snapshots taken on those dates). Pre-existing pattern; lint timeline-continuity check will flag this gap.
+
+## [2026-04-18] query-filed | AC Infinity Cloudline LITE 6" fan control — reverse-engineering plan + hardware ordered
+
+- User wants to remove AC Infinity's proprietary stock wired remote from the loop and drive the Cloudline LITE 6" inline fan from an Arduino Nano (controlled by the Dirt stack) for programmatic speed / scheduled ramps / closed-loop VPD pairing with the humidifier.
+- **Signaling confirmed as PWM** via the back label of the stock wired speed controller. Working assumption: single PWM line on the fan's USB-C connector (most likely SBU1/SBU2; fallback CC1/CC2; least-likely D+/D−). Duty cycle encodes speed; no multi-byte protocol.
+- **Approach:** (1) multimeter pre-flight to confirm no pin >5V and narrow candidates to the pin whose DC-averaged voltage changes with knob position; (2) HiLetgo 8-channel logic analyzer + PulseView to identify the PWM pin, measure frequency and duty-cycle range; (3) permanent install on a perma-proto board with a socketed Arduino Nano driving a Treedix female USB-C breakout.
+- **Hardware ordered 2026-04-18** (all in transit):
+  - minidodoca USB-C M/F passthrough test board × 2 (B0FLX671VF) — analysis tap
+  - Treedix vertical female USB-C breakout × 2 (B0D31GG6WD) — permanent install interface
+  - HiLetgo USB logic analyzer 24 MHz 8CH (B077LSG5P2)
+  - ElectroCookie prototype solderable PCBs 5+1 (B07ZYNWJ1S)
+  - Lonely Binary female header assortment kit, 160 pc (B0FFM2RBMB)
+- **New page:** `wiki/hardware/ac-infinity-fan-control.md` — full context, shopping list, reverse-engineering stages, permanent install plan, open questions.
+- Updated: `wiki/index.md` (added under Hardware), `wiki/overview.md` (System Status row added).
+
+## [2026-04-18] training | SCROG net installed; LST start deferred 1–3 days
+
+- User installed VIVOSUN 4x4 trellis net today at **11" above canopy / 18" above pot base** — matches the plan spec in `wiki/concepts/scrog.md` (18" above pots) and sits in the standard 8–12" above-canopy range. Install is ~1–2 weeks ahead of the original weeks-6–8 estimate; acceptable tradeoff — the net becomes an anchor plane for LST ties rather than a later overhead constraint.
+- **LST not started today** — user reports the two new main shoots per plant aren't yet sized up enough to bend confidently; will begin once each clears ~2" (expected 1–3 days).
+- Updated: `wiki/daily/2026-04-18.md` (title, summary, added Training Action Today section, Recommendation #1 rewritten for net-installed + LST-pending state), `wiki/overview.md` (Current Stage, Plant Status rows, Active Action Items #1, Upcoming Milestones — SCROG marked done), `wiki/concepts/scrog.md` ("In This Grow" with actual install date + measurements).
+- Q&A context: user asked whether LST and SCROG are mutually exclusive (no — sequence is Top → LST → SCROG per `wiki/concepts/plant-training-methods.md`), when to install the net, what height, and whether indica/sativa changes the answer. Answer was in-chat; the concept pages already cover the rationale, so no new concept page needed.
+
+## [2026-04-18] decision | Humidifier control switched to stage-dynamic VPD targeting
+
+- **Motivated by 2026-04-18 overnight data:** fixed 60% RH setpoint produced healthy daytime VPD (~1.3 kPa at 75°F) but collapsed to 0.46 kPa overnight (seedling range) when the tent cooled to 63°F and the humidifier kept topping off. The control loop needed to be temperature-aware; VPD already is.
+- **Decision:** humidifier now targets the **upper edge of the stage-appropriate VPD band** read from `dirt.services.grow_state.STAGE_TARGETS`, with a 0.1 kPa deadband. ON when `vpd > upper_band`, OFF when `vpd < upper_band − deadband`. Stage band shifts automatically across veg / early flower / late flower as `grow_state.flower_start_date` is written.
+- **Grow identity modeled in DB:** new `grow_state` singleton table (`germination_date`, `flower_start_date`), seeded from `config.GROW_START` on first boot. Future frontend will PATCH this row; the flower-start flip drives the veg→flower transition without a service restart.
+- **Single source of truth for stage targets:** Claudia's voice status tool (`src/dirt/tools/sensors.py`) now reads the same `STAGE_TARGETS` dict, so "out of range" flagging matches the humidifier setpoint exactly. Stage bands sourced from converging cannabis cultivation guidance (gorillagrowtent.com, athenaag.com, advancednutrients.com, growerIQ, royalqueenseeds, questclimate — all consulted 2026-04-18).
+- **Hardware / safety guards unchanged:** Kasa EP10 actuator, min-off 90s, max-on 20min, stale-sensor failsafe 5min, failsafe-OFF on ambiguity — all carry over from [2026-04-17 decision](decisions/2026-04-17-humidifier-kasa-ep10.md). Only the setpoint definition changed.
+- **Config cleanup:** `humidity_target_pct` and `humidity_deadband_pct` removed; replaced by `vpd_deadband_kpa = 0.1`. `grow_week()` moved from `config.py` to `services/grow_state.py` (now async, reads germination_date from DB); callers in `channels/voice.py` and `tools/wiki.py` updated.
+- **Resolved action item from overview:** "Lower overnight humidifier setpoint" — VPD targeting handles this automatically (cool nights drop VPD naturally, loop stops running without a schedule).
+- **New page:** [`wiki/decisions/2026-04-18-vpd-targeting.md`](decisions/2026-04-18-vpd-targeting.md). Updated: `wiki/hardware/humidifier-control.md` (Control Logic + State Logging + Acceptance sections rewritten), `wiki/environment/humidity.md` (Targets by Phase table + Deployed Control System section), `CLAUDE.md` (observability table: `humidifier` stream fields now `vpd`, `vpd_age_s`, `stage`, `upper_band_kpa`, `lower_band_kpa`), `wiki/overview.md` (removed resolved action item).
+- **Tests:** 13 new in `tests/test_grow_state.py` — stage math, week math, target lookup, singleton seeding idempotency. 131 tests passing.
+
+## [2026-04-19] decision | Drop humidifier max-on and min-off safety timers
+- **Decision:** [`wiki/decisions/2026-04-19-drop-humidifier-safety-timers.md`](decisions/2026-04-19-drop-humidifier-safety-timers.md). Removed `humidifier_max_on_seconds` (20 min) and `humidifier_min_off_seconds` (90s) from `apps/shared/src/dirt_shared/config.py` and from the loop in `apps/hwd/src/dirt_hwd/services/humidifier.py`. Only safety retained: `humidifier_failsafe_stale_seconds` (5 min).
+- **Why:** 2026-04-19 log analysis (`var/logs/humidifier/2026-04-19.jsonl`) showed four consecutive on-phases between 13:34–14:55 UTC terminating on `max_on_timeout` at VPD values (1.65, 1.36, 1.22) still well above the hysteresis turn-off edge (1.10). The 20-min safety had become the *primary* termination criterion, making the effective setpoint non-deterministic and burning relay cycles against the deadband. 90s `min_off` was redundant with the VPD deadband (hysteresis already prevents chatter).
+- **Safety reasoning:** Raydrop 4L has its own low-water cutoff, so a stuck-high VPD reading self-limits by reservoir exhaustion rather than by the `max_on` timer. Relay lifetime is cycle-limited, not duty-limited — dropping these guards *reduces* cycles.
+- **Updated:** `wiki/hardware/humidifier-control.md` (Control Logic pseudocode, "Why these choices" bullets, State-change reasons list, Acceptance criteria, relay-lifetime note), `wiki/index.md` (new decision entry), `CLAUDE.md` (observability table: `humidifier` stream `reason` values enumerated).
+- **Tests:** No tests referenced the removed settings; no env / systemd overrides existed.
+
+## [2026-04-19] decision | Lights-off-aware humidifier feedforward (A + B)
+- **Decision:** [`wiki/decisions/2026-04-19-lights-off-aware-humidifier.md`](decisions/2026-04-19-lights-off-aware-humidifier.md). Added two rules to `humidifier_loop`:
+  - **A.** Pre-lights-off prep window: force OFF in the last `lights_off_prep_minutes` (30) of lights-on.
+  - **B.** Lights-off band offset: subtract `vpd_lights_off_offset_kpa` (−0.3) from the stage band during dark period. Preserves deadband width.
+- **Schema:** added `lights_on_local` and `lights_off_local` (`TIME`) columns to `growstate`. Seeded `(05:00, 23:00)` for veg 18/6. Migration is idempotent `ALTER TABLE ADD COLUMN ... DEFAULT` in `init_db()` — existing production row auto-populated.
+- **Why:** lights-off crash is a *scheduled, periodic* disturbance, so feedforward (clock-based) strictly dominates derivative feedback (DHT22-noise-limited). Measured steady-state overshoot after clean shutoff is only ~0.004 kPa and ~15 s — nighttime VPD collapse is the disturbance itself, not control-loop lag. Night band (0.5–0.9 veg; 0.7–1.0 flower_early; 0.9–1.2 flower_late) sits inside the published "0.2–0.4 kPa below day" industry range.
+- **Files:** `apps/shared/src/dirt_shared/models/grow_state.py` (two new `time` fields), `apps/shared/src/dirt_shared/db.py` (column migration), `apps/shared/src/dirt_shared/services/grow_state.py` (`TENT_TZ`, `LightsState`, async `lights_state()`), `apps/shared/src/dirt_shared/config.py` (two new knobs), `apps/hwd/src/dirt_hwd/services/humidifier.py` (decision block).
+- **Observability:** new reason `lights_off_prep`; every state_change now carries `lights_on`, `minutes_until_off`, `band_offset_kpa`.
+- **Updated:** `wiki/hardware/humidifier-control.md` (Control Logic rewritten, new "Why" bullets, State Logging reasons), `wiki/index.md`, `CLAUDE.md` (observability table, + new "Current grow" section pinning germination 2026-03-15 and the stage-derivation rule for agents without DB access).
+- **Tests:** 5 new in `apps/shared/tests/test_grow_state.py` covering `lights_state` across on/off/prep-window/schedule-override cases. 113 tests passing across invariants + shared + hwd suites.
+- **Pending user action:** `systemctl --user restart dirt-hwd` to pick up the new loop (+ the earlier drop-timers change). Service has NOT been restarted yet.
+
+## [2026-04-19] query-filed | Multi-actuator environment control design principles
+- **New page:** [`wiki/concepts/multi-actuator-environment-control.md`](concepts/multi-actuator-environment-control.md). Captures the design discussion from 2026-04-19 for how to structure the control loop once the dehumidifier (second Kasa EP10) and PWM exhaust fan are provisioned.
+- **Key decisions (principles, not code yet):** target 2D (T, RH) zones rather than scalar VPD; cascaded SISO state-machine with priority over true MIMO; assign actuators by dominant authority (fan → T, humidifier/dehumidifier → RH ±); feedforward on the lights schedule is the main lever; rejected PID / LQR / derivative estimation as over-engineering for a sparse actuator-output matrix. Failure modes called out up front: actuator mutex, dehumidifier saturation detection via wattage, fan baseline floor, dehumidifier compressor min-off.
+- **Status:** explicitly future work. Nothing to implement until hardware arrives. Migration path documented.
+- **Updated:** `wiki/index.md` (new concept entry flagged as "future").
+
+## [2026-04-19] daily | Day 36 — Overnight temp recovered; LST overdue; daytime VPD elevated
+
+- Created `wiki/daily/2026-04-19.md` — Day 36 (Day 8/7 post-topping); 5 photos (overview + 4 plants, 14:00 MDT); windowed sensor data; all plants healthy and vigorous; overnight temp recovered to 68.0°F ✅ (first time in veg night range); overnight RH still elevated at 70.79% (improving trend); daytime VPD above ceiling at 1.31–1.51 kPa ⚠️; LST overdue (Day 8/7 post-topping); Plant A moisture rising to 56% (autopot active); B/D stable ~26–27%
+- Updated `wiki/plants/plant-a.md` — timeline entry (Day 36, LST overdue) + Current State rewritten
+- Updated `wiki/plants/plant-b.md` — timeline entry (Day 36, LST overdue) + Current State rewritten
+- Updated `wiki/plants/plant-c.md` — timeline entry (Day 36, LST overdue) + Current State rewritten
+- Updated `wiki/plants/plant-d.md` — timeline entry (Day 36, LST overdue) + Current State rewritten
+- Updated `wiki/environment/temperature.md` — trend row for Apr 19 (overnight in range for first time); notable event added
+- Updated `wiki/environment/humidity.md` — trend row for Apr 19 (overnight improving; daytime VPD above ceiling); notable event added
+- Rewrote `wiki/overview.md` — Day 36, overnight temp resolved, daytime VPD new flag, LST overdue, plant status and environment readings updated
+- Updated `wiki/index.md` — Day 36 daily entry added
+
+## [2026-04-20] decision | Swap tent-hub temp/RH sensor DHT22 → BME280
+- **Decision:** [`wiki/decisions/2026-04-20-bme280-sensor-swap.md`](decisions/2026-04-20-bme280-sensor-swap.md). Replaced the DHT22 on the Arduino Nano tent-hub with a Bosch BME280 (I²C `0x76`). Sensor physically deployed ~2026-04-13; documentation catch-up today.
+- **Why:** DHT22 hardware failure (stale / invalid reads) + want less long-term cal drift under a VPD-targeted control loop where temp error compounds into VPD error.
+- **Unchanged:** tent-hub topology (Nano outside the tent, USB serial to host), ingest schema, humidifier control loop (VPD setpoint, 0.1 kPa deadband, feedforward, failsafes). Control loop is sensor-agnostic — reads VPD from DB.
+- **Bonus:** barometric pressure now captured as a free side channel. Not wired to any controller.
+- **Historical decisions kept intact:** `decisions/2026-04-12-distributed-sensor-architecture.md`, `decisions/2026-04-14-humidifier-relay-control.md`, `decisions/2026-04-17-humidifier-kasa-ep10.md`, `decisions/2026-04-18-reservoir-level-pressure-transducer.md`, `decisions/2026-04-19-lights-off-aware-humidifier.md`, `decisions/2026-04-19-drop-humidifier-safety-timers.md` — DHT22 references preserved; rationale still sound under BME280. New decision record is the authoritative supersede pointer.
+- **Updated:** `wiki/overview.md` (System Status row), `wiki/index.md` (humidifier blurb + new decision entry + `updated` bumped), `wiki/environment/humidity.md` (Deployed Control System sensor line), `wiki/hardware/humidifier-control.md` (pipeline description + deadband rationale + "Why these choices" bullets), `wiki/concepts/multi-actuator-environment-control.md` (room-sensor references).
+- **Out of scope wiki-side:** `apps/shared/src/dirt_shared/services/system_status.py` and any other code-side user-facing strings still mentioning "DHT22" — flagged for a follow-up pass.
+
+## [2026-04-20] daily | Day 37 — Daytime environment in target; overnight RH regressed; LST still outstanding
+
+- Created `wiki/daily/2026-04-20.md` — Day 37 (Day 9/8 post-topping); 5 photos (overview + 4 plants, 14:00 MDT); windowed sensor data; daytime temp in target (75.04°F ✅) and VPD in target at 14:00 (1.12 kPa ✅) for first time; overnight RH regressed to 74.37% ⚠️ and overnight VPD dropped to 0.57 kPa ⚠️ — `dirt-hwd` restart still pending; all plants healthy and vigorous; Plant D lighter green than peers — monitoring; LST critically overdue (Day 9/8); Plant B moisture spiked to 58% at 14:00 (autopot afternoon feeding)
+- Updated `wiki/plants/plant-a.md` — timeline entry (Day 37, LST critically overdue, Day 9 post-topping) + Current State rewritten
+- Updated `wiki/plants/plant-b.md` — timeline entry (Day 37, moisture spike 58%, LST critically overdue) + Current State rewritten
+- Updated `wiki/plants/plant-c.md` — timeline entry (Day 37, compact healthy canopy, LST critically overdue) + Current State rewritten
+- Updated `wiki/plants/plant-d.md` — timeline entry (Day 37, ⚠️ lighter green — monitoring, LST critically overdue) + Current State rewritten
+- Updated `wiki/environment/temperature.md` — trend row for Apr 20 (daytime in target; overnight regression); notable event added
+- Updated `wiki/environment/humidity.md` — trend row for Apr 20 (daytime VPD in target; overnight regression confirmed); notable event added
+- Rewrote `wiki/overview.md` — Day 37, daytime environment resolved, overnight regression new flag, LST critically overdue, plant status and environment readings updated
+- Updated `wiki/index.md` — Day 37 daily entry added
+- Updated `wiki/hardware/humidifier-control.md` — added "BME280 stuck-state (recurring)" subsection under Known Issues with pattern description, detection cue, fix (`systemctl --user restart dirt-hwd`), and incident log table (entry 1: 2026-04-20 17:36 MDT)
+- Updated `wiki/daily/2026-04-20.md` — added "BME280 stuck-state incident at 17:36 MDT" flag under Issues & Flags
+
+## [2026-04-22] query-filed | PTZ camera USB dropout — potentially recurring hardware pattern
+- **Incident:** 2026-04-22 08:58 MDT — OBSBOT SDK logged `remove uvc device: RMOWLHI1203JLY`; camera absent from `lsusb` and `/dev/video*` for ~25 min, then spontaneously reappeared at ~09:23. Systemd watchdog (30 s) killed each of 6 restart attempts since the SDK couldn't issue keepalives without a camera; burst cap (commit `554c272`) then stopped the restart loop. Manual `systemctl --user reset-failed dirt-camera && systemctl --user start dirt-camera` brought the service back once the USB device reappeared.
+- **Pairs with:** commit `1ef1020` (earlier V4L2 `ENODEV` hot-spin fix) — second known self-disconnect event, so it's being treated as a *potentially recurring* pattern rather than a one-off.
+- **Updated:** [`wiki/hardware/ptz-camera.md`](hardware/ptz-camera.md) — added Known quirk #8 with the incident timeline, the burst-cap recovery procedure, and a "fix hardware, not software" directive (USB cable / RSHTECH hub / camera PSU / thermal); updated the USB hot-unplug row in "What it handles automatically" to flag the burst-cap edge case.
+- **Explicit non-fix:** do not loosen the watchdog or raise the burst cap — they behaved correctly and are the backstop against runaway restart loops.
+
+## [2026-04-22] decision | Replace tent-hub BME280/Arduino with SHT45/ESP32-C3
+- **Decision:** [`wiki/decisions/2026-04-22-sht45-tent-node-esp32.md`](decisions/2026-04-22-sht45-tent-node-esp32.md). Both sensor (BME280 → Sensirion SHT45 + PTFE cap, Adafruit 5665, I²C `0x44`) and host board (Arduino Nano + USB serial → ESP32-C3 SuperMini + HTTP ingest at `tent-node.local`) replaced. Two-day-old [BME280 swap](decisions/2026-04-20-bme280-sensor-swap.md) superseded.
+- **Why (sensor):** recurring BME280 stuck-state first logged 2026-04-20 17:36 MDT (`humidifier-control.md` Known Issues #1) makes the failsafe force OFF on a working sensor. PTFE cap is the specific reason for SHT45 over SHT31/35 — direct mist exposure inside the tent.
+- **Why (transport):** last USB-serial tether in the sensor fleet — the four plant nodes all POST over WiFi. Removes `serial_reader.py`, `/dev/ttyArduino` udev rule, Arduino toolchain, and the ExecStartPre serial-symlink assertion. Unlocks OTA reflash on the tent sensor.
+- **Wiring choice:** SDA=GPIO4, SCL=GPIO5 (not 8/9 — GPIO8 is the SuperMini onboard LED + boot-strap pin, GPIO9 is BOOT button). The plant-node "don't use GPIO4" warning is ADC-only — JTAG doesn't interfere with actively-driven I²C.
+- **Firmware restructure:** `firmware/` is now three peer PlatformIO projects (`plant_node/`, `tent_node/`, `common/`) with a shared C++ lib tree at `common/{wifi_client, ota, ingest_client}/`. Each node project consumes it via `lib_extra_dirs = ../common`. Plant node refactored to the shared libs — all four envs still compile clean. Legacy `firmware/src/` + `firmware/lib/sensor_protocol/` + `firmware/platformio.ini` kept until cutover, deleted after.
+- **Unchanged:** `sensorreading` schema, `SensorLocation.TENT`, humidifier VPD loop (0.1 kPa deadband, stage targets, lights-off feedforward, stale-sensor failsafe). Only `sensorreading.source` shifts from `arduino` to `esp32` for new tent rows.
+- **Status:** Accepted — firmware ready and compile-verified. Hardware deployment pending solder-up.
+- **Updated:** `wiki/decisions/2026-04-22-sht45-tent-node-esp32.md` (new), `wiki/decisions/2026-04-20-bme280-sensor-swap.md` (frontmatter + status-line superseded marker), `wiki/index.md` (new decision entry + `updated` bumped).
+- **Deferred until deployed:** `wiki/hardware/tent-node.md` (new page, mirroring `esp32-plant-nodes.md`); `wiki/hardware/humidifier-control.md` Known Issues #1 → resolved-by-transition; `wiki/overview.md` System Status row; retirement of `SensorSource.ARDUINO` enum value.
+
+## [2026-04-22] daily-update | Day 39 — Overnight Env Breakthrough; Reservoir Change Due; Plant D Improving
+- **Daily entry created:** `wiki/daily/2026-04-22.md`
+- **Overnight env both metrics in veg target for first time:** RH 52.06% ✅ (was 74.37%), temp 70.17°F ✅ (was 66.84°F); confirms `dirt-hwd` service was restarted and lights-off feedforward is now active
+- **Afternoon slightly off:** temp 72.34°F ⚠️ (below 74°F floor), RH 69.19% ⚠️ (above 65% ceiling); VPD 0.84 kPa ✅ in range due to lower temp; ~10 hPa pressure drop suggests weather system
+- **Plant D color improving** — lighter medium-green, no longer alarming vs. Apr 20 pale yellow-green
+- **Plant A overnight sensor dropout** — null data 00–06; morning/now stable
+- **Plant C moisture high** — 75%+ consistently; monitor root zone
+- **Reservoir change due** — Day 7 post-activation (Apr 15); change at next opportunity
+- **Plant pages updated:** A, B, C, D (timeline + current state)
+- **Environment pages updated:** `temperature.md`, `humidity.md`
+- **`overview.md`** and **`index.md`** refreshed
+
+## [2026-04-22] milestone | AC Infinity fan controller — D+ bring-up validated
+- **Hardware built:** ESP32-C3 SuperMini + 2× 2N7000 MOSFETs (Q1=D+, Q2=B5) + 2× 10 kΩ gate pull-downs, wired to Treedix USB-C female breakout. Common GND tied between ESP32 and fan; fan powered separately. GPIO 6 → Q1 gate (D+ driver), GPIO 7 → Q2 gate (B5 keep-alive). See updated [`hardware/ac-infinity-fan-control.md`](hardware/ac-infinity-fan-control.md) driver-circuit section.
+- **Deviation from original 2026-04-18 plan:** moved from Arduino Nano to ESP32-C3 SuperMini. Motivation: fleet uniformity (same board as plant nodes + tent node; same toolchain, same OTA model), unlocks WiFi + HTTP ingest + OTA reflash, drops a whole family of Nano-era failure modes.
+- **Firmware:** new [`firmware/fan_controller/`](../../firmware/fan_controller/) PIO project (ESP32-C3 Arduino platform). 5 kHz PWM via LEDC (ch 0 = D+, ch 1 = B5), 10-bit resolution. `set_fan_speed(pct)` helper handles the inversion math (MCU duty = 100 − D+ wire duty, since Q1 pulls the line LOW when the GPIO is HIGH) and the linear remap from human % to 22–100% wire duty. B5 statically driven at 1.4% MCU duty → 98.6% wire duty, mimicking the stock remote's keep-alive.
+- **Bring-up smoke test (16:35 MDT):** started with a 20% / 40% alternation every 5 s; firmware printed the expected LEDC register values, fan stepped audibly between the two speeds.
+- **Full-range sweep (16:37 MDT):** 0% → 10% → ... → 100% → 90% → ... → 0%, 10% steps, 5 s each. All checkpoints passed — silent at 0% (Q1 holds D+ LOW), audible kick-in around 10–20%, clean monotonic ramp up and back down, 100% matches the boot-blast behavior (same ~9V line state). No dead zones, no uneven steps.
+- **Still unvalidated:** whether B5 is actually required (fan accepted commands with B5 driven; untested whether it also would with B5 floating). Thermal behavior of the MOSFETs over long runs not yet verified. Tach (D−) not wired.
+- **Next firmware milestone:** fold `firmware/common/{wifi_client, ota, ingest_client}/` in so the host can command speed via the ingest path + OTA reflash becomes available. Downstream: VPD-coupled control (see [humidifier-control.md](hardware/humidifier-control.md) + [multi-actuator-environment-control.md](concepts/multi-actuator-environment-control.md)).
+- **Obsolete artifacts (kept, not deleted):** `debug/fan-pwm/driver-schematic.{png,svg}` and `debug/fan-pwm/fan_drive_test/` are the Nano-era design; flagged as stale in the wiki's Status section.
+- **Updated:** `wiki/hardware/ac-infinity-fan-control.md` (status, goal, driver-circuit section rewrite, parts BOM bumped to 2 FETs + 2 resistors, firmware section, permanent install rewrite, bring-up validation table, future-integration refresh); `wiki/index.md` (hardware entry). Note: `humidifier-control.md` line 44 in `index.md` still describes humidifier bang-bang control in isolation — when VPD-coupled fan control lands, that description should be updated to reflect the combined actuator loop.
+
+## [2026-04-22] revision | Fan controller + SHT45 tent sensor merged onto one ESP32
+- **Change:** the SHT45 that was originally slated for a dedicated `tent_node` ESP32 (per [2026-04-22 SHT45 decision](decisions/2026-04-22-sht45-tent-node-esp32.md) this morning) is now wired onto the fan-controller ESP32-C3 instead. One board, two roles: LEDC PWM on GPIO 6/7 drives the fan via Q1/Q2; I²C on GPIO 4/5 reads the Adafruit SHT45 (0x44).
+- **Why the revision:** the 7 ft USB-C cable from the Cloudline fan lets the ESP32 sit on the tent floor — same physical domain a tent sensor would want. Combining saves one board, one power feed, one WiFi association, one OTA target. No pin contention (GPIO 10 still reserved for a future tach revisit).
+- **Tach (D−) deferred:** attempted a 10 kΩ / 4.7 kΩ voltage divider from D− to GPIO 10; zero interrupts fired. Cause traced to a weaker-than-expected internal pull-up on D− (DC measurement on the wire under load: 0.71 V; our divider loaded it below the ESP32 HIGH threshold). Fix is either (a) a higher-impedance divider (100 kΩ / 47 kΩ) or (b) an external VBUS→D− pull-up to overcome the loading — user elected to defer pending a fresh signal-analysis pass. Flagged as "tach path unimplemented" in the hardware Status section and a pending row in the bring-up validation table.
+- **Firmware:** `firmware/fan_controller/` bumped to fw `0.1.0`. Removed all tach ISR/snapshot code. Added `#include <Wire.h>` + `<Adafruit_SHT4x.h>`, I²C init on GPIO 4/5 in setup, `bring_up_sht()` helper, inline VPD calculation (Tetens formula), and a per-heartbeat combined log line: `fan=30% (D+ wire=45.4%)  |  tent: 22.70°C (72.9°F)  RH 38.9%  VPD 1.69 kPa`. If the SHT45 drops mid-flight the fan keeps running; sensor init retries every heartbeat. `platformio.ini` gained `adafruit/Adafruit SHT4x Library` + `Adafruit Unified Sensor` in `lib_deps`.
+- **Bring-up:** first flash 2026-04-22 evening, SHT45 `begin()` succeeded, first heartbeat read `22.70°C / 72.9°F / 38.9% RH / VPD 1.69 kPa` (room-air values — board not yet physically inside the tent). The SHT45 library's `readSerial()` returned 0x00000000 — known Adafruit library quirk, doesn't affect measurement.
+- **Obsoleted on disk (not yet deleted):** `firmware/tent_node/` PIO project. Slated for removal after combined firmware soaks for a few days; user-approved follow-up.
+- **Updated:** `wiki/hardware/ac-infinity-fan-control.md` (title, status, goal, parts BOM adds SHT45 + PTFE cap, new "Tent environmental sensor (SHT45)" section with I²C wiring + rationale, firmware section rewrite for dual-role, bring-up table gains D− tach failure + SHT45 success rows); `wiki/decisions/2026-04-22-sht45-tent-node-esp32.md` (revision block added at top, status line acknowledges combined-board deployment); `wiki/index.md` (hardware entry renamed "Fan Control + Tent Environmental Sensor"; decision entry marked revised-same-day). Frontmatter `updated: 2026-04-22` on both touched wiki pages.
+
+## [2026-04-22] milestone | Fan controller network-attached + HTTP control surface + SHT45 heater cycle
+- **Firmware:** `firmware/fan_controller/` bumped to fw `0.2.0`. Now consumes `firmware/common/{wifi_client, ota, ingest_client}/` (same pattern as plant/tent nodes) so the fan-controller joins WiFi, registers mDNS hostname `fan-controller.local`, and OTA-reflashes via the new `env:fan-ota` env in `platformio.ini`. Adds `#include <WebServer.h>` to expose a LAN HTTP control surface on port 80: `POST /fan {"duty_pct":0..100}` sets the fan, `GET /fan` returns `{"set_duty_pct":N,"reported_duty_pct":N}`. `reported_duty_pct` is explicitly MOCKED (echoes the last-set value) until the D− tach path is wired — the JSON shape is stable across that transition so host-side callers don't need to change when tach lands. Boot sequence unchanged: 2 s max-blast failsafe, then settles to `BOOT_SPEED_PCT` (30 %).
+- **SHT45 heater cycle:** new non-blocking state machine replaces the bring-up firmware's naive 60 s heartbeat loop. Each 60 s cycle: fire 200 mW / 1 s heater pulse (`SHT4X_HIGH_HEATER_1S`, measurement discarded — sensor is ~50 °C hot), wait 59 s for T to equilibrate at no-heater, read T/RH at high precision, POST `{temperature_c, humidity_pct, fan_duty_pct}` to `/api/ingest/sensors` at `location=tent`, immediately chain back into the next pulse. Heater duty ≈ 1.67 % (datasheet cap 10 %). Matches Sensirion's [Creep Mitigation SHT4x app note](https://sensirion.com/media/documents/A88858C9/629626D4/Application_Note_Creep_Mitigation_SHT4x.pdf) §3 continuous-pulsing regime — addresses the up-to-+3 %RH creep offset that would otherwise develop after 60 h at >90 %RH and silently defeat the humidifier VPD loop. Cadence is intentionally 60 s (matches plant nodes + keeps humidifier failsafe — `humidifier_failsafe_stale_seconds = 300` — with 5× headroom); a 5-minute cadence was considered and rejected because it lands right on the failsafe edge.
+- **SensorLocation decision:** `fan_duty_pct` rides on existing `tent` rows (metrics dict adds a key) rather than introducing a new `SensorLocation.FAN_CONTROLLER` enum. No Atlas migration, no schema change, no new ingest path — the whole thing is pure-additive in the `metrics` JSON column.
+- **Shared client:** new `apps/shared/src/dirt_shared/services/fan_node.py` — `FanNodeClient` with `async set_duty(0..100)` and `async get_state() → {set_duty_pct, reported_duty_pct}`. Takes an `httpx.AsyncClient` by injection; `FanNodeError` for non-2xx / transport / non-JSON. Default `base_url="http://fan-controller.local"`. Module docstring flags that nothing calls it automatically yet — it's pure plumbing until a control loop lands. Tests: 8 covering happy paths, validation (duty_pct out of range raises `ValueError`), HTTP error, transport error, non-JSON body, trailing-slash base URL. `uv run pytest apps/shared/tests/test_fan_node.py` green (8/8); `uv run ruff check` clean.
+- **Deferred on purpose:** host-side closed-loop VPD control. `FanNodeClient` exists and is ready to be called; no service calls it. Target shape documented in `wiki/hardware/ac-infinity-fan-control.md` "Future integration" section — a `apps/hwd/src/dirt_hwd/services/fan_controller.py` analogous to `HumidifierLoopService`. TODO pointers planted in the firmware main.cpp header, the shared client module docstring, and the wiki page.
+- **Build verification:** `cd firmware/fan_controller && pio run -e fan` compiles clean. Flash 76.0 % (995,732 / 1,310,720 bytes), RAM 13.7 % — comfortable headroom. Not yet flashed; board is already running fw `0.1.0` in the tent and the user will do the over-USB re-flash + relocation inside the tent as a follow-up.
+- **Updated:** `firmware/fan_controller/{platformio.ini, src/main.cpp}` (lib_extra_dirs, new `env:fan-ota`, FIRMWARE_VERSION=0.2.0, full main.cpp rewrite); `firmware/fan_controller/include/secrets.h.example` (new template, gitignored `secrets.h` mirrors the tent_node fleet credentials); `.gitignore` (+1 secrets line); `apps/shared/src/dirt_shared/services/fan_node.py` (new); `apps/shared/tests/test_fan_node.py` (new); `wiki/hardware/ac-infinity-fan-control.md` (Status rewrite, Firmware section condensed, new "SHT45 heater schedule" subsection, "Future integration" section rewritten around control-loop + tach todos); `docs/progress/2026-04-22-fan-tent-node.md` (§1 open-question closed, §3 + §4 status updated). `uv run scripts/lint.py` 7/7.
+
+## [2026-04-23] milestone | Arduino Nano + BME280 tent hub retired — BME280 found to be systematically wrong
+- **Terminal incident (2026-04-23 00:15 MDT).** After moving the combined fan-controller ESP32 inside the tent alongside the Arduino, ESP32 and Arduino reported wildly different readings (SHT45: 20.9 °C / 53 %RH ; BME280: 22.4 °C / 73 %RH). User placed a calibrated handheld hygrometer on the tent floor between both sensors; it read **69 °F / 49 %RH** — effectively matching the SHT45 (+0.6 °F / +4 %RH — within sensor-noise + PTFE-cap diffusion delay) and convicting the BME280 of a **+3.5 °F / +23 %RH** bias. This is far worse than the previously-documented "stuck-state" pattern and likely explains why some earlier incidents attributed to transient lockups never quite added up.
+- **Consequence — VPD loop was running against wrong inputs.** Real conditions at incident time: 20.6 °C / 49 %RH → VPD ≈ 1.24 kPa (above the veg 0.8–1.2 upper band, humidifier-ON territory). BME280-reported conditions: 22.5 °C / 73 %RH → VPD ≈ 0.74 kPa (below upper band, humidifier-OFF territory). The humidifier has been under-running for some unquantified time — tent has been drier than the wiki, daily reports, and control loop believed. Future syntheses see only the SHT45; historical `source=arduino` tent readings prior to 2026-04-23 00:22 MDT should be read against this caveat.
+- **Cutover executed in-band** — the user's soak gate (≥24 h parallel operation) was satisfied in spirit within ~10 min since the hygrometer reading was unambiguous.
+- **Code removed:** `apps/hwd/src/dirt_hwd/services/serial_reader.py` (171 lines), `apps/hwd/tests/test_serial_reader.py`, the `SerialReaderService` wiring in `apps/hwd/src/dirt_hwd/app.py`, `SerialConfig` dataclass + `Settings.serial()` + `serial_port/baud/sensor_poll_interval` fields in `apps/shared/src/dirt_shared/config.py`, `sensor_boot` retention entry in `apps/shared/src/dirt_shared/observability.py`, legacy Arduino Nano firmware tree (`firmware/src/`, `firmware/lib/sensor_protocol/`, `firmware/platformio.ini`), obsolete `firmware/tent_node/` PIO project (superseded by the combined fan_controller build), pyserial from `apps/hwd/pyproject.toml`. Renamed `_tent_arduino_status` → `_tent_sensor_status` in `SystemStatusService`, with device-list label "Arduino Nano + BME280" → "ESP32-C3 · fan+tent". `SensorSource.ARDUINO` enum value retained — historical rows keep that label.
+- **New code:** `_augment_temp_rh_metrics()` helper at the ingest endpoint (`apps/hwd/src/dirt_hwd/api/ingest.py`). Derives `temperature_f`, `vpd_kpa`, `dew_point_f` from `temperature_c + humidity_pct` using the same Tetens/Magnus formulas the retired `serial_reader._derive_metrics` used — required because the fan-controller firmware posts only SI units, but the humidifier loop, grow_state stage targets, web envelope, and voice tool all still read the derived metrics. Passthrough for posts lacking either input (plant-node moisture, humidifier on/off writes). Two new tests in `apps/hwd/tests/test_ingest_api.py`.
+- **Humidifier-loop validation after restart:** VPD reading now landing on ESP32-derived values (1.12 kPa at restart time). Loop is still in `allowed=false` because we're mid-dark-cycle (23:00–05:00 → force OFF); expected to kick on at 05:00 lights-on if VPD is still elevated, at which point it'll pull the tent toward the veg 1.0 kPa setpoint — the "catch-up" behaviour predicted from the incident data.
+- **Physical Arduino:** still plugged in at cutover time but harmless — `serial_reader` is gone so the serial buffer is unread (ring-buffer overflow silently, no-op). User can unplug at leisure. `/etc/udev/rules.d/99-dirt-webcam.rules` still contains the `ttyArduino` symlink rule + CH341 autosuspend disable — cleanup deferred (requires sudo); the rule is harmless with the device unplugged and also harmless with the device plugged in + nothing listening.
+- **Updated:** `apps/hwd/{app.py, src/dirt_hwd/main.py, pyproject.toml, src/dirt_hwd/api/ingest.py, tests/test_ingest_api.py}`; `apps/shared/src/dirt_shared/{config.py, observability.py, services/system_status.py, services/readings.py}`; `apps/web/tests/test_system_devices_endpoint.py`; `systemd/dirt-hwd.service` (description + hardening comment); `.gitignore` (dropped tent_node entries); `firmware/` (legacy Nano + obsolete tent_node trees deleted); `wiki/hardware/humidifier-control.md` (Known Issues "BME280 stuck-state" → "BME280 drift (resolved-by-transition)" with historical-data caveat + terminal-incident row); `wiki/overview.md` (System Status row renamed); `wiki/decisions/2026-04-22-sht45-tent-node-esp32.md` (Status → Deployed). Tests: 342 passed / 1 skipped across apps. `uv run ruff check` clean. `uv run scripts/lint.py` 7/7.
+
+## [2026-04-23] operational finding | Humidifier output rate vs fan exhaust rate is the bottleneck, not the deadband
+- **Sequence:** 05:00 MDT lights-on transition exposed the post-SHT45 loop operating right at the edge of the veg 1.2 kPa VPD upper band. Observed symptoms:
+  - 05:00-06:27: humidifier flapped on/off roughly every 60 s (20+ state changes over 20 min, audible Kasa plug clicks in the grow space). Cause: the Raydrop running for 1 min drops VPD ~0.45 kPa (from ~1.35 to ~0.87), overshooting the 0.1 kPa deadband ~4×. Classic bang-bang instability — actuator moves the PV much faster than the control band tolerates.
+  - 06:27: **bumped `vpd_deadband_kpa` from 0.1 to 0.3** (turn-off drops from 1.1 to 0.9, so one humidifier pulse can run to a proper finish). Restarted dirt-hwd; cycling stopped immediately.
+  - 06:40ish: **set fan to 40 %** via `POST /fan` on the fan-controller node (previously 30 %).
+  - 07:58-08:08 (and onward): tent RH started tanking (dropped to 43.5 %, veg target 45-55 %). Humidifier held *continuously ON* for 1h 40 min with zero state changes, yet VPD kept rising, now 1.50 kPa (well above 1.2 setpoint).
+- **Root cause of the RH drop:** the Raydrop's physical mist-output dial was turned down low — its actual mist emission rate was slower than the fan-at-40 % exhaust rate. Room air (~40 % RH) was replacing tent air faster than the humidifier could dose moisture. Software was doing exactly the right thing (plug ON continuously); the physical actuator just couldn't keep up. User turned the Raydrop dial up; RH recovery expected in the next few minutes.
+- **Why this matters:** with the honest SHT45 readings, the tent is operating *much* closer to the edge of the target band than the BME280 had been showing. The system is no longer forgiving of mismatched actuator sizing. Pre-cutover the BME280's +23 %RH bias meant the loop almost never turned the humidifier on — so this coupling was invisible.
+- **Open idea noted in [humidifier-control.md](hardware/humidifier-control.md) "Future work":** replace the Raydrop's analog potentiometer with microcontroller-controlled output rate so the host-side loop can modulate *mist intensity* alongside the on/off plug state. Turns a single-DOF bang-bang actuator into a continuous one, which would make the whole loop a lot more stable without requiring the user to remember where the physical dial was set.
+- **No code/config change in this entry** — the deadband bump and fan bump already landed in `08e5655` and a runtime `POST /fan`. This entry documents the operational pattern that emerged once those landed. `wiki/hardware/humidifier-control.md` gained a "Coupling between mist output rate and fan exhaust rate" section + a "Future work" idea-bucket.
+
+## [2026-04-23] feat | Stuck-humidifier watchdog + red-LED failure mode documented
+- **Incident that prompted it:** 10:00 MDT — humidifier plug pinned ON for 1h 30m+, VPD rising despite full-duty output, RH tanking. Physical check: Raydrop LED red (normally green), no visible mist. Unplug from Kasa → wall outlet briefly → back through Kasa cleared it, unit immediately began misting.
+- **Model:** Raydrop **KC-RD03A** ([manual](https://manuals.plus/raydrop/kc-rd03a-cool-mist-humidifiers-manual)) — earlier log entry cited KC-RD05 in error; corrected here.
+- **Root cause (research-grounded):** low-water float sensor latches "empty" even with water in the tank; controller red-lights and disables ultrasonic until a power cycle drops the latch. Trigger is mineral scale/biofilm on the float stem and the atomizer disc (same substrate fouls both). Raydrop has no thermal cutout and no other documented red-LED state, so this is the dominant failure mode. **Confirmed in field 2026-04-23:** cleaning the atomizer disc cleared the latch for the second time today (first clear was the power-cycle-reseat earlier; second clear was via physical scale removal). Strong evidence that weekly vinegar descale prevents recurrence.
+
+## [2026-04-23] decision + epic | Continuous humidifier intensity control (Raydrop MCU-driven mist)
+- **Decision filed:** [`wiki/decisions/2026-04-23-raydrop-mcu-mist-control.md`](decisions/2026-04-23-raydrop-mcu-mist-control.md). Replace the Raydrop KC-RD03A's analog intensity pot with MCU-driven control (digipot or DAC on the fan-controller ESP32) + a host-side PI loop on VPD error. Retires today's bang-bang Kasa-plug control. Kasa plug stays as hard-off authority.
+- **Motivation:** three failure modes observed 2026-04-23 all traceable to the humidifier being a binary actuator with a hidden analog dial. (1) Actuator-overshoot oscillation forced widening the deadband 0.1 → 0.3 kPa this morning. (2) Fan-coupling saturation: with fan@40 % + dial turned down, plug pinned ON for 1h 40m while VPD *climbed* because mist rate < exhaust rate; software had no visibility into the dial to compensate. (3) Red-LED low-water-float latch on a full tank — separate failure mode, but shares the "loop commands on / actual output is zero" pattern and needed a watchdog to detect.
+- **Architecture reconciliation:** updated `wiki/concepts/multi-actuator-environment-control.md` with a revision block noting the per-class plan shape shifts from `hum_on: bool` to `hum_intensity: 0..100`. Class-dispatch architecture, cross-actuator mutex, feedforward compounds, and failure-mode design unchanged. PI control is *within-actuator intensity given that it's commanded on* — not a replacement for the class-dispatch system. The doc's "no PID at the system level" rule still holds.
+- **Scope, phases, acceptance criteria:** `docs/epics/continuous-humidifier/README.md`. Five phases (investigation → hardware → firmware → PI loop → physical cleanup). **Phase 1 is the stop gate** — open the Raydrop, probe the pot, identify the driver IC, decide digipot vs DAC vs direct-PWM. No commitment to Phases 2–4 until Phase 1 reports back.
+- **Updated:** `wiki/decisions/2026-04-23-raydrop-mcu-mist-control.md` (new), `wiki/concepts/multi-actuator-environment-control.md` (revision block + updated `related:`), `wiki/hardware/humidifier-control.md` ("Future work" entry promoted from idea-bucket to scoped/tracked), `wiki/index.md` (Decisions entry added), `docs/epics/continuous-humidifier/README.md` (new). `uv run scripts/lint.py` 7/7.
+
+## [2026-04-23] session pause | Continuous humidifier — parts ordered, Phase 1 waiting on delivery
+- **Procurement state:** DigiKey order placed (1× each MCP4131 at 10 kΩ / 50 kΩ / 100 kΩ; DIP-8 through-hole; ~$2.24 parts + shipping). Adafruit order placed (MCP4725 DAC breakout #935, BSS138 level shifter #757, headers #392, jumpers #1957/#1954). Amazon Raydrop spare ordered (ASIN [B0CDL8XCJ5](https://www.amazon.com/dp/B0CDL8XCJ5), $19.99). Amazon BOJACK ceramic cap kit (ASIN [B085RDTCCV](https://www.amazon.com/dp/B085RDTCCV), $9.99) flagged for user to order. Heat-shrink + E12 resistor kit already in user stash. All four Phase-1 → Phase-2 decision-matrix rows are covered by what's already on order — no additional purchasing required based on the probe verdict.
+- **Resume point for a fresh agent:** start at [`docs/epics/continuous-humidifier/README.md`](../docs/epics/continuous-humidifier/README.md) "Current state" section. When parts arrive, execute [`phase1-probe-checklist.md`](../docs/epics/continuous-humidifier/phase1-probe-checklist.md) end-to-end; paste the verdict back to the [decision doc](decisions/2026-04-23-raydrop-mcu-mist-control.md) as a "Phase 1 findings" revision block and flip the epic from `planning` to `in-progress`.
+- **Refinements during this session:** (a) BOM reduced from 2× to 1× per MCP4131 variant — the three are different resistances, not spares of the same part, so buying 2× each saved $2 on an already-$2 order. (b) Generic Amazon "cap kit" replaced with a specific verified Amazon listing (BOJACK B085RDTCCV) after research confirmed all three needed values (0.1/1/10 µF) are present and MLCC 10 µF is strictly better than electrolytic for the RC-filter use case. (c) Raydrop model-number caveat added: wiki historical "Raydrop 4L" doesn't match the verified KC-RD03A (1.0 L per the manual); user told to verify bottom-sticker before using the ordered spare for Phase 1 probing since the driver circuit may differ across Raydrop sizes.
+- **No code changes.** Docs-only session. `docs/epics/continuous-humidifier/bom.md` (new), `docs/epics/continuous-humidifier/README.md` (current-state block added), `wiki/log.md` (this entry). `uv run scripts/lint.py` 7/7.
+- **New watchdog:** `HumidifierLoopService` now runs a stuck-actuator watchdog alongside the existing VPD bang-bang. Pure-function state machine `update_stuck_state` (in `apps/hwd/src/dirt_hwd/services/humidifier.py`) tracks the current continuous-ON streak and the VPD at streak start; when elapsed-on ≥ `humidifier_stuck_alert_after_s` (default 1200 s = 20 min) AND VPD dropped less than `humidifier_stuck_min_vpd_drop_kpa` (default 0.15 kPa), it fires a `suspected_stuck` event on the `humidifier` observability stream and a Telegram alert with the start/now VPD numbers and a "check Raydrop red LED / water level / visible mist" prompt. Fires exactly once per streak (suppressed until the next OFF transition).
+- **12 unit tests** in `apps/hwd/tests/test_humidifier_stuck.py` covering: idle-off, off→on transition captures start VPD, on→off clears streak, healthy VPD drop silences alert, pre-threshold silence, stuck-after-threshold fires, VPD-rising (today's signature) fires, single-fire-per-streak dedup, cross-transition refire, stale-VPD skip, missing-start-VPD skip, exact-threshold boundary. All pure — driven entirely off the state machine, no Kasa/Telegram mocking needed to assert the logic.
+- **Shape changes to internal APIs:**
+  - `Settings` gains `humidifier_stuck_alert_after_s: int = 1200` and `humidifier_stuck_min_vpd_drop_kpa: float = 0.15`.
+  - `HumidifierConfig` gains `stuck_alert_after_s`, `stuck_min_vpd_drop_kpa`, `telegram_bot_token`, `telegram_chat_id` (the last two mirror existing `Settings.telegram_bot_token` / `telegram_allowed_user_id`, reused via the service config factory).
+  - `HumidifierLoopService.__init__` gains `http_client_factory` (defaults to `httpx.AsyncClient(timeout=10.0)`) so tests can mock the Telegram transport the same way `DeviceWatchdogService` does. If Telegram creds are unset, the watchdog still fires `suspected_stuck` log events but skips the Telegram send (info log emitted at startup).
+- **Wiki updates:** new "Red LED on the Raydrop = low-water sensor latch" section in `hardware/humidifier-control.md` (first observed timestamps, root cause w/ citations, detection, recovery, prevention). Trimmed the historical "BME280 drift" incident-log table since the narrative paragraph above it already covers both incidents. `CLAUDE.md` observability table mentions the new `suspected_stuck` event shape.
+- **Tests:** `uv run pytest apps/hwd apps/shared apps/web apps/tests/invariants` — 356 passed / 1 skipped. `uv run ruff check` clean. `uv run scripts/lint.py` 7/7.
+
+## [2026-04-24] daily-update | Day 41 — Temperature Milestone; VPD Clean All Windows; C/D Moisture Very High
+- **Daily entry created:** `wiki/daily/2026-04-24.md`
+- **Temperature milestone:** all three windows in veg target simultaneously for first time — overnight 69.35°F ✅, morning 74.84°F ✅, now 76.01°F ✅; "monitor afternoon temp" action item resolved
+- **VPD clean all three windows:** 1.18 / 0.99 / 0.90 kPa — second consecutive day of full VPD coverage ✅
+- **Overnight RH second consecutive night in target:** 51.81% (was 52.06% Apr 22); lights-off feedforward holding
+- **Afternoon RH still elevated:** 66–71% morning/afternoon; VPD in range only because temp now proper — watch if temp dips
+- **Plant A overnight sensor back online:** overnight data present (n=717); dropout from Apr 22 resolved ✅
+- **Plants C and D moisture very high:** C at 82%+ (was 75% Apr 22), D jumped from 60% to 83% in two days — autopot feeding aggressively; no visible stress symptoms
+- **LST critically overdue:** Day 13/12 post-topping; snap risk at highest this grow; Plant A shows training ties in photo
+- **Reservoir change still pending:** Day 9 post-activation (7–10 day window closes tomorrow)
+- **Plant pages updated:** A, B, C, D (timeline entries + Current State rewritten)
+- **Environment pages updated:** `temperature.md` (trend row + milestone notable event), `humidity.md` (trend row + notable event + Deployed Control System updated to SHT45/ESP32-C3)
+- **`overview.md`** and **`index.md`** refreshed
+- **Known gap:** No daily entry for 2026-04-23 — no photos or sensor snapshot captured that day. Lint timeline-continuity check will flag this; pre-existing pattern.
+
+## [2026-04-24] query-filed | LST actually started 2026-04-20 on all 4 plants (user correction)
+- **Source:** user statement during the Apr 24 Claude Code session: "I started at LST about four days ago on all plants."
+- **Problem the correction fixes:** the auto-generated daily reports from Apr 20 through Apr 24 all carried a "🔴 LST critically overdue" flag because the 14:00 MDT photo sessions didn't capture the evening training. Plant A's ties were finally caught in the Apr 24 photo, but B/C/D angles missed them. Every day, the same action item ("Complete LST today") was re-raised in error.
+- **LST start date:** 2026-04-20 (evening, after 14:00 photo session). Day 4 of stress recovery as of today.
+- **Files updated:**
+  - `wiki/plants/plant-a.md`, `plant-b.md`, `plant-c.md`, `plant-d.md` — Current State rewritten; Apr 20 timeline entry split into the observed state + a new "LST started" entry; `plant-c.md` frontmatter `related:` now cites `concepts/lst.md`.
+  - `wiki/overview.md` — Current Stage reframed; Plant Status table rows now note LST Day 4; Action Items dropped "Complete LST" and gained "Monitor LST recovery" + a concrete light-ramp window (Apr 25–27); Upcoming Milestones row struck through and resolved.
+  - `wiki/daily/2026-04-24.md` — Summary gained a correction block; "🔴 LST critically overdue" Issue rewritten to "✅ LST started Apr 20 (Day 4)"; Recommendations renumbered (dropped "Complete LST today"; kept light-ramp + added LST recovery monitoring).
+  - `wiki/daily/2026-04-20.md` — correction block prepended (frontmatter `updated` bumped to 2026-04-24). Does NOT rewrite the day's observations, only clarifies that the "no LST visible" photos are from 14:00 MDT and LST was performed later that evening.
+  - `wiki/index.md` — Plants section summaries updated with "LST Day 4 (started Apr 20)".
+- **Not updated (intentional):** Apr 21–23 dailies left as-is. Their "LST overdue" framing was contextually correct for the data the orchestrator had at report time (photos only). Rewriting them would be revisionism — the Apr 20 correction note + today's resolution give a reader enough breadcrumbs to reconstruct.
+- **Next lint:** `uv run scripts/lint.py` — expect 7/7 pass. If "overview staleness" flags due to `updated: 2026-04-24` already being current, that's expected.
+
+## [2026-04-24] session pause | Continuous humidifier — Phase 1 probe mid-session
+- **Where we stopped:** resistance sweep done on the unplugged spare Raydrop; pot identified; photos captured. Powered Step 1 DC voltage sweep is the next action.
+- **Spare Raydrop is open on the bench; primary stays on the Kasa plug driving the live VPD loop** — no service interruption. `dirt-hwd` was not stopped and does not need to be for the rest of Phase 1.
+- **Pot:** silkscreen `B5K` = 5 kΩ linear-taper + integrated SPST switch (clicks off at min rotation). 4-wire JST = 3 pot pins + 1 switch tab; switch return commons via the pot chassis to one of the pot outers on the PCB.
+- **Resistance sweep (DMM, 200 kΩ range, unplugged):** wiper + non-chassis-outer reads 0.002 kΩ at max-mist → 2.55 kΩ at min-mist-just-before-click. Smooth monotonic — clean rheostat behavior. The 2.55 kΩ vs 5 kΩ label gap is most plausibly the mechanical rotation covering ~half the electrical track (switch-cam dead zone). Firmware-side "intensity %" will map to the observed 0→~2.55 kΩ range.
+- **Photos:** `debug/raydrop-re/photos/pot-front.jpg` (silkscreen visible) + `pot-back.jpg` (pins + JST wires).
+- **BOM consequence (not yet actioned):** none of the three MCP4131 variants on order (10 kΩ / 50 kΩ / 100 kΩ) is a direct match. If Step 1 confirms DC-analog case, `MCP4131-502E/P` (5 kΩ) needs ordering. Do NOT order until Step 1 verdict lands — a PWM case skips the digipot entirely.
+- **Resume point for a fresh agent:** start at [`docs/epics/continuous-humidifier/README.md`](../docs/epics/continuous-humidifier/README.md) "Current state" section. The immediate next action is walking the user through Step 1 of [`phase1-probe-checklist.md`](../docs/epics/continuous-humidifier/phase1-probe-checklist.md) (DC voltage measurement on pot wires with unit powered, ground clip on a verified board GND). The checklist's observations log has a partially-filled "Session 1 — 2026-04-24" block at the top; fill in the Step 1 section when probing resumes.
+- **No code or wiki-page changes this session** — only docs/epic tracking updates. `wiki/log.md`, `docs/epics/continuous-humidifier/README.md` (Current state rewritten), `docs/epics/continuous-humidifier/phase1-probe-checklist.md` (observations log seeded).
+
+## [2026-04-26] query-filed | Breeding program section created
+- **Trigger:** working session synthesizing breeding-program research (cannabis pollen viability, pheno-hunting practice, SBxBS01 hybrid genetics, F1/F2 nomenclature) into a working manual ahead of the Track A male grow starting this week.
+- **New top-level section:** `wiki/breeding/` — operating manual for the small home breeding program. Frontmatter `type: breeding`. Concept-level OBG background remains in `concepts/oregon-breeding-group.md`; the new pages are protocol.
+- **Pages created:**
+  - `wiki/breeding/README.md` — section index, two-track structure (pollen production + pheno hunt → F2 cross), goals, page reading order
+  - `wiki/breeding/nomenclature.md` — F1/F2/BX/S1/IBL definitions tied to our SBxBS01 program; clarifies that our F1 = breeder's F1 and our cross produces F2
+  - `wiki/breeding/timeline.md` — dated calendar from program launch through F2 seed harvest (active document; will be updated as phases land)
+  - `wiki/breeding/isolation.md` — separate-room contamination protocol; phase-based hygiene rules; tools/clothes discipline
+  - `wiki/breeding/cloning.md` — procedure, equipment list, space requirements, mother management, take-rate expectations
+  - `wiki/breeding/pheno-hunt-protocol.md` — six selection axes (color/terps/structure primary; finish/vigor/resilience secondary), weighted scoring rubric, weekly schedule
+  - `wiki/breeding/male-evaluation.md` — pre-pollen-collection male scoring; stem color + hermie tendency are gating criteria
+  - `wiki/breeding/pollen-handling.md` — collection, drying, 4:1 baked-flour cut, aliquoting, freezer storage, single-thaw discipline
+  - `wiki/breeding/cross-procedure.md` — paintbrush pollination, branch labeling, seed maturation stages, harvest timing
+- **Decision page:** `wiki/decisions/2026-04-26-breeding-program-launch.md` — captures rationale, alternatives considered, trait priorities, scope exclusions, hardware acquisitions, critical-path commitments. Open questions explicitly listed (second-pack BS line choice; keeper female source; cross direction count).
+- **CLAUDE.md updates:** added `breeding/` to the layout list, the question-routing table, and the wiki/ subfolder taxonomy.
+- **Index update:** `wiki/index.md` gained a "Breeding" section between "Concepts" and "Decisions" with all 9 new page links + the launch decision link.
+- **Open follow-ups:** second-pack BS line decision (BS01/BS13/BS35/BS45) before mid-July; first cloning batch this week to preserve A/B/C/D as breeding candidates; isolation-room outfit (light, fan, environment); portable freezer acquisition.
+
+## [2026-04-26] decision-pivot | Humidifier — abandon Raydrop MCU mod, pivot to Wi-Fi-native Govee H7140
+- **Trigger:** replacement spare Raydrop arrived; Phase 1 probe session ran deep but stalled. Pot characterized as a 5 kΩ rheostat (only 2 of 3 terminals wired); clean DC voltage sweep on the wiper couldn't be obtained — multiple ground-reference candidates failed and the low-water sensor was suppressing the entire oscillator stage so the wiper had no signal to read in the first place. Defeating the water sensor and redoing the bench setup was on the path back to "finished probe," but the user surfaced the better question: why are we doing $40 of bespoke MCU-mod work when a $45 Wi-Fi-native humidifier with a documented HTTP API exists?
+- **Decision:** order a GoveeLife Smart Humidifier Lite (H7140) and integrate via Govee Public API v2. Arrives 2026-04-27. Integration shape is **Manual mode + the existing host-side VPD PI controller** — the H7140 becomes the actuator at the dispatch boundary, with `u_pct ∈ [0, 100]` quantized to one of 8 discrete Manual-mode levels (with hysteresis dead-zones at boundaries to prevent limit-cycle chatter). VPD-targeting (per 2026-04-18 decision) stays. The device's built-in Auto mode (RH setpoint + internal closed loop) is RH-only — using it would walk back the VPD decision, so we don't.
+- **What gets retired:** Raydrop KC-RD03A + Kasa EP10 plug stack; the planned digipot mod and firmware work; the home-grown stuck-actuator watchdog for empty-tank (replaced by the device's built-in `lackWaterEvent`).
+- **What stays live (becomes production):** the PI controller + plant-in-loop tests + shadow logging + analyzer harness all carry over — the H7140 is just a different actuator at the dispatch boundary. FOPDT plant model needs refitting against H7140 mist rate (graduated step test, originally Phase 4 acceptance — same methodology, new actuator). Surrounding loop logic (stage-band setpoint, lights-off prep, failsafe, observability) is unchanged.
+- **Concerns flagged in the decision:** cloud-only API (Internet outage = no humidifier control), 10K calls/account/day quota (comfortable for the 30 s loop with "POST only when level changes"), quantization needs hysteresis dead-zone at level boundaries to avoid limit cycling, FOPDT needs refitting (planned step), net-new SaaS dependency.
+- **Files updated:**
+  - **New:** `wiki/decisions/2026-04-26-govee-h7140-pivot.md` (decision doc with full alternatives, rollout, consequences).
+  - **New:** `docs/references/govee-api/INDEX.md` + `control.md` + `h7140-capabilities.md` + `rate-limits.md` + `gotchas.md` — full reference pack pinned to Public API v2 (`openapi.api.govee.com/router/api/v1/`); H7140-specific capability map includes the Manual/Custom/Auto work modes, 40-80% RH range, `lackWaterEvent`, plus the Option A / Option B integration choice writeup.
+  - **Updated:** `docs/epics/continuous-humidifier/README.md` — marked ABANDONED at top with pivot pointers; original "Current state" preserved below as historical archaeology.
+  - **Updated:** `wiki/decisions/2026-04-23-raydrop-mcu-mist-control.md` — status flipped to SUPERSEDED with pointer to the pivot decision; control-theory analysis (PI vs PID, FOPDT, IMC) explicitly noted as still applicable for the Option B fallback.
+  - **Updated:** `wiki/hardware/humidifier-control.md` — frontmatter updated; banner at top noting the impending swap and pointing to the pivot decision + Govee reference pack. Body content preserved (still describes live state until cutover).
+  - **Updated:** `wiki/index.md` — Raydrop decision marked superseded; new pivot decision added to the Decisions list.
+  - **Updated:** `CLAUDE.md` — added Govee Public API v2 to the Framework/API References list with the standard "consult when / training-data drift" framing.
+- **Resume point for cutover (when hardware arrives 2026-04-27):** see "Rollout" section of `wiki/decisions/2026-04-26-govee-humidifier-pivot.md` for the 9-step plan (provision → API key in `.env` → discovery sanity check → bench script → production client at `apps/shared/src/dirt_shared/services/govee.py` → graduated step test → loop swap in `HumidifierLoopService` → 48-72h soak → physical decommission of Raydrop+Kasa).
+
+## [2026-04-26] decision-revise | Humidifier — switched deployment SKU from Govee H7140 to H7142 (same line, more granularity + bigger tank)
+- **Trigger:** after a fuller side-by-side comparison across the Govee H71xx line later the same day, the H7142 (6 L cool-mist) emerged as the better choice over the originally-ordered H7140 (3 L Lite). Two axes: **9 Manual-mode API levels** vs the H7140/H7143's 8 (one extra level — small win), and **6 L tank** vs the H7140's 3 L (would require daily refills in flower-stage demand vs ~3-day cadence on the H7142).
+- **Hardware status:** H7140 still en route 2026-04-27 (the original-order backup; will be retained as spare or returned). H7142 ordered 2026-04-26, arrives 2026-04-28.
+- **What changed:** SKU string only. Same API contract across the H71xx line — `workMode` STRUCT capability with Manual/Custom/Auto sub-modes, `humidity` 40-80% range, `lackWaterEvent`, `powerSwitch`, plus nightlight/UVC/aroma extras we ignore. Quantization at the dispatch boundary becomes `u_pct → level 1..9` instead of `1..8`. Graduated step test sample points become 2/5/8 instead of 1/4/8. Everything else (PI controller, plant-in-loop tests, shadow logging, analyzer, surrounding loop logic) is unaffected.
+- **Considered also:** local-control alternatives. SwitchBot Smart Humidifier (BLE local, ~$50, 3.5 L) was the first-choice "escape cloud" option but is no longer available on Amazon. Tuya/SmartLife humidifiers via LocalTuya (~$30-80) require ~30 min one-time local-key extraction + typically only 3 mist levels (worse than Govee). SwitchBot Evaporative ($240, Matter) is the price ceiling and uses evaporative not ultrasonic physics. The Dreo HM713S was specifically considered (6 L, popular Amazon listing) but has only 3 mist levels AND is cloud-only — strictly worse than Govee on both axes. The cloud-dependency cost on Govee is bounded — failsafe-OFF on cloud unreachability + Telegram alert keeps the worst case at "tent gets a little dry during a multi-hour outage" — not worth the local-control premium.
+- **Files updated:**
+  - **Renamed:** `docs/references/govee-api/h7140-capabilities.md` → `h714x-capabilities.md` (line-wide spec, H7142 deployment-specifics inline). `wiki/decisions/2026-04-26-govee-h7140-pivot.md` → `2026-04-26-govee-humidifier-pivot.md` (model-agnostic name).
+  - **Rewritten:** `docs/references/govee-api/h714x-capabilities.md` — H7142 deployment spec, per-SKU comparison table (H7140 / H7142 / H7143), updated dispatch shape (`modeValue ∈ 1..9`), inferred capability list with explicit "verify against live discovery once provisioned" note since the H7142's full capability list hasn't been captured from a live device yet.
+  - **Updated:** `wiki/decisions/2026-04-26-govee-humidifier-pivot.md` — title + decision body now reflect H7142 as deployment SKU; revision block explains the same-day switch from H7140; alternatives table expanded to call out H7140/H7143/SwitchBot/Tuya/Dreo as considered-and-rejected within the H71xx line; rollout steps updated to reflect both arrivals (H7140 backup 2026-04-27, H7142 primary 2026-04-28).
+  - **Updated:** `docs/references/govee-api/INDEX.md` — example SKU strings flipped to H7142, deployment description updated, links to renamed `h714x-capabilities.md`, source links extended with H7142-specific manual + Amazon listing.
+  - **Updated:** `docs/references/govee-api/control.md` and `gotchas.md` — example SKU strings + line-wide framing.
+  - **Updated:** `docs/epics/continuous-humidifier/README.md` — abandoned-status block now references H7142 as the deployment SKU + renamed pivot decision.
+  - **Updated:** `wiki/decisions/2026-04-23-raydrop-mcu-mist-control.md` — superseded link points at renamed pivot file; superseded text reframes "may be re-applied" → "carries over" since we're going Manual+PI from day one (not Auto-mode-first as the earlier pivot draft assumed).
+  - **Updated:** `wiki/hardware/humidifier-control.md` — banner reflects both arrivals + renamed pivot decision.
+  - **Updated:** `wiki/index.md` — pivot-decision entry retitled and rewritten to reflect H7142 deployment + 9 levels.
+  - **Updated:** `CLAUDE.md` — Govee reference pack pointer now mentions H7142 deployment + 9 vs 8 level distinction across the H71xx line.
+
+## [2026-04-26] daily | Day 43 — VPD below floor day 2; B moisture rising; all temp windows below targets
+- Created `wiki/daily/2026-04-26.md` — Day 43; overnight VPD 0.94 kPa ✅ / morning 0.99 kPa ✅ / now 0.68 kPa 🔴 (below floor, 2nd consecutive day); all temperature windows marginally below veg targets; overnight RH 59.48% above 45–55% target for first time; Plant B moisture rising to 79.3%; C/D stable at 85–87%; reservoir change critically overdue (Day 11+)
+- Photos: all four plants healthy, vibrant green, good SCROG fill; no humidity haze; A med-light green; B darkest/densest; C bushy med-dark green; D medium green
+- Updated plant timeline + current state: plant-a (stable 57%), plant-b (rising 79%), plant-c (stable 85–86%), plant-d (stabilizing 87%)
+- Updated `wiki/environment/humidity.md` — trend log entry + notable event: afternoon VPD below floor day 2; overnight RH above veg target first time; all windows above RH targets
+- Updated `wiki/environment/temperature.md` — trend log entry + notable event: all windows below veg targets second consecutive day
+- Refreshed `wiki/overview.md` and `wiki/index.md`
+
+## [2026-04-26] decision + breeding-update | Pheno-split flip strategy + locked clone/male gear list
+- **Trigger:** user inspection at Day 43 confirmed the 4 plants have split into two morphological groups — sativa-leaning (already at the net, starting to fill) and indica-leaning (barely reaching the net). Generic "flip at 70% coverage" guidance doesn't fit the asymmetric stretch profile. Separately, user committed to launching Track A this week with a 2×2×4 grow tent in another room (already on hand) and locked the gear shopping list.
+- **Decision:** flip target window **2026-05-10 → 2026-05-17**, gated on **~60% net coverage with all four plants reaching the net plane** (not on a calendar date). Strategy: aggressively tuck the sativas under the net to slow vertical and force lateral spread; encourage indicas to keep climbing toward the net (light step-up window). Re-evaluate every 3 days. ~60% (not 70%+) is correct for this grow because mixed phenos have asymmetric stretch and a too-late flip traps sativa growth above the net while the indicas finally arrive.
+- **Locked gear:**
+  - Clones (closet shelf, ~$130): Rapid Rooter 50-pack, 7"+ humidity dome + tray, Clonex gel, heat mat, 30–50W LED bar, solo cups + Happy Frog soil for stasis pots, spray bottle, plant tags. Soil over coco for stasis to allow 3–4 day watering cadence (low-attention mode while focus is on current grow + male tent).
+  - Males (2×2×4 tent in separate room, ~$245): 100W LED quantum board (Spider Farmer SF1000 or generic), 4" inline fan + carbon filter combo (mandatory for negative-pressure pollen containment), 6" oscillating clip fan, 1-gal fabric pots, digital hygrometer, jeweler's loupe 40×, paper lunch bags, 1.5 mL Eppendorf tubes, silica desiccant. Existing coco/perlite + veg formula at half-strength.
+  - Germinate **6 of 10** SBxBS01 regulars (4 held in reserve); ~3 males expected from a 50/50 split. **Revised same day to germinate all 10 — see following entry.**
+- **Files updated:**
+  - **Created:** `wiki/decisions/2026-04-26-pheno-flip-strategy.md` — flip-target rationale, alternatives considered (40% / 70%+ / 90%), risk/mitigation table, breeding-program implications (clone window 2026-05-03 → 2026-05-10), open items (per-plant pheno assignment + daily coverage % tracking).
+  - **Updated:** `wiki/breeding/timeline.md` — Phase 0 rewritten with locked gear list and the clone-taking window; Phase 1 flip date updated to the 2026-05-10–17 range gated on coverage; anchor-dates block now references the flip-strategy decision.
+  - **Updated:** `wiki/breeding/cloning.md` — added "Stasis mode vs. productive-mother mode" section explaining the two operating modes; added "Medium choice for stasis pots" specifying Happy Frog over coco for low-attention stasis; added "Where the cloning station lives" section (closet shelf, not in any tent); transplant step (Day 14–21) updated to default to solo-cup stasis.
+  - **Updated:** `wiki/breeding/isolation.md` — setup table rewritten to describe the 2-layer containment (closed-door room + 2×2×4 tent inside); concrete gear list with cost references; "Notes specific to our setup" updated to note the cloning station lives in a different room (incompatible with the male tent's environmental targets).
+  - **Updated:** `wiki/index.md` — new pheno-flip-strategy decision added to the Decisions list.
+
+## [2026-04-26] update | Pheno morphology assignments confirmed (A & D sativa, B & C indica)
+- User-confirmed at Day 43: Plants A and D are sativa-leaning (longer internodes, vertical-dominant, already at SCROG net); Plants B and C are indica-leaning (tighter internodes, bushy, barely reaching net). Notable: the sativa pair is also the primary-keeper pair (purple signal pair) — every tuck pass on A/D matters more.
+- **Files updated:**
+  - **Updated:** `wiki/plants/plant-a.md`, `wiki/plants/plant-b.md`, `wiki/plants/plant-c.md`, `wiki/plants/plant-d.md` — added "Morphology" header field with phenotype lean + SCROG action (tuck for A/D, encourage-upward for B/C).
+  - **Updated:** `wiki/decisions/2026-04-26-pheno-flip-strategy.md` — phenotype-split table filled in (A, D sativa; B, C indica); added a note that the sativa pair coincides with the primary-keeper pair; closed two open items.
+
+## [2026-04-26] update | Reservoir refilled (afternoon) + clone session moved up to 2026-04-29
+- Reservoir refilled 2026-04-26 afternoon (after the morning report was generated) — clears the Day 11+ overdue flag from today's daily and overview.md. Next change window ~2026-05-03 → 2026-05-06. Mothers are in good donor state for the clone session, which is one of the reasons we're moving the clone session up.
+- Clone gear arrives Tue 2026-04-28; first cuttings planned Wed 2026-04-29. Original timeline window was 2026-05-03 → 2026-05-10 (~7-10 days before flip); moving it up because (a) mid-veg tissue at Day 45–46 roots more readily than tissue from plants approaching flip, (b) early take leaves a redo window if rate is poor (~70% expected), (c) lower laterals on A/D at the SCROG net are about to be lollipopped anyway, (d) decouples the cut from the busy flip-week. Asymmetric cut: lower laterals on A/D (sativa, already at net), middle laterals on B/C (indica, still need lower growth to reach the net).
+- **Files updated:**
+  - **Updated:** `wiki/breeding/timeline.md` Phase 0 — clone session moved to 2026-04-28/29 with rationale + asymmetric strategy.
+  - **Updated:** `wiki/overview.md` — reservoir-overdue flag cleared; new action items for sativa-tucking + clone session; upcoming-milestones table now lists the clone gear/session arrivals + the corrected flip-target window.
+  - **Updated:** `wiki/daily/2026-04-26.md` — reservoir flag flipped from 🔴 to ✅; added "Breeding-program scheduling" supplementary block summarizing today's filings.
+
+## [2026-04-26] revise | Track A germination — pop all 10 regulars (revised from 6 of 10)
+- **Trigger:** user pushed back on the "germinate 6, hold 4 in reserve" plan from earlier today. After re-examining the tradeoff, agreed: germ all 10 is the right call.
+- **Reasoning:**
+  - **Stochastic risk:** P(<2 males) drops from ~11% (with 6 seeds) to ~1% (with 10).
+  - **Selection power:** picking the best of ~5 males is a real selection event per [`male-evaluation.md`](../wiki/breeding/male-evaluation.md); picking the best of ~3 is barely selection at all. Selection is the whole point of the breeding program.
+  - **Reserves are illusory:** the existing 4 SBxBS01 F1s in the main tent (A/B/C/D) are already the genetic library + cloned for keeper preservation; holding 4 unstarted seeds doesn't add anything that banked pollen + clones don't already provide. If germ technique fails, it likely fails the same way on a second batch.
+  - **Cost is small:** germ-stage effort identical; ~5 females to cull at sex confirmation vs ~3; peak male tent occupancy ~5 in a 2×2×4 is tight but fine since non-keepers get culled within 1–3 weeks of co-flowering anyway.
+- **Files updated:**
+  - **Updated:** `wiki/breeding/timeline.md` Phase 0 — germ count flipped to all 10 with rationale; Phase 1 fallback updated (sourcing another OBG pack only if <2 males surface from the full batch, P ≈ 1%).
+  - **Updated:** `wiki/overview.md` — upcoming-milestones germ entry updated to "all 10".
+  - **Updated:** `wiki/log.md` — prior entry annotated with the same-day revision pointer.
+
+## 2026-04-27 daily-update | Day 44: VPD fully recovered; overnight RH drift continues; B moisture crossed 80%
+
+- **Photos:** 5 presets captured 14:00 MDT (overview, plant-a, plant-b, plant-c, plant-d)
+- **Key findings:** VPD recovered across all three windows (0.86/1.05/1.01 kPa) after two-day below-floor streak; humidifier reduction effective. Overnight RH five-night upward drift continues (52.1% → 64.4%). Plant B moisture crossed 80% (81.84%), entering C/D elevated range. Plant D moisture easing slightly off 88.48% peak. Temperature overnight crossed 68°F floor (68.87°F) for first time in four nights; day/morning still marginally below 74°F.
+- **Files created/updated:**
+  - **Created:** `wiki/daily/2026-04-27.md`
+  - **Updated:** `wiki/plants/plant-a.md` — timeline + current state
+  - **Updated:** `wiki/plants/plant-b.md` — timeline + current state
+  - **Updated:** `wiki/plants/plant-c.md` — timeline + current state
+  - **Updated:** `wiki/plants/plant-d.md` — timeline + current state
+  - **Updated:** `wiki/environment/humidity.md` — trend row + notable event
+  - **Updated:** `wiki/environment/temperature.md` — trend row + notable event
+  - **Updated:** `wiki/overview.md`
+  - **Updated:** `wiki/index.md`
+
+## [2026-04-27] hardware + control | Govee H7142 humidifier deployed; PI controller promoted to authoritative
+- **Hardware cutover:** GoveeLife H7142 (6 L cool-mist ultrasonic, 9 Manual-mode mist levels via Govee Public API v2) provisioned at `192.168.1.247` (MAC `14:38:60:74:F4:DD:B9:46`, account name `dirt-humidifier`). Raydrop 4L + Kasa EP10 plug physically retired and unplugged. Raydrop kept as a spare; Kasa EP10 deprovisioned from the humidifier loop (lights still on a separate Kasa plug).
+- **Control upgrade:** the host-side PI controller (`apps/hwd/src/dirt_hwd/services/humidifier_pi.py`) — running in shadow mode against the Kasa bang-bang since 2026-04-25 — promoted to authoritative. New module `humidifier_dispatch.py` quantizes its `u_pct ∈ [0, 100]` into a discrete H7142 Manual-mode level (1..9) with hysteresis at boundaries. New module `apps/shared/src/dirt_shared/services/govee.py` is the async API client (verified `GET /user/devices` discovery, POST state/control endpoints, `lackWaterEvent` parsing).
+- **Loop rewrite:** `HumidifierLoopService.run` now diffs live device state against the PI/quantizer target each tick, sending the minimal set of API calls (state read + 0–2 control calls). Boot-tick path collapses `set_power(on)` + `set_manual_level(N)` into one tick with a 200 ms inline pause. New event types in the `humidifier` stream: `state_change` (with `power`/`level`/`u_pct`), `level_change` (level transitions while powered), `lack_water` / `lack_water_cleared` (rising/falling edge of the H7142's empty-tank alarm), `device_offline` / `device_online`, `suspected_ineffective` (replaces the Raydrop-specific `suspected_stuck`), `rate_limited`, `skip_offline`. `_record_actuator` writes `humidifier_on` + `humidifier_mist_level` every tick as the heartbeat for `SystemStatusService`.
+- **Gain tweak:** `HUMIDIFIER_PI_KC` set to 40 in `.env` (default was 8.0, sourced from a Raydrop FOPDT fit). With Kc=8 the PI threshold gate (`u ≥ 5.5%`) needed VPD overshoot ≥ 0.69 kPa before engaging — too sluggish. Kc=40 engages at error ≈ 0.14 kPa (typical veg-stage overshoot). Live trace at the cutover: VPD 1.36 kPa → PI engaged at u=5.53% → quantizer picked level 1 → H7142 acknowledged `powerSwitch=1, workMode={1, 1}`.
+- **Live API findings (against pre-deploy reference pack):** `/user/devices` is GET, not POST as our 2026-04-26 pack had it; H7142 capability list is exactly `powerSwitch` / `workMode` / `humidity` / `lackWaterEvent` (no UVC/aroma/nightlight as speculated); `humidity` cap range is 40–70%, not 40–80%; `workMode` enum is `1=Manual, 2=Custom, 3=Auto`. Reference pack updated; live discovery captured at `apps/shared/tests/fixtures/govee_h7142_discovery.json`.
+- **Atlas migration `20260428003304_add_govee_sensor_source.sql`** — adds `govee` to the `sensor_source` Postgres enum so the new actuator breadcrumbs (`humidifier_on`, `humidifier_mist_level`) record `source=govee`. Applied.
+- **Tests:** 14 new tests for the Govee client (`apps/shared/tests/test_govee.py`), 20 property tests for the dispatch quantizer (`apps/hwd/tests/test_humidifier_dispatch.py`), 18 helper unit tests + 7 single-tick integration tests for the rewritten loop (`apps/hwd/tests/test_humidifier_helpers.py`, `test_humidifier_loop.py`). Old `test_humidifier_stuck.py` deleted (semantics changed). Total: 477 passed across the workspace, 1 skipped, no invariant violations.
+- **Updated:** `wiki/decisions/2026-04-27-h7142-deployed.md` (new), `wiki/hardware/humidifier-control.md` (full rewrite for H7142 + PI), `wiki/overview.md`, `wiki/index.md`, `wiki/environment/humidity.md`, `docs/references/govee-api/{INDEX,control,h714x-capabilities}.md` (corrections from live discovery), `apps/shared/src/dirt_shared/services/system_status.py` (`Humidifier (Kasa EP10)` → `Humidifier (Govee H7142)`), `apps/web/tests/test_system_devices_endpoint.py`, `web-ui/src/mocks/fixtures/system.devices.json`, `CLAUDE.md` (`humidifier` log stream description rewritten for the new event taxonomy).
+- **Open items:** week-1 graduated step test for FOPDT refit against the H7142 (current gains carry over from the abandoned Raydrop fit). Watch `humidifier_shadow` traces for level-change cadence — tighten hysteresis if > 5 transitions/hour at steady state.
+
+## [2026-04-28] daily | Day 45 — photos + sensors; Plant B moisture escalation; Govee H7142 day 1
+- Photos captured at 14:00 MDT across 5 presets (overview, A, B, C, D). All four plants at or above SCROG net; canopy healthy across all plants.
+- **Plant B moisture escalation:** jumped from 81.84% (Apr 27 now) to 86.74% — now matches C/D elevated zone (B: 86.7%, C: 88.0%, D: 86.1%); no visible stress.
+- **Govee H7142 first full day:** daytime RH dropped 8.6 points (64.6% → 56.0%); VPD 1.19 kPa ✅. Overnight RH 65.55% — first overnight under H7142 PI control; performance review pending tomorrow.
+- **Temperature regression:** overnight 67.76°F — back below 68°F floor after yesterdays 68.87°F recovery.
+- Clone gear arrived today; clones + SBxBS01 regular germination (10 seeds, Track A) planned 2026-04-29.
+- Updated: `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-04-29] daily | Day 46 — Plant B moisture action; H7142 overnight low VPD
+- Photos captured at 14:00 MDT across 5 presets (overview, A, B, C, D). Canopy remains healthy; A/D are sativa-leaning tuck candidates, B/C are denser and should continue growing upward into the net.
+- **Plant B moisture action:** now 91.93% (up from 86.74% Apr 28 and 81.84% Apr 27) with no visible stress. Close B float valve today and dry back before reopening.
+- **H7142 overnight issue:** overnight RH worsened to 67.41% and VPD fell to 0.76 kPa; morning/now VPD remains in range (1.12 / 0.98 kPa), but all RH windows are above the 45–55% veg guide.
+- **Temperature still cool:** 67.71°F overnight, 71.97°F morning, 72.63°F now — all below current veg targets.
+- Clones + SBxBS01 regular germination are due today; light step to 50% remains overdue if not already done.
+- Updated: `daily/2026-04-29.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-01] daily | Day 48 — B dryback still required; humidity wet-edge; day temp recovered
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy remains broadly healthy; A/D are still sativa-leaning tuck candidates, while B/C remain denser at the net.
+- **Plant B moisture remains critical:** 93.90% now after 91.93% Apr 29 and 86.74% Apr 28. Photo still lacks obvious wilt, but keep/close the B float valve and dry back before reopening.
+- **Humidity/VPD still wet-edge:** overnight VPD again averaged 0.76 kPa and current RH climbed to 71.3%; daytime VPD is in range but low (0.90 morning, 0.84 now).
+- **Temperature partly recovered:** current temp is back in target at 74.55°F, but overnight remains below floor at 67.31°F.
+- **Root zones:** C remains saturated around 90%; D is high but easing to 86.85%; A remains stable around 60%.
+- Updated: `daily/2026-05-01.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-01] lint backfill | 2026-04-30 continuity daily
+- `uv run scripts/lint.py` found the existing 2026-04-30 raw photo set without a matching daily page, causing photo coverage and timeline-continuity failures.
+- Added `wiki/daily/2026-04-30.md` as a continuity entry only; no Apr 30 sensor readings were available in the May 1 prompt, so the page does not invent sensor values.
+- Added one-line Apr 30 plant timeline backlinks and indexed the daily page.
+
+## [2026-05-02] manual update | Clones taken; Track A regulars germinated
+- User-confirmed breeding propagation status: clones were taken today from all four current SBxBS01 plants (A/B/C/D), and the SBxBS01 regular seeds for Track A were germinated approximately four days earlier (~2026-04-28).
+- Both clone cuttings and regular seedlings are currently under a humidity dome. The next propagation watch is balancing clone humidity against seedling damping-off/stretch risk and preserving clear labels.
+- **Files created/updated:**
+  - **Created:** `wiki/daily/2026-05-02.md`
+  - **Updated:** `wiki/plants/plant-a.md`, `wiki/plants/plant-b.md`, `wiki/plants/plant-c.md`, `wiki/plants/plant-d.md` — current state + timeline entries for clone preservation
+  - **Updated:** `wiki/breeding/README.md`, `wiki/breeding/timeline.md`, `wiki/decisions/2026-04-26-breeding-program-launch.md` — Track A current plan/status corrected to all 10 regulars; Phase 0 clone/germination tasks marked done; regular sex-watch window recalculated from approximate 2026-04-28 germination
+  - **Updated:** `wiki/overview.md`, `wiki/index.md`
+  - **Updated:** `scripts/lint.py` — added 2026-05-02 to the known no-photo daily allowlist because this was a manual non-photo check-in.
+
+## [2026-05-02] strategy update | Stabilize dark-purple sativa-leaning line
+- User clarified the breeding goal: stabilize the most interesting phenotype rather than optimize for yield or broad BS-line exploration. Target seeds should reliably produce dark purple buds, stems, and leaves with longer internodes / sativa-leaning trellis-friendly structure.
+- Added decision logic for F-line selection vs backcrossing: A/D being purple does not prove the alleles are fixed; progeny testing is required. Prefer F2 → selected F3 family lots → F4/F5 selection for stabilization, with BX to A/D reserved as an anchor route if A/D proves exceptional and F-line families do not improve consistency.
+- Added operational plan: fast 14–21 day veg cycles, early flip, hard culling, short-lived male isolation with separately banked pollen, and small female clone stasis space as the undo button.
+- **Files created/updated:**
+  - **Created:** `wiki/breeding/stabilization-strategy.md`
+  - **Created:** `wiki/decisions/2026-05-02-purple-stabilization-strategy.md`
+  - **Updated:** `wiki/breeding/README.md`, `wiki/breeding/timeline.md`, `wiki/breeding/pheno-hunt-protocol.md`, `wiki/breeding/male-evaluation.md`, `wiki/decisions/2026-04-26-breeding-program-launch.md`
+  - **Updated:** `wiki/overview.md`, `wiki/index.md`
+
+## [2026-05-02] daily | Day 49 — photos + sensors; B dryback critical; lights-off cold/wet regression
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy is broadly at the SCROG plane; A/D remain sativa-leaning tuck candidates, while B/C are denser. Lower/interior yellowing is visible, most relevant on C/D given high root-zone moisture.
+- **Plant B moisture remains critical:** 94.93% now after 93.90% May 1 and 91.93% Apr 29; no obvious wilt in photo, but keep/close the float valve and dry back before reopening.
+- **Lights-off environment regressed:** overnight temp 64.98°F, RH 70.95%, VPD 0.62 kPa. Morning/now VPD recovered to 1.09/1.07 kPa because the tent warmed to 77-79°F, not because RH returned to target.
+- **Root zones:** A stable at 60.37%; C remains saturated at 90.20%; D is high but easing at 86.50%.
+- **Propagation:** clones from A/B/C/D and SBxBS01 regular seedlings remain under the humidity dome; manage venting once seedlings are upright and keep labels secure.
+- Updated: `daily/2026-05-02.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-02] query-filed | Feminized seed production endpoint clarified
+- User refined the breeding objective: the mature program should produce large feminized seed batches where progeny testing shows >90% of offspring express the dark-purple, vigorous sativa-leaning target.
+- Added `wiki/breeding/feminized-production.md` to define the endpoint: elite female seed mother, reversed female pollen donor, anchor/backup clones, validation thresholds, batch scaling, and failure rules.
+- Updated breeding strategy, timeline, nomenclature, cross procedure, section index, overview, decision summary, and wiki index so feminized production is treated as the final validated phase after F-line progeny testing, not as a shortcut around stabilization.
+
+## [2026-05-02] query-filed | F3/F4/F5 family-selection scale
+- User asked how progeny-tested family selection works in practice with limited plant sites: whether to grow one best cross, a few pairings, or a full matrix.
+- Added `wiki/breeding/family-selection.md` to define the operating rule: make 2–4 family lots, screen 1–4 families, advance one winning family, and avoid full 4x4 matrices by default.
+- Updated breeding README, stabilization strategy, timeline, and index so F2 → F3 and later F-generation work point to the family-selection protocol.
+
+## [2026-05-02] query-filed | Isolation tent and clone potting defaults
+- User chose 1-gal fabric pots for males after considering 0.5-gal; 0.5-gal is acceptable for very short male runs but too dryback-prone in coco/fabric for the default.
+- Documented 2×2 isolation tent water management: hand-watered coco/perlite, 1-gal males, 2-gal seed mother / keeper clone, saucer or boot-tray runoff, and no irrigation automation unless hand-watering proves unreliable.
+- Documented clone stasis potting: 16 oz solo cups with 75-80% Happy Frog or similar light peat soil plus 20-25% extra perlite; 0.5-gal pots reserved for important finalist clones, 1-gal for confirmed keeper mothers.
+- Updated `wiki/breeding/isolation.md`, `wiki/breeding/cloning.md`, and `wiki/breeding/bill-of-materials.md`.
+
+## [2026-05-02] query-filed | Isolation tent drip-assist option
+- User selected the simple free-flow manifold path over a pressure-compensating / buy-once manifold for the 2×2 isolation tent.
+- Documented optional drip-assist plumbing: 5 gal reservoir, Sicce Syncra Silent 1.5, 1/2 inch main line, inline filter, bypass valve back to reservoir, Rain Bird free-flow 6-port manifold, six equal 1/4 inch lines, inline valve per plant, and open stakes or simple halos.
+- Noted that the Syncra Silent 1.5 should be sufficient for free-flow drip assist but is not a pressure-compensating irrigation pump; line output must be calibrated with measuring cups at 5/10/20 second pulses.
+- Updated `wiki/breeding/isolation.md` and `wiki/breeding/bill-of-materials.md`.
+
+## [2026-05-02] wiki refactor | Split isolation tent culture from containment protocol
+- Created `wiki/breeding/isolation-tent-culture.md` for 2×2 pot sizing, coco/perlite use, runoff management, and optional drip-assist plumbing.
+- Trimmed `wiki/breeding/isolation.md` back to containment, hygiene, operational phases, and contamination edge cases.
+- Updated breeding README, BOM, and index links so setup guidance routes to the right page.
+
+## [2026-05-03] daily | Day 50 / Flower Day 0 — 12/12 started; early-flower humidity flag
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy is dense at/above the SCROG; A/D remain sativa-leaning tuck candidates, while B/C remain compact and crowded.
+- **Flower flip:** 2026-05-03 is Day 0 of 12/12. Temperature is inside early-flower bands, but RH 70-74% and VPD 0.61-0.91 kPa are too wet for the new target.
+- **Plant B moisture remains critical:** 95.51% now after 94.93% May 2 and 93.90% May 1; no obvious wilt, but keep/close the float valve and dry back before reopening.
+- **Root zones:** A stable at 60.74%; C remains saturated at 90.16%; D is high but easing at 86.66%.
+- Updated: `daily/2026-05-03.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-04] daily | Day 51 / Flower Day 1 — lights-on VPD recovered; B still saturated
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy is full and crowded at/above the SCROG; A/D remain sativa-leaning tuck candidates, while B/C remain dense and compact.
+- **Environment improved but not solved:** RH dropped to 61-64% and morning VPD reached 1.12 kPa, but overnight VPD remains low at 0.76 kPa and the current reading slightly overshoots at 1.33 kPa.
+- **Plant B moisture remains critical:** 96.13% now after 95.51% May 3 and 94.93% May 2; dryback verification is urgent because the reading is still rising.
+- **Root zones:** A stable at 60.50%; C remains saturated at 90.20%; D is high but easing at 86.54%.
+- Updated: `daily/2026-05-04.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-05] manual update | Track A regular seedlings shifted to 1-gal containers
+- User-confirmed breeding update: the SBxBS01 regular seedlings for Track A were moved from propagation into 1-gal containers today.
+- Updated Track A status from humidity-dome seedling management to active grow-out for sexing and pollen production.
+- No photo or sensor snapshot was provided with this manual update.
+- Updated: `daily/2026-05-05.md`, `breeding/README.md`, `breeding/timeline.md`, `breeding/bill-of-materials.md`, `overview.md`, `index.md`.
+
+## [2026-05-05] manual update | 6-inch passive intake planned
+- User confirmed cooler room air is available outside the tent, but the tent is mostly zipped up with only limited intake through the bottom zipper.
+- User purchased a 6-inch duct and plans to add it 2026-05-06 as a low passive intake.
+- Filed the working hypothesis: lowering canopy/tent temperature with cooler intake air should reduce the VPD/RH conflict that is keeping the humidifier off under the early-flower RH ceiling. Duct should be installed with a bend/light trap because the grow is on 12/12.
+- Updated: `daily/2026-05-05.md`, `overview.md`, `environment/temperature.md`, `environment/humidity.md`.
+
+## [2026-05-05] docs update | Hosted web control plane recorded
+- Documented the new web-based topology: local `dirt-hwd` remains the hardware authority, local `dirt-web` remains the LAN UI/API/MCP surface, Railway runs `control-plane-api` + `web-ui`, and `dirt-gateway` provides outbound-only sync plus PTZ-only command execution.
+- Added a decision page for the hosted control-plane boundary and linked it from the wiki index and system status.
+- Updated the root README to include the new `apps/control-plane/`, `apps/gateway/`, `cloud/`, hosted Railway services, private signed assets, and the local-vs-hosted runtime surfaces.
+- Updated: `README.md`, `wiki/decisions/2026-05-05-hosted-control-plane.md`, `wiki/index.md`, `wiki/overview.md`.
+
+## [2026-05-05] daily | Day 52 / Flower Day 2 - overnight VPD regression; B still saturated
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy is dense and stretching through the SCROG; A/D remain sativa-leaning tuck candidates, while B/C remain compact and crowded.
+- **Environment flag:** overnight regressed to 72.75% RH and 0.56 kPa VPD, too wet for early flower. Lights-on VPD is usable at 1.00 kPa morning and 1.13 kPa now.
+- **Plant B moisture remains critical:** 96.46% now after 96.13% May 4, 95.51% May 3, and 94.93% May 2; dryback verification remains urgent.
+- **Root zones:** A stable at 60.65%; C remains saturated at 90.37%; D remains high at 86.97%.
+- **Breeding/intake:** Track A regular seedlings were potted into coco/perlite; 6-inch low passive intake planned for 2026-05-06 with a light-trap bend.
+- Updated: `daily/2026-05-05.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-05] manual update | Track A sprout count and clone rooting status
+- User-confirmed breeding update: 10 SBxBS01 regulars were started, 7 total sprouted, and all 7 sprouted seedlings were potted into coco/perlite; 5 currently look healthy and vigorous.
+- A/B/C/D mother-plant clones are perking under the humidity dome, but only 1 clone is showing visible roots so far. Dome stays on until more rooted cuttings are ready for stasis transplant.
+- Updated: `daily/2026-05-05.md`, `breeding/README.md`, `breeding/timeline.md`, `breeding/cloning.md`, `breeding/bill-of-materials.md`, `breeding/isolation.md`, `decisions/2026-04-26-breeding-program-launch.md`, `overview.md`, `index.md`.
+
+## [2026-05-06] daily | Day 53 / Flower Day 3 - VPD below target all windows; B still saturated
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy is full, crowded, and stretching through the SCROG; A/D remain daily tuck candidates while B/C are dense and compact.
+- **Environment flag:** VPD missed the early-flower target all day (0.51 overnight, 0.90 morning, 0.95 now) with RH still high and overnight temperature down to 62.44°F.
+- **Plant B moisture remains critical:** 96.83% now after 96.46% May 5, 96.13% May 4, and 95.51% May 3; dryback verification remains urgent.
+- **Root zones:** A stable at 60.44%; C remains saturated at 90.53%; D remains high but flat at 86.93%.
+- Updated: `daily/2026-05-06.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-07] daily | Day 54 / Flower Day 4 - lights-on VPD recovered; overnight still wet
+- Photos captured across 5 presets (overview, A, B, C, D). Canopy remains full and stretching through the SCROG; A/D are daily tuck candidates while B/C remain compact and crowded.
+- **Environment trend:** RH improved in every window and lights-on VPD reached target (1.01 kPa morning, 1.07 kPa now), but overnight remains too wet at 0.61 kPa with 63.35°F / 69.16% RH.
+- **Plant B moisture remains critical:** 96.62% now, only slightly down from 96.83% May 6; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.37%; C remains saturated but easing at 90.04%; D remains high but easing at 86.30%.
+- Updated: `daily/2026-05-07.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-08] daily | Day 55 / Flower Day 5 - incomplete photos; VPD below target all windows
+- Photos captured across 2 of 5 expected presets (overview, A only). B/C/D dedicated views are missing, so today's visual record is incomplete.
+- **Environment regression:** VPD missed early-flower target in every window (0.45 kPa overnight, 0.67 morning, 0.82 now) with RH high all windows and temperature below target.
+- **Plant B moisture remains critical:** 96.38% now, only slightly down from 96.62% May 7; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.65%; C remains saturated at 90.12%; D remains high at 86.34%.
+- Updated: `daily/2026-05-08.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-09] daily | Day 56 / Flower Day 6 - incomplete photos; humidity/VPD still critical
+- Photos captured across 1 of 5 expected presets (Plant A only). Overview, B, C, and D views are missing, so today's visual record is incomplete.
+- **Environment flag:** VPD missed early-flower target in every window again (0.45 kPa overnight, 0.61 morning, 0.63 now) while RH stayed 75.72-79.00%; temperature recovered enough that humidity/clearing is now the main constraint.
+- **Plant B moisture remains critical:** 96.25% now, only slightly down from 96.38% May 8; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.59%; C remains saturated at 90.04%; D remains high but easing at 85.98%.
+- Updated: `daily/2026-05-09.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-10] daily | Day 57 / Flower Day 7 - incomplete photos; VPD still below target
+- Photos captured across 1 of 5 expected presets (Plant A only). Overview, B, C, and D views are missing, so today's visual record is incomplete.
+- **Environment flag:** VPD missed early-flower target in every window again (0.49 kPa overnight, 0.62 morning, 0.63 now) while RH stayed high at 75.76-78.47% across window averages and 77.00% now.
+- **Plant B moisture remains critical:** 96.25% now, effectively unchanged from May 9; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.83%; C remains saturated at 89.96%; D remains high but easing at 85.82%.
+- Updated: `daily/2026-05-10.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-11] daily | Day 58 / Flower Day 8 - incomplete photos; main VPD still low; breeding tent hot/dry
+- Photos captured across 1 of 5 expected main presets (Plant A only). Overview, B, C, D, and breeding overview views are missing, so today's visual record is incomplete.
+- **Main-tent environment flag:** VPD missed early-flower target in every window again (0.54 kPa overnight, 0.62 morning, 0.59 now) while RH stayed high at 75.88-78.63%.
+- **Breeding-tent flag:** Current breeding tent reading is 85.68°F / 58.31% RH / 1.75 kPa VPD; check small plants/clones for drying stress because no breeding photo was captured.
+- **Plant B moisture remains critical:** 95.88% now, still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.93%; C remains saturated at 90.04%; D remains high but easing at 85.70%.
+- Updated: `daily/2026-05-11.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-12] query-filed | Track A short-veg flip and pollen aliquot strategy
+- User-confirmed Track A status: breeding-tent seedlings now have their first 2-3 sets of true leaves.
+- Filed the pollen-production operating plan: because the objective is strictly sex, cull females, and collect pollen, keep them under veg light only ~7-14 more days, then flip once most seedlings have 4-5 nodes, steady new growth, and no obvious stress.
+- Expanded pollen handling around parent identity and freezer management: assign `TA-M#` male IDs at sex confirmation, keep each male's pollen separate, collect in multiple sessions, dry with desiccant, flour-cut 4:1, and freeze many small single-use aliquots rather than one bulk tube.
+- Updated: `breeding/README.md`, `breeding/timeline.md`, `breeding/pollen-handling.md`, `index.md`.
+
+## [2026-05-12] manual update | AC Infinity 4 inch filtration kit purchased for breeding tent
+- User purchased the AC Infinity 4" air filtration kit for the 2x2x4 breeding/male isolation tent.
+- Filed it as the selected containment exhaust: carbon filter inside the upper tent area, inline fan exhausting out, passive lower intake only, fan run low enough to keep slight negative pressure.
+- Updated: `breeding/bill-of-materials.md`, `breeding/isolation.md`, `breeding/timeline.md`.
+
+## [2026-05-12] daily | Day 59 / Flower Day 9 - main VPD recovered; no main-tent photos
+- Photos captured across 0 of 5 expected main presets; only the breeding overview was available, and it mostly shows fan/vent/tent hardware rather than plant detail.
+- **Main-tent environment shift:** VPD averaged in range overnight and morning (1.24/1.24 kPa) after several low-VPD days, but the current reading is slightly high at 1.37 kPa with 80.01°F.
+- **Breeding-tent watch:** Overnight was wet at 0.53 kPa VPD / 77.88% RH, then recovered to 1.09 kPa now; manually inspect seedlings/clones because the photo cannot verify plant condition.
+- **Plant B moisture remains critical:** 95.84% now, still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.89%; C remains saturated at 89.88%; D remains high but easing at 84.79%.
+- Updated: `daily/2026-05-12.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-13] daily | Day 60 / Flower Day 10 - main VPD overshot high; no main-tent photos
+- Photos captured across 0 of 5 expected main presets; only the breeding overview was available, and it mostly shows fan/vent/tent hardware plus a cropped `R4` container edge rather than plant detail.
+- **Main-tent environment shift:** Overnight and morning VPD were usable (1.00/1.15 kPa), but the current reading overshot high at 1.60 kPa with 85.80°F.
+- **Breeding-tent watch:** Overnight was wet at 0.59 kPa VPD / 73.19% RH, then recovered to 1.23 kPa now; manually inspect seedlings/clones because the photo cannot verify plant condition.
+- **Plant B moisture remains critical:** 95.47% now, still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 60.74%; C remains saturated at 89.56%; D remains high but easing at 83.84%.
+- Updated: `daily/2026-05-13.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-14] daily | Day 61 / Flower Day 11 - main VPD recovered; no main-tent photos
+- Photos captured across 0 of 5 expected main presets; only the breeding overview was available. It shows several labeled upright young plants, but remains incomplete for main-tent diagnosis.
+- **Main-tent environment recovery:** VPD is in target across all windows (1.17 overnight, 1.26 morning, 1.16 now) with current temperature back in range at 75.79°F.
+- **Breeding-tent watch:** Overnight was wet at 0.66 kPa VPD / 72.07% RH, then morning spiked dry at 1.49 kPa before settling to 1.26 kPa now; manually check surfaces and fan exposure.
+- **Plant B moisture remains critical:** 95.92% now, still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 61.51%; C remains saturated at 90.53%; D remains high at 84.31%.
+- Updated: `daily/2026-05-14.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-15] daily | Day 62 / Flower Day 12 - full main coverage restored; VPD stable
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense, healthy overall, and actively stretching; the visible main risk is crowding/interior airflow rather than acute canopy damage.
+- **Main-tent environment stability:** VPD is in target across all windows for a second day (1.16 overnight, 1.21 morning, 1.09 now) with current temperature in range at 74.71°F.
+- **Breeding-tent watch:** Overnight was wet at 0.74 kPa VPD / 69.14% RH, then moved to hot/dry now at 81.23°F / 1.57 kPa; manually check surface moisture and fan exposure.
+- **Plant B moisture remains critical:** 96.29% now, still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 61.69%; C remains saturated at 90.69%; D remains high at 83.40%.
+- Updated: `daily/2026-05-15.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-16] query-filed | Isolation drip-assist pump controller decision
+- User selected **Shelly Plus Plug US** as the permanent controller for the 2x2 isolation-tent drip-assist pump.
+- Filed the control model: `dirt-hwd` owns irrigation schedules and sends short pump pulses, but the plug must enforce device-side seconds auto-off so a service crash or missed follow-up command cannot leave the pump running.
+- Documented temporary test path: an existing Kasa EP10 may be used for supervised calibration and first-water tests while the Shelly plug is in transit, but not as the only unattended shutoff path.
+- Updated: `breeding/isolation-tent-culture.md`, `breeding/bill-of-materials.md`.
+
+## [2026-05-16] query-filed | AC Infinity ThermoForge T3 direct-control investigation
+
+- User added an AC Infinity ThermoForge T3 to stabilize main-tent night temperatures and VPD, and wants to revisit programmatic heater control tomorrow.
+- Research summary: ThermoForge exposes external control through AC Infinity **UIS** cabling; Bluetooth/Wi-Fi are provided by a compatible UIS controller, not directly by the heater. The supported bridge path is Controller 69 Pro/Pro+/AI+ → UIS cable → ThermoForge.
+- Preferred investigation path mirrors the successful Cloudline fan work: passive inline tap, multimeter pre-flight, level-safe PulseView/sigrok capture, classify PWM/keep-alive vs richer serial protocol, then only replay with an ESP32 once pin voltages and OFF/fail behavior are known.
+- Safety distinction recorded: fan fail-safe can bias to high airflow, but heater fail-safe must bias to OFF on ESP32 reset, WiFi loss, stale commands, or host crash.
+- **New page:** [`wiki/hardware/ac-infinity-thermoforge-control.md`](hardware/ac-infinity-thermoforge-control.md).
+
+## [2026-05-16] daily | Day 63 / Flower Day 13 - full photos; main VPD stable; breeding tent dry
+- Photos captured across all 5 expected main presets plus the breeding overview. Plant B's dedicated view remains fan-obstructed, but the rest of the main canopy shows healthy stretch and dense early-flower sites.
+- **Main-tent environment stability:** VPD is in target across all windows for a third day (1.12 overnight, 1.10 morning, 1.09 now) with current temperature in range at 72.39°F.
+- **Breeding-tent watch:** Overnight was usable at 0.94 kPa VPD, then moved dry during lights-on to 77.61°F / 48.88% RH / 1.65 kPa; manually check surface moisture and fan angle.
+- **Plant B moisture remains critical:** 96.13% now, slightly lower than morning but still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** A stable at 61.88%; C remains saturated at 90.93%; D remains high at 83.12%.
+- Updated: `daily/2026-05-16.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-17] daily | Day 64 / Flower Day 14 - full photos; main VPD stable; A moisture movement flagged
+- Photos captured across all 5 expected main presets plus the breeding overview. Plant B's dedicated view remains fan-obstructed, but the rest of the main canopy shows healthy stretch and dense early-flower sites.
+- **Main-tent environment stability:** VPD is in target across all windows for a fourth day (1.21 overnight, 1.09 morning, 1.01 now) with current temperature near the day floor at 71.96°F.
+- **Plant A moisture/probe movement:** A moved sharply to 41.34% now, down 18.57 rough percentage points from the morning average; verify media/tray/probe by hand before assuming true dryback.
+- **Plant B moisture remains critical:** 95.80% now, slightly lower than morning but still near full saturation; dryback verification remains urgent before reopening normal feed.
+- **Root zones:** C remains saturated at 90.85%; D eased to 74.03% but remains high enough to inspect.
+- **Breeding-tent watch:** Morning reached 81.59°F / 1.84 kPa VPD and now remains hot/dry at 80.13°F / 1.68 kPa; manually check surface moisture and fan angle.
+- Updated: `daily/2026-05-17.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-17] query-filed | Plant A local low-pH tray/root-zone diagnosis
+- User measured Plant A Autopot tray/runoff at pH 4.8 after rough lower-leaf symptoms and stunting concerns; reservoir was normal at pH 5.8 / EC 1.4.
+- Working diagnosis filed as localized low-pH lockout or root-zone acidification, not hot whole-reservoir feed. Post-flush runoff EC was about 1.1 and no white salt crust was visible.
+- Corrective action: Plant A received 8 cups pH 5.8 / EC 1.2 top flush on 2026-05-17 evening. Next check is A tray/runoff pH+EC before disturbance, plus B/C/D tray comparisons.
+- Updated: `daily/2026-05-17.md`, `plants/plant-a.md`, `environment/nutrients.md`, `overview.md`.
+
+## [2026-05-18] daily | Day 65 / Flower Day 15 - full photos; main VPD swing returned
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense and early-flower sites are stacking; Plant B's dedicated view is still fan-obstructed.
+- **Main-tent VPD swing:** Overnight ran dry/high at 1.47 kPa, morning recovered to 1.04 kPa, and the current reading fell wet/low to 0.78 kPa with 70.70% RH.
+- **Plant A follow-up:** Visible canopy is upright and moisture is stable near 56-57%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.21%, and C is pinned at 91.25%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture shift:** D is stable around 60% today after a large 24-hour drop from yesterday's 74.03%; verify by hand before treating it as complete dryback.
+- **Breeding-tent watch:** Less extreme than yesterday but still mildly dry during lights-on at 78.96°F / 58.38% RH / 1.41 kPa VPD; check surface moisture and fan angle.
+- Updated: `daily/2026-05-18.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-19] daily | Day 66 / Flower Day 16 - breeding photo only; main VPD recovered lights-on
+- Photo coverage was incomplete: only `breeding-overview.jpg` was available, with no main overview or A-D close views. Main-tent visual status requires direct manual inspection.
+- **Main-tent VPD recovery:** Overnight remained dry/high at 1.41 kPa, but morning and now are in target at 1.24 and 1.07 kPa; hold the environment steady and avoid large humidity/drying changes.
+- **Plant A follow-up:** Moisture is stable near 56%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 95.88%, and C is pinned at 90.93%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** Stable around 60% for a second day after the earlier drop; verify media/tray/probe conditions by hand.
+- **Breeding-tent watch:** Seedlings in the overview look upright, but VPD moved from 0.93 overnight to 1.54 morning and 1.46 now; check pot weight, surface moisture, and fan angle.
+- Updated: `daily/2026-05-19.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-20] daily | Day 67 / Flower Day 17 - full photos; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense, upright, and stacking early flower sites with purple expression visible across multiple tops; Plant B remains partly fan-obstructed.
+- **Main-tent environment:** Morning and current VPD are in range at 1.28 and 1.19 kPa, but overnight ran warm/dry at 79.02°F and 1.51 kPa.
+- **Plant A follow-up:** Visible tops are upright and purple with stable moisture near 56%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.54%, and C is pinned at 91.49%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** Stable around 60% with upright sativa-leaning purple flower tops; verify media/tray/probe conditions by hand.
+- **Breeding-tent watch:** Seedlings look upright, but VPD is dry during lights-on at 1.45 morning and 1.61 now; check pot weight, surface moisture, and fan angle.
+- Updated: `daily/2026-05-20.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-21] daily | Day 68 / Flower Day 18 - full photos; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense, upright, and stacking early flower sites with purple expression visible across multiple tops; Plant B remains partly fan-obstructed.
+- **Main-tent environment:** Morning and current VPD are in range at 1.28 and 1.24 kPa, but overnight remains dry/high at 78.38°F and 1.44 kPa.
+- **Plant A follow-up:** Visible tops are upright and purple with stable moisture near 57%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.33%, and C is pinned at 91.21%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** Stable today near 51% after yesterday's higher rough signal; verify media/tray/probe conditions by hand.
+- **Breeding-tent watch:** Seedlings look upright, but VPD is dry during lights-on at 1.61 morning and 1.71 now; check pot weight, surface moisture, and fan angle.
+- Updated: `daily/2026-05-21.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-22] daily | Day 69 / Flower Day 19 - full photos; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense, upright, and stacking early flower sites with purple expression visible across multiple tops; Plant B remains partly fan-obstructed.
+- **Main-tent environment:** Morning and current VPD are in range at 1.08 and 1.05 kPa, while overnight shifted slightly wet/low at 71.17°F and 0.88 kPa after the prior dry/high nights.
+- **Plant A follow-up:** Visible tops are upright and purple with stable moisture near 58%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.25%, and C is pinned at 91.05%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** Stable near 51% for a second day; verify media/tray/probe conditions by hand.
+- **Breeding-tent watch:** Seedlings look upright, but VPD is dry during lights-on at 1.34 morning and 1.46 now; check pot weight, surface moisture, and fan angle.
+- Updated: `daily/2026-05-22.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-23] daily | Day 70 / Flower Day 20 - full photos; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, and flower-heavy with purple expression across multiple tops; Plant B remains partly fan-obstructed.
+- **Main-tent environment:** Morning and current VPD are both in range at 1.08 kPa, while overnight repeated the slightly wet/low pattern at 71.58°F and 0.89 kPa.
+- **Plant A follow-up:** Visible tops are upright and purple with stable moisture near 58.7%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.17%, and C is pinned at 90.81%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D dropped from a 50.59% morning average to 46.43% now; verify tray/media/probe conditions by hand before acting on the lower signal.
+- **Breeding-tent watch:** Seedlings look upright, but current RH spiked to 80.16% with 0.68 kPa VPD after a usable morning; check watering timing, fan blockage, and sensor exposure.
+- Updated: `daily/2026-05-23.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-24] daily | Day 71 / Flower Day 21 - late-flower boundary; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense, upright, and purple-flowered; Plant B and Plant C dedicated views are heavily fan-obstructed.
+- **Main-tent environment:** Main tent entered late flower today. Morning/current VPD are in range at 1.22/1.36 kPa, but overnight is wet/low at 0.95 kPa and RH remains high for late flower.
+- **Plant A follow-up:** Limited view shows upright purple flower tops with stable moisture near 59.15%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 95.96%, and C is pinned at 90.89%; manual tray/float/media/probe checks remain urgent, especially because today's photos are obstructed.
+- **Plant D moisture:** D is lower but stable near 47.10% after yesterday's drop; verify tray/media/probe conditions by hand before acting on the lower signal.
+- **Breeding-tent watch:** Breeding is Flower Day 0 and wet across all windows, now 80.44°F / 78.96% RH / 0.75 kPa; check watering timing, fan direction, sensor exposure, pot weight, and standing moisture.
+- Updated: `daily/2026-05-24.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `breeding/timeline.md`, `overview.md`, `index.md`.
+
+## [2026-05-25] daily | Day 72 / Flower Day 22 - full photos; main current VPD wet/low
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, and purple-flowered; Plant B and Plant C dedicated views remain heavily fan-obstructed.
+- **Main-tent environment:** Morning VPD averaged 1.25 kPa, but overnight stayed wet/low at 0.95 kPa and now fell to 1.01 kPa with 65.52% RH. Late-flower drying and canopy airflow remain the main action.
+- **Plant A follow-up:** Limited view shows upright purple flower tops with stable moisture near 59.70%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.05%, and C is pinned at 91.21%; manual tray/float/media/probe checks remain urgent, especially because today's photos are obstructed.
+- **Plant D moisture:** D is lower but stable near 47.54%; verify tray/media/probe conditions by hand before acting on the lower signal.
+- **Breeding-tent watch:** Breeding is Flower Day 1 and corrected from yesterday's wet profile to 76.46°F / 53.02% RH / 1.46 kPa now; check pot weight and fan exposure before changing watering.
+- Updated: `daily/2026-05-25.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-26] daily | Day 73 / Flower Day 23 - full photos; current VPD dry edge
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, and purple-flowered; Plant B remains almost fully fan-obstructed, while Plant C is partly inspectable.
+- **Main-tent environment:** Morning VPD averaged 1.25 kPa and now is 1.52 kPa, but overnight stayed wet/low at 0.98 kPa with 61.68% RH. Keep dark-cycle drying and airflow active rather than adding humidity for the dry-edge current reading.
+- **Plant A follow-up:** Upright purple flower tops remain visible with stable moisture near 59.88%, but the 2026-05-17 low-pH tray finding remains open until A tray/runoff pH+EC is rechecked against B/C/D.
+- **Plant B/C moisture remains critical:** B is pinned at 96.25%, and C is pinned at 91.29%; manual tray/float/media/probe checks remain urgent, especially because B's photo is non-diagnostic.
+- **Plant D moisture:** D is lower and drifting near 47.02%; verify tray/media/probe conditions by hand before acting on the lower signal.
+- **Breeding-tent watch:** Breeding is Flower Day 2 and dry/high now at 76.80°F / 41.04% RH / 1.86 kPa; check pot weight and fan exposure.
+- Updated: `daily/2026-05-26.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-27] daily | Day 74 / Flower Day 24 - full photos; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, and purple-flowered; Plant B is still non-diagnostic behind the fan, and Plant C is partly obstructed/soft-focused.
+- **Main-tent environment:** Morning/current VPD are in late-flower range at 1.26/1.44 kPa, but overnight stayed wet/low at 0.99 kPa with 60.97% RH. Keep dark-cycle drying and airflow active.
+- **Plant A follow-up:** Visible tops are upright and moisture is stable near 61.35%, but the root-zone pH/EC diagnostic remains open until A is checked against a healthy comparison pot.
+- **Plant B/C moisture remains critical:** B is pinned at 96.09%, and C is pinned at 91.37%; manual tray/float/media/probe checks remain urgent, especially because B's photo is non-diagnostic.
+- **Plant D moisture:** D's rough signal moved sharply wetter to 48.81% now; verify tray/media/probe conditions by hand before treating it as true rewetting.
+- **Breeding-tent watch:** Breeding is Flower Day 3 and dry/high now at 79.47°F / 52.97% RH / 1.62 kPa; check pot weight and fan exposure.
+- Updated: `daily/2026-05-27.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-27] query-filed | Plant A extraction diagnostic and dryback plan
+- User completed a 1:1.5 distilled-water coco extraction after a 2-hour rest: Plant A measured pH 5.78 / EC 4.4 and healthy comparison Plant D measured pH 5.97 / EC 3.0.
+- Plant A's sample was visibly wetter than D's. Hourly sensor review after A's valve was closed around 19:00-20:00 MDT on 2026-05-26 showed mostly flat moisture overnight near 61.8%, then slow lights-on dryback to roughly 61.2% by late afternoon.
+- Assessment filed: current evidence points away from active low-pH lockout and toward high root-zone EC/salt concentration plus wet/slower cycling in Plant A.
+- Action filed: A's tray/stand was removed and cleaned, valve remains closed, and A should dry back until the top coco is no longer visibly wet before any controlled weak pH 5.8 Canna top rinse around EC 0.6-0.8; remove runoff immediately and do not adjust the whole reservoir based on A alone.
+- Updated: `daily/2026-05-27.md`, `plants/plant-a.md`, `environment/nutrients.md`, `overview.md`, `index.md`.
+
+## [2026-05-28] daily | Day 75 / Flower Day 25 - full photos; lights-on VPD in range
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, and purple-flowered; Plant B is still non-diagnostic behind the fan, and Plant C/main overview are partly obstructed.
+- **Main-tent environment:** Morning/current VPD are in late-flower range at 1.26/1.42 kPa, but overnight stayed wet/low at 1.00 kPa with 59.12% RH. Keep dark-cycle drying and airflow active.
+- **Plant A follow-up:** Visible tops are upright with purple flowers, and rough moisture is drier near 52.13%; continue the high-EC/wet-root-zone dryback plan before any weak top rinse.
+- **Plant B/C moisture remains critical:** B is pinned at 96.50%, and C is pinned at 91.45%; manual tray/float/media/probe checks remain urgent, especially because B's photo is non-diagnostic.
+- **Plant D moisture:** D is lower/slightly drier near 44.96%; keep media/tray/probe hand-check open because recent probe movement was large.
+- **Breeding-tent watch:** Breeding is Flower Day 4 and dry/high now at 77.49°F / 50.52% RH / 1.59 kPa; check pot weight and fan exposure.
+- Updated: `daily/2026-05-28.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-30] daily | Day 77 / Flower Day 27 - full photos; lights-on VPD upper edge
+- Added `daily/2026-05-29.md` as a continuity entry because raw photos existed for 2026-05-29 but no daily page had been created; no 2026-05-29 sensor JSON or attached photo synthesis was available, so no per-plant observations were invented.
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, and purple-flowered; Plant B is still non-diagnostic behind the fan, and several other views are partly obstructed.
+- **Main-tent environment:** Morning/current VPD are in late-flower range at 1.32/1.50 kPa, but overnight stayed wet/low at 1.07 kPa with 58.28% RH. Keep dark-cycle drying and airflow active rather than adding lights-on humidity.
+- **Plant A follow-up:** Visible tops are upright with purple flowers, and rough moisture moved sharply drier near 35.55%; hand-check top coco/tray state before any weak rinse or refeed decision.
+- **Plant B/C moisture remains critical:** B is pinned at 95.43%, and C remains high at 88.72% despite drifting drier; manual tray/float/media/probe checks remain urgent, especially because B's photo is non-diagnostic.
+- **Plant D moisture:** D is low/flat near 44.72%; keep media/tray/probe hand-check open because recent probe movement was large.
+- **Breeding-tent watch:** Breeding is Flower Day 6 and usable now at 75.11°F / 50.26% RH / 1.48 kPa; keep pot-weight and fan-exposure checks active.
+- Updated: `daily/2026-05-29.md`, `daily/2026-05-30.md`, `plants/plant-{a,b,c,d}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-05-30] query-filed | Grow-scoped plant wiki and Track A male confirmations
+- Restructured plant pages under `wiki/grows/<grow_run_id>/plants/` to match the database model where `growrun.grow_run_id` owns scoped `plant.plant_id` values.
+- Moved main A-D plant pages to `wiki/grows/main-2026-03-15/plants/` and added grow `README.md` landing pages for `main-2026-03-15` and `breeding-track-a-2026-04-28`, matching the existing section-page convention used by `wiki/breeding/README.md`.
+- Created Track A pollen-run plant pages for R1-R5 under `wiki/grows/breeding-track-a-2026-04-28/plants/`.
+- Filed today's breeding update: seven regular seeds germinated, two died during transplant to coco coir, five active plants remain (R1-R5), and R1/R4 have confirmed male pre-sex organs / male sex expression as of 2026-05-30.
+- Updated wiki conventions, wiki routing instructions, daily-update workflow notes, daily synthesis prompt text, and wiki lint to recognize grow-scoped plant pages.
+
+## [2026-05-31] query-filed | Plant A post-dryback rinse result
+- User reported Plant A looks healthier after extended dryback, with small dark-green growth tips.
+- Live moisture context at 11:24 MDT showed Plant A near raw 2717 / ~35.7% calibrated, stable after the 2026-05-30 sharp dryback.
+- Filed today's controlled weak pH 5.8 Canna top rinse/feed result: runoff pH 6.2 and EC about 40% above input.
+- Assessment filed: this does not support active low-pH lockout or a severe salt dump; stop further rinsing, remove runoff, leave A off Autopot for 12-24h, and reopen only as a monitored test if pot/tray conditions stay clean.
+- Updated: `daily/2026-05-31.md`, `plants/plant-a.md`, `environment/nutrients.md`, `index.md`.
+
+## [2026-05-31] query-filed | Kalash Valley Black breeding target
+- User reported a major breeding update: the original "black cannabis" goal may be reachable by using Kalash Valley Black as outside breeding stock.
+- Source check filed: Mandala Seeds lists Kalash Valley Black as an Indian Landrace Exchange regular-seed strain made available through Ace Seeds collaboration; listing describes Kalash, Pakistan genetics, sweet/berry/floral aroma, tall/lanky habit, deep black maturation, and broad environmental resilience.
+- Sourcing constraint filed: do not assume project access before September 2026; user reports Mandala's United States shipping is paused through September, so recheck availability and shipping before any purchase attempt.
+- Strategy filed: preserve and evaluate the best purple/fruity Serious Black / SBxBS01 parent, then prioritize a known-family SBxBS01 x Kalash Valley Black black-line project once Kalash stock can be sourced.
+- Updated: `decisions/2026-05-31-kalash-valley-black-target.md`, `breeding/README.md`, `breeding/stabilization-strategy.md`, `breeding/timeline.md`, `breeding/pheno-hunt-protocol.md`, `index.md`.
+
+## [2026-06-01] daily | Day 79 / Flower Day 29 - breeding overview only; main photo coverage missing
+- Photo coverage was incomplete: only `breeding-overview.jpg` was available, so no main-tent per-plant visual observations were invented.
+- **Main-tent environment:** Morning/current VPD are in the late-flower band at 1.35/1.49 kPa, but overnight stayed wet/low at 1.07 kPa. Current temperature reached 79.45°F and dew point reached 62.60°F, so airflow and moisture clearing remain the priority.
+- **Plant A follow-up:** Rough moisture moved only slightly drier to 48.85% after the 2026-05-31 weak rinse/feed. Keep A in monitored recovery and avoid further rinsing.
+- **Plant B/C moisture remains critical:** B is pinned at 96.33%, and C remains high at 90.77%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D is low and drifting drier near 41.34%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 8 and dry/high during lights-on at 76.10°F / 45.77% RH / 1.67 kPa. The overview shows pale/droopy small-plant stress, so check pot weight, fan exposure, watering timing, and sex sites.
+- Updated: `daily/2026-06-01.md`, `plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-02] daily | Day 80 / Flower Day 30 - breeding overview only; main photo coverage missing
+- Photo coverage was incomplete again: only `breeding-overview.jpg` was available, so no main-tent per-plant visual observations were invented.
+- **Main-tent environment:** Morning/current VPD are in the late-flower band at 1.38/1.45 kPa, but overnight stayed wet/low at 1.09 kPa. Current temperature is still warm at 78.01°F and dew point is 60.83°F, so airflow and dark-cycle moisture clearing remain the priority.
+- **Plant A follow-up:** Rough moisture continued a controlled dry-side move to 44.68% after the 2026-05-31 weak rinse/feed. Keep A in monitored recovery and avoid further rinsing.
+- **Plant B/C moisture remains critical:** B is pinned at 95.88%, and C remains high/flat at 90.08%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D is low/stale near 41.30%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 9 and less extreme than yesterday but still dry-side now at 74.17°F / 50.28% RH / 1.43 kPa. The overview still shows pale/lime foliage, lower yellowing, and droop, so check pot weight, fan exposure, watering timing, and sex sites.
+- Updated: `daily/2026-06-02.md`, `plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-03] daily | Day 81 / Flower Day 31 - full photos; lights-on dry edge, overnight wet
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense and flower-heavy with upright purple-toned tops and many fresh white pistils; breeding remains obstructed/soft-focused.
+- **Main-tent environment:** Morning/current VPD are 1.40/1.53 kPa, so lights-on is at the dry edge/slightly high, while overnight stayed wet/low at 1.09 kPa. Keep dark-cycle moisture clearing and airflow active without making lights-on hotter or drier.
+- **Plant A follow-up:** Visible tops are upright, and rough moisture continued post-rinse dryback to 41.71%. Avoid further rinsing; reopen Autopot only as a monitored test if tray/pot checks stay clean.
+- **Plant B/C moisture remains critical:** B is pinned/stale at 95.72%, and C remains high/flat at 90.04%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D has strong purple tops but remains low with little useful movement near 42.61%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 10 and lower-VPD now at 69.87°F / 57.57% RH / 1.06 kPa, but the obstructed overview still shows lime/yellow foliage and droop. R1/R2/R4 are confirmed male; R3/R5 still need direct sex-site checks.
+- Updated: `daily/2026-06-03.md`, `plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-04] query-filed | Plant A runoff TDS and Autopot reconnection
+- User reported Plant A looks fine after the diagnostic rinse/dryback sequence, with no heavy, sour, or stagnant pot/tray signs.
+- Additional runoff pH looked fine. TDS measured >1000 ppm on the 500 scale, equivalent to EC >2.0 mS/cm, so salts are still being mobilized through the coco after top rinsing.
+- Assessment filed: current evidence points to residual salt wash-through rather than active low-pH lockout or a need for another immediate flush.
+- Action filed: reconnect Plant A to the Autopot as a monitored test, remove runoff, watch tray cycling and leaf posture, and avoid further top flushing unless the plant declines or repeated checks show persistent high EC.
+- Updated: `daily/2026-06-04.md`, `plants/plant-a.md`, `environment/nutrients.md`, `concepts/autopot.md`, `concepts/flushing.md`, `overview.md`, `index.md`.
+
+## [2026-06-04] query-filed | Track A R3 female cull
+- User confirmed R3 is female and culled it on 2026-06-04.
+- Track A active pollen-run set is now R1/R2/R4 as confirmed male candidates plus R5 still on sex watch; R3 is removed from the active candidate pool.
+- Updated: `daily/2026-06-04.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r3.md`, `grows/breeding-track-a-2026-04-28/README.md`, `breeding/README.md`, `breeding/timeline.md`, `overview.md`, `index.md`.
+
+## [2026-06-04] daily | Day 82 / Flower Day 32 - full photos; main now dry/high, breeding wet spike
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy is dense and flower-heavy with upright purple-toned tops and many fresh white pistils; breeding overview remains tent-level and partly obstructed.
+- **Main-tent environment:** Morning VPD averaged in range at 1.42 kPa, but current VPD overshot dry/high to 1.79 kPa with the fan at 80%; overnight stayed wet/low at 1.08 kPa. Keep correction focused on dark-cycle clearing and airflow without increasing lights-on dryness.
+- **Plant A follow-up:** Visible tops remain upright and rough moisture continued a controlled dry-side move to 37.05%. Manual inspection found no heavy/sour/stagnant signs; runoff pH looked fine but TDS was >1000 ppm / EC >2.0, so Autopot reconnection is a monitored test and no further top flush is recommended.
+- **Plant B/C moisture remains critical:** B is pinned/stale at 96.38%, and C remains high/flat at 91.73%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D has strong purple tops but remains low with little useful movement near 42.02%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 11 and now wet/low at 71.92°F / 83.28% RH / 0.45 kPa with 66.57°F dew point. R1/R2/R4 are confirmed male candidates, R3 is confirmed female and culled, and R5 remains on sex watch.
+- Updated: `daily/2026-06-04.md`, `plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-05] daily | Day 83 / Flower Day 33 - full photos; lights-on upper edge, overnight wet
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, purple-toned, and flower-heavy with many fresh white pistils; breeding overview remains tent-level and does not resolve individual sex sites.
+- **Main-tent environment:** Morning/current VPD are 1.44/1.50 kPa, so lights-on is at the late-flower upper edge rather than yesterday's dry/high spike; overnight stayed wet/low at 1.09 kPa and current dew point rose to 63.47°F.
+- **Plant A follow-up:** Visible tops remain upright and rough moisture moved slightly wetter to 38.34% after watched Autopot reconnection; confirm tray cycling and leaf posture, with no additional top flush unless new evidence appears.
+- **Plant B/C moisture remains critical:** B is pinned/stale at 96.29%, and C remains high/flat at 91.49%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D has strong purple tops but remains low with little useful movement near 41.90%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 12. Only a current sensor reading is available and it exactly repeats yesterday's wet value, so verify sensor freshness/exposure while checking pot weight, airflow, watering timing, and R5 sex sites.
+- Updated: `daily/2026-06-05.md`, `plants/plant-{a,b,c,d}.md`, `grows/main-2026-03-15/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-06] daily | Day 84 / Flower Day 34 - full photos; lights-on in range, overnight still wet
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, purple-toned, and flower-heavy with many fresh white pistils; Plant A's dedicated view is mostly fan-blocked, and breeding overview remains tent-level.
+- **Main-tent environment:** Morning/current VPD are 1.36/1.32 kPa, cleanly in the late-flower band, while overnight remains slightly wet/low at 1.13 kPa. Keep correction focused on dark-cycle clearing and canopy airflow.
+- **Plant A follow-up:** Visible tops remain upright and rough moisture continued slightly wetter to 44.59% after watched Autopot reconnection; confirm tray cycling and leaf posture, with no additional top flush unless new decline or repeated high-EC evidence appears.
+- **Plant B/C moisture remains critical:** B is pinned/stale at 96.62%, and C remains high/flat at 91.85%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D has strong purple tops but remains low with little useful movement near 42.53%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 13. Only a current sensor reading is available and it exactly repeats the same wet value again, so verify sensor freshness/exposure while checking pot weight, airflow, watering timing, and R5 sex sites.
+- Updated: `daily/2026-06-06.md`, `plants/plant-{a,b,c,d}.md`, `grows/main-2026-03-15/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-07] daily | Day 85 / Flower Day 35 - full photos; lights-on in range, overnight still wet
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, purple-toned, and flower-heavy with many fresh white pistils; Plant A's dedicated view is mostly fan-blocked, and breeding overview remains tent-level.
+- **Main-tent environment:** Morning/current VPD are 1.30/1.39 kPa, cleanly in the late-flower band, while overnight remains slightly wet/low at 1.11 kPa. Current dew point improved to 57.15°F, but fan is already 80% now, so keep correction focused on dark-cycle clearing and canopy airflow.
+- **Plant A follow-up:** Visible tops remain upright and rough moisture continued slightly wetter to 47.59% after watched Autopot reconnection; confirm tray cycling and leaf posture, with no additional top flush unless new decline or repeated high-EC evidence appears.
+- **Plant B/C moisture remains critical:** B is pinned/stale at 96.66%, and C remains high/flat at 91.85%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D has strong purple tops but remains low and drifting drier near 42.02%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 14. Only a current sensor reading is available and it exactly repeats the same wet value again, so verify sensor freshness/exposure while checking pot weight, airflow, watering timing, and R5 sex sites.
+- Updated: `daily/2026-06-07.md`, `plants/plant-{a,b,c,d}.md`, `grows/main-2026-03-15/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-08] daily | Day 86 / Flower Day 36 - full photos; split VPD profile, overnight still wet
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, purple-toned, and flower-heavy with many fresh white pistils; Plant A's dedicated view is mostly fan-blocked, and breeding overview remains tent-level.
+- **Main-tent environment:** Morning VPD is in range at 1.43 kPa, but now is slightly dry/high at 1.53 kPa while overnight remains wet/low at 1.10 kPa. Keep correction focused on dark-cycle clearing and canopy airflow, not more broad lights-on drying.
+- **Plant A follow-up:** Visible tops remain upright and rough moisture is stable near 49.13% after watched Autopot rewet; confirm tray cycling and leaf posture, with no additional top flush unless new decline or repeated high-EC evidence appears.
+- **Plant B/C moisture remains critical:** B is pinned/stale at 96.66%, and C remains high/flat at 92.01%; manual tray/float/media/probe checks remain urgent.
+- **Plant D moisture:** D has strong purple tops but remains low and drifting drier near 42.02%; verify media/tray/probe conditions by hand before changing irrigation assumptions.
+- **Breeding-tent watch:** Breeding is Flower Day 15. Only a current sensor reading is available and it exactly repeats the same wet value again, so verify sensor freshness/exposure while checking pot weight, airflow, watering timing, and R5 sex sites.
+- Updated: `daily/2026-06-08.md`, `plants/plant-{a,b,c,d}.md`, `grows/main-2026-03-15/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-09] query-filed | RS485 substrate probe bring-up documented
+- Added `hardware/rs485-substrate-sensors.md` with DFRobot SEN0604 + XIAO ESP32C3 + Seeed RS485 breakout wiring, 5 V/12 V power notes, Modbus assumptions, first live readings, M12 quick-disconnect enclosure plan, and proposed external calibration workflow for temperature, moisture, EC, and pH.
+- Updated `hardware/soil-moisture-sensing-options.md` and `index.md` to route future agents to the new RS485 operational page.
+- Key state: debug firmware at `debug/rs485_soil_probe/` successfully read SEN0604 register block `0x0000-0x0003` over Modbus (`9600 8N1`, address `0x01`). Plant A stabilized around 23.0-23.1% moisture, 19.7-19.8 deg C, 128-130 us/cm EC, pH 5.0-5.3; another plant stabilized around 36.3-36.4% moisture, 20.2 deg C, 279-283 us/cm EC, pH 5.5-5.7.
+- Calibration posture: do not write undocumented SEN0604 calibration registers yet; use software-side curves based on reference pH/EC probes, standards, and coco/perlite media calibration data.
+
+## [2026-06-09] daily | Day 87 / Flower Day 37 - full photos; lights-on VPD in range, overnight wetter
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, purple-toned, and flower-heavy with many fresh white pistils; Plant A's dedicated view is mostly fan-blocked, and breeding overview remains tent-level.
+- **Main-tent environment:** Morning/current VPD are in range at 1.41/1.47 kPa, but overnight worsened wet/low to 1.01 kPa with 57.44% RH. Current dew point climbed to 62.30°F, so preserve lights-on VPD while improving dark-cycle clearing and airflow.
+- **Plant A follow-up:** Visible material remains upright and rough moisture is stable/slightly drier near 49.56% after watched Autopot rewet; confirm tray cycling and leaf posture, with no additional top flush unless new decline or repeated high-EC evidence appears.
+- **Plant B moisture movement:** B moved sharply drier to 88.51% from the recent pinned-high pattern; verify tray standing water, float behavior, media smell, and probe seating before treating dryback as solved.
+- **Plant C/D moisture checks:** C remains high/flat near 91.61%, and D remains low/drifting drier near 41.82%; manual tray/media/probe checks remain active.
+- **Breeding-tent watch:** Breeding is Flower Day 16. Only a current sensor reading is available and it exactly repeats the same wet value again, so verify sensor freshness/exposure while checking pot weight, airflow, watering timing, and R5 sex sites.
+- Updated: `daily/2026-06-09.md`, `plants/plant-{a,b,c,d}.md`, `grows/main-2026-03-15/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-10] daily | Day 88 / Flower Day 38 - full photos; current VPD dry/high, overnight still wet
+- Photos captured across all 5 expected main presets plus the breeding overview. The main canopy remains dense, upright, purple-toned, and flower-heavy with many fresh white pistils; Plant A's dedicated view is mostly fan-blocked, and breeding overview remains tent-level.
+- **Main-tent environment:** Morning VPD is in range at 1.41 kPa, but current VPD is dry/high at 1.62 kPa with fan at 80%, while overnight remains wet/low at 1.10 kPa. Improve dark-cycle clearing and flower-pocket airflow without adding broad lights-on dryness.
+- **Plant A follow-up:** Visible material remains upright and rough moisture is stable near 50.69% after watched Autopot rewet; confirm tray cycling and leaf posture, with no additional top flush unless new decline or repeated high-EC evidence appears.
+- **Plant B moisture movement:** B returned high near 96.00% after yesterday's sharp drier move; verify tray standing water, float behavior, media smell, and probe seating before treating either signal as representative.
+- **Plant C/D moisture checks:** C remains high/flat near 91.85%, and D remains low/drifting drier near 41.74%; manual tray/media/probe checks remain active.
+- **Breeding-tent watch:** Breeding is Flower Day 17. Only a current sensor reading is available and it exactly repeats the same wet value again, so verify sensor freshness/exposure while checking pot weight, airflow, watering timing, and R5 sex sites.
+- Updated: `daily/2026-06-10.md`, `plants/plant-{a,b,c,d}.md`, `grows/main-2026-03-15/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/humidity.md`, `environment/temperature.md`, `overview.md`, `index.md`.
+
+## [2026-06-10] query-filed | High-EC Autopot reservoir reset
+- User reported the Autopot reservoir EC was too high, well over 2.0 mS/cm, during evening service.
+- At 20:00 MDT, the entire reservoir was flushed/replaced with plain Denver tap water adjusted to pH 5.8 and measuring roughly EC 0.3.
+- Plan filed: let the plants drink plain pH 5.8 / EC ~0.3 water for roughly 24 hours, then rebuild nutrients to roughly EC 1.2 around 2026-06-11 20:00 MDT if plant posture and tray cycling remain acceptable.
+- Updated: `daily/2026-06-10.md`, `environment/nutrients.md`, `overview.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `index.md`.
+
+## [2026-06-11] query-filed | RS485 Plant A cutover and capacitive-node retirement
+- Plant A current moisture is now `plant-a-substrate-node` RS485 direct `soil_moisture_pct`; post-cutover validation showed `/health` OK, Modbus OK, ingest HTTP 202, and fresh Postgres rows for moisture, substrate temperature, EC, and pH.
+- Old capacitive nodes `plant-a-node` through `plant-d-node` and their `soil_moisture_raw` capabilities are disabled/retired in active inventory. Historical readings/calibrations remain available.
+- Plants B-D have no trusted current moisture probe until replacement probes exist; use hand checks, tray behavior, plant posture, media condition, and runoff/slurry evidence.
+- Operator note: physically disconnecting the old capacitive nodes is safe and should not create stale/offline system-status noise.
+- Updated: `hardware/rs485-substrate-sensors.md`, `hardware/rs485-substrate-sensor-calibration.md`, `hardware/esp32-plant-nodes.md`, `overview.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`.
+
+## [2026-06-12] query-filed | Post-flush reservoir diluted to EC 1.0
+- User reported the new EC meter is an Apera Instruments AI314 Premium Series EC60.
+- After the 2026-06-10 high-EC reservoir reset and roughly 24 hours on pH-adjusted tap water, rebuilt nutrient solution measured 1300 uS/cm / 1.3 mS/cm, which is inside the late-flower Autopot reservoir band.
+- The reservoir was then diluted to EC 1.0 mS/cm as a conservative recovery-strength feed after the nutrient-burn/high-EC concern.
+- Updated: `environment/nutrients.md`, `concepts/ec.md`, `overview.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `index.md`.
+
+## [2026-06-12] query-filed | Post-flush burn recovery plan
+- User reported the plants still look lighter green and the tips still look burned after the 24-hour pH-adjusted tap-water flush and nutrient restart.
+- Plan filed from AutoPot/grower EC guidance: hold reservoir at about EC 0.8-1.0 total for 48-72 hours, keep pH around 5.8, judge recovery by new growth/fresh burn/posture/tray cycling, and do not extend plain-water reservoir flushing by default.
+- Escalation condition: if fresh tip/edge burn keeps advancing, leaves keep fading rapidly, posture declines, or root-zone/runoff/slurry EC evidence remains high, turn off the valve, remove pots from trays, top-flush drain-to-waste, let pots drain, clean trays/valves, and restart around EC 0.6-0.8.
+- Updated: `daily/2026-06-12.md`, `environment/nutrients.md`, `overview.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `index.md`.
+
+## [2026-06-14] query-filed | Track A narrowed to R2 pollen donor
+- User reported all Track A R1-R5 pollen-run plants have been culled except R2.
+- R2 was retained because it showed purple coloration on the pollen sacs, and the current plan is to collect pollen from R2.
+- Track A is now a single-donor pollen collection: label all pollen explicitly as R2-derived and follow collection, drying, aliquot, and freezer protocol.
+- Updated: `overview.md`, `breeding/README.md`, `breeding/timeline.md`, `breeding/isolation.md`, `grows/README.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `index.md`.
+
+## [2026-06-16] query-filed | Plant A upper-canopy light/temperature correction
+- User reported Plant A's highest large fan leaves were yellow while lower/protected leaves stayed dark green; the affected leaves were closest to the light at roughly 5 inches.
+- Reservoir status was acceptable by handheld check: pH 5.8 / EC 1.1 mS/cm, with tray cycling normal. Buds and sugar leaves were not bleaching or crisping, and trichomes were still largely clear.
+- At 20:50 MDT, the light was raised about 5 inches and lung-room AC was adjusted to hold 72°F to reduce lights-on heat/VPD pressure.
+- Updated: `grows/main-2026-03-15/plants/plant-a.md`, `environment/temperature.md`, `environment/nutrients.md`, `overview.md`, `index.md`.
+
+## [2026-06-19] daily | Day 97 / Flower Day 47 - full main photos; steadier VPD, breeding photo missing
+- Photos captured across all 5 expected main presets: overview plus Plant A, Plant B, Plant C, and Plant D. No breeding overview photo was available, so breeding visual coverage is incomplete.
+- **Main-tent environment:** VPD is steadier than the last full report at 1.18 kPa overnight / 1.43 morning / 1.49 now. RH remains above the late-flower guide near 51%, so keep flower-pocket airflow and dead-leaf checks active rather than adding broad lights-on drying.
+- **Plant observations:** A remains fan-obstructed but visible tops are upright with no obvious bud/sugar-leaf bleaching; B has upright flower clusters but no trusted direct moisture value; C is upright on the wall side; D still shows the strongest visible purple flower expression.
+- **Moisture telemetry:** trusted direct-percent readings are stable for A/C/D (`SBBS-R1-001` 26.4%, `SBBS-R1-003` 34.6%, `SBBS-R1-004` 31.8%) with less than 0.1 point movement from morning to now. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 26; R2 remains the only retained pollen donor. Current-only sensor data repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly.
+- Updated: `daily/2026-06-19.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-20] daily | Day 98 / Flower Day 48 - no photos; VPD split, A/C/D moisture stable
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's plant status is sensor-only and manual inspection is required for visual checks.
+- **Main-tent environment:** VPD is split at 1.10 kPa overnight / 1.39 morning / 1.55 now. RH remains above the late-flower guide, so improve dark-cycle clearing and flower-pocket airflow without adding broad lights-on drying.
+- **Moisture telemetry:** trusted direct-percent readings are stable to slightly drifting for A/C/D (`SBBS-R1-001` 26.5%, `SBBS-R1-003` 34.0%, `SBBS-R1-004` 31.4%). `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 27; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly.
+- Updated: `daily/2026-06-20.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-21] daily | Day 99 / Flower Day 49 - full main photos; overnight VPD wet, current dew point higher
+- Photos captured across all 5 expected main presets: overview plus Plant A, Plant B, Plant C, and Plant D. Plant A's dedicated view is mostly fan/blur-obstructed, and no breeding overview photo was available.
+- **Main-tent environment:** VPD is wet/low overnight at 1.00 kPa, then usable at 1.37 morning / 1.43 now. Current dew point climbed to 60.57°F and RH remains above the late-flower guide, so keep the action on dark-cycle clearing, dead-leaf removal, and dense flower-pocket airflow.
+- **Plant observations:** The canopy is dense, late-flower, and purple-toned with fresh pistils still visible. Plant B and C flowers are upright with older tip/edge wear and pale/yellow fade; Plant D remains the strongest visible purple expression.
+- **Moisture telemetry:** trusted direct-percent readings are flat for A/D and modestly down for C (`SBBS-R1-001` 26.5%, `SBBS-R1-003` 33.0%, `SBBS-R1-004` 31.4%). `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 28; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly.
+- Updated: `daily/2026-06-21.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-22] daily | Day 100 / Flower Day 50 - full main photos; VPD split dry now, wet overnight
+- Photos captured across all 5 expected main presets: overview plus Plant A, Plant B, Plant C, and Plant D. Plant A's dedicated view remains mostly obstructed, and no breeding overview photo was available.
+- **Main-tent environment:** VPD is split at 1.05 kPa overnight / 1.39 morning / 1.69 now with the fan at 80%. Current RH is lower than yesterday but still above the late-flower guide, so keep correction on dark-cycle clearing and flower-pocket airflow without adding more lights-on drying.
+- **Plant observations:** The canopy is dense, colorful, late-flower, and purple-toned with fresh pistils still visible. Plant B/C flowers remain upright with older tip/edge wear and pale/yellow fade; Plant D remains the strongest visible purple expression.
+- **Moisture telemetry:** trusted direct-percent readings show only small movement for A/C/D (`SBBS-R1-001` 26.5%, `SBBS-R1-003` 33.6%, `SBBS-R1-004` 30.7%). `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 29; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly.
+- Updated: `daily/2026-06-22.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-23] daily | Day 101 / Flower Day 51 - full main photos; VPD split narrowed, breeding photo missing
+- Photos captured across all 5 expected main presets: overview plus Plant A, Plant B, Plant C, and Plant D. Plant A's dedicated view remains mostly obstructed, and no breeding overview photo was available.
+- **Main-tent environment:** VPD is still split but narrower at 1.10 kPa overnight / 1.37 morning / 1.51 now with the fan near 20%. Current RH remains above the late-flower guide, so keep correction on dark-cycle clearing, dead-leaf removal, and dense flower-pocket airflow without adding broad lights-on drying.
+- **Plant observations:** The canopy is dense, colorful, and late-flower mature with chunky purple/lavender flowers, ongoing fade, and fresh pistils still present. Plant B/C flowers remain upright with older tip/edge wear and pale/yellow fade; Plant D remains the strongest visible purple expression.
+- **Moisture telemetry:** trusted direct-percent readings show only small/flat movement for A/C/D (`SBBS-R1-001` 26.4%, `SBBS-R1-003` 33.7%, `SBBS-R1-004` 31.1%). `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 30; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly.
+- Updated: `daily/2026-06-23.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-24] daily | Day 102 / Flower Day 52 - no photos; VPD improved lights-on, breeding wet repeat
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD improved to 1.17 kPa overnight / 1.31 morning / 1.40 now with fan near 20%. Lights-on is in range; keep correction focused on the slightly wet overnight window and dense flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show small/modest movement for A/C/D (`SBBS-R1-001` 26.2%, `SBBS-R1-003` 32.8%, `SBBS-R1-004` 31.9%). `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 31; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly.
+- Updated: `daily/2026-06-24.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-25] daily | Day 103 / Flower Day 53 - main photos present, stable lights-on VPD, breeding photo missing
+- Photos captured across all 5 expected main presets: overview plus Plant A, Plant B, Plant C, and Plant D. Plant A's dedicated view is mostly fan/blur-obstructed, and no breeding overview photo was available.
+- **Main-tent environment:** VPD held stable at 1.16 kPa overnight / 1.29 morning / 1.37 now with fan steady at 20%. Lights-on remains in range; keep correction focused on the slightly wet overnight window, dead-leaf removal, and dense flower-pocket airflow.
+- **Plant observations:** The canopy is dense, colorful, and late-flower mature with purple/lavender flowers and visible yellow/lime fade. Plant C and D remain upright; Plant B is partly visible and hand-check-only; Plant A still requires direct inspection because the dedicated photo is non-diagnostic.
+- **Moisture telemetry:** trusted direct-percent readings show flat/small movement for A/C/D (`SBBS-R1-001` 26.2%, `SBBS-R1-003` 32.9%, `SBBS-R1-004` 32.8%). `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 32; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-06-25.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-26] daily | Day 104 / Flower Day 54 - no photos; wet overnight regression, C/D moisture checks
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is 1.05 kPa overnight / 1.20 morning / 1.27 now. Lights-on remains usable, but the overnight window regressed wetter with 57.90% RH despite higher fan output, so keep the action on dark-cycle clearing and flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat near 24.9%, `SBBS-R1-003` flat today near 27.2% after a notable lower step, and `SBBS-R1-004` moving upward to 35.9%. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 33; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-06-26.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-27] daily | Day 105 / Flower Day 55 - no photos; VPD improved, D moisture up
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD improved to 1.17 kPa overnight / 1.29 morning / 1.46 now. Lights-on is in range and overnight is only slightly wet/low, but RH remains above the late-flower guide, so keep the action on dark-cycle clearing and flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat near 24.9%, `SBBS-R1-003` flat near 27.4% after yesterday's lower-step context, and `SBBS-R1-004` continuing upward to 36.6%. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 34; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-06-27.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-28] daily | Day 106 / Flower Day 56 - no photos; VPD in range all windows, breeding wet repeat
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band across all windows at 1.26 kPa overnight / 1.36 morning / 1.41 now. RH remains slightly above the late-flower guide, so hold broad conditions steady and keep the action on dark-cycle clearing and flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat/slightly down near 24.7%, `SBBS-R1-003` flat near 27.3% after the recent lower-step context, and `SBBS-R1-004` nearly flat/slightly up at 36.7%. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 35; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-06-28.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-29] daily | Day 107 / Flower Day 57 - no photos; VPD in range all windows again, breeding wet repeat
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band across all windows at 1.23 kPa overnight / 1.35 morning / 1.42 now. RH remains above the late-flower guide, so hold broad conditions steady and keep the action on dark-cycle clearing and flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat/slightly down near 24.6%, `SBBS-R1-003` flat near 27.4% after the recent lower-step context, and `SBBS-R1-004` slightly up to 37.1%. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 36; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-06-29.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-06-30] daily | Day 108 / Flower Day 58 - no photos; VPD in range third report, D moisture up
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for a third straight report at 1.28 kPa overnight / 1.46 morning / 1.50 now. RH remains above the guide but current RH is closer at 46.18%, so hold broad conditions steady and keep dark-cycle clearing plus dense flower-pocket airflow active.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat/slightly down to 24.5%, `SBBS-R1-003` flat/slightly down to 27.2% after the recent lower-step context, and `SBBS-R1-004` slightly up to 37.7%. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 37; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-06-30.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-01] daily | Day 109 / Flower Day 59 - no photos; VPD in range fourth report, D high-30s watch
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for a fourth straight report at 1.27 kPa overnight / 1.38 morning / 1.46 now. RH is slightly high overnight and morning, but current RH is at the guide ceiling at 44.97%, so hold broad conditions steady and keep dark-cycle clearing plus dense flower-pocket airflow active.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat near 24.7%, `SBBS-R1-003` flat near 27.3% after the recent lower-step context, and `SBBS-R1-004` at 37.7% with a modest intraday rise. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 38; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-01.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-02] daily | Day 110 / Flower Day 60 - no photos; VPD in range fifth report, RH/dew point rose
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for a fifth straight report at 1.25 kPa overnight / 1.31 morning / 1.35 now, but RH is above the late-flower guide in every window and current dew point rose to 52.78°F. Keep broad VPD control steady while checking dark-cycle clearing, dead material, and dense flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat near 24.6%, `SBBS-R1-003` flat near 27.3% after the recent lower-step context, and `SBBS-R1-004` at 38.0% with a modest intraday rise. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 39; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-02.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-03] daily | Day 111 / Flower Day 61 - no photos; VPD in range sixth report, RH/dew point improved
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for a sixth straight report at 1.28 kPa overnight / 1.40 morning / 1.44 now. RH remains above the late-flower guide, but lights-on RH and current dew point improved from yesterday; hold broad control steady while checking dark-cycle clearing, dead material, and dense flower-pocket airflow.
+- **Moisture telemetry:** trusted direct-percent readings show `SBBS-R1-001` flat near 24.6%, `SBBS-R1-003` flat near 27.2% after the recent lower-step context, and `SBBS-R1-004` at 38.2% with a modest intraday rise. `SBBS-R1-002` is omitted and remains hand-check-only.
+- **Breeding-tent watch:** Flower Day 40; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-03.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-04] manual note | seeded-flower hold, seedling queue, and DTW transition
+- The main 4x4 flower tent is down to two remaining flower plants. Both have been seeded and are being held only until seeds mature; cull them once mature.
+- After the seeded plants are culled, convert the main 4x4 tent to the planned drip-tray drain-to-waste setup.
+- About 38 seedlings are currently in the 3x3 veg tent under the 3x3 grow light. They are being hand-watered while waiting for the main-tent cull and drain-to-waste setup.
+- The three RS485/TDS substrate probes remain relevant for the next drain-to-waste layout; reconcile their plant-label placement before relying on them after the tent conversion.
+- Updated: `overview.md`, `log.md`.
+
+## [2026-07-04] daily | Day 112 / Flower Day 62 - no photos; VPD in range seventh report, C moisture jump
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for a seventh straight report at 1.26 kPa overnight / 1.34 morning / 1.38 now. RH remains above the 40-45% guide, so hold broad control steady and keep checking local seeded flower pockets and dark-cycle clearing.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, moving sharply wetter from 43.79% overnight to 58.70% now. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the earlier July 4 operator note says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 41; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-04.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-05] daily | Day 113 / Flower Day 63 - no photos; VPD in range eighth report, C moisture elevated
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for an eighth straight report at 1.29 kPa overnight / 1.38 morning / 1.49 now. RH remains above the 40-45% guide and current VPD is near the upper edge, so hold broad control steady and keep checking local seeded flower pockets and dark-cycle clearing.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, remaining elevated at 66.90% now after 68.47% overnight and 65.56% morning. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 42; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-05.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-06] daily | Day 114 / Flower Day 64 - no photos; VPD in range ninth report, C moisture stepped down
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD is in the late-flower band for a ninth straight report at 1.33 kPa overnight / 1.42 morning / 1.50 now. RH remains just above the 40-45% guide and current VPD is at the upper edge, so hold broad control steady and keep checking local seeded flower pockets and dark-cycle clearing.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, stepping down to 57.90% now after 60.13% overnight and 59.55% morning. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 43; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-06.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-07] daily | Day 115 / Flower Day 65 - no photos; VPD mostly controlled, C moisture rebounded
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD stayed in range overnight and morning at 1.32 kPa / 1.42 kPa, then edged just high at 1.52 kPa now. RH is near the 40-45% guide, so hold broad control steady and keep checking local seeded flower pockets and dark-cycle clearing.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, rebounding modestly to 58.70% now after 57.10% overnight and 56.82% morning. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 44; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-07.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-08] daily | Day 116 / Flower Day 66 - no photos; VPD in range, C moisture lower
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD is controlled across all windows at 1.31 kPa overnight / 1.41 kPa morning / 1.43 kPa now. RH remains slightly above the 40-45% late-flower guide, so hold broad control steady and keep checking seeded flower pockets, dead material, and dark-cycle clearing.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, lower at 52.50% now after 54.15% overnight and 52.88% morning. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 45; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-08.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-09] daily | Day 117 / Flower Day 67 - no photos; VPD tiny current dry edge, C moisture lower
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD stayed in range overnight and morning at 1.28 kPa / 1.42 kPa, then edged just high at 1.51 kPa now. RH improved into the late-flower guide now at 44.72%, so hold broad control steady and keep direct seeded-flower airflow/dead-material checks active.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, lower at 50.50% now after 53.37% overnight and 51.75% morning. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 46; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-09.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-10] daily | Day 118 / Flower Day 68 - no photos; VPD tiny current dry edge, C moisture lower
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD stayed in range overnight and morning at 1.31 kPa / 1.47 kPa, then edged just high at 1.53 kPa now. RH is near the 40-45% guide, so hold broad control steady and keep direct seeded-flower airflow/dead-material checks active.
+- **Moisture telemetry:** trusted direct-percent data reports only `SBBS-R1-003` today, lower at 45.50% now after 48.07% overnight and 46.41% morning. `SBBS-R1-001`, `SBBS-R1-002`, and `SBBS-R1-004` are omitted; reconcile retained tags and verify C probe/media/tray before acting.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 47; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-10.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-11] daily | Day 119 / Flower Day 69 - no photos; wet overnight, dry/high current, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** overnight VPD regressed wet/low at 1.00 kPa with 56.52% RH, morning reached the 1.50 kPa upper edge, and the current reading is dry/high at 1.79 kPa with 75.27°F / 40.27% RH. Improve dark-cycle clearing and direct seeded-flower airflow without adding broad lights-on drying.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 48; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-11.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-12] daily | Day 120 / Flower Day 70 - no photos; dry/high lights-on VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** overnight VPD recovered into range at 1.44 kPa with 43.76% RH, but morning/current moved dry-high at 1.74/1.94 kPa. Current conditions are 76.46°F / 37.71% RH, so prevent extra broad lights-on drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and repeated dropout.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 49; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-12.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-13] daily | Day 121 / Flower Day 71 - no photos; dry/high lights-on VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** overnight VPD sat at the late-flower upper edge at 1.50 kPa with 41.94% RH, then morning/current moved dry-high at 1.77/1.96 kPa. Current conditions are 76.96°F / 38.13% RH, so prevent extra broad lights-on drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and current dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 50; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-13.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-14] daily | Day 122 / Flower Day 72 - no photos; all-window dry/high VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD is dry/high across all windows: 1.57 kPa overnight, 1.79 kPa morning, and 1.99 kPa now. Current conditions are 77.02°F / 37.07% RH, so prevent extra broad drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and fourth-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 51; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-14.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-15] daily | Day 123 / Flower Day 73 - no photos; all-window dry/high VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD remains dry/high across all windows: 1.56 kPa overnight, 1.80 kPa morning, and 2.00 kPa now. Current conditions are 77.09°F / 37.13% RH, so prevent extra broad drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and fifth-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 52; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-15.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-16] daily | Day 124 / Flower Day 74 - no photos; all-window dry/high VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD remains dry/high across all windows: 1.58 kPa overnight, 1.81 kPa morning, and 2.00 kPa now. Current conditions are 76.91°F / 36.63% RH, so prevent extra broad drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and sixth-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 53; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-16.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-17] daily | Day 125 / Flower Day 75 - no photos; all-window dry/high VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD remains dry/high across all windows: 1.56 kPa overnight, 1.80 kPa morning, and 2.00 kPa now. Current conditions are 76.64°F / 35.97% RH, so prevent extra broad drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and seventh-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 54; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-17.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-18] daily | Day 126 / Flower Day 76 - no photos; VPD improved, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD improved sharply from the dry/high streak: 1.31 kPa overnight and 1.44 kPa morning are in range, with the current reading only slightly high at 1.52 kPa. Current conditions are 73.02°F / 45.04% RH, so hold broad control steady and keep direct seeded-flower airflow/dead-material checks active.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and eighth-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 55; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-18.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-19] daily | Day 127 / Flower Day 77 - no photos; wet/low VPD, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, flower-pocket checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD regressed wet/low across all windows at 1.12 kPa overnight / 1.11 kPa morning / 1.13 kPa now, with RH 60-63% and current dew point 62.67°F. Verify clearing, exhaust/fan behavior, humidifier/off-gate state, and any dehumidification while keeping direct seeded-flower airflow active.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and ninth-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 56; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-19.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-20] daily | Day 128 / Flower Day 78 - no photos; VPD recovered, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Today's visual checks, seed-maturity checks, flower-pocket checks, and pollen/trichome decisions must be done manually.
+- **Main-tent environment:** VPD recovered into the late-flower band across all windows at 1.32 kPa overnight / 1.32 kPa morning / 1.36 kPa now, but RH remains above the guide at 55-58% and current dew point is 61.88°F. Hold broad VPD steady while improving moisture clearing and direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported today. `SBBS-R1-001` through `SBBS-R1-004` are all omitted again; hand-check retained tags, tray/media/posture, and C's probe/feed after its recent lower-reading run and tenth-report dropout sequence.
+- **Transition watch:** the July 4 operator note still says only two seeded flower plants remain, but retained A-D labels were not specified. Update active plant status once the remaining tags are confirmed.
+- **Breeding-tent watch:** Flower Day 57; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness/exposure, airflow, pot weight, and dry pollen-handling conditions directly before collection.
+- Updated: `daily/2026-07-20.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-21] daily | Day 129 / Flower Day 79 - no photos; VPD slightly high, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Visual seed-maturity, dense-flower, pollen, and trichome checks must be done manually.
+- **Main-tent environment:** temperature and moisture load dropped sharply; VPD is at the upper edge/slightly high at 1.55 kPa overnight / 1.52 morning / 1.53 now. Avoid extra broad drying while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported. `SBBS-R1-001` through `SBBS-R1-004` are omitted; hand-check retained tags, tray/media/posture, and C's probe/feed after its eleventh-report dropout sequence.
+- **Transition watch:** the July 4 note still says only two seeded flower plants remain, but retained A-D labels were not specified. Reconcile them before DTW conversion.
+- **Breeding-tent watch:** Flower Day 58; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness and dry pollen-handling conditions before collection.
+- Updated: `daily/2026-07-21.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`.
+
+## [2026-07-22] daily | Day 130 / Flower Day 80 - no photos; VPD in range, plant moisture missing
+- No daily photos were available: main overview, Plant A/B/C/D, and breeding overview coverage are all incomplete. Visual seed-maturity, dense-flower, pollen, and trichome checks must be done manually.
+- **Main-tent environment:** VPD is in range at 1.50 kPa overnight / 1.48 morning / 1.48 now, with daytime temperature in range and overnight temperature still warm. Hold broad control steady while preserving direct seeded-flower airflow.
+- **Moisture telemetry:** no trusted direct-percent plant readings reported. `SBBS-R1-001` through `SBBS-R1-004` are omitted; hand-check retained tags, tray/media/posture, and C's probe/feed after its twelfth-report dropout sequence.
+- **Transition watch:** the July 4 note still says only two seeded flower plants remain, but retained A-D labels were not specified. Reconcile them before DTW conversion.
+- **Breeding-tent watch:** Flower Day 59; R2 remains the selected pollen donor. Current-only sensor data again repeats 71.92°F / 83.28% RH / 0.45 kPa, so verify sensor freshness and dry pollen-handling conditions before collection.
+- Updated: `daily/2026-07-22.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-23] daily | Day 131 / Flower Day 81 - no photos; lights-on VPD dry-high, plant moisture missing
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.19/73.11/74.05°F, 46.10/44.78/44.30% RH, and 1.45/1.54/1.60 kPa VPD overnight/morning/now. Avoid additional broad drying while keeping localized seeded-flower airflow.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirteenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-23.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-24] daily | Day 132 / Flower Day 82 - no photos; lights-on VPD dry-high, plant moisture missing
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.03/74.93/75.51°F, 44.89/43.88/45.10% RH, and 1.48/1.66/1.65 kPa VPD overnight/morning/now. Avoid additional broad drying while keeping localized seeded-flower airflow.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a fourteenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-24.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-25] daily | Day 133 / Flower Day 83 - no photos; lights-on VPD dry-high, plant moisture missing
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.16/74.56/76.24°F, 44.95/45.30/48.09% RH, and 1.49/1.60/1.60 kPa VPD overnight/morning/now. Avoid added broad drying or heat while keeping localized seeded-flower airflow and direct flower-pocket checks.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a fifteenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-25.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-26] daily | Day 134 / Flower Day 84 - no photos; VPD improved slightly high, plant moisture missing
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.44/73.65/75.54°F, 45.14/45.26/48.89% RH, and 1.49/1.55/1.54 kPa VPD overnight/morning/now. VPD improved versus the prior dry-high readings but remains slightly high through lights-on; hold broad control steady and keep localized seeded-flower airflow plus direct flower-pocket checks.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a sixteenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-26.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-27] daily | Day 135 / Flower Day 85 - no photos; VPD in range, RH/dew point high
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 74.59/75.83/76.35°F, 55.45/58.82/57.28% RH, and 1.30/1.25/1.32 kPa VPD overnight/morning/now. VPD is in range, but the profile is warm and high-moisture; hold broad VPD steady, avoid added heat, and keep localized seeded-flower airflow plus direct flower-pocket checks.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a seventeenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-27.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-28] daily | Day 136 / Flower Day 86 - no photos; VPD in range, RH/dew point climbed
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 73.29/75.48/76.28°F, 56.49/58.42/60.27% RH, and 1.22/1.25/1.23 kPa VPD overnight/morning/now. VPD is in range, but the profile is warm and high-moisture with current dew point 61.48°F; hold broad VPD steady, avoid added heat, and keep localized seeded-flower airflow plus direct flower-pocket checks.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for an eighteenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-28.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-29] daily | Day 137 / Flower Day 87 - no photos; VPD in range, RH still high
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 73.03/74.84/75.97°F, 54.51/55.79/55.63% RH, and 1.26/1.30/1.36 kPa VPD overnight/morning/now. VPD is in range and the current dew point eased to 58.94°F, but RH remains above the late-flower guide; hold broad VPD steady and keep localized seeded-flower airflow plus direct flower-pocket checks.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a nineteenth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-29.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-30] daily | Day 138 / Flower Day 88 - no photos; VPD upper-edge, plant moisture missing
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.77/75.20/75.15°F, 47.93/48.51/49.14% RH, and 1.43/1.54/1.51 kPa VPD overnight/morning/now. RH and dew point improved materially, but lights-on VPD is now slightly high; avoid added heat or broad drying while checking retained seeded flowers directly.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twentieth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-30.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-07-31] daily | Day 139 / Flower Day 89 - no photos; VPD in range, RH above guide
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.83/74.40/74.98°F, 50.44/48.69/51.87% RH, and 1.37/1.49/1.43 kPa VPD overnight/morning/now. VPD recovered into range, but RH remains above the late-flower guide and current dew point rose to 56.08°F; hold broad control steady and keep localized seeded-flower checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-first report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-07-31.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-01] daily | Day 140 / Flower Day 90 - no photos; VPD in range with cooler/lower-dew profile
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.79/72.58/73.17°F, 48.42/48.73/49.48% RH, and 1.37/1.40/1.41 kPa VPD overnight/morning/now. VPD is in range and current dew point improved to 53.11°F; hold broad control steady while keeping localized seeded-flower airflow and direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-second report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-01.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-02] daily | Day 141 / Flower Day 91 - no photos; VPD upper-edge after warming
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.24/74.78/75.27°F, 47.29/48.00/49.95% RH, and 1.42/1.53/1.50 kPa VPD overnight/morning/now. VPD is upper-edge/slightly high and current dew point rose to 55.30°F; avoid added heat or broad drying while keeping localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-third report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-02.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-03] daily | Day 142 / Flower Day 92 - no photos; VPD slightly high all windows
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 74.70/74.51/75.79°F, 45.72/48.28/49.96% RH, and 1.60/1.51/1.52 kPa VPD overnight/morning/now. VPD is slightly high across all windows while RH remains above the late-flower guide; avoid added heat or broad drying while keeping localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-fourth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-03.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-04] daily | Day 143 / Flower Day 93 - no photos; VPD recovered, RH/dew point high
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.79/74.41/74.37°F, 54.89/55.72/55.12% RH, and 1.20/1.29/1.30 kPa VPD overnight/morning/now. VPD recovered into range across all windows, but RH/dew point remain high for late flower; hold broad control steady, avoid added humidity or heat, and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-fifth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-04.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-05] daily | Day 144 / Flower Day 94 - no photos; overnight VPD slightly low
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.18/74.47/74.62°F, 54.84/57.96/57.06% RH, and 1.18/1.22/1.26 kPa VPD overnight/morning/now. Overnight VPD slipped just below range while lights-on VPD remained usable; avoid added humidity, hold broad control steady, and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-sixth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; verify freshness and dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-05.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-06] daily | Day 145 / Flower Day 95 - no photos; overnight VPD low
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.31/74.55/74.64°F, 56.05/55.97/56.57% RH, and 1.15/1.29/1.27 kPa VPD overnight/morning/now. Overnight VPD is low while lights-on recovered into range; avoid added humidity, hold broad lights-on control steady, and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-seventh report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-06.md`, `grows/main-2026-03-15/README.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/README.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-07] daily | Day 146 / Flower Day 96 - no photos; VPD recovered in range
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.42/74.05/75.06°F, 49.44/52.39/54.08% RH, and 1.33/1.37/1.36 kPa VPD overnight/morning/now. VPD recovered into range as RH/dew point fell versus yesterday, though RH remains above the late-flower guide and overnight remains warm; hold broad control steady, avoid added humidity, and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-eighth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-07.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-08] daily | Day 147 / Flower Day 97 - no photos; moisture load rebounded
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.67/74.90/76.17°F, 53.02/55.21/54.82% RH, and 1.25/1.32/1.39 kPa VPD overnight/morning/now. RH/dew point rose in every window and current temperature is high, though VPD remains in range; avoid added humidity or heat and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a twenty-ninth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-08.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-09] daily | Day 148 / Flower Day 98 - no photos; current RH rose to 58.42%
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.17/73.99/74.89°F, 52.16/56.32/58.42% RH, and 1.29/1.25/1.23 kPa VPD overnight/morning/now. Current RH rose 3.60 points while VPD remained in range near its lower edge; avoid added humidity, keep localized seeded-flower airflow plus direct flower-pocket checks active, and do not use added heat as the primary correction.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirtieth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-09.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-10] daily | Day 149 / Flower Day 99 - no photos; VPD stable in range
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.76/74.92/75.38°F, 53.15/55.86/57.75% RH, and 1.25/1.30/1.27 kPa VPD overnight/morning/now. VPD remained in range throughout while RH stayed above the late-flower guide and overnight temperature remained warm; avoid added humidity and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-first report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-10.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-11] daily | Day 150 / Flower Day 100 - no photos; VPD remains in range
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.43/74.00/75.09°F, 54.03/56.59/56.95% RH, and 1.21/1.24/1.28 kPa VPD overnight/morning/now. VPD remained in range throughout while RH stayed above the late-flower guide and overnight temperature remained warm; avoid added humidity and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-second report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-11.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-12] daily | Day 151 / Flower Day 101 - no photos; overnight VPD low
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.58/74.85/75.56°F, 55.64/56.79/57.25% RH, and 1.17/1.27/1.29 kPa VPD overnight/morning/now. Overnight VPD slipped below the late-flower band while RH remained above guide; avoid added humidity or heat and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-third report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-12.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-13] daily | Day 152 / Flower Day 102 - no photos; morning RH elevated
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 72.05/74.36/74.53°F, 54.06/58.34/55.63% RH, and 1.23/1.21/1.29 kPa VPD overnight/morning/now. Overnight VPD recovered into range, but morning RH rose and VPD reached the lower band edge; avoid added humidity or heat and keep localized seeded-flower airflow plus direct flower-pocket checks active.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-fourth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-13.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-14] daily | Day 153 / Flower Day 103 - no photos; VPD low throughout
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.71/73.44/74.21°F, 59.61/59.85/59.03% RH, and 1.07/1.13/1.18 kPa VPD overnight/morning/now. VPD is below the late-flower band throughout while RH holds near 60%; avoid added humidity, improve moisture removal and localized seeded-flower airflow without adding heat, and inspect flower pockets directly.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-fifth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-14.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-15] daily | Day 154 / Flower Day 104 - no photos; humidity increased
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.42/73.11/73.38°F, 63.16/64.76/63.85% RH, and 0.97/0.98/1.01 kPa VPD overnight/morning/now. RH rose materially from yesterday and VPD is well below the late-flower band throughout; avoid added humidity, improve moisture removal and localized seeded-flower airflow without adding heat, and inspect flower pockets directly.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-sixth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-15.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-16] daily | Day 155 / Flower Day 105 - no photos; lights-on humidity worsened
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 71.52/72.72/72.75°F, 63.21/67.08/66.32% RH, and 0.97/0.90/0.93 kPa VPD overnight/morning/now. Morning/current RH worsened and VPD remains well below the late-flower band while fan output stays at 20%; avoid added humidity, improve moisture removal and localized seeded-flower airflow without adding heat, and inspect flower pockets directly.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-seventh report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-16.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.
+
+## [2026-08-17] daily | Day 156 / Flower Day 106 - no photos; humidity improved but remains high
+
+- No main overview, Plant A/B/C/D, or breeding overview photos were available; visual seed, flower, trichome, pollen, retained-tag, and canopy checks remain incomplete.
+- Main Tent 1: 70.96/72.32/72.27°F, 60.89/61.65/61.49% RH, and 1.01/1.04/1.04 kPa VPD overnight/morning/now. Moisture load improved from August 16 but remains outside the late-flower band while fan output stays at 20%; continue moisture removal and localized seeded-flower airflow without adding heat.
+- No trusted direct-percent A-D moisture readings; `SBBS-R1-003` is missing for a thirty-eighth report after the earlier lower-reading run. Reconcile the two retained tags and verify C's probe/feed, media, tray, and posture.
+- Tent 2 again reports the exact current-only 71.92°F / 83.28% RH / 0.45 kPa repeat with no photo; treat it as stale or otherwise unverified and confirm freshness plus dry handling conditions before R2 pollen work.
+- Updated: `daily/2026-08-17.md`, `grows/main-2026-03-15/plants/plant-{a,b,c,d}.md`, `grows/breeding-track-a-2026-04-28/plants/plant-r{1,2,3,4,5}.md`, `environment/temperature.md`, `environment/humidity.md`, `overview.md`, `index.md`, `../README.md`.

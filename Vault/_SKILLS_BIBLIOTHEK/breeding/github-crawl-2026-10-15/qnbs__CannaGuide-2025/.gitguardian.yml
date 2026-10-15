@@ -1,0 +1,20 @@
+# GitGuardian Configuration
+# Docs: https://docs.gitguardian.com/ggshield-docs/reference/gitguardian-yaml
+
+# Paths to ignore during secret scanning
+paths-ignore:
+    - '**/node_modules/**'
+    - '**/dist/**'
+    - '**/coverage/**'
+    - '**/test-results/**'
+    - '**/*.test.ts'
+    - '**/*.test.tsx'
+    - '**/tests/mocks/**'
+    - '**/docker/iot-mocks/**'
+    - '**/data/strains/*.json'
+    - '**/public/screenshots/**'
+    - '**/*.png'
+    - '**/*.ico'
+    - '**/*.icns'
+    - '**/CHANGELOG.md'
+    - '**/scorecard.json'

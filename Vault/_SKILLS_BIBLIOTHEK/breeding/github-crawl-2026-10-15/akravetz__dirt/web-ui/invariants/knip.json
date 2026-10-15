@@ -1,0 +1,23 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/main.tsx",
+    "src/shared/storage.ts",
+    "src/shared/platform.ts",
+    "src/api-client/index.ts",
+    "vite.config.ts",
+    "eslint.config.ts",
+    "invariants/eslint.config.ts",
+    "invariants/rules/*.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx}", "invariants/**/*.ts"],
+  "ignore": ["src/routeTree.gen.ts", "src/api-client/generated/**"],
+  "ignoreDependencies": [
+    "tailwindcss",
+    "@eslint/js",
+    "eslint-plugin-boundaries",
+    "typescript-eslint",
+    "jiti",
+    "openapi-typescript"
+  ]
+}

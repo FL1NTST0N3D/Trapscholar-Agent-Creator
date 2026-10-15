@@ -1,0 +1,41 @@
+{
+    "$schema": "https://raw.githubusercontent.com/stryker-mutator/stryker/master/packages/core/schema/stryker-core.schema.json",
+    "mutate": [
+        "stores/slices/**/*.ts",
+        "stores/useIotStore.ts",
+        "services/equipmentCalculatorService.ts",
+        "services/knowledgeCalculatorService.ts",
+        "services/knowledgeRagService.ts",
+        "utils/lockFreeRingBuffer.ts",
+        "utils/atomicsChannel.ts",
+        "services/workerPool.ts",
+        "!stores/slices/**/*.test.ts",
+        "!stores/**/*.test.ts",
+        "!utils/**/*.test.ts",
+        "!services/**/*.test.ts"
+    ],
+    "testRunner": "vitest",
+    "plugins": ["@stryker-mutator/vitest-runner", "@stryker-mutator/typescript-checker"],
+    "checkers": ["typescript"],
+    "tsconfigFile": "tsconfig.json",
+    "coverageAnalysis": "perTest",
+    "vitest": {
+        "configFile": "vite.config.ts",
+        "dir": "."
+    },
+    "testFiles": ["**/*.test.ts", "**/*.test.tsx"],
+    "reporters": ["clear-text", "html"],
+    "htmlReporter": {
+        "fileName": "../../reports/mutation/mutation-report.html"
+    },
+    "thresholds": {
+        "high": 80,
+        "low": 60,
+        "break": 50
+    },
+    "concurrency": 6,
+    "timeoutMS": 120000,
+    "incremental": true,
+    "incrementalFile": "../../reports/mutation/.stryker-incremental.json",
+    "ignorePatterns": ["node_modules", "dist", ".turbo", "coverage"]
+}

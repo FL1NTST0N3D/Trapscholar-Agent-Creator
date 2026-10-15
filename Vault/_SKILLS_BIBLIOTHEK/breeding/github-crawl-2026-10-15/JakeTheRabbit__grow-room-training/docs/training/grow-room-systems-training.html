@@ -1,0 +1,2820 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grow Room Systems — Cultivation Training Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..800;1,8..60,300..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f1e1;
+  --paper-2:#efe7d2;
+  --paper-3:#e6dcc1;
+  --ink:#1c1812;
+  --ink-2:#3d362a;
+  --ink-3:#6a604f;
+  --rule:#1c1812;
+  --rule-soft:#b8ad94;
+  --accent:#2d5a3a;
+  --accent-soft:#cfe0d4;
+  --warn:#8a5a1f;
+  --warn-soft:#ecdcb7;
+  --risk:#8e2f24;
+  --risk-soft:#ecc9c4;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+body{
+  font-family:var(--serif);
+  font-size:18px;
+  line-height:1.72;
+  font-feature-settings:"onum","liga","kern";
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,h5,h6{font-family:var(--serif);font-weight:600;letter-spacing:-0.005em;color:var(--ink);margin:0 0 0.5em}
+h1{font-size:2.6rem;line-height:1.12;font-weight:700}
+h2{font-size:1.85rem;line-height:1.18;border-bottom:2px solid var(--rule);padding-bottom:0.35em;margin-top:1.6em}
+h3{font-size:1.35rem;line-height:1.28;margin-top:1.4em;color:var(--ink)}
+h4{font-size:1.08rem;line-height:1.35;margin-top:1.2em;text-transform:uppercase;letter-spacing:0.06em;font-family:var(--mono);font-weight:600;font-size:0.85rem}
+p{margin:0 0 1em;max-width:68ch}
+ul,ol{margin:0 0 1em;padding-left:1.3em;max-width:68ch}
+li{margin:0 0 0.35em}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
+a:hover{background:var(--accent-soft)}
+hr{border:0;border-top:1px solid var(--rule-soft);margin:2em 0}
+code,kbd,samp{font-family:var(--mono);font-size:0.92em;background:var(--paper-2);padding:0.05em 0.35em;border-radius:2px}
+small{font-size:0.82em;color:var(--ink-3)}
+strong{font-weight:700;color:var(--ink)}
+em{font-style:italic}
+
+.app-header{
+  position:sticky;top:0;z-index:100;
+  background:var(--paper);
+  border-bottom:3px double var(--rule);
+  padding:0.6em 2.2em;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5em;
+}
+.brand{display:flex;align-items:baseline;gap:0.8em}
+.brand .mark{font-family:var(--mono);font-weight:600;letter-spacing:0.18em;font-size:0.75rem;text-transform:uppercase;color:var(--ink-3)}
+.brand .title{font-family:var(--serif);font-weight:700;font-size:1.15rem;color:var(--ink)}
+.brand .subtitle{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3)}
+.counters{display:flex;gap:1.4em;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3)}
+.counters span b{color:var(--ink);font-weight:600}
+
+.layout{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:296px 1fr;gap:2em;padding:2em 2.2em 5em;align-items:start}
+
+.toc{
+  position:sticky;top:88px;
+  font-family:var(--mono);font-size:0.78rem;
+  border-right:1px solid var(--rule-soft);
+  padding-right:1.4em;
+  max-height:calc(100vh - 110px);overflow-y:auto;
+}
+.toc h4{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;color:var(--ink-3);margin-top:1.6em;margin-bottom:0.4em;text-transform:uppercase}
+.toc h4:first-child{margin-top:0}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc button{
+  display:block;width:100%;text-align:left;
+  background:none;border:0;color:var(--ink-2);
+  font-family:var(--mono);font-size:0.78rem;
+  padding:0.25em 0.4em;cursor:pointer;line-height:1.4;
+  border-left:2px solid transparent;
+}
+.toc button:hover{background:var(--paper-2);color:var(--ink)}
+.toc button.active{border-left-color:var(--accent);background:var(--paper-2);color:var(--ink);font-weight:600}
+.toc .num{display:inline-block;width:2.4em;color:var(--ink-3)}
+.toc button.active .num{color:var(--accent)}
+
+main{max-width:880px;min-width:0}
+.chapter-meta{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.4em}
+
+.key-idea,.example,.science,.def,.warn-box,.risk-box{
+  border-left:4px solid var(--rule);
+  padding:0.9em 1.2em;
+  margin:1.4em 0;
+  background:var(--paper-2);
+  max-width:68ch;
+}
+.key-idea{border-left-color:var(--accent);background:var(--accent-soft)}
+.example{border-left-color:var(--ink);background:var(--paper-3)}
+.science{border-left-color:var(--warn);background:var(--warn-soft)}
+.def{border-left-color:var(--ink-2);background:var(--paper);border:1px solid var(--rule-soft);padding:0.7em 1em;margin:0.6em 0}
+.warn-box{border-left-color:var(--warn);background:var(--warn-soft)}
+.risk-box{border-left-color:var(--risk);background:var(--risk-soft)}
+.key-idea h4,.example h4,.science h4,.warn-box h4,.risk-box h4{margin-top:0;color:var(--ink)}
+.def .term{font-family:var(--mono);font-weight:600;letter-spacing:0.04em;color:var(--ink);text-transform:none;font-size:0.95em}
+.def .gloss{display:inline;margin-left:0.4em;color:var(--ink-2)}
+.def p{margin:0.3em 0 0;font-size:0.94em}
+
+.def-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.6em;margin:1.2em 0;max-width:none}
+
+table{border-collapse:collapse;width:100%;font-family:var(--serif);font-size:0.92rem;margin:1.2em 0;border-top:2px solid var(--rule);border-bottom:2px solid var(--rule)}
+table thead th{
+  text-align:left;font-family:var(--mono);font-weight:600;
+  font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.55em 0.7em;border-bottom:1px solid var(--rule);color:var(--ink)
+}
+table tbody td{padding:0.55em 0.7em;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+table tbody tr:last-child td{border-bottom:0}
+table.compact{font-size:0.86rem}
+table.compact td,table.compact th{padding:0.4em 0.55em}
+.dir{font-family:var(--mono);font-weight:600}
+.dir.up{color:var(--accent)}
+.dir.dn{color:var(--risk)}
+.dir.eq{color:var(--ink-3)}
+
+.btn{
+  font-family:var(--mono);font-weight:500;
+  font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;
+  background:var(--paper);color:var(--ink);
+  border:1px solid var(--rule);padding:0.5em 1em;cursor:pointer;
+  transition:background 80ms;
+}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink)}
+.btn.ghost{background:transparent;border-color:var(--rule-soft);color:var(--ink-2)}
+.btn.danger{border-color:var(--risk);color:var(--risk)}
+.btn.danger:hover{background:var(--risk);color:var(--paper)}
+.btn[disabled]{opacity:0.4;cursor:not-allowed}
+.btn-row{display:flex;flex-wrap:wrap;gap:0.5em;margin:0.8em 0}
+
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.4em;margin:1.4em 0;max-width:none}
+.chain-node{
+  border:1px solid var(--rule-soft);background:var(--paper);
+  padding:0.55em 0.55em;font-family:var(--mono);font-size:0.7rem;
+  text-align:left;cursor:pointer;line-height:1.3;
+  position:relative;
+}
+.chain-node .n{display:block;font-weight:600;color:var(--accent);font-size:0.72rem;letter-spacing:0.08em}
+.chain-node .label{display:block;color:var(--ink);font-weight:500;margin-top:0.25em}
+.chain-node:hover{background:var(--paper-2);border-color:var(--ink)}
+.chain-node.selected{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.chain-node.selected .n,.chain-node.selected .label{color:var(--paper)}
+.chain-arrow{font-family:var(--mono);color:var(--ink-3);text-align:center;align-self:center;font-size:0.85rem}
+.chain-detail{
+  border:1px solid var(--rule);background:var(--paper-2);
+  padding:1.1em 1.3em;margin:1em 0;max-width:none;
+}
+.chain-detail .header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule-soft);padding-bottom:0.5em;margin-bottom:0.7em}
+.chain-detail .badge{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3)}
+
+details.failure{
+  border:1px solid var(--rule);background:var(--paper);
+  margin:0.8em 0;max-width:none;
+}
+details.failure summary{
+  cursor:pointer;padding:0.8em 1.1em;
+  font-family:var(--mono);font-weight:600;font-size:0.85rem;
+  display:flex;align-items:baseline;gap:1em;list-style:none;
+  border-bottom:1px solid transparent;
+}
+details.failure summary::-webkit-details-marker{display:none}
+details.failure summary::before{content:"+";font-family:var(--mono);color:var(--accent);font-weight:600;width:1em}
+details.failure[open] summary::before{content:"−"}
+details.failure[open] summary{border-bottom:1px solid var(--rule-soft)}
+details.failure .code{color:var(--risk);font-weight:700;letter-spacing:0.06em}
+details.failure .name{color:var(--ink);font-weight:600;font-family:var(--serif);font-size:1rem;letter-spacing:0}
+details.failure .body{padding:0.9em 1.1em 1.1em;font-family:var(--serif);font-size:0.95rem}
+details.failure .body h5{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin:1em 0 0.3em;font-weight:600}
+
+.lever-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5em;margin:1em 0;max-width:none}
+.lever-tile{
+  border:1px solid var(--rule-soft);padding:0.6em 0.8em;
+  font-family:var(--mono);font-size:0.78rem;cursor:pointer;background:var(--paper);
+  text-align:left;
+}
+.lever-tile:hover{background:var(--paper-2);border-color:var(--ink)}
+.lever-tile.selected{border-color:var(--accent);background:var(--accent-soft)}
+.lever-tile .grp{display:block;font-size:0.65rem;letter-spacing:0.1em;color:var(--ink-3);text-transform:uppercase}
+.lever-tile .nm{display:block;color:var(--ink);font-weight:600;margin-top:0.2em}
+.group-head{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);margin:1.2em 0 0.4em;font-weight:600}
+
+.lever-detail{border:1px solid var(--rule);background:var(--paper-2);padding:1.2em 1.4em;margin:1em 0;max-width:none}
+.lever-detail .lhead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:0.5em;margin-bottom:0.8em}
+.lever-detail h3{margin:0;font-size:1.2rem}
+.lever-detail .pair{display:grid;grid-template-columns:1fr 1fr;gap:1.2em;margin:0.8em 0}
+.lever-detail .pair section{border-left:3px solid var(--rule);padding-left:0.9em}
+.lever-detail .pair section.up{border-left-color:var(--accent)}
+.lever-detail .pair section.dn{border-left-color:var(--warn)}
+.lever-detail .pair h5{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 0.4em;color:var(--ink-2);font-weight:600}
+.lever-detail ul{margin:0;font-size:0.92rem}
+
+.chip-row{display:flex;flex-wrap:wrap;gap:0.4em;margin:0.8em 0}
+.chip{
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;
+  background:var(--paper);color:var(--ink-2);
+  border:1px solid var(--rule-soft);padding:0.35em 0.7em;cursor:pointer;
+}
+.chip:hover{border-color:var(--ink)}
+.chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+input[type=text],input[type=search],textarea{
+  font-family:var(--serif);font-size:1rem;
+  background:var(--paper);color:var(--ink);
+  border:1px solid var(--rule-soft);padding:0.55em 0.7em;
+  width:100%;max-width:520px;
+}
+textarea{font-size:0.95rem;min-height:120px;font-family:var(--serif);line-height:1.5;resize:vertical}
+input[type=text]:focus,input[type=search]:focus,textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+
+.exercises{border-top:2px solid var(--rule);margin-top:2.6em;padding-top:1em}
+.exercises h3{font-family:var(--mono);font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);margin-top:0}
+.exercise{border-left:3px solid var(--accent);padding:0.5em 1em;margin:0.8em 0;background:var(--paper);max-width:68ch}
+.exercise .ex-num{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--accent);font-weight:600}
+
+.glossary-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:0.4em;margin:1.2em 0;max-width:none}
+.glossary-list .def{margin:0}
+.glossary-letter{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;color:var(--ink-3);margin-top:1em;font-weight:600;text-transform:uppercase;border-bottom:1px solid var(--rule-soft);padding-bottom:0.2em}
+
+.assessment .question{
+  border:1px solid var(--rule);background:var(--paper);
+  padding:1em 1.2em;margin:0.7em 0;
+}
+.assessment .question .q-num{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;color:var(--ink-3);font-weight:600;text-transform:uppercase}
+.assessment .question .q-text{font-family:var(--serif);font-size:1.02rem;margin:0.4em 0 0.6em;font-weight:500}
+.opt{
+  display:block;width:100%;text-align:left;
+  font-family:var(--serif);font-size:0.96rem;
+  background:var(--paper);color:var(--ink);
+  border:1px solid var(--rule-soft);padding:0.55em 0.8em;margin:0.25em 0;cursor:pointer;
+}
+.opt:hover{background:var(--paper-2)}
+.opt.sel{background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+.opt.correct{background:var(--accent-soft);border-color:var(--accent)}
+.opt.wrong{background:var(--risk-soft);border-color:var(--risk)}
+.opt .marker{font-family:var(--mono);font-weight:600;margin-right:0.6em;color:var(--ink-3)}
+.opt.sel .marker,.opt.correct .marker{color:var(--accent)}
+.opt.wrong .marker{color:var(--risk)}
+.feedback{font-size:0.88rem;font-family:var(--serif);color:var(--ink-2);margin:0.5em 0 0;font-style:italic;padding:0.4em 0.6em;background:var(--paper-2);border-left:2px solid var(--rule-soft)}
+
+.score-panel{border:2px solid var(--rule);padding:1.2em 1.4em;margin:1.6em 0;background:var(--paper);max-width:none}
+.score-panel h3{margin-top:0}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1em;margin:1em 0}
+.score-grid .score-cell{border:1px solid var(--rule-soft);padding:0.7em 0.9em;background:var(--paper-2)}
+.score-grid .score-cell .lbl{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3)}
+.score-grid .score-cell .val{font-family:var(--mono);font-size:1.6rem;color:var(--ink);font-weight:600}
+.score-grid .score-cell.pass .val{color:var(--accent)}
+.score-grid .score-cell.fail .val{color:var(--risk)}
+.verdict{font-family:var(--mono);font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;padding:0.6em 1em;margin:0.8em 0}
+.verdict.pass{background:var(--accent);color:var(--paper)}
+.verdict.fail{background:var(--risk);color:var(--paper)}
+
+.mark-row{display:flex;align-items:center;gap:0.4em;margin:0.5em 0;font-family:var(--mono);font-size:0.8rem}
+.mark-row .lbl{color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;font-size:0.7rem;margin-right:0.4em}
+.mark-btn{
+  font-family:var(--mono);font-size:0.85rem;font-weight:600;
+  background:var(--paper);border:1px solid var(--rule-soft);
+  width:2.4em;height:2.4em;cursor:pointer;color:var(--ink-2)
+}
+.mark-btn:hover{border-color:var(--ink)}
+.mark-btn.sel{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+
+.field-card{
+  border:2px solid var(--ink);background:var(--paper);
+  padding:1.6em 1.8em;margin:1.6em 0;max-width:none;
+  position:relative;
+}
+.field-card .fc-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:0.5em;margin-bottom:1em}
+.field-card .fc-head h3{margin:0;font-size:1.3rem}
+.field-card .fc-head .meta{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--ink-3);text-transform:uppercase}
+
+.certificate{
+  border:6px double var(--ink);padding:2.6em 2.4em;background:var(--paper);
+  position:relative;margin:1.4em 0;max-width:none;
+}
+.certificate::before,.certificate::after{
+  content:"";position:absolute;width:24px;height:24px;border:2px solid var(--ink)
+}
+.certificate::before{top:8px;left:8px;border-right:0;border-bottom:0}
+.certificate::after{top:8px;right:8px;border-left:0;border-bottom:0}
+.certificate .corner-bl,.certificate .corner-br{position:absolute;width:24px;height:24px;border:2px solid var(--ink)}
+.certificate .corner-bl{bottom:8px;left:8px;border-right:0;border-top:0}
+.certificate .corner-br{bottom:8px;right:8px;border-left:0;border-top:0}
+.certificate .cert-brand{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink);text-align:center;margin-bottom:0.4em}
+.certificate .cert-mark{text-align:center;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.16em;color:var(--ink-3);margin-bottom:1.4em;text-transform:uppercase}
+.certificate .cert-title{text-align:center;font-family:var(--serif);font-size:2.4rem;font-weight:700;margin:0 0 0.2em;letter-spacing:0.01em}
+.certificate .cert-sub{text-align:center;font-family:var(--serif);font-style:italic;color:var(--ink-2);margin-bottom:1.4em}
+.certificate .cert-name-lbl{text-align:center;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.3em}
+.certificate .cert-name{text-align:center;font-family:var(--serif);font-size:2.2rem;font-weight:600;font-style:italic;border-bottom:1px solid var(--ink);padding-bottom:0.4em;margin:0 4em 1.4em}
+.certificate .cert-body{text-align:center;font-family:var(--serif);font-size:1.05rem;margin:1em 0 1.4em;line-height:1.6}
+.certificate .cert-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8em;margin:1em 0 1.8em;border-top:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft);padding:0.8em 0}
+.certificate .cert-stat{text-align:center}
+.certificate .cert-stat .l{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3)}
+.certificate .cert-stat .v{font-family:var(--mono);font-size:1rem;color:var(--ink);font-weight:600;margin-top:0.2em}
+.certificate .sigs{display:grid;grid-template-columns:1fr 1fr;gap:2.4em;margin:2em 1em 0.4em}
+.certificate .sig{text-align:center}
+.certificate .sig-line{border-bottom:1px solid var(--ink);height:2em;margin-bottom:0.4em}
+.certificate .sig-lbl{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3)}
+.certificate .cert-id{text-align:center;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.16em;color:var(--ink-3);margin-top:1.6em;text-transform:uppercase}
+
+.gmp-table{font-size:0.85rem}
+.gmp-table th,.gmp-table td{border:1px solid var(--rule)}
+.gmp-table td{height:2.4em}
+
+.notice{font-family:var(--mono);font-size:0.78rem;background:var(--warn-soft);border-left:4px solid var(--warn);padding:0.7em 1em;margin:1em 0;max-width:68ch}
+
+.refresh-warn{font-family:var(--mono);font-size:0.7rem;color:var(--warn);letter-spacing:0.06em;background:var(--warn-soft);padding:0.3em 0.7em;display:inline-block;margin:0.6em 0;border:1px solid var(--warn)}
+
+.attribution{font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.04em;border-top:1px solid var(--rule-soft);padding-top:1em;margin-top:3em;max-width:68ch}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;padding:1em}
+  .toc{position:static;border-right:0;border-bottom:1px solid var(--rule-soft);padding-right:0;padding-bottom:1em;max-height:none}
+  .app-header{padding:0.6em 1em;flex-wrap:wrap}
+  .counters{font-size:0.65rem;gap:0.8em}
+  .lever-detail .pair{grid-template-columns:1fr}
+  .certificate .cert-name{margin:0 0.5em 1.4em;font-size:1.6rem}
+  h1{font-size:2rem}
+  h2{font-size:1.4rem}
+  body{font-size:16px}
+}
+
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;line-height:1.45}
+  .app-header,.toc,.btn,.btn-row,.chip-row,.refresh-warn,.notice,.exercises{display:none !important}
+  .layout{display:block;padding:0;max-width:none}
+  main{max-width:none}
+  body[data-print] main > *{display:none !important}
+  body[data-print="cert"] main > .certificate-host,
+  body[data-print="cert"] .certificate-host *{display:block !important}
+  body[data-print="cert"] .certificate-host{display:block !important;page-break-after:avoid}
+  body[data-print="gmp"] main > .gmp-host,
+  body[data-print="gmp"] .gmp-host *{display:block !important}
+  body[data-print="gmp"] .gmp-host{display:block !important}
+  body[data-print="fc-chain"] #fc-chain,body[data-print="fc-chain"] #fc-chain *{display:block !important}
+  body[data-print="fc-chain"] #fc-chain table,body[data-print="fc-chain"] #fc-chain table *{display:revert !important}
+  body[data-print="fc-trouble"] #fc-trouble,body[data-print="fc-trouble"] #fc-trouble *{display:block !important}
+  body[data-print="fc-trouble"] #fc-trouble table,body[data-print="fc-trouble"] #fc-trouble table *{display:revert !important}
+  body[data-print="fc-athena"] #fc-athena,body[data-print="fc-athena"] #fc-athena *{display:block !important}
+  body[data-print="fc-athena"] #fc-athena table,body[data-print="fc-athena"] #fc-athena table *{display:revert !important}
+  body[data-print="fc-fails"] #fc-fails,body[data-print="fc-fails"] #fc-fails *{display:block !important}
+  body[data-print="fc-fails"] #fc-fails table,body[data-print="fc-fails"] #fc-fails table *{display:revert !important}
+  .field-card,.certificate{border-color:#000;page-break-inside:avoid}
+  table thead{display:table-header-group}
+  a{color:#000;border:0}
+}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">
+    <span class="mark">L/A</span>
+    <span>
+      <div class="title">Grow Room Systems</div>
+      <div class="subtitle">Cannabis Cultivation Manual</div>
+    </span>
+  </div>
+  <div class="counters" id="counters"></div>
+</header>
+<div class="layout">
+  <nav class="toc" id="toc" aria-label="Table of contents"></nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+<script>
+// ============================================================================
+//  GROW ROOM SYSTEMS — CANNABIS CULTIVATION TRAINING MANUAL
+//  Single-file interactive textbook. No persistence. In-memory state only.
+// ============================================================================
+"use strict";
+
+const state = {
+  chapter: "00",
+  chain: { selected: 1, direction: "forward" },
+  lever: null,
+  trouble: { filter: "", chip: null },
+  glossary: { search: "" },
+  assessment: {
+    name: "",
+    trainer: "",
+    answers: {},
+    scenarios: { 1: "", 2: "", 3: "" },
+    marks: { 1: null, 2: null, 3: null },
+    submitted: false,
+    certId: null,
+    certDate: null
+  }
+};
+
+function setState(patch) {
+  Object.assign(state, patch);
+  render();
+}
+function setNested(path, value) {
+  const keys = path.split(".");
+  let o = state;
+  for (let i = 0; i < keys.length - 1; i++) o = o[keys[i]];
+  o[keys[keys.length - 1]] = value;
+  render();
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" })[c]);
+}
+function el(id) { return document.getElementById(id); }
+
+// ============================================================================
+//  DATA: DEFINITIONS (used by glossary & inline cards)
+// ============================================================================
+const definitions = [
+  { term: "PPFD", expand: "Photosynthetic Photon Flux Density",
+    unit: "μmol/m²/s",
+    body: "The count of photosynthetically-useful photons (400–700 nm) landing on one square metre of canopy each second. The light the leaf actually receives, not what the fixture is rated for at the lens." },
+  { term: "DLI", expand: "Daily Light Integral",
+    unit: "mol/m²/day",
+    body: "PPFD multiplied by seconds of photoperiod, divided by one million. The total daily photon dose. Stage targets are commonly given as DLI rather than PPFD because the plant integrates over time." },
+  { term: "RH", expand: "Relative Humidity",
+    unit: "%",
+    body: "Water vapour in the air as a percentage of saturation at the current temperature. Same RH at 28 °C holds more water than at 18 °C, which is why RH alone never tells you what the leaf feels." },
+  { term: "VPD (air)", expand: "Vapour Pressure Deficit, air-referenced",
+    unit: "kPa",
+    body: "The gap between the air's current vapour pressure and its saturation pressure at air temperature. A first approximation of evaporative pull." },
+  { term: "VPD (leaf)", expand: "Vapour Pressure Deficit, leaf-referenced",
+    unit: "kPa",
+    body: "The same calculation but using leaf temperature for the saturation reference. Because healthy leaves run cooler than air, leaf VPD is usually lower than air VPD. This is what the stomata actually feel." },
+  { term: "Air vs leaf temp", expand: "Canopy thermal offset",
+    unit: "°C",
+    body: "A healthy, well-transpiring canopy sits 1–3 °C BELOW air temperature because evaporative cooling at the stomata removes heat. If leaf rises to meet air, transpiration has stalled — investigate before yield falls." },
+  { term: "Stomata", expand: "Leaf gas-exchange pores",
+    unit: "—",
+    body: "Microscopic apertures on the leaf underside controlling water loss and CO₂ intake. Open in light, close in dark, and close prematurely as VPD rises. Cannabis stomata begin anticipatory closure around 1.5–1.6 kPa, well before water deficit is severe." },
+  { term: "Substrate", expand: "Growing medium",
+    unit: "—",
+    body: "The inert or semi-inert matrix holding roots — coco coir, rockwool, peat blends. Substrate WC and pore EC are measured properties of this material." },
+  { term: "EC (feed)", expand: "Electrical Conductivity of input solution",
+    unit: "mS/cm",
+    body: "Total dissolved fertiliser salts in the irrigation solution you mix and deliver. What you put in." },
+  { term: "EC (substrate / pore)", expand: "Electrical Conductivity in the rootzone",
+    unit: "mS/cm",
+    body: "Salt concentration of solution actually surrounding the roots, measured by extracting pore water or runoff. Drifts apart from feed EC because plants take water selectively and substrate-surface evaporation concentrates what remains." },
+  { term: "pH", expand: "Hydrogen-ion activity",
+    unit: "0–14",
+    body: "Acidity of feed and rootzone. Cannabis in soilless: feed 5.6–6.2, rootzone tolerant slightly wider. Drives nutrient availability — high pH locks out iron, low pH locks out calcium." },
+  { term: "Dryback", expand: "Substrate water loss between irrigations",
+    unit: "%",
+    body: "Drop in substrate WC from field capacity at the end of an irrigation event to the moment the next event fires. Expressed as % of WC. Targets vary by stage and substrate — e.g. 5–10 % overnight in coco bulk flower." },
+  { term: "Runoff", expand: "Drainage from the bottom of the pot",
+    unit: "% of feed",
+    body: "Solution that leaves the substrate during/after irrigation. Used to leach accumulated salts and to read rootzone EC and pH. 10–20 % runoff is a common target band." },
+  { term: "Substrate WC", expand: "Volumetric Water Content of substrate",
+    unit: "% v/v",
+    body: "Percentage of substrate volume currently occupied by water. Measured by capacitance probe (e.g. TEROS-12). Defines both water availability and oxygen availability." },
+  { term: "Sink capacity", expand: "Useful demand for an input",
+    unit: "—",
+    body: "How much of an input the plant can actually convert into growth before something else becomes limiting. Raising PPFD beyond CO₂ sink capacity is wasted light; raising CO₂ beyond light sink capacity is wasted gas." },
+  { term: "Boundary layer", expand: "Still air against leaf surface",
+    unit: "—",
+    body: "A thin layer of stagnant air that clings to every leaf. CO₂ and water vapour must diffuse through it. Thicker layer = slower gas exchange. Under-canopy airflow exists to thin this layer." },
+  { term: "Dew point", expand: "Temperature at which air saturates",
+    unit: "°C",
+    body: "The temperature any surface must drop to for liquid water to condense on it. If dew point is 18 °C and your wall surface is 17 °C, you have condensation on that wall — and a botrytis window if it touches plant tissue." },
+  { term: "Photoperiod", expand: "Hours of light per 24 h",
+    unit: "h",
+    body: "18/6 in vegetative growth, 12/12 in flowering for photoperiod cultivars. Triggers the morphological switch into bloom." },
+  { term: "Spectrum", expand: "Wavelength composition of canopy light",
+    unit: "—",
+    body: "Blue-rich spectrum compacts morphology; red and far-red drive stretch and transpiration. Mixed white LEDs at warm CCT plus far-red are typical." },
+  { term: "ppm (CO₂)", expand: "Parts per million carbon dioxide",
+    unit: "ppm",
+    body: "Ambient air sits at ~420 ppm. Enriched rooms run 1200–1500 ppm during light hours of high-PPFD flowering. Wasted entirely if not light-limited." },
+  { term: "HVAC", expand: "Heating, Ventilation, Air Conditioning",
+    unit: "—",
+    body: "The combined system that holds room temperature, humidity, and air mixing inside setpoints. In a sealed grow, HVAC also handles latent moisture load from transpiration." },
+  { term: "Reheat", expand: "Heating coil downstream of cooling coil",
+    unit: "—",
+    body: "Allows AC to chase humidity (cool air below dew point to condense water) without dropping room air temperature. Hot gas reheat is the efficient form; electric reheat is the brute-force form." },
+  { term: "Sensible load", expand: "Heat that changes temperature",
+    unit: "kW",
+    body: "Energy that raises air temperature — lights, motors, people. Removed by cooling without affecting moisture." },
+  { term: "Latent load", expand: "Heat tied up in evaporated water",
+    unit: "kW",
+    body: "Energy held in water vapour from transpiration and surface evaporation. Removed by dehumidification (or by AC cold enough to condense water)." },
+  { term: "Deadband", expand: "Switching hysteresis",
+    unit: "—",
+    body: "The temperature/humidity band inside which the controller does nothing. Too tight = short-cycling and wear; too wide = drifting setpoint." },
+  { term: "Stratification", expand: "Unmixed vertical layers",
+    unit: "—",
+    body: "Temperature, RH, or CO₂ varying by height because air is not being mixed enough. Symptom of inadequate horizontal airflow or fan placement." },
+  { term: "Negative pressure", expand: "Room pressure below ambient",
+    unit: "Pa",
+    body: "Achieved by exhaust > intake. Sucks unfiltered outside air in through leaks; bleeds expensive CO₂ out. Useful for odour containment, costly for gas balance." },
+  { term: "Botrytis", expand: "Botrytis cinerea — grey mould",
+    unit: "—",
+    body: "Pathogen that establishes when free water sits on tissue or when local RH stays above ~93–95 % for hours. The classic late-flower disease; the dehumidifier's reason for being." },
+  { term: "Powdery mildew (PM)", expand: "Erysiphe / Podosphaera spp.",
+    unit: "—",
+    body: "Surface fungus thriving in warm, moderately humid, low-airflow micro-climates inside the canopy. Unlike botrytis, does not need free water — it needs stagnant humidity at the leaf." },
+  { term: "Osmotic stress", expand: "Restricted root uptake from high salts",
+    unit: "—",
+    body: "When pore EC climbs, the gradient between root cell and substrate solution shrinks; water and nutrient uptake slows. Tip burn and stalled growth follow." },
+  { term: "Hypoxia", expand: "Low oxygen at the roots",
+    unit: "—",
+    body: "Caused by saturated substrate with no air-filled porosity. Roots cannot respire; root tips die; pathogens move in. The other half of why dryback matters." },
+  { term: "Air-filled porosity", expand: "Substrate pore space not full of water",
+    unit: "% v/v",
+    body: "What is left over when WC drops below field capacity. Roots need this for oxygen. Drives why a saturated pot can starve a plant even with water everywhere." },
+  { term: "Photoinhibition", expand: "Damage from light beyond useful demand",
+    unit: "—",
+    body: "When PPFD exceeds the plant's combined sink capacity (CO₂, water, leaf temp, nutrient delivery), photosystems are damaged. Yield falls; bleaching appears on top colas." },
+  { term: "Transpiration", expand: "Water loss through leaf stomata",
+    unit: "L/m²/day",
+    body: "The evaporative engine. Couples roots, leaves, and air. Drives nutrient delivery (especially calcium and magnesium), leaf cooling, and the moisture load on the HVAC." }
+];
+
+function defCard(term) {
+  const d = definitions.find(x => x.term === term);
+  if (!d) return `<div class="def"><span class="term">${escapeHtml(term)}</span><span class="gloss">(undefined)</span></div>`;
+  return `<div class="def"><span class="term">${escapeHtml(d.term)}</span><span class="gloss">— ${escapeHtml(d.expand)}${d.unit && d.unit !== "—" ? " &middot; " + escapeHtml(d.unit) : ""}</span><p>${escapeHtml(d.body)}</p></div>`;
+}
+
+// ============================================================================
+//  CHAPTERS REGISTRY (rendered by chapter id)
+// ============================================================================
+const chapters = {};
+window.__chapters = chapters;
+
+// chapter registry populated below in subsequent script blocks via assignments
+// (kept in one script element — only the comment marker is here)
+
+// ============================================================================
+//  DATA: CHAIN NODES (11 total — light to disease risk)
+// ============================================================================
+const CHAIN = [
+  { n: 1, name: "Light at canopy", short: "PPFD",
+    detail: "Photons (μmol/m²/s) actually reaching the leaf — not the lamp rating, not the room average. Variation across the canopy of more than ±15 % means downstream nodes will diverge plant by plant.",
+    upstreamLever: "Fixture height, dimming, photoperiod, spectrum.",
+    downstream: "Raises leaf temperature and drives the demand for CO₂ and water.",
+    measurement: "Quantum sensor PAR map at canopy height, 9 or 16 points per fixture footprint."
+  },
+  { n: 2, name: "Leaf temperature", short: "T_leaf",
+    detail: "The temperature of the leaf itself, set by the balance of absorbed light radiation in and evaporative cooling out. Healthy = 1–3 °C below air.",
+    upstreamLever: "PPFD, fixture distance, spectrum (more far-red = more thermal load).",
+    downstream: "Sets the saturation vapour pressure at the leaf surface, which sets leaf-VPD.",
+    measurement: "IR thermometer or thermal camera held 30 cm from canopy."
+  },
+  { n: 3, name: "Vapour pressure deficit", short: "VPD",
+    detail: "The pull on the leaf from the dry air. Calculated from leaf temperature and air vapour pressure. The leaf experiences leaf-VPD, not air-VPD.",
+    upstreamLever: "Air temperature, RH, leaf temp.",
+    downstream: "Drives transpiration, but only up to the point where the plant closes its stomata in defence (~1.5–1.6 kPa)."
+  },
+  { n: 4, name: "Transpiration rate", short: "E",
+    detail: "Litres of water moved per square metre of canopy per day. The engine that carries nutrients up, dissipates heat, and loads moisture into the room.",
+    upstreamLever: "VPD, stomatal aperture, root-zone water availability.",
+    downstream: "Drives substrate dryback rate and dehumidifier latent load simultaneously."
+  },
+  { n: 5, name: "Substrate dryback", short: "WC drop",
+    detail: "The rate at which substrate water content falls between irrigations. Coupled directly to transpiration — fast transpiration in a small substrate volume can drop WC several percent per hour.",
+    upstreamLever: "Transpiration rate, substrate volume, irrigation strategy.",
+    downstream: "As water leaves the substrate, dissolved salts stay behind. Pore EC rises."
+  },
+  { n: 6, name: "Substrate (pore) EC", short: "EC_sub",
+    detail: "The salt concentration of the solution actually surrounding the roots. Drifts up with dryback (concentration) and with selective ion uptake. Drifts down only if you leach.",
+    upstreamLever: "Feed EC, dryback %, runoff %, transpiration rate.",
+    downstream: "Once high enough, osmotic stress restricts root uptake of water and nutrients."
+  },
+  { n: 7, name: "Plant water status", short: "ψ_leaf",
+    detail: "The internal water potential of the leaf. Falls (becomes more negative) when transpiration outpaces root uptake — either because root supply is short or because pore EC has restricted uptake.",
+    upstreamLever: "Transpiration, root uptake, pore EC.",
+    downstream: "Drives stomatal closure as a defensive response, which then caps photosynthesis."
+  },
+  { n: 8, name: "Photosynthesis rate", short: "A",
+    detail: "Sugars produced per second per unit leaf area. The output of the entire upstream chain. Sets canopy CO₂ demand and the rate of biomass accumulation.",
+    upstreamLever: "Light, leaf temp, CO₂ availability, water status (via stomata).",
+    downstream: "Drives the room's CO₂ depletion rate."
+  },
+  { n: 9, name: "CO₂ uptake", short: "[CO₂]",
+    detail: "How fast the canopy draws CO₂ from the air. A heavy canopy under 1000 PPFD can pull 400 ppm down by 50–100 ppm in minutes if injection cannot keep up.",
+    upstreamLever: "Photosynthesis rate, canopy density, room volume, dosing rate.",
+    downstream: "If supply falls short, photosynthesis caps — and you have spent capacity on the rest of the chain for nothing."
+  },
+  { n: 10, name: "HVAC / dehum load", short: "kW + kg/h",
+    detail: "The latent (water removal) and sensible (heat removal) burden on the building services. Latent comes from transpiration; sensible comes from lights plus dehum reheat plus motors.",
+    upstreamLever: "Transpiration rate, lighting wattage, dehum type and placement.",
+    downstream: "If the load exceeds capacity, RH climbs at night, dew points form on cold surfaces, and Node 11 lights up."
+  },
+  { n: 11, name: "Disease pressure", short: "Risk",
+    detail: "Probability over time that botrytis or powdery mildew will establish. Driven by sustained local RH, free water on tissue, and stagnant under-canopy air. A direct consequence of every upstream node failing to clear its load.",
+    upstreamLever: "Local RH and dew points, airflow, canopy density.",
+    downstream: "End of chain. Yield loss, crop loss, compliance event."
+  }
+];
+
+// ============================================================================
+//  DATA: 11 LEVERS
+// ============================================================================
+const LEVERS = [
+  { id: "light", group: "Environmental", name: "Light (PPFD / DLI / spectrum)",
+    range: "Veg 300–600 PPFD · Flower 600–1000 ambient / 850–1500 with CO₂",
+    raised: [
+      "Photosynthesis rises until sink capacity (CO₂, water, leaf temp) caps it.",
+      "Leaf temperature rises (radiative load) unless transpiration keeps pace.",
+      "Transpiration demand rises → substrate dryback accelerates.",
+      "CO₂ depletion rate rises; ambient rooms saturate sooner.",
+      "Dehumidifier and AC loads both climb."
+    ],
+    lowered: [
+      "Photosynthesis falls, but VPD-driven transpiration may not — stomata stay open in dimmer light too.",
+      "Dryback slows; substrate stays wetter longer; hypoxia risk rises if irrigation is not pulled back.",
+      "Calcium and magnesium delivery slows along with transpiration."
+    ],
+    mistake: "Raising PPFD without lifting CO₂, irrigation volume, or HVAC capacity in lock-step. This is the #1 source of mid-flower environmental failures."
+  },
+  { id: "temp", group: "Environmental", name: "Air temperature",
+    range: "Veg 22–28 °C · Stretch 25–28 · Bulk 24–26 · Finish 18–24",
+    raised: [
+      "Saturation vapour pressure rises sharply (Clausius-Clapeyron) → VPD rises for the same RH.",
+      "Stomatal aperture target shifts; risk of pushing past anticipatory closure.",
+      "Plant metabolic rate climbs; CO₂ and water demand follow.",
+      "AC sensible load rises."
+    ],
+    lowered: [
+      "VPD falls for the same RH → transpiration slows.",
+      "Dryback slows; rootzone wettens; pore EC can stall or even drift down.",
+      "Below ~18 °C, root and metabolic activity drops; nutrient uptake slows; cannabinoid expression in finish stage can lift."
+    ],
+    mistake: "Treating air temp as independent of RH. The two together set VPD. Move one without re-thinking the other and you have changed the wrong thing."
+  },
+  { id: "humidity", group: "Environmental", name: "Humidity / dehumidification",
+    range: "Veg 58–75 % · Stretch 60–72 · Bulk 60–70 · Finish 50–60",
+    raised: [
+      "VPD falls → transpiration slows → calcium/magnesium delivery slows.",
+      "Dryback slows; substrate wet/dry cycle compresses or fails.",
+      "Local dew points rise toward cold surfaces (walls, coils, leaves at lights-on).",
+      "Botrytis envelope approached above sustained ~93–95 % RH."
+    ],
+    lowered: [
+      "VPD rises → transpiration rises → dryback faster → pore EC climbs.",
+      "Above leaf-VPD ~1.5–1.6 kPa, stomata begin defensive closure and the lever inverts.",
+      "Tip burn and edge burn likely if EC strategy not also adjusted."
+    ],
+    mistake: "Setting RH alone instead of designing for VPD. Same 65 % RH at 22 °C and at 28 °C gives very different VPDs."
+  },
+  { id: "airflow", group: "Environmental", name: "Air movement / circulation",
+    range: "Canopy-level air velocity 0.3–1.0 m/s, with detectable under-canopy movement",
+    raised: [
+      "Boundary layer thins → CO₂ and water vapour exchange at leaf accelerates.",
+      "Effective leaf-VPD rises slightly (drier film against the leaf).",
+      "Local micro-climates collapse into room average; sensors agree with reality more often.",
+      "Above ~1.5 m/s, mechanical wind stress on leaves becomes the new problem."
+    ],
+    lowered: [
+      "Boundary layer thickens → leaves suffocate even with good room averages (F-02).",
+      "Stratification appears; bottom of canopy can be 10 %+ RH above the sensor.",
+      "Local botrytis pockets form in dense bracts."
+    ],
+    mistake: "Pointing fans only at the upper canopy and ignoring under-canopy circulation. Most PM problems start under the canopy where no fan goes."
+  },
+  { id: "exchange", group: "Environmental", name: "Air exchange / room pressure",
+    range: "Sealed rooms: 0–0.1 ACH leakage. Vented rooms: design-driven",
+    raised: [
+      "More fresh air dilutes both CO₂ and humidity simultaneously.",
+      "Negative pressure pulls unfiltered air in through leaks (pest/spore risk).",
+      "Energy cost of conditioning the new air climbs."
+    ],
+    lowered: [
+      "CO₂ holds longer; less make-up gas needed.",
+      "Latent and sensible loads concentrate inside the room — HVAC must scale.",
+      "Odour and pressure-management options narrow."
+    ],
+    mistake: "Running negative pressure while paying for CO₂ enrichment. The two fight each other; gas costs climb without ppm rising."
+  },
+  { id: "co2", group: "Environmental", name: "CO₂ enrichment",
+    range: "Ambient 400–450 ppm · Enriched 1000–1500 ppm during lights-on of high-PPFD flower",
+    raised: [
+      "Lifts the PPFD ceiling — saturation moves from ~1500 to ~1800–2000 μmol/m²/s.",
+      "Photosynthesis rises if (and only if) light, water, temp, EC, and airflow are not limiting.",
+      "Stomata may close slightly tighter at the same VPD — small water-saving side effect."
+    ],
+    lowered: [
+      "Light becomes wasted above the ambient ceiling.",
+      "Yield gap of 20–35 % vs enriched is the usual reference.",
+      "Closing exhaust and tightening the room becomes worthwhile."
+    ],
+    mistake: "Enriching CO₂ in a leaky room, or enriching while light, water, or VPD is still the actual limit. You will see no yield response and no idea why."
+  },
+  { id: "irrigation", group: "Root-zone", name: "Irrigation strategy",
+    range: "Frequency, shot size, dryback target, runoff fraction — stage and substrate dependent",
+    raised: [
+      "More frequent / larger shots → substrate WC higher → less dryback → pore EC stable or falling.",
+      "Air-filled porosity drops; root oxygen risk rises in dense substrates.",
+      "Latent load on room rises from substrate-surface evaporation."
+    ],
+    lowered: [
+      "Dryback deeper → pore EC concentrates → osmotic stress likely.",
+      "Roots may stretch and harden; can be useful early veg, dangerous in late flower.",
+      "Substrate sensor variability rises — readings between plants diverge."
+    ],
+    mistake: "Tuning irrigation by clock instead of by dryback %. The clock is wrong every time the canopy or PPFD changes."
+  },
+  { id: "feed", group: "Root-zone", name: "Feed chemistry (EC & pH)",
+    range: "Veg EC 3.0, pH 5.6–6.0 · Flower EC 3.0, pH 5.8–6.2 · Finish EC ↓ to 2.0–3.0",
+    raised: [
+      "Feed EC up → pore EC rises (sometimes faster than expected because dryback is concentrating too).",
+      "Osmotic gradient at root narrows; water uptake slows.",
+      "Risk of tip burn and EC-driven leaf curl."
+    ],
+    lowered: [
+      "Pore EC drifts down only if dryback also moderates; otherwise concentration still wins.",
+      "Deficiency symptoms (especially N) appear before pore EC reaches feed EC.",
+      "Useful at finish to drive remobilisation and a cleaner burn."
+    ],
+    mistake: "Chasing rising pore EC by lowering feed EC alone. If transpiration and dryback are driving the climb, dropping feed EC just delays the problem one cycle."
+  },
+  { id: "rootzone", group: "Root-zone", name: "Root-zone temp & oxygen",
+    range: "Solution & substrate 18–22 °C · air-filled porosity ≥20 % v/v",
+    raised: [
+      "Warmer rootzone (above ~24 °C) → dissolved O₂ falls → Pythium risk climbs.",
+      "Metabolic rate and uptake rise modestly with temp, then collapse above ~28 °C.",
+      "Cold rootzone (<16 °C) → uptake of P, K, Ca slows; deficiencies appear despite feed strength being correct."
+    ],
+    lowered: [
+      "Slower root metabolism → slower uptake → slower dryback.",
+      "Risk of cold-induced lockouts that look like nutrient errors."
+    ],
+    mistake: "Forgetting that AC return-air placement and tank insulation set rootzone temperature far more than the heater does."
+  },
+  { id: "canopy", group: "Crop", name: "Canopy architecture & density",
+    range: "Plants/m², pruning aggression, trellis level, veg time, defoliation schedule",
+    raised: [
+      "Denser canopy intercepts more light at the top but starves the bottom.",
+      "Under-canopy airflow needs to scale or F-02 (boundary suffocation) appears.",
+      "Local RH inside dense bracts rises — botrytis envelope approached even with room RH fine."
+    ],
+    lowered: [
+      "More light reaches lower canopy; bottom buds size better.",
+      "Defoliation done too late stresses the plant during the high-demand bulk window.",
+      "Lower transpiration per m² → lower latent load."
+    ],
+    mistake: "Treating defoliation as cosmetic. It is the lever that controls under-canopy RH and PM risk. Schedule it; do not improvise."
+  },
+  { id: "sensing", group: "Crop", name: "Sensors, calibration & biosecurity",
+    range: "Sensor placement at canopy, calibration cadence, alarm thresholds, sanitation cycle",
+    raised: [
+      "Better sensor placement / more nodes → controller responds to reality, not to a corner.",
+      "Tighter alarm thresholds catch drift earlier — but also alarm-fatigue staff.",
+      "More frequent calibration → trust in data → smaller, faster corrections."
+    ],
+    lowered: [
+      "Single-point sensors over-trust one canopy spot; controller responds to a number that nobody else in the room agrees with.",
+      "Skipped sanitation → spore pressure accumulates; the room becomes harder to keep clean per cycle.",
+      "Stale calibration → dehumidifier appears to fail when it is actually the RH sensor reading low."
+    ],
+    mistake: "Assuming the controller's number is the truth. The controller's number is whatever the nearest sensor told it; check the sensor before changing the lever."
+  }
+];
+
+// ============================================================================
+//  DATA: FAILURE MODES
+// ============================================================================
+const FAILURES = [
+  { code: "F-01", name: "More light than the room can support",
+    summary: "PPFD raised faster than HVAC, dehumidifier, CO₂, irrigation, and EC strategy. The smallest downstream limit punishes the whole crop.",
+    mechanism: "Every additional photon recruits more transpiration, more CO₂ demand, more substrate dryback, more dehumidifier load, more AC load. If any one of those five fails to scale, the chain breaks at that node and the rest of the chain reads as 'the plant is failing'.",
+    signals: ["Hot spots immediately under fixtures, edge burn, bleached colas", "CO₂ ppm sags during lights-on and recovers at night", "Dehumidifier and AC run continuously", "Pore EC climbs even though feed is unchanged"],
+    correction: "Walk it back. Drop PPFD 10–15 % until the symptom calms, then identify the smallest downstream limit (CO₂? dehum? irrigation? EC?) and lift it before reapproaching the previous PPFD."
+  },
+  { code: "F-02", name: "Hidden high humidity inside the canopy (boundary suffocation)",
+    summary: "Room sensor reads acceptable RH while the inside of dense flower clusters runs much wetter and stiller.",
+    mechanism: "Every leaf carries a stagnant boundary layer of air. In an open-spaced canopy with good under-canopy airflow, this layer is thin and the leaf sees room-average conditions. In a dense canopy with no under-canopy fans, the boundary layer thickens, CO₂ supply at the leaf collapses, transpired water vapour pools, and local RH inside the bracts can exceed 90 % while the controller reads 65 %. Botrytis and PM establish in pockets the controller cannot see.",
+    signals: ["Local PM spots in lower-mid canopy; controller alarm never fires", "Sluggish transpiration despite 'good' room VPD", "Bottom-canopy leaves cool, soft, and wet to the touch at lights-off"],
+    correction: "Re-balance airflow first (under-canopy circulation, not just over-canopy). Defoliate to break up dense pockets. Re-site at least one RH sensor at lower-mid canopy and compare to the controller sensor."
+  },
+  { code: "F-03", name: "CO₂ enrichment fighting exhaust or leakage",
+    summary: "CO₂ is being injected at one rate while the room is losing it (out through exhaust, through leaks, or through a poorly-sequenced minimum-purge cycle) at a similar rate.",
+    mechanism: "Sealed-room CO₂ strategy assumes leakage ≤ injection. If exhaust is running during lights-on, or if the room's air seal has degraded, ppm becomes unstable: spikes after each dosing cycle, falls between cycles, never settles. Injection rate increases without a corresponding plant response.",
+    signals: ["CO₂ ppm graph looks like a saw-tooth instead of a flat band", "Make-up gas usage doubles for no yield gain", "Lights-on draw-down is fast and recovery is incomplete"],
+    correction: "Verify exhaust is interlocked off during enrichment. Smoke-test door seals and HVAC penetrations. Confirm intake dampers close fully. Only then re-evaluate dosing rate."
+  },
+  { code: "F-04", name: "Cooling without latent removal — VPD collapse",
+    summary: "AC removes heat (sensible) but not enough moisture (latent). Room reads at temperature setpoint but RH climbs, VPD falls, plant responds soft.",
+    mechanism: "AC removes water only when the coil runs below the room dew point. Variable-speed and short-cycling AC often does not — it satisfies the sensible setpoint and shuts off before the coil gets cold enough to condense. Latent load (transpiration) keeps loading the room and RH climbs. VPD collapses; transpiration self-suppresses; the lever fails silently.",
+    signals: ["Air temp at setpoint, RH climbing through the day", "Calcium-deficiency tip damage on new growth", "Leaves cool and limp instead of cool and turgid"],
+    correction: "Set the dehumidifier to lead, not lag. Coordinate AC and dehum so AC handles sensible while dehum handles latent. Add hot-gas reheat if AC is the only path. Investigate AC short-cycling."
+  },
+  { code: "F-05", name: "Dehumidifier overheating the room",
+    summary: "Standalone or recirculating refrigerant dehumidifier converts the latent moisture it removes into sensible heat dumped back into the room.",
+    mechanism: "A refrigerant dehumidifier cools room air below dew point on a cold coil, condenses water out, then reheats the dry air on a hot coil (and adds the compressor's own waste heat) before returning it. Net effect: water removed, but room is warmer than it was. AC then has to remove that heat. If AC capacity is short, room temperature climbs and you appear to have an AC problem.",
+    signals: ["RH and VPD improve, but air temp creeps up", "AC runtime climbs in parallel with dehum runtime", "Latent capacity ahead of sensible capacity"],
+    correction: "Match dehum capacity to AC capacity at design time (rule of thumb: 1 kW of refrigerant dehum ≈ 1.3 kW of additional sensible load). Consider ducted, externally-condensing units or desiccant dehum for high-latent rooms."
+  },
+  { code: "F-06", name: "Irrigation masking or amplifying a climate failure",
+    summary: "Irrigation strategy compensating for an upstream environmental problem and hiding the real cause — or being driven by one and making it worse.",
+    mechanism: "Two flavours: (a) VPD is too high → dryback is too fast → operator adds more shots to maintain WC → pore EC climbs because more concentrated solution arrives each shot → tip burn. (b) RH is too high → dryback too slow → operator drops shot frequency → substrate stays saturated → air-filled porosity collapses → hypoxia. In both cases the operator is treating the symptom (dryback) instead of the cause (VPD).",
+    signals: ["Irrigation schedule drifting daily but environment unchanged", "Pore EC rising and tip burn appearing while feed EC is held", "Substrate WC bouncing between saturation and stress-stop"],
+    correction: "Diagnose VPD and dryback together. Adjust climate to put dryback in target band, then return irrigation to a stable schedule. Irrigation should be the last lever you reach for, not the first."
+  }
+];
+
+// ============================================================================
+//  DATA: TROUBLESHOOTING TABLE (Reading the Room)
+// ============================================================================
+const TROUBLE = [
+  { obs: "Dryback too fast", chain: "Node 4→5 (transpiration ↑, WC drops fast)", causes: "High PPFD, high VPD, excess airflow, small substrate volume, dosing too sparse", checks: "Leaf temp, leaf-VPD, substrate WC trace, runoff EC", chip: "wilting" },
+  { obs: "Dryback too slow", chain: "Node 4→5 (transpiration ↓)", causes: "Low VPD, high RH, low PPFD, over-irrigation", checks: "Dew point, night RH, root health, irrigation log", chip: "soft" },
+  { obs: "CO₂ ppm falling fast", chain: "Node 8→9 (high A vs low supply)", causes: "Heavy canopy, exhaust running, dosing under-rate, leaks", checks: "Exhaust interlock, room pressure, decay curve after a dose", chip: "low-yield" },
+  { obs: "High CO₂ use but no growth gain", chain: "Node 1–7 limiting upstream", causes: "Light, temp, VPD, EC, or airflow is the actual limit — CO₂ is not", checks: "PPFD map, VPD, runoff EC, room tightness", chip: "low-yield" },
+  { obs: "RH spike after lights-off", chain: "Node 10 (dehum capacity)", causes: "Late irrigation, falling air temp, undersized night dehum", checks: "Dew point trajectory, last shot timing, dehum runtime", chip: "spots" },
+  { obs: "Condensation on walls or leaves", chain: "Node 10→11", causes: "Surface temp below dew point, poor airflow at that surface", checks: "Dew point vs coldest surface temperature, fan map", chip: "spots" },
+  { obs: "Edge burn on upper leaves", chain: "Node 6 (pore EC) + Node 3 (VPD)", causes: "High VPD, fast dryback, pore EC climbed, excess airflow", checks: "Leaf temp, leaf-VPD, runoff EC, fan direction", chip: "tip-burn" },
+  { obs: "Tip burn on new growth", chain: "Node 6 (pore EC) ± Node 7 (water status)", causes: "Feed EC too high for current transpiration, pore EC climb", checks: "Pore EC sample, feed EC, dryback %, leaf-VPD", chip: "tip-burn" },
+  { obs: "Botrytis pockets in flower", chain: "Node 11 (after sustained Node 10 load)", causes: "Dense canopy, local RH high, no under-canopy airflow, dead leaves left in canopy", checks: "Under-canopy RH, smoke test for airflow, canopy density", chip: "spots" },
+  { obs: "Uneven canopy", chain: "Node 1 + Node 4 variation", causes: "PPFD map uneven, fan placement uneven, irrigation non-uniform", checks: "PPFD map, emitter flow check, thermal/RH map", chip: "low-yield" },
+  { obs: "AC short-cycles", chain: "Node 10 control failure", causes: "Oversized AC, narrow deadband, bad sensor placement", checks: "Runtime log, sensor location, control sequence", chip: "soft" },
+  { obs: "Dehum cannot hold setpoint", chain: "Node 10 capacity short", causes: "Undersized for current canopy load, room leaking water in, over-irrigation", checks: "Condensate rate, irrigation volume, room seal", chip: "soft" },
+  { obs: "Pore EC climbing, feed unchanged", chain: "Node 5→6", causes: "Dryback too deep, runoff too low, selective ion uptake", checks: "Runoff EC, runoff %, dryback %, transpiration estimate", chip: "tip-burn" },
+  { obs: "Soft, stretchy growth", chain: "Node 3 + Node 4 collapse", causes: "Low PPFD, low VPD, excess N, low airflow", checks: "PPFD, leaf-VPD, feed N:K ratio, fan pattern", chip: "soft" },
+  { obs: "Stretching past stage target", chain: "Node 1 (spectrum) or Node 2 (temp delta)", causes: "Insufficient blue, excess far-red, day-night temp gap too small", checks: "Spectrum log, night temp setpoint, fixture height", chip: "stretching" },
+  { obs: "Midday wilt at top, lower fine", chain: "Node 7 collapse from Node 6", causes: "Pore EC restricted uptake; root supply cannot match canopy demand", checks: "Pore EC, leaf-VPD at upper canopy, leaf temp", chip: "wilting" },
+  { obs: "Yellowing lower leaves with healthy top", chain: "Below-canopy stagnation + light starvation", causes: "Mobile-nutrient remobilisation (normal late flower) or light-starved lower leaves", checks: "Stage, light penetration, canopy density", chip: "low-yield" }
+];
+
+const TROUBLE_CHIPS = [
+  { id: "tip-burn", label: "Tip / edge burn" },
+  { id: "soft", label: "Soft growth" },
+  { id: "wilting", label: "Wilting" },
+  { id: "spots", label: "Spots / disease" },
+  { id: "stretching", label: "Stretching" },
+  { id: "low-yield", label: "Low yield" }
+];
+
+// ============================================================================
+//  DATA: PARAMETER CASCADES MATRIX
+// ============================================================================
+const CASCADE_LEVERS = [
+  "PPFD ↑","Air temp ↑","RH ↑","Airflow ↑","CO₂ ↑",
+  "Feed EC ↑","Irrigation freq ↑","Canopy density ↑","Exhaust ↑"
+];
+const CASCADE_PARAMS = [
+  "Leaf temp","Leaf-VPD","Transpiration","Substrate dryback","Pore EC","CO₂ demand","Dehum load","AC load","Disease risk"
+];
+const CASCADE_MATRIX = [
+  ["↑↑","↑","↑↑","↑↑","→/↑","↓ (dilution)","↑↑","↑↑","↑ via canopy local RH"],
+  ["↑","↑↑","↑","↑","→","→","↑","↑↑","↑ via dew point shift"],
+  ["→","↓ (sat. rises with T only)","↓","↓","→","→/↓","→ (more water in room)","→","↑↑"],
+  ["→","↑ slight (boundary layer)","↑","↑","→","→","↑ slight","↑ slight (mixing)","↓↓ (local RH falls)"],
+  ["→","→","→","→","↑↑ (uptake faster)","→","→","→","→"],
+  ["→","→","→","→ (until uptake stalls)","↑↑","→","→","→","→ (via leaf damage longer-term)"],
+  ["→","→","↓","↓ (WC held up)","↓/→","→","→ (more substrate evap)","→","→"],
+  ["↑ slight (shading mid-canopy)","→","→ local","↓ under-canopy","↑ at top, ↓ in bottom","→","→","→","↑↑ local"],
+  ["→","↓","↓ (out the door)","→","→","→","↑ if outdoor moist","↑","↓ at the cost of CO₂ loss"]
+];
+
+// ============================================================================
+//  DATA: EQUIPMENT BEHAVIOUR
+// ============================================================================
+const EQUIPMENT = [
+  { name: "Refrigerant air conditioner (split / DX)",
+    role: "Removes sensible heat from room air. Removes some latent moisture as a side effect when coil drops below dew point.",
+    levers: ["Setpoint", "Deadband", "Fan mode (auto vs continuous)", "Sensor location", "Stage cycling on multi-head systems"],
+    coupling: "Net cooling. Removes latent moisture only when coil is cold enough. Variable-speed units in 'comfort' mode often run too warm a coil to dehumidify — a frequent F-04 cause.",
+    pitfalls: "Oversized AC short-cycles, satisfies sensible quickly, never gets cold enough to condense. Continuous fan circulates room air through wet coil → re-evaporates condensate."
+  },
+  { name: "Refrigerant dehumidifier (recirculating, in-room)",
+    role: "Removes latent moisture. Returns dry air warmer than intake because compressor and reheat both dump indoors.",
+    levers: ["RH setpoint", "Capacity (L/24 h)", "Placement", "Drain vs reservoir", "Continuous vs cycling"],
+    coupling: "Adds sensible heat — roughly 1.0–1.3× the latent load it pulls. AC sizing must scale together. This is the F-05 driver.",
+    pitfalls: "Stand-alone unit in a tightly sealed room can fight the AC: dehum dumps heat, AC pulls heat, AC condenses water, dehum waits for the moisture it would have removed. Coordinate setpoints and stage them."
+  },
+  { name: "Desiccant dehumidifier",
+    role: "Removes latent moisture via adsorption onto a rotor (silica gel etc.) which is regenerated by hot exhaust.",
+    levers: ["Process airflow", "Regen temperature", "Rotor speed", "Regen exhaust routing"],
+    coupling: "Heat penalty similar in scale to refrigerant dehum BUT regen heat can be exhausted outdoors. Better fit for high-latent / low-temperature rooms (drying rooms, finish stage) where refrigerant coils ice up.",
+    pitfalls: "Regen exhaust must actually leave the building. Run with regen-to-room and you have just added a 5–10 kW heater."
+  },
+  { name: "Exhaust fan & make-up intake",
+    role: "Bulk replacement of room air with outside air. Removes heat, moisture, and CO₂ together — does not discriminate.",
+    levers: ["Fan speed", "Damper position", "Pressure target (positive / neutral / negative)", "Schedule (during lights-on vs lights-off only)"],
+    coupling: "Cheapest moisture removal there is, until you start paying for CO₂ enrichment. After that it becomes the most expensive. Interlock against CO₂ dosing.",
+    pitfalls: "Running exhaust while dosing CO₂ is the F-03 textbook case. Negative pressure pulls unfiltered spores in through any leak."
+  },
+  { name: "Circulation / under-canopy fans",
+    role: "Mix room air to break stratification; thin leaf boundary layer; expose lower canopy to room conditions.",
+    levers: ["Number of fans", "Placement (above vs below canopy)", "Speed", "Oscillation"],
+    coupling: "Effectively raises leaf-VPD slightly by thinning boundary layer. Required to make the room sensor's number agree with what the leaf experiences. Single biggest defence against F-02.",
+    pitfalls: "Too few fans (over-canopy only) hide an F-02 in plain sight. Too many at high speed cause wind stress, edge curling, and irregular transpiration."
+  },
+  { name: "CO₂ injection (compressed bottle / generator)",
+    role: "Raises room ppm above ambient to lift the light-saturation ceiling.",
+    levers: ["Dosing rate", "ppm setpoint", "Schedule (lights-on only)", "Manifold distribution"],
+    coupling: "Compressed bottled gas: no heat, no water added. Combustion generator: adds heat AND water (≈1.6 kg water per kg CO₂ produced) → loads dehumidifier and AC. Choose by room size and HVAC headroom.",
+    pitfalls: "Single-point injection without circulation gives a hot spot of ppm right at the diffuser and ambient everywhere else. Use the room's circulation fans to distribute."
+  }
+];
+
+// ============================================================================
+//  RENDER PIPELINE
+// ============================================================================
+function partsIndex() {
+  return [
+    { part: "Front matter", items: [["00","Preface"]] },
+    { part: "Part I — Foundations", items: [["01","How the Plant Works"]] },
+    { part: "Part II — The Course", items: [
+      ["02","The Coupled Room"],
+      ["03","The Chain You Carry"],
+      ["04","The Cost of a Lever"],
+      ["05","How Rooms Fail"],
+      ["06","Reading the Room"]
+    ]},
+    { part: "Part III — Reference Library", items: [
+      ["07","Lever Inspector"],
+      ["08","Parameter Cascades"],
+      ["09","Equipment Behaviour"]
+    ]},
+    { part: "Part IV — Glossary", items: [["10","Glossary"]] },
+    { part: "Part V — Field Cards", items: [["11","Field Cards"]] },
+    { part: "Part VI — Assessment", items: [["12","Competency Assessment"]] },
+    { part: "Part VII — Administration", items: [
+      ["13","Trainer's Guide"],
+      ["14","GMP Register"]
+    ]}
+  ];
+}
+
+function renderTOC() {
+  const idx = partsIndex();
+  const html = idx.map(group => {
+    const items = group.items.map(([id, title]) => {
+      const active = id === state.chapter ? " active" : "";
+      return `<li><button class="toc-btn${active}" data-chapter="${id}"><span class="num">${id}</span>${escapeHtml(title)}</button></li>`;
+    }).join("");
+    return `<h4>${escapeHtml(group.part)}</h4><ol>${items}</ol>`;
+  }).join("");
+  el("toc").innerHTML = html;
+  el("toc").querySelectorAll(".toc-btn").forEach(b => {
+    b.addEventListener("click", () => setState({ chapter: b.dataset.chapter, lever: null }));
+  });
+}
+
+function renderHeader() {
+  const idx = partsIndex();
+  let chapterNum = 0, total = 0, currentTitle = "";
+  idx.forEach(g => g.items.forEach(([id, t]) => {
+    total++;
+    if (id === state.chapter) { chapterNum = total; currentTitle = t; }
+  }));
+  const a = state.assessment;
+  const answered = Object.keys(a.answers).length;
+  el("counters").innerHTML =
+    `<span>Chapter <b>${String(chapterNum).padStart(2,"0")}/${String(total).padStart(2,"0")}</b></span>` +
+    `<span>Current <b>${escapeHtml(currentTitle)}</b></span>` +
+    `<span>MCQ <b>${answered}/8</b></span>`;
+}
+
+function renderMain() {
+  const ch = chapters[state.chapter];
+  if (!ch) { el("main").innerHTML = `<p>Chapter ${escapeHtml(state.chapter)} not registered.</p>`; return; }
+  el("main").innerHTML = ch.render();
+  bindMainEvents();
+  el("main").focus({ preventScroll: false });
+}
+
+function render() {
+  renderTOC();
+  renderHeader();
+  renderMain();
+}
+
+function bindMainEvents() {
+  document.querySelectorAll("[data-action]").forEach(node => {
+    node.addEventListener("click", e => handleAction(node.dataset.action, node, e));
+  });
+  document.querySelectorAll("[data-input]").forEach(node => {
+    node.addEventListener("input", e => handleInput(node.dataset.input, node));
+  });
+  document.querySelectorAll("[data-change]").forEach(node => {
+    node.addEventListener("change", e => handleInput(node.dataset.change, node));
+  });
+}
+
+function handleAction(action, node, e) {
+  switch (action) {
+    case "select-chain-node": {
+      const n = parseInt(node.dataset.node, 10);
+      state.chain.selected = n;
+      render();
+      break;
+    }
+    case "chain-direction": {
+      state.chain.direction = node.dataset.dir;
+      render();
+      break;
+    }
+    case "select-lever": {
+      state.lever = node.dataset.lever;
+      render();
+      break;
+    }
+    case "trouble-chip": {
+      const chip = node.dataset.chip;
+      state.trouble.chip = state.trouble.chip === chip ? null : chip;
+      render();
+      break;
+    }
+    case "clear-trouble": {
+      state.trouble.filter = "";
+      state.trouble.chip = null;
+      render();
+      break;
+    }
+    case "mcq-select": {
+      const q = node.dataset.q;
+      const opt = node.dataset.opt;
+      if (state.assessment.submitted) return;
+      state.assessment.answers[q] = opt;
+      render();
+      break;
+    }
+    case "submit-assessment": {
+      submitAssessment();
+      break;
+    }
+    case "reset-assessment": {
+      if (confirm("Reset the assessment? In-memory progress will be cleared.")) {
+        state.assessment = { name: "", trainer: "", answers: {}, scenarios: {1:"",2:"",3:""}, marks: {1:null,2:null,3:null}, submitted: false, certId: null, certDate: null };
+        render();
+      }
+      break;
+    }
+    case "mark-scenario": {
+      const s = parseInt(node.dataset.scenario, 10);
+      const m = parseInt(node.dataset.mark, 10);
+      state.assessment.marks[s] = state.assessment.marks[s] === m ? null : m;
+      render();
+      break;
+    }
+    case "print-section": {
+      const id = node.dataset.section;
+      printSection(id);
+      break;
+    }
+    case "goto": {
+      setState({ chapter: node.dataset.target, lever: null });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      break;
+    }
+  }
+}
+
+function handleInput(target, node) {
+  const path = target.split(".");
+  let o = state;
+  for (let i = 0; i < path.length - 1; i++) o = o[path[i]];
+  o[path[path.length - 1]] = node.value;
+  if (target === "trouble.filter" || target === "glossary.search") {
+    render();
+  }
+}
+
+function printSection(id) {
+  document.body.dataset.print = id;
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => { delete document.body.dataset.print; }, 200);
+  }, 50);
+}
+
+// ============================================================================
+//  ASSESSMENT — SCORING & CERTIFICATE
+// ============================================================================
+const MCQ_BANK = [
+  { id: "q1",
+    text: "In a healthy, well-transpiring canopy, leaf temperature compared to air temperature is typically:",
+    options: [
+      { k:"a", t:"2–5 °C above air, because lights radiate heat onto leaves." },
+      { k:"b", t:"Equal to air, because plants and air reach thermal equilibrium." },
+      { k:"c", t:"1–3 °C BELOW air, because evaporative cooling at the stomata removes heat." },
+      { k:"d", t:"Unrelated to air temperature; depends only on light spectrum." }
+    ],
+    correct: "c",
+    why: "Stomatal transpiration is an evaporative process. Each gram of water leaving the leaf carries roughly 2.4 kJ of latent heat with it. The leaf runs cooler than the air around it whenever water is moving. A leaf that has risen to meet air temperature has stopped transpiring — almost always your first warning of trouble."
+  },
+  { id: "q2",
+    text: "Substrate (pore) EC drifts away from feed EC because:",
+    options: [
+      { k:"a", t:"Salts evaporate off the leaf into the air." },
+      { k:"b", t:"Two mechanisms together — plants take up water selectively (some ions taken faster than others) AND substrate-surface evaporation concentrates the remaining solution." },
+      { k:"c", t:"Calcium carbonate precipitates out of the feed line." },
+      { k:"d", t:"pH drift dissolves additional bound salts from the medium." }
+    ],
+    correct: "b",
+    why: "Selective uptake means the plant pulls some ions faster than water (and some slower); evaporation from the substrate surface concentrates what is left behind. Both run at once. Either alone is the wrong mental model and leads to wrong corrections."
+  },
+  { id: "q3",
+    text: "The PPFD at which cannabis becomes light-saturated:",
+    options: [
+      { k:"a", t:"Is fixed at about 1000 μmol/m²/s." },
+      { k:"b", t:"Sits around 1500 μmol/m²/s at ambient CO₂ and rises to roughly 1800–2000 with CO₂ enrichment of 1200–1500 ppm." },
+      { k:"c", t:"Is independent of CO₂." },
+      { k:"d", t:"Is set entirely by leaf temperature." }
+    ],
+    correct: "b",
+    why: "Saturation is a sink-capacity statement, not a fixed number. CO₂ enrichment lifts the ceiling because the dark-reaction can keep up with more photons. Push past the ceiling for the conditions you have and you waste energy at best and damage photosystems at worst."
+  },
+  { id: "q4",
+    text: "Cannabis stomata begin anticipatory closure (closing in response to rising vapour demand, not to actual water deficit yet) around:",
+    options: [
+      { k:"a", t:"VPD ~0.8 kPa." },
+      { k:"b", t:"VPD ~1.0–1.2 kPa." },
+      { k:"c", t:"VPD ~1.5–1.6 kPa." },
+      { k:"d", t:"Only at VPD ≥2.0 kPa and only once leaves have wilted." }
+    ],
+    correct: "c",
+    why: "Cannabis is a conservative-strategy species. Stomata close before tissue dehydrates. Push VPD beyond ~1.5–1.6 kPa and you trade transpiration (and the calcium delivery and leaf cooling that come with it) for closed stomata — a self-inflicted defect that looks like 'too much light'."
+  },
+  { id: "q5",
+    text: "Botrytis (grey mould) becomes a serious risk when:",
+    options: [
+      { k:"a", t:"Room RH ever exceeds 70 %." },
+      { k:"b", t:"Only in cold rooms below 18 °C." },
+      { k:"c", t:"Local RH stays sustained above 93–95 % OR there is free liquid water on plant tissue." },
+      { k:"d", t:"Only after a fresh spore inoculation event." }
+    ],
+    correct: "c",
+    why: "Botrytis spores are ubiquitous in any commercial environment. The variable you control is whether the leaf surface gives them the sustained humidity or free water they need to germinate. Brief RH excursions are forgiven; sustained envelope or free water is not."
+  },
+  { id: "q6",
+    text: "The 'boundary layer' in a grow room context is:",
+    options: [
+      { k:"a", t:"The paint coating on interior walls." },
+      { k:"b", t:"The thin film of still air sitting against the leaf surface, through which all gas exchange must diffuse." },
+      { k:"c", t:"The distance from the lamp to the canopy at which PPFD halves." },
+      { k:"d", t:"The cellular membrane around each stomatal pore." }
+    ],
+    correct: "b",
+    why: "Every leaf carries a film of stagnant air. CO₂ has to push in through it; water vapour has to push out through it. Under-canopy airflow exists to thin this layer. In a dense canopy with no fans below, leaves can suffocate while the room sensor reads perfect numbers."
+  },
+  { id: "q7",
+    text: "A standalone refrigerant dehumidifier sitting inside a sealed flower room:",
+    options: [
+      { k:"a", t:"Cools the room as it removes moisture." },
+      { k:"b", t:"Adds net heat to the room, because compressor work and reheat are both released indoors." },
+      { k:"c", t:"Has no thermal effect — it only moves water." },
+      { k:"d", t:"Cools more aggressively than a comparable AC unit." }
+    ],
+    correct: "b",
+    why: "The dehum chills air below dew point on a cold coil, then reheats it. The compressor's work and the reheat both end up as room heat. Latent moisture has been turned into sensible heat. The AC then has to remove that heat — which is why dehum capacity and AC capacity are coupled, not independent decisions."
+  },
+  { id: "q8",
+    text: "If you raise PPFD without lifting CO₂, irrigation, or feed EC at the same time:",
+    options: [
+      { k:"a", t:"Yield rises linearly with light." },
+      { k:"b", t:"You hit diminishing return, then negative return — photoinhibition, stalled growth, or environmental failure modes appear." },
+      { k:"c", t:"Flowering accelerates by 1–2 days per 100 μmol added." },
+      { k:"d", t:"The plant tolerates higher EC as compensation." }
+    ],
+    correct: "b",
+    why: "More light is only useful if every downstream demand it triggers has spare capacity. Push light past the smallest downstream limit — CO₂ supply, root water delivery, dehumidifier headroom, AC headroom — and you make the limiting factor worse, not the light better."
+  }
+];
+
+const SCENARIOS = [
+  { id: 1,
+    title: "Morning dew on the upper canopy",
+    prompt: "At lights-on this morning you walk in to find free water beaded on the upper canopy in flower week 5. The room sensor reads air temp at setpoint (24 °C), RH 72 %. Walk us through what you do, in order, and explain why each step is in that order — not just the actions, but the diagnosis."
+  },
+  { id: 2,
+    title: "Pore EC creep with feed unchanged",
+    prompt: "Pore EC has climbed from 4.2 to 6.8 over five days. The feed EC has been held constant the entire time and there has been no change to the runoff fraction you target. Name three measurements you take, what each will tell you, and what is most likely going on. Be specific about why feed EC alone is not the answer."
+  },
+  { id: 3,
+    title: "Upper-canopy midday wilt after PPFD change",
+    prompt: "Two days ago the boss raised PPFD from 700 to 950 μmol/m²/s with no other change. Today at midday the upper-canopy leaves are wilting noticeably while the lower canopy looks fine. Walk down the chain from light to symptom, identify the most likely failure node, and explain what you adjust first and why that adjustment — and not the others."
+  }
+];
+
+function mcqScore() {
+  const a = state.assessment.answers;
+  let correct = 0;
+  MCQ_BANK.forEach(q => { if (a[q.id] === q.correct) correct++; });
+  return { correct, total: MCQ_BANK.length, pct: Math.round((correct / MCQ_BANK.length) * 100) };
+}
+function scenarioScore() {
+  const marks = state.assessment.marks;
+  let sum = 0, maxed = 0;
+  for (const k of [1,2,3]) {
+    if (marks[k] !== null && marks[k] !== undefined) sum += marks[k];
+    maxed += 3;
+  }
+  return { sum, max: maxed, pct: maxed ? Math.round((sum / maxed) * 100) : 0 };
+}
+function overallScore() {
+  const m = mcqScore(); const s = scenarioScore();
+  const totalPossible = m.total + s.max;
+  const totalEarned = m.correct + s.sum;
+  return { earned: totalEarned, possible: totalPossible, pct: Math.round((totalEarned / totalPossible) * 100) };
+}
+function isPass() {
+  const m = mcqScore(); const s = scenarioScore(); const o = overallScore();
+  return o.pct >= 80 && m.pct >= 60 && s.pct >= 50;
+}
+function submitAssessment() {
+  if (!state.assessment.name || state.assessment.name.trim().length < 2) {
+    alert("Trainee name is required before submitting."); return;
+  }
+  const unanswered = MCQ_BANK.filter(q => !state.assessment.answers[q.id]).length;
+  if (unanswered > 0) {
+    if (!confirm(unanswered + " MCQ question(s) are unanswered. Submit anyway?")) return;
+  }
+  state.assessment.submitted = true;
+  state.assessment.certDate = new Date();
+  state.assessment.certId = generateCertId(state.assessment.certDate);
+  render();
+}
+function generateCertId(d) {
+  const pad = n => String(n).padStart(2, "0");
+  const y = d.getFullYear();
+  const mo = pad(d.getMonth() + 1);
+  const da = pad(d.getDate());
+  const hh = pad(d.getHours());
+  const mm = pad(d.getMinutes());
+  const seq = String(Math.floor(1000 + Math.random() * 9000));
+  return `GRS-${y}${mo}${da}-${hh}${mm}-${seq}`;
+}
+function fmtDate(d) {
+  if (!d) return "";
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+// ============================================================================
+//  CHAPTER 00 — PREFACE
+// ============================================================================
+chapters["00"] = {
+  title: "Preface",
+  render: () => `
+    <div class="chapter-meta">Front Matter &middot; Chapter 00</div>
+    <h1>Preface</h1>
+    <p class="lead" style="font-size:1.12rem;color:var(--ink-2);max-width:68ch;font-style:italic;">
+      An operating handbook for the cultivation and processing staff of the cultivation programme.
+      Written so that any member of the team — newly arrived or ten years in — can pick it up,
+      read it from front to back, and leave understanding why the room behaves the way it does
+      and what to do at seven in the morning when something looks off.
+    </p>
+
+    <h2>What this manual is for</h2>
+    <p>
+      A grow room is not a collection of independent dials. Every lever you can move — light,
+      temperature, humidity, CO₂, airflow, irrigation, feed strength, canopy structure — is
+      coupled to every other lever through the plant and through the room. Move one and the
+      others have to move with it, or you create a hole somewhere and something else has to
+      pay for it.
+    </p>
+    <p>
+      The first part of the manual builds a shared vocabulary so that no chapter uses a term
+      it has not already defined. The middle part teaches the four balances and eleven levers
+      as a single connected system, then walks the chain of cause and effect that runs from
+      light to disease. The reference library at the back lets you look up a single lever or a
+      single failure mode without re-reading the rest. Field cards at the end print to A4 and
+      live above the controllers.
+    </p>
+
+    <div class="key-idea">
+      <h4>The question this manual teaches you to ask</h4>
+      <p style="margin:0">
+        When I move this lever, which balance am I disturbing — heat, moisture, CO₂, substrate
+        EC, plant water status, or pathogen risk — and what else now has to move so the room
+        does not punish me for it?
+      </p>
+    </div>
+
+    <h2>How to use it</h2>
+    <ol>
+      <li><strong>Read it through once</strong>, in order, even if the early chapters feel basic. Later chapters assume the vocabulary built in Chapter 01.</li>
+      <li><strong>Do the end-of-chapter exercises out loud</strong> with a workmate. The answers are not in the book on purpose; the exercises are the test of whether the chapter went in.</li>
+      <li><strong>Use the field cards on the floor.</strong> Print Chapters 11.1 to 11.4 and keep them on the controller, the bench, and the dehum.</li>
+      <li><strong>Sit the assessment in Chapter 12</strong> when you and your trainer agree you are ready. Pass it once a year.</li>
+    </ol>
+
+    <h2>What "competent" means here</h2>
+    <p>
+      Competent staff can explain — without reaching for the book — why a change to one lever
+      forces a change to another, can read three or four measurements in the room and name
+      the failure mode that fits the pattern, and can make the smallest correction that
+      addresses the root cause rather than the symptom. Competent staff do not chase
+      symptoms. They walk the chain.
+    </p>
+
+    <div class="notice">
+      <strong>This manual holds no state between sessions.</strong> Reload the page or close
+      the browser and every answer, every typed scenario, every trainer mark is wiped. There
+      is no save button by design. The artefact of competence is the <em>printed
+      certificate</em> at the end of the assessment, signed by trainer and trainee and filed
+      in the GMP register. Treat the on-screen state as scratch paper.
+    </div>
+
+    <div class="notice" style="background:var(--accent-soft);border-left-color:var(--accent);color:var(--ink)">
+      Begin the assessment in Chapter 12 only when you can sit it through in one go. Do not
+      start, walk away, and come back tomorrow — the answers will be gone.
+    </div>
+
+    <h2>Who wrote this and where the ideas come from</h2>
+    <p>
+      Distilled and restructured for cultivation staff. The systems framing — eleven levers,
+      four balances, six failure modes, the chain from light to disease — is adapted from a
+      publicly available source on cannabis grow-room levers. The scientific corrections, the
+      field cards, the assessment, and the room-specific decisions in this manual are our own.
+    </p>
+
+    <p class="attribution">
+      Edition 1, May 2026 &middot; &middot; For internal training use.
+      Source attribution: Cannabis Grow Room Levers (public source).
+    </p>
+
+    <div class="btn-row" style="margin-top:2em">
+      <button class="btn primary" data-action="goto" data-target="01">Begin Chapter 01 →</button>
+    </div>
+  `
+};
+
+// ============================================================================
+//  CHAPTER 10 — GLOSSARY
+// ============================================================================
+chapters["10"] = {
+  title: "Glossary",
+  render: () => {
+    const q = state.glossary.search.trim().toLowerCase();
+    const sorted = [...definitions].sort((a,b) => a.term.localeCompare(b.term, "en"));
+    const filtered = q
+      ? sorted.filter(d => d.term.toLowerCase().includes(q) || d.expand.toLowerCase().includes(q) || d.body.toLowerCase().includes(q))
+      : sorted;
+
+    let lastLetter = "";
+    const grouped = [];
+    filtered.forEach(d => {
+      const letter = d.term[0].toUpperCase();
+      if (letter !== lastLetter) {
+        grouped.push(`<div class="glossary-letter">${escapeHtml(letter)}</div>`);
+        lastLetter = letter;
+      }
+      grouped.push(`<div class="def" style="margin:0.3em 0"><span class="term">${escapeHtml(d.term)}</span><span class="gloss">— ${escapeHtml(d.expand)}${d.unit && d.unit !== "—" ? " &middot; " + escapeHtml(d.unit) : ""}</span><p>${escapeHtml(d.body)}</p></div>`);
+    });
+
+    return `
+      <div class="chapter-meta">Part IV &middot; Reference &middot; Chapter 10</div>
+      <h1>Glossary</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        Every term used in this manual, alphabetised, with the same definitions used
+        in-chapter. Search by term, by expansion, or by any word in the body text.
+      </p>
+
+      <div style="margin:1em 0">
+        <input type="search" placeholder="Search the glossary…" value="${escapeHtml(state.glossary.search)}" data-input="glossary.search" style="max-width:440px">
+      </div>
+
+      ${filtered.length === 0
+        ? `<p style="font-style:italic;color:var(--ink-3)">No matches for "${escapeHtml(state.glossary.search)}".</p>`
+        : grouped.join("")}
+
+      <p class="attribution" style="margin-top:3em">
+        ${filtered.length} of ${definitions.length} terms shown.
+      </p>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 11 — FIELD CARDS (4 printable)
+// ============================================================================
+chapters["11"] = {
+  title: "Field Cards",
+  render: () => `
+    <div class="chapter-meta">Part V &middot; Floor Use &middot; Chapter 11</div>
+    <h1>Field Cards</h1>
+
+    <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+      Four one-page references designed to be printed and lived with on the floor. Each has
+      its own print button — only the selected card prints; the rest of the manual stays out
+      of the way.
+    </p>
+
+    <div class="notice">Print landscape if the table looks tight. The print stylesheet hides navigation and headers automatically.</div>
+
+    <!-- FIELD CARD 1 — THE CHAIN -->
+    <div class="field-card" id="fc-chain">
+      <div class="fc-head">
+        <h3>Card 11.1 — The Chain You Carry</h3>
+        <span class="meta">Cultivation &middot; Field Card 1 of 4</span>
+      </div>
+      <p style="font-style:italic;margin-bottom:1em">From the first photon to disease risk. Walk forward to predict; walk backward to diagnose. Change one lever, wait one cycle, look again.</p>
+      <table class="compact">
+        <thead><tr><th>Node</th><th>What</th><th>Watch for</th></tr></thead>
+        <tbody>
+          ${CHAIN.map(n => `
+            <tr>
+              <td><strong>${n.n}</strong></td>
+              <td><strong>${escapeHtml(n.name)}</strong> <small>(${escapeHtml(n.short)})</small></td>
+              <td>${escapeHtml(n.downstream || "")}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <div class="btn-row" style="margin-top:1em">
+        <button class="btn primary" data-action="print-section" data-section="fc-chain">Print this card</button>
+      </div>
+    </div>
+
+    <!-- FIELD CARD 2 — TROUBLESHOOTING -->
+    <div class="field-card" id="fc-trouble">
+      <div class="fc-head">
+        <h3>Card 11.2 — Troubleshooting Quick Reference</h3>
+        <span class="meta">Cultivation &middot; Field Card 2 of 4</span>
+      </div>
+      <p style="font-style:italic;margin-bottom:1em">Symptom → chain location → likely cause → first measurement. Read three rows together; one symptom is never the diagnosis.</p>
+      <table class="compact">
+        <thead><tr><th>Observation</th><th>Chain</th><th>Likely cause</th><th>First check</th></tr></thead>
+        <tbody>
+          ${TROUBLE.map(r => `
+            <tr>
+              <td><strong>${escapeHtml(r.obs)}</strong></td>
+              <td><small>${escapeHtml(r.chain)}</small></td>
+              <td>${escapeHtml(r.causes)}</td>
+              <td>${escapeHtml(r.checks)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <div class="btn-row" style="margin-top:1em">
+        <button class="btn primary" data-action="print-section" data-section="fc-trouble">Print this card</button>
+      </div>
+    </div>
+
+    <!-- FIELD CARD 3 — ATHENA TARGETS -->
+    <div class="field-card" id="fc-athena">
+      <div class="fc-head">
+        <h3>Card 11.3 — Athena Environmental Targets by Stage</h3>
+        <span class="meta">Cultivation &middot; Field Card 3 of 4</span>
+      </div>
+      <p style="font-style:italic;margin-bottom:1em">Operating envelopes by crop stage. RH figures are room targets. Dome RH during propagation is much higher than the room.</p>
+      <table class="compact">
+        <thead>
+          <tr>
+            <th>Stage</th><th>Temp °C</th><th>RH %</th><th>VPD kPa</th>
+            <th>PPFD μmol</th><th>Feed EC</th><th>pH</th><th>CO₂ ppm</th><th>Photo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Tissue Culture</strong></td><td>20–23</td><td>50–60</td><td>0.8–1.0</td><td>75–125</td><td>—</td><td>—</td><td>—</td><td>18/6</td></tr>
+          <tr><td><strong>Clones</strong></td><td>23–26</td><td>65–75 (dome 80–95)</td><td>0.8</td><td>100–150</td><td>2.0–3.0</td><td>5.6–6.0</td><td>—</td><td>24/0</td></tr>
+          <tr><td><strong>Veg</strong></td><td>22–28</td><td>58–75</td><td>0.8–1.0</td><td>300–600</td><td>3.0</td><td>5.6–6.0</td><td>—</td><td>18/6</td></tr>
+          <tr><td><strong>Stretch (wk 1–3)</strong></td><td>25–28</td><td>60–72</td><td>1.0–1.2</td><td>600–1000</td><td>3.0</td><td>5.8–6.2</td><td>1200–1500</td><td>12/12</td></tr>
+          <tr><td><strong>Bulk (wk 4–7)</strong></td><td>24–26</td><td>60–70</td><td>1.0–1.2</td><td>850–1200</td><td>3.0</td><td>6.0–6.2</td><td>1200–1500</td><td>12/12</td></tr>
+          <tr><td><strong>Finish (wk 8–9)</strong></td><td>18–24</td><td>50–60</td><td>1.2–1.4</td><td>600–900</td><td>2.0–3.0</td><td>6.0–6.2</td><td>500–800</td><td>12/12</td></tr>
+          <tr><td><strong>Dry & Cure (14 d)</strong></td><td>15–18</td><td>55–60</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>0/24</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;margin-top:0.8em"><strong>Notes:</strong> CO₂ enrichment only earns its keep from stretch onward where canopy light is intense enough to use it. Finish drops PPFD and CO₂ deliberately to promote colour and trichome maturity. Dry & cure is a post-harvest hold — cool, moderate RH, no light.</p>
+      <div class="btn-row" style="margin-top:1em">
+        <button class="btn primary" data-action="print-section" data-section="fc-athena">Print this card</button>
+      </div>
+    </div>
+
+    <!-- FIELD CARD 4 — FAILURE MODES -->
+    <div class="field-card" id="fc-fails">
+      <div class="fc-head">
+        <h3>Card 11.4 — Failure Modes Summary</h3>
+        <span class="meta">Cultivation &middot; Field Card 4 of 4</span>
+      </div>
+      <p style="font-style:italic;margin-bottom:1em">F-01 to F-06. Recognise by the pattern of signals, not the first symptom. Full mechanism descriptions are in Chapter 05.</p>
+      <table class="compact">
+        <thead><tr><th>Code</th><th>Mode</th><th>Pattern</th><th>First fix</th></tr></thead>
+        <tbody>
+          ${FAILURES.map(f => `
+            <tr>
+              <td><strong style="color:var(--risk)">${f.code}</strong></td>
+              <td><strong>${escapeHtml(f.name)}</strong></td>
+              <td>${escapeHtml(f.summary)}</td>
+              <td>${escapeHtml(f.correction)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <div class="btn-row" style="margin-top:1em">
+        <button class="btn primary" data-action="print-section" data-section="fc-fails">Print this card</button>
+      </div>
+    </div>
+  `
+};
+
+// ============================================================================
+//  CHAPTER 12 — COMPETENCY ASSESSMENT
+// ============================================================================
+chapters["12"] = {
+  title: "Competency Assessment",
+  render: () => {
+    const a = state.assessment;
+    const submitted = a.submitted;
+    const mcq = mcqScore(); const sc = scenarioScore(); const ov = overallScore();
+    const pass = isPass();
+
+    const mcqHTML = MCQ_BANK.map((q, i) => {
+      const picked = a.answers[q.id];
+      const opts = q.options.map(o => {
+        let cls = "opt";
+        if (submitted) {
+          if (o.k === q.correct) cls += " correct";
+          if (picked === o.k && o.k !== q.correct) cls += " wrong";
+        } else if (picked === o.k) {
+          cls += " sel";
+        }
+        return `<button class="${cls}" data-action="mcq-select" data-q="${q.id}" data-opt="${o.k}"${submitted ? " disabled" : ""}>
+          <span class="marker">${o.k.toUpperCase()}.</span>${escapeHtml(o.t)}
+        </button>`;
+      }).join("");
+      return `
+        <div class="question">
+          <div class="q-num">Question ${i+1} of ${MCQ_BANK.length}</div>
+          <div class="q-text">${escapeHtml(q.text)}</div>
+          ${opts}
+          ${submitted ? `<div class="feedback"><strong>Why:</strong> ${escapeHtml(q.why)}</div>` : ""}
+        </div>
+      `;
+    }).join("");
+
+    const scenarioHTML = SCENARIOS.map(s => `
+      <div class="question">
+        <div class="q-num">Scenario ${s.id} of 3 &middot; ${escapeHtml(s.title)}</div>
+        <div class="q-text">${escapeHtml(s.prompt)}</div>
+        <textarea data-input="assessment.scenarios.${s.id}" placeholder="Your answer (the trainer will mark this).">${escapeHtml(a.scenarios[s.id] || "")}</textarea>
+        ${submitted ? `
+          <div class="mark-row">
+            <span class="lbl">Trainer mark (0–3):</span>
+            ${[0,1,2,3].map(m => `<button class="mark-btn ${a.marks[s.id] === m ? "sel" : ""}" data-action="mark-scenario" data-scenario="${s.id}" data-mark="${m}">${m}</button>`).join("")}
+            <span style="margin-left:0.8em;color:var(--ink-3)">0 = absent · 1 = partial · 2 = competent · 3 = fluent</span>
+          </div>
+        ` : ""}
+      </div>
+    `).join("");
+
+    const scorePanel = submitted ? `
+      <div class="score-panel">
+        <h3>Result</h3>
+        <div class="score-grid">
+          <div class="score-cell ${mcq.pct >= 60 ? "pass" : "fail"}">
+            <div class="lbl">MCQ</div>
+            <div class="val">${mcq.correct}/${mcq.total}</div>
+            <div class="lbl" style="margin-top:0.3em">${mcq.pct}% &middot; gate ≥60%</div>
+          </div>
+          <div class="score-cell ${sc.pct >= 50 ? "pass" : "fail"}">
+            <div class="lbl">Scenarios</div>
+            <div class="val">${sc.sum}/${sc.max}</div>
+            <div class="lbl" style="margin-top:0.3em">${sc.pct}% &middot; gate ≥50%</div>
+          </div>
+          <div class="score-cell ${ov.pct >= 80 ? "pass" : "fail"}">
+            <div class="lbl">Overall</div>
+            <div class="val">${ov.pct}%</div>
+            <div class="lbl" style="margin-top:0.3em">${ov.earned}/${ov.possible} &middot; gate ≥80%</div>
+          </div>
+        </div>
+        <div class="verdict ${pass ? "pass" : "fail"}">${pass ? "Pass — issue certificate" : "Not yet competent — review and resit"}</div>
+        ${pass ? `
+          <div class="certificate-host">
+            ${certificateHTML()}
+          </div>
+        ` : `
+          <p>Discuss with the trainer which areas to review. Most candidates who fail the first pass do so on scenarios; re-read Chapters 03, 05, and 06 and attempt again.</p>
+        `}
+        <div class="btn-row">
+          ${pass ? `<button class="btn primary" data-action="print-section" data-section="cert">Print certificate</button>` : ""}
+          <button class="btn danger" data-action="reset-assessment">Reset assessment</button>
+        </div>
+      </div>
+    ` : "";
+
+    return `
+      <div class="chapter-meta">Part VI &middot; Assessment &middot; Chapter 12</div>
+      <h1>Competency Assessment</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        Eight multiple-choice questions (auto-scored) and three scenario questions (marked by
+        your trainer). Pass requires <strong>≥80 % overall</strong> AND <strong>≥60 % on the
+        MCQ</strong> AND <strong>≥50 % on the scenarios</strong>. A passing result generates a
+        printable certificate; the certificate is the official record.
+      </p>
+
+      <div class="refresh-warn">
+        IN-MEMORY ONLY · Reload or close this tab and every answer is gone · Sit it in one go
+      </div>
+
+      <h2>Identification</h2>
+      <div class="assessment" style="max-width:68ch">
+        <label style="display:block;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.2em">Trainee name (full)</label>
+        <input type="text" value="${escapeHtml(a.name)}" data-input="assessment.name" placeholder="e.g. A. Grower"${submitted ? " disabled" : ""}>
+        <label style="display:block;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin:0.8em 0 0.2em">Trainer name</label>
+        <input type="text" value="${escapeHtml(a.trainer)}" data-input="assessment.trainer" placeholder="e.g. B. Trainer"${submitted ? " disabled" : ""}>
+      </div>
+
+      <h2>Section A — Multiple choice</h2>
+      <div class="assessment">${mcqHTML}</div>
+
+      <h2>Section B — Scenarios</h2>
+      <p>Type your answers below. After you submit, the trainer marks each scenario 0–3 using the rubric in Chapter 13.</p>
+      <div class="assessment">${scenarioHTML}</div>
+
+      ${submitted ? scorePanel : `
+        <div class="btn-row" style="margin-top:2em">
+          <button class="btn primary" data-action="submit-assessment">Submit & score</button>
+          <button class="btn ghost" data-action="reset-assessment">Reset</button>
+        </div>
+      `}
+    `;
+  }
+};
+
+function certificateHTML() {
+  const a = state.assessment;
+  const mcq = mcqScore(); const sc = scenarioScore(); const ov = overallScore();
+  return `
+    <div class="certificate">
+      <div class="corner-bl"></div><div class="corner-br"></div>
+      <div class="cert-brand">Cannabis Cultivation Manual</div>
+      <div class="cert-mark">Cultivation Training Programme · Edition 1 · 2026</div>
+      <h2 class="cert-title">Certificate of Competence</h2>
+      <p class="cert-sub">Grow Room Systems</p>
+      <div class="cert-name-lbl">This certifies that</div>
+      <div class="cert-name">${escapeHtml(a.name || "—")}</div>
+      <p class="cert-body">
+        has demonstrated competence in the systems, levers, balances, failure modes, and
+        diagnostic procedures of medicinal cannabis cultivation rooms, in accordance with the
+        Cultivation Grow Room Systems training manual.
+      </p>
+      <div class="cert-stats">
+        <div class="cert-stat"><div class="l">Overall</div><div class="v">${ov.pct}%</div></div>
+        <div class="cert-stat"><div class="l">MCQ</div><div class="v">${mcq.correct}/${mcq.total}</div></div>
+        <div class="cert-stat"><div class="l">Scenarios</div><div class="v">${sc.sum}/${sc.max}</div></div>
+      </div>
+      <div class="cert-stats" style="border:0;padding:0;grid-template-columns:repeat(2,1fr);margin:0">
+        <div class="cert-stat"><div class="l">Awarded</div><div class="v">${escapeHtml(fmtDate(a.certDate))}</div></div>
+        <div class="cert-stat"><div class="l">Trainer</div><div class="v">${escapeHtml(a.trainer || "—")}</div></div>
+      </div>
+      <div class="sigs">
+        <div class="sig"><div class="sig-line"></div><div class="sig-lbl">Trainee signature</div></div>
+        <div class="sig"><div class="sig-line"></div><div class="sig-lbl">Trainer signature</div></div>
+      </div>
+      <div class="cert-id">Certificate ID · ${escapeHtml(a.certId || "—")}</div>
+    </div>
+  `;
+}
+
+// ============================================================================
+//  CHAPTER 13 — TRAINER'S GUIDE
+// ============================================================================
+chapters["13"] = {
+  title: "Trainer's Guide",
+  render: () => `
+    <div class="chapter-meta">Part VII &middot; Administration &middot; Chapter 13</div>
+    <h1>Trainer's Guide</h1>
+
+    <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+      For Cannabis cultivation leads marking the assessment in Chapter 12 and running the
+      training programme. Read once before your first session.
+    </p>
+
+    <h2>Programme structure</h2>
+    <ol>
+      <li><strong>Self-study:</strong> trainee reads Chapters 00–06 (front matter + course) in their own time, ideally across one week. Do the end-of-chapter exercises with a workmate.</li>
+      <li><strong>Floor walk:</strong> trainer takes trainee through one full lights-on walk-through and one full lights-off walk-through, narrating the chain. Spend ~30 minutes per walk.</li>
+      <li><strong>Reference scan:</strong> trainee reads Chapters 07–10 (reference + glossary) before the assessment. They do not need to memorise; they need to know where to look.</li>
+      <li><strong>Assessment:</strong> single sitting. ~60–90 minutes. Trainer present for scenario discussion after submit.</li>
+      <li><strong>Refresh annually.</strong></li>
+    </ol>
+
+    <h2>Marking the scenarios</h2>
+    <p>
+      Each scenario is marked 0–3. The MCQ is auto-scored. Use the rubric below. Be strict.
+      A 2 (competent) is the bar for safe operation; a 3 (fluent) is the bar for senior
+      cultivation staff.
+    </p>
+
+    <table>
+      <thead><tr><th>Mark</th><th>Level</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>0</strong></td><td>Absent</td><td>Answer is missing, off-topic, or unrelated to the chain. Trainee has not engaged with the systems framework.</td></tr>
+        <tr><td><strong>1</strong></td><td>Partial</td><td>Identifies one correct element (e.g. names a node, or names a likely cause) but does not connect them. May reach for the symptom instead of the root cause.</td></tr>
+        <tr><td><strong>2</strong></td><td>Competent</td><td>Walks the chain correctly. Names the right root-cause node. Proposes the smallest correct correction. Order of operations is reasonable. Would be safe to leave on shift unsupervised.</td></tr>
+        <tr><td><strong>3</strong></td><td>Fluent</td><td>Competent plus: explains <em>why</em> the chosen lever in the chosen order, names what they would <em>not</em> do and why, identifies a likely second-order consequence to watch for, and connects the answer to one of F-01–F-06.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Expected answers — scenarios</h2>
+
+    <h3>Scenario 1 — Morning dew on upper canopy (RH 72 %, air 24 °C)</h3>
+    <p><strong>Diagnosis (chain backward):</strong> Free water at Node 11 implies the leaf surface dropped below local dew point at lights-on. At 24 °C and 72 % RH, dew point is ~18.5 °C; if leaves cooled overnight to ~17 °C and air at lights-on rose faster than the canopy did, dew formed briefly. This is the classic lights-on transient (F-05 mechanism related).</p>
+    <p><strong>Order of operations:</strong> (1) air-circulation check — is there under-canopy movement? Lack of mixing held leaves cooler than air longer. (2) Day-night air temp delta check — too cold overnight means a wider catch-up gap at lights-on. (3) Lights-on ramp — instantaneous full power vs a 15-minute ramp; ramp gives the canopy time to warm with the air. (4) Defoliation review if canopy was wet on lower leaves too.</p>
+    <p><strong>Lever:</strong> first move is a 15-minute lights-on ramp + lift overnight setpoint 1 °C. Do <em>not</em> simply drop RH; the dew point only matters relative to canopy temperature.</p>
+    <p><strong>3-mark indicators:</strong> mentions F-05, connects to dew point math, identifies that simply lowering RH would not have fixed the underlying overnight cold-canopy condition, names botrytis as the downstream risk if this recurs.</p>
+
+    <h3>Scenario 2 — Pore EC 4.2 → 6.8 over 5 days, feed unchanged</h3>
+    <p><strong>Diagnosis:</strong> Two mechanisms drive pore EC away from feed — selective uptake and evaporative concentration. Either or both are responsible. Most likely cause in five days: transpiration rose (anything from a PPFD lift, a temp lift, a defoliation that exposed more canopy, or a humidity drop) → dryback deepened → pore EC concentrated.</p>
+    <p><strong>Three measurements:</strong> (1) dryback % over the 5-day window — is it deeper than target? (2) runoff fraction — is it lower than target? (3) leaf-VPD trend — is it rising? Each cuts a different candidate cause: (1) tests the dryback/concentration mechanism, (2) tests the leaching path, (3) tests whether transpiration drove the change.</p>
+    <p><strong>Lever:</strong> raise runoff fraction first (the leaching path) before adjusting feed EC. Dropping feed EC while dryback is still deep just delays the climb one cycle.</p>
+    <p><strong>3-mark indicators:</strong> names both mechanisms explicitly, defends why feed EC alone is the wrong lever, identifies that the climate change is upstream and would otherwise come back.</p>
+
+    <h3>Scenario 3 — PPFD 700 → 950, upper canopy midday wilt 2 days later</h3>
+    <p><strong>Diagnosis:</strong> Classic F-01 — light was raised past the smallest available downstream capacity. Upper canopy wilt with lower fine = the top is transpiration-limited, not whole-plant water deficit. The chain: Node 1 ↑ → Node 4 ↑ → Node 5 deeper → Node 6 pore EC climbed → Node 7 water status at the top dropped → defensive stomatal closure → can't keep up with light demand → wilt. Alternatively, leaf-VPD pushed past 1.5 kPa and stomata closed in anticipation. Most likely: pore EC climbed and root supply cannot keep up at the top.</p>
+    <p><strong>First measurement:</strong> pore EC and leaf-VPD on the upper canopy.</p>
+    <p><strong>First lever:</strong> back PPFD off to ~850 immediately. Do <em>not</em> drop feed EC first (lag), do <em>not</em> raise RH first (only helps if VPD was the cause, not EC). Once symptom calms, identify which downstream capacity ran out (most often dehum or feed-system irrigation rate) and lift that before reapproaching the PPFD target.</p>
+    <p><strong>3-mark indicators:</strong> names F-01, distinguishes anticipatory stomatal closure (VPD cause) from osmotic restriction (EC cause), explains why PPFD walk-back is the correct first action even though the upstream cause is downstream-capacity-limited.</p>
+
+    <h2>Common misconceptions to watch for</h2>
+    <ul>
+      <li><strong>"Leaf and air should be the same temperature."</strong> — No. Healthy leaf is 1–3 °C below. Correct this first; everything downstream cascades from it.</li>
+      <li><strong>"Higher VPD always pushes more transpiration."</strong> — Only up to ~1.5 kPa. Beyond, cannabis stomata close in defence.</li>
+      <li><strong>"More CO₂ always lifts yield."</strong> — Only if light, water, and EC are not the limit. Otherwise wasted gas.</li>
+      <li><strong>"The dehumidifier just removes water."</strong> — A refrigerant dehum is a net heater of the room. AC and dehum capacity are coupled.</li>
+      <li><strong>"Pore EC climbed; drop feed EC."</strong> — Often wrong. If dryback is deep, lowering feed EC just delays the climb. Fix the climate or the leaching path first.</li>
+      <li><strong>"One symptom means one cause."</strong> — Tip burn alone can be F-01, F-03, F-04, or F-06. Demand 2–3 confirming signals before reaching for a lever.</li>
+    </ul>
+
+    <h2>Discussion prompts</h2>
+    <p>Use these in floor walks. They reveal whether the trainee has the chain internalised:</p>
+    <ul>
+      <li>"Why is this leaf cooler than that one?"</li>
+      <li>"What changed in the last 48 hours, and what would you expect to see today because of it?"</li>
+      <li>"If I asked you to lift PPFD 15 % tomorrow, what would you change today?"</li>
+      <li>"Walk me from this dew point reading on the wall to a botrytis risk."</li>
+      <li>"Which lever did you reach for last week, and would you reach for it again?"</li>
+    </ul>
+
+    <h2>Re-certification</h2>
+    <p>Annual. Pass mark unchanged. Trainees keep the previous certificate in their personnel file; a fresh one is issued and filed each year.</p>
+  `
+};
+
+// ============================================================================
+//  CHAPTER 14 — GMP REGISTER
+// ============================================================================
+chapters["14"] = {
+  title: "GMP Register",
+  render: () => `
+    <div class="chapter-meta">Part VII &middot; Administration &middot; Chapter 14</div>
+    <h1>GMP Training Register</h1>
+
+    <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+      Printable register page for the GMP records folder. One row per trainee per
+      certification event. Sign in ink. The on-screen state of this manual is not the
+      record; this register, signed and filed, is.
+    </p>
+
+    <div class="btn-row">
+      <button class="btn primary" data-action="print-section" data-section="gmp">Print the register</button>
+    </div>
+
+    <div class="gmp-host">
+      <div style="border:2px solid var(--ink);padding:1.4em 1.6em;background:var(--paper);max-width:none">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:0.5em;margin-bottom:1em">
+          <div>
+            <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.16em;color:var(--ink-3);text-transform:uppercase">Cultivation &middot; Cultivation Training Programme</div>
+            <h3 style="margin:0.2em 0">GMP Training Register — Grow Room Systems</h3>
+          </div>
+          <div style="font-family:var(--mono);font-size:0.72rem;color:var(--ink-3);letter-spacing:0.06em">Form GRS-REG-01 &middot; Rev 1 &middot; 2026</div>
+        </div>
+
+        <p style="font-size:0.9rem">
+          This register records the names, dates, scores, and signatures of cultivation and
+          processing staff who have completed the Grow Room Systems training. The
+          register is held in the GMP records folder and is reviewed at annual quality audit.
+        </p>
+
+        <table class="gmp-table">
+          <thead>
+            <tr>
+              <th style="width:15%">Date</th>
+              <th style="width:22%">Trainee name</th>
+              <th style="width:18%">Trainer name</th>
+              <th style="width:10%">Overall %</th>
+              <th style="width:22%">Certificate ID</th>
+              <th style="width:13%">Both signed</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${Array.from({length: 16}, () => "<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>").join("")}
+          </tbody>
+        </table>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2em;margin-top:1.6em;font-family:var(--mono);font-size:0.78rem">
+          <div>
+            <div style="border-bottom:1px solid var(--ink);height:2em;margin-bottom:0.3em"></div>
+            <div style="color:var(--ink-3);letter-spacing:0.1em;text-transform:uppercase">Cultivation Lead — printed name</div>
+            <div style="border-bottom:1px solid var(--ink);height:2em;margin:1em 0 0.3em"></div>
+            <div style="color:var(--ink-3);letter-spacing:0.1em;text-transform:uppercase">Signature & date</div>
+          </div>
+          <div>
+            <div style="border-bottom:1px solid var(--ink);height:2em;margin-bottom:0.3em"></div>
+            <div style="color:var(--ink-3);letter-spacing:0.1em;text-transform:uppercase">Quality Manager — printed name</div>
+            <div style="border-bottom:1px solid var(--ink);height:2em;margin:1em 0 0.3em"></div>
+            <div style="color:var(--ink-3);letter-spacing:0.1em;text-transform:uppercase">Signature & date</div>
+          </div>
+        </div>
+
+        <p style="font-size:0.78rem;color:var(--ink-3);margin-top:1.6em;font-family:var(--mono);letter-spacing:0.04em">
+          File in GMP records · Retain seven years · Review annually
+        </p>
+      </div>
+    </div>
+
+    <h2>How to use this register</h2>
+    <ol>
+      <li>Print one page per recording cycle (typically annual).</li>
+      <li>For every trainee that passes the Chapter 12 assessment, enter one row.</li>
+      <li>Both trainee and trainer sign the trainee's certificate <em>and</em> tick the "both signed" column in this register.</li>
+      <li>Cultivation lead reviews and signs at the bottom monthly; quality manager signs at audit time.</li>
+      <li>File the completed page in the GMP records folder, filed by date.</li>
+    </ol>
+
+    <h2>What if there is no recent assessment to enter?</h2>
+    <p>
+      If no new certifications were issued in a month, write "No certifications this period"
+      in the first data row and date it. An empty register signed by the cultivation lead is
+      a valid GMP record; a missing register page is not.
+    </p>
+  `
+};
+
+// ============================================================================
+//  CHAPTER 07 — LEVER INSPECTOR
+// ============================================================================
+chapters["07"] = {
+  title: "Lever Inspector",
+  render: () => {
+    const sel = state.lever;
+    const groups = ["Environmental","Root-zone","Crop"];
+    const groupHTML = groups.map(g => {
+      const items = LEVERS.filter(l => l.group === g);
+      return `
+        <div class="group-head">${escapeHtml(g)}</div>
+        <div class="lever-list">
+          ${items.map(l => `
+            <button class="lever-tile ${sel === l.id ? "selected" : ""}" data-action="select-lever" data-lever="${l.id}">
+              <span class="grp">${escapeHtml(l.group)}</span>
+              <span class="nm">${escapeHtml(l.name)}</span>
+            </button>
+          `).join("")}
+        </div>
+      `;
+    }).join("");
+    const lever = LEVERS.find(l => l.id === sel);
+    const detail = lever ? `
+      <div class="lever-detail">
+        <div class="lhead">
+          <h3>${escapeHtml(lever.name)}</h3>
+          <span class="badge" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;color:var(--ink-3);text-transform:uppercase">${escapeHtml(lever.group)}</span>
+        </div>
+        <p><strong>Operating range:</strong> ${escapeHtml(lever.range)}</p>
+        <div class="pair">
+          <section class="up">
+            <h5>If raised ↑</h5>
+            <ul>${lever.raised.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+          </section>
+          <section class="dn">
+            <h5>If lowered ↓</h5>
+            <ul>${lever.lowered.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>
+          </section>
+        </div>
+        <div class="risk-box" style="margin-top:1em">
+          <h4>Common mistake</h4>
+          <p style="margin:0">${escapeHtml(lever.mistake)}</p>
+        </div>
+      </div>
+    ` : `<p style="font-style:italic;color:var(--ink-3)">Select a lever above to see its directional effects.</p>`;
+
+    return `
+      <div class="chapter-meta">Part III &middot; Reference &middot; Chapter 07</div>
+      <h1>Lever Inspector</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        A per-lever reference. Click any of the eleven levers below to see what happens when
+        you push it up, when you pull it down, and what mistake to avoid. Use this in
+        conjunction with the parameter matrix in Chapter 08 and the equipment notes in
+        Chapter 09.
+      </p>
+
+      ${groupHTML}
+      ${detail}
+
+      <div class="exercises">
+        <h3>End-of-Chapter Exercises</h3>
+        <div class="exercise"><div class="ex-num">EX 07.1</div><p>Pick three levers at random. For each, recite from memory both directional effects and the common mistake. Then check.</p></div>
+        <div class="exercise"><div class="ex-num">EX 07.2</div><p>For the "humidity / dehumidification" lever, write down what compensating change you would make to <em>each</em> other environmental lever if you raised RH by 5 points.</p></div>
+        <div class="exercise"><div class="ex-num">EX 07.3</div><p>Of the three crop levers (canopy, sensing, irrigation actually sits in root-zone) — which one most often gets neglected on a "the room is fine" day? Why is that dangerous?</p></div>
+      </div>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 08 — PARAMETER CASCADES
+// ============================================================================
+chapters["08"] = {
+  title: "Parameter Cascades",
+  render: () => {
+    const dirClass = v => {
+      if (v.includes("↑↑")) return "up";
+      if (v.startsWith("↑")) return "up";
+      if (v.startsWith("↓↓")) return "dn";
+      if (v.startsWith("↓")) return "dn";
+      if (v.startsWith("→")) return "eq";
+      return "";
+    };
+    return `
+      <div class="chapter-meta">Part III &middot; Reference &middot; Chapter 08</div>
+      <h1>Parameter Cascades</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        A diagnostic matrix. Rows are levers you move (always in the ↑ direction; reverse the
+        arrows mentally for ↓). Columns are downstream parameters. The cell tells you which
+        way that parameter trends when you make that move.
+      </p>
+
+      <p>Arrows: <span class="dir up">↑</span> rises, <span class="dir dn">↓</span> falls, <span class="dir eq">→</span> little or no direct effect. Doubled arrows indicate a strong / first-order effect.</p>
+
+      <div style="overflow-x:auto;margin:1.2em 0">
+      <table class="compact" style="min-width:760px">
+        <thead>
+          <tr>
+            <th>Lever (↑)</th>
+            ${CASCADE_PARAMS.map(p => `<th>${escapeHtml(p)}</th>`).join("")}
+          </tr>
+        </thead>
+        <tbody>
+          ${CASCADE_LEVERS.map((lvr, i) => `
+            <tr>
+              <td><strong>${escapeHtml(lvr)}</strong></td>
+              ${CASCADE_MATRIX[i].map(v => `<td><span class="dir ${dirClass(v)}">${escapeHtml(v)}</span></td>`).join("")}
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      </div>
+
+      <h2>How to use this matrix</h2>
+      <ol>
+        <li><strong>Forward (planning):</strong> Find your lever in the leftmost column. Read across — every column with a non-→ entry is a downstream parameter you should have a compensating plan for.</li>
+        <li><strong>Backward (diagnosis):</strong> Find your symptom parameter in the column headers. Read down — every lever with a ↑ or ↓ in that column is a candidate cause for the symptom.</li>
+      </ol>
+
+      <h2>Reading the doubled arrows</h2>
+      <p>
+        ↑↑ marks the first-order effects. These are the changes that show up in minutes to
+        hours, not in days. Plan compensating moves for these before you touch the lever. The
+        single arrows are second-order: they will show up but slowly, and you have time to
+        adjust after the lever moves.
+      </p>
+
+      <h2>Examples</h2>
+      <div class="example">
+        <h4>Example — PPFD ↑</h4>
+        <p style="margin:0">Read across the "PPFD ↑" row. The ↑↑ effects (leaf temp, transpiration, dryback, dehum load, AC load) are your forward-cost list. The → on CO₂ demand is a slight misnomer; it says PPFD does not change CO₂ demand <em>per leaf</em> as much as it changes total uptake — the column hides nuance. Cross-check with the worked example in Chapter 04.</p>
+      </div>
+      <div class="example">
+        <h4>Example — pore EC climbing (diagnosis)</h4>
+        <p style="margin:0">Read down the "Pore EC" column. ↑↑ entries are at PPFD, Feed EC, and Canopy density. Either you moved one of those, or one of them is operating outside its assumed envelope. Walk those candidates first.</p>
+      </div>
+
+      <div class="exercises">
+        <h3>End-of-Chapter Exercises</h3>
+        <div class="exercise"><div class="ex-num">EX 08.1</div><p>From the matrix only: name every lever whose ↑ move drives transpiration ↑. Which one drives it ↑↑?</p></div>
+        <div class="exercise"><div class="ex-num">EX 08.2</div><p>You see disease pressure rising. Read down that column. Which three levers have the strongest direct effect? Which is easiest to act on first?</p></div>
+        <div class="exercise"><div class="ex-num">EX 08.3</div><p>Find one cell where you disagree with the entry. Defend your reading. (Matrices are simplifications; reading them critically is part of the skill.)</p></div>
+      </div>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 09 — EQUIPMENT BEHAVIOUR
+// ============================================================================
+chapters["09"] = {
+  title: "Equipment Behaviour",
+  render: () => {
+    const cards = EQUIPMENT.map(e => `
+      <div style="border:1px solid var(--rule);background:var(--paper-2);padding:1.2em 1.4em;margin:1em 0;max-width:none">
+        <h3 style="margin:0 0 0.4em">${escapeHtml(e.name)}</h3>
+        <p style="margin:0 0 0.6em"><em>${escapeHtml(e.role)}</em></p>
+        <h4>Levers you have on it</h4>
+        <ul>${e.levers.map(l => `<li>${escapeHtml(l)}</li>`).join("")}</ul>
+        <h4>Coupling to the room</h4>
+        <p>${escapeHtml(e.coupling)}</p>
+        <h4>Pitfalls</h4>
+        <p style="margin:0">${escapeHtml(e.pitfalls)}</p>
+      </div>
+    `).join("");
+    return `
+      <div class="chapter-meta">Part III &middot; Reference &middot; Chapter 09</div>
+      <h1>Equipment Behaviour</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        The plant does not know what model AC you bought. But the room does — and so does
+        the dehumidifier, the CO₂ controller, and the exhaust fan. This chapter is the
+        equipment-specific knowledge you need so the levers in Chapter 07 land where you
+        expect.
+      </p>
+
+      ${cards}
+
+      <h2>Coordinating dehum and AC</h2>
+      <p>
+        The two pieces of equipment most often at war with each other in a sealed flower
+        room. Coordinate them, or they will fight you.
+      </p>
+      <ul>
+        <li><strong>Dehum leads, AC follows</strong> in high-latent rooms. Let the dehum be the primary moisture remover; let the AC focus on sensible.</li>
+        <li><strong>AC leads, dehum follows</strong> in low-latent rooms (veg, early flower, smaller canopies). The AC coil can do most latent and dehum is the trim.</li>
+        <li><strong>Reheat is your friend</strong>. Hot-gas reheat on the AC lets it chase humidity without overcooling. Electric reheat works but is expensive.</li>
+        <li><strong>Sensor placement matters more than the unit's spec sheet</strong>. A perfectly-sized AC reading a corner that runs warm short-cycles. Place sensors at canopy level, well-mixed.</li>
+      </ul>
+
+      <h2>The CO₂ trap</h2>
+      <p>
+        CO₂ is the single most expensive utility per useful kg in a flower room <em>if used
+        well</em> and the most wasteful utility per useless kg <em>if used badly</em>. Three
+        rules:
+      </p>
+      <ol>
+        <li><strong>Interlock exhaust against dosing.</strong> Never both at once during lights-on.</li>
+        <li><strong>Verify with a portable meter at three canopy points.</strong> One injection diffuser does not make a room — distribution matters.</li>
+        <li><strong>Only enrich when light, temp, water, and EC can use it.</strong> If any one of those is limiting, the extra ppm is wasted.</li>
+      </ol>
+
+      <h2>The dehumidifier types</h2>
+      <p>The two technologies behave very differently and the wrong choice for the room is the most expensive equipment mistake on this list.</p>
+      <table class="compact">
+        <thead><tr><th>Type</th><th>Best in</th><th>Avoid in</th><th>Heat handling</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Refrigerant</strong> (in-room recirculating)</td>
+            <td>Warm flower rooms with AC capacity to absorb dehum heat</td>
+            <td>Cold drying / curing rooms (coil icing); rooms already AC-limited</td>
+            <td>Adds ~1.0–1.3× the latent load it removes as sensible heat to the room</td>
+          </tr>
+          <tr>
+            <td><strong>Desiccant</strong> (wheel / silica gel)</td>
+            <td>Cool, high-latent rooms (drying, finish stage); large facilities with regen exhaust path</td>
+            <td>Small rooms with no path to exhaust regen heat</td>
+            <td>Regen heat is concentrated; if exhausted outdoors, no net room load. If not, dumps heater-grade heat into the room.</td>
+          </tr>
+          <tr>
+            <td><strong>Ducted central</strong> (AHU coil + post-reheat)</td>
+            <td>Whole-facility designs with engineering up front</td>
+            <td>Retrofit into rooms with no duct space</td>
+            <td>Cleanest integration; sensible and latent both absorbed centrally; regen heat managed at plant scale.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="science">
+        <h4>Scientific note — dehumidifier heat</h4>
+        <p style="margin:0">
+          Every kilogram of water condensed releases ~2,450 kJ of latent heat. That heat plus
+          the compressor's own work appears as sensible heat at the dehumidifier outlet (for
+          refrigerant) or at the regen exhaust (for desiccant). Refrigerant dehum dumps it
+          all in the room. Desiccant dumps it wherever you route the regen exhaust. Plan the
+          path before you buy the box.
+        </p>
+      </div>
+
+      <div class="exercises">
+        <h3>End-of-Chapter Exercises</h3>
+        <div class="exercise"><div class="ex-num">EX 09.1</div><p>For each of the six equipment categories above, name one lever on the equipment and one room-side consequence of moving that lever.</p></div>
+        <div class="exercise"><div class="ex-num">EX 09.2</div><p>Drying room at 17 °C target, RH 55 %. Refrigerant or desiccant? Defend the choice.</p></div>
+        <div class="exercise"><div class="ex-num">EX 09.3</div><p>The CO₂ controller graph shows a sawtooth pattern with each tooth deeper than the last. Which two equipment pieces would you check first, and what would each tell you?</p></div>
+      </div>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 02 — THE COUPLED ROOM
+// ============================================================================
+chapters["02"] = {
+  title: "The Coupled Room",
+  render: () => `
+    <div class="chapter-meta">Part II &middot; The Course &middot; Chapter 02</div>
+    <h1>The Coupled Room</h1>
+
+    <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+      A grow room is not a list of independent setpoints. It is four simultaneous balances and
+      eleven coupled levers. Every change to one is also a change to the others. This chapter
+      gives you the framework so the rest of the manual makes sense.
+    </p>
+
+    <h2>The four balances</h2>
+    <p>
+      Everything happening inside the room can be tracked as one of four conservation
+      equations. They all run at once. They all must close (in = out) or you accumulate
+      something — heat, water, gas, or salt — and the plant pays for it.
+    </p>
+
+    <h3>Balance 01 — Energy</h3>
+    <p><strong>In:</strong> lights (the biggest single input), pumps, fans, the dehumidifier compressor and reheat coil, people, CO₂ burners (if used). <strong>Out:</strong> AC cooling capacity, exhaust air, conductive loss through walls and roof.</p>
+    <div class="science">
+      <h4>The hidden energy line everyone forgets</h4>
+      <p style="margin:0">A standalone refrigerant dehumidifier returns its dry air <em>warmer</em> than it took it in. The latent heat of the water it condensed plus the compressor's own waste heat both dump back into the room. Whatever the dehumidifier removes as moisture, the AC then has to remove as heat. AC capacity and dehum capacity are not independent decisions. (See F-05 in Chapter 05.)</p>
+    </div>
+
+    <h3>Balance 02 — Moisture</h3>
+    <p><strong>In:</strong> plant transpiration (the biggest single source in flower), surface evaporation from substrate and drains, humidifiers, outside air through the intake. <strong>Out:</strong> dehumidifier condensate, AC condensate, exhaust.</p>
+    <div class="key-idea">
+      <h4>Most of the irrigation eventually becomes room humidity</h4>
+      <p style="margin:0">Water that enters the substrate and is not lost as runoff leaves the system as water vapour through the leaf. A 100 m² flower room transpiring 4 L/m²/day produces 400 litres of water vapour daily. The dehumidifier has to remove all of it. If it cannot, you find out on the lower canopy at lights-off.</p>
+    </div>
+
+    <h3>Balance 03 — Carbon (CO₂)</h3>
+    <p><strong>In:</strong> CO₂ injection or burner, outside air (~420 ppm baseline). <strong>Out:</strong> plant uptake during photosynthesis, exhaust, leakage through any breach in the room envelope.</p>
+    <div class="key-idea">
+      <h4>Enrichment only pays if every other balance is closed</h4>
+      <p style="margin:0">Raising CO₂ from 420 to 1300 ppm is wasted if light, water, leaf temp, EC, or VPD is already the limiting factor. The plant cannot use the extra carbon unless every other input is also at or above the level that combination demands. The most expensive mistake in cannabis cultivation is paying for CO₂ in a room that cannot use it.</p>
+    </div>
+
+    <h3>Balance 04 — Salt (root zone)</h3>
+    <p><strong>In:</strong> fertiliser delivered with each irrigation, plus the concentrating effect of dryback (water leaves; salts remain). <strong>Out:</strong> plant uptake of ions, leaching through runoff.</p>
+    <div class="science">
+      <h4>Two mechanisms drive pore EC away from feed EC</h4>
+      <p style="margin:0">
+        Pore EC drifts apart from feed EC for two reasons that run simultaneously:
+        (1) selective ion uptake — the plant takes some ions faster than water and some
+        slower, so the remaining solution shifts in composition; (2) evaporative
+        concentration — water leaves the substrate as vapour while salts stay behind. Either
+        mechanism alone gives the wrong picture and the wrong correction. Both together
+        explain why pore EC can climb sharply in a single day of high transpiration without
+        the feed having changed at all.
+      </p>
+    </div>
+
+    <h2>The eleven levers</h2>
+    <p>
+      Each of the four balances is moved by some combination of the eleven levers below. We
+      group them by where you reach for them — environmental controllers, root-zone
+      strategy, or the crop itself.
+    </p>
+
+    <h3>Environmental (6)</h3>
+    <ol>
+      <li><strong>Light</strong> — PPFD, DLI, spectrum, photoperiod, fixture height, uniformity.</li>
+      <li><strong>Temperature control</strong> — AC setpoint, deadband, fan mode, reheat, day/night offset.</li>
+      <li><strong>Humidity / dehumidification</strong> — RH setpoint, dehum capacity and placement, reheat path, humidification (rare in flower).</li>
+      <li><strong>Air movement</strong> — circulation fans above and below canopy, oscillation, speed, count.</li>
+      <li><strong>Air exchange / room pressure</strong> — exhaust rate, intake dampers, sealed vs vented, leakage.</li>
+      <li><strong>CO₂</strong> — injection rate, ppm setpoint, schedule, distribution, gas vs burner.</li>
+    </ol>
+
+    <h3>Root-zone (3)</h3>
+    <ol start="7">
+      <li><strong>Irrigation strategy</strong> — frequency, shot size, dryback target, runoff fraction, substrate volume.</li>
+      <li><strong>Feed chemistry</strong> — feed EC, pH, NPK + secondary ratio, additives, runoff EC/pH thresholds.</li>
+      <li><strong>Root-zone temp & oxygen</strong> — tank/solution temp, substrate temp, air-filled porosity.</li>
+    </ol>
+
+    <h3>Crop (2)</h3>
+    <ol start="10">
+      <li><strong>Canopy architecture</strong> — plant density, pruning, defoliation cadence, trellis height, veg time.</li>
+      <li><strong>Sensors, calibration, biosecurity</strong> — sensor placement and calibration, alarm thresholds, sanitation cycle, IPM, condensate handling.</li>
+    </ol>
+
+    <h2>Lever-to-balance map</h2>
+    <p>Which lever disturbs which balance, at a glance:</p>
+    <table class="compact">
+      <thead><tr><th>Lever</th><th>Energy</th><th>Moisture</th><th>Carbon</th><th>Salt</th></tr></thead>
+      <tbody>
+        <tr><td>Light</td><td>★★★</td><td>★★ (via transpiration)</td><td>★★ (via demand)</td><td>★★ (via dryback)</td></tr>
+        <tr><td>Air temp</td><td>★★★</td><td>★★ (via VPD)</td><td>★</td><td>★</td></tr>
+        <tr><td>Humidity / dehum</td><td>★★ (heat from dehum)</td><td>★★★</td><td>—</td><td>★ (via dryback)</td></tr>
+        <tr><td>Airflow</td><td>★ (motor heat)</td><td>★★ (boundary mixing)</td><td>★ (boundary mixing)</td><td>—</td></tr>
+        <tr><td>Exchange / pressure</td><td>★★ (loss/gain)</td><td>★★</td><td>★★★ (lose CO₂)</td><td>—</td></tr>
+        <tr><td>CO₂</td><td>★ (if burner)</td><td>★ (if burner)</td><td>★★★</td><td>★ (via demand)</td></tr>
+        <tr><td>Irrigation</td><td>★ (substrate evap)</td><td>★★ (substrate evap)</td><td>—</td><td>★★★</td></tr>
+        <tr><td>Feed EC / pH</td><td>—</td><td>—</td><td>—</td><td>★★★</td></tr>
+        <tr><td>Rootzone temp / O₂</td><td>★</td><td>—</td><td>—</td><td>★★ (uptake rate)</td></tr>
+        <tr><td>Canopy density</td><td>★ (radiative)</td><td>★★ (transpiration)</td><td>★★ (uptake)</td><td>★★</td></tr>
+        <tr><td>Sensors / biosec</td><td>★ (controller accuracy)</td><td>★ (controller accuracy)</td><td>★</td><td>★</td></tr>
+      </tbody>
+    </table>
+
+    <h2>How the levers actually interact</h2>
+    <p>
+      Reading the table above row by row gives you which balance each lever disturbs. But
+      the levers also disturb <em>each other</em>: raising one forces a compensating move on
+      another. The full plant-mediated chain that connects all of this is the subject of
+      Chapter 03. The downstream-effect catalogue lever by lever is Chapter 07. The
+      parameter-by-parameter matrix is Chapter 08.
+    </p>
+
+    <div class="key-idea">
+      <h4>What competence looks like at this point</h4>
+      <p style="margin:0">A competent operator, given any one lever move, can name (a) which of the four balances it disturbs, (b) which downstream lever will likely need to move to re-close that balance, and (c) which symptom on the plant will appear first if the compensating move is not made.</p>
+    </div>
+
+    <div class="exercises">
+      <h3>End-of-Chapter Exercises</h3>
+      <div class="exercise"><div class="ex-num">EX 02.1</div><p>Name the four balances. For each, name the single biggest "in" line and the single biggest "out" line in your room.</p></div>
+      <div class="exercise"><div class="ex-num">EX 02.2</div><p>The boss raises CO₂ from ambient to 1300 ppm without changing anything else. Walk through each of the four balances and identify what (if anything) needs to change to keep them closed.</p></div>
+      <div class="exercise"><div class="ex-num">EX 02.3</div><p>Group the 11 levers into the three categories from memory. Then explain why "sensors and calibration" is a lever and not just a measurement tool.</p></div>
+    </div>
+  `
+};
+
+// ============================================================================
+//  CHAPTER 03 — THE CHAIN YOU CARRY
+// ============================================================================
+chapters["03"] = {
+  title: "The Chain You Carry",
+  render: () => {
+    const dir = state.chain.direction;
+    const seq = dir === "forward" ? CHAIN : [...CHAIN].reverse();
+    const sel = state.chain.selected;
+    const node = CHAIN.find(n => n.n === sel);
+    const tiles = seq.map(n => `
+      <button class="chain-node ${n.n === sel ? "selected" : ""}" data-action="select-chain-node" data-node="${n.n}">
+        <span class="n">Node ${n.n}</span>
+        <span class="label">${escapeHtml(n.name)}</span>
+      </button>
+    `).join("");
+    return `
+      <div class="chapter-meta">Part II &middot; The Course &middot; Chapter 03</div>
+      <h1>The Chain You Carry</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        Eleven nodes connect the first photon striking a leaf to whether or not you get a
+        botrytis outbreak this week. Walk the chain forward to predict consequences before
+        you change something. Walk it backward to find the cause when a symptom appears.
+      </p>
+
+      <h2>The chain</h2>
+      <p>Click any node to inspect it. Switch direction to walk from light to disease (planning) or from disease back to a lever (diagnosis).</p>
+
+      <div class="btn-row">
+        <button class="btn ${dir === "forward" ? "primary" : ""}" data-action="chain-direction" data-dir="forward">← Forward (light → disease)</button>
+        <button class="btn ${dir === "reverse" ? "primary" : ""}" data-action="chain-direction" data-dir="reverse">Reverse (symptom → cause) →</button>
+      </div>
+
+      <div class="chain">${tiles}</div>
+
+      ${node ? `
+      <div class="chain-detail">
+        <div class="header">
+          <h3 style="margin:0">Node ${node.n}. ${escapeHtml(node.name)}</h3>
+          <span class="badge">${escapeHtml(node.short)}</span>
+        </div>
+        <p>${escapeHtml(node.detail)}</p>
+        <h4>Upstream levers</h4>
+        <p style="margin:0 0 0.6em">${escapeHtml(node.upstreamLever || "—")}</p>
+        <h4>Effect on the next node</h4>
+        <p style="margin:0 0 0.6em">${escapeHtml(node.downstream || "—")}</p>
+        ${node.measurement ? `<h4>How you measure it</h4><p style="margin:0">${escapeHtml(node.measurement)}</p>` : ""}
+      </div>
+      ` : ""}
+
+      <h2>Walking forward (planning)</h2>
+      <p>
+        Before you move a lever, walk forward from that lever to the end of the chain and ask
+        what compensates at each node. A common worked example — raising PPFD — is detailed
+        in Chapter 04. The pattern there is the pattern for every lever.
+      </p>
+
+      <h2>Walking backward (diagnosis)</h2>
+      <p>
+        When you see a symptom, start at the symptom node and walk backward. The first node
+        upstream that does not look right is your root cause — not the node where the symptom
+        appeared. A botrytis pocket at Node 11 is almost never solved at Node 11. It is solved
+        somewhere between Node 4 (transpiration) and Node 10 (dehum load).
+      </p>
+
+      <div class="key-idea">
+        <h4>The discipline</h4>
+        <p style="margin:0">When something is wrong, do not change the lever closest to the symptom. Walk backward to the first upstream node that is out of band, and make the smallest correction there. Then wait one full cycle before doing anything else.</p>
+      </div>
+
+      <h2>What the chain is not</h2>
+      <p>
+        The chain is a teaching map, not a strict pipeline. Several nodes feed back on each
+        other — pore EC affects water status, which feeds back on transpiration, which feeds
+        back on dryback. You do not need to track every loop. You need to know the dominant
+        forward direction so you can predict; and you need to be able to walk it backward
+        from any symptom to find the actual lever to move.
+      </p>
+
+      <div class="exercises">
+        <h3>End-of-Chapter Exercises</h3>
+        <div class="exercise"><div class="ex-num">EX 03.1</div><p>Without looking at the page, recite the eleven nodes of the chain in order.</p></div>
+        <div class="exercise"><div class="ex-num">EX 03.2</div><p>You see edge burn on upper-canopy fan leaves. Walk the chain backward — which is the most likely root-cause node, and what would be the next-most-likely?</p></div>
+        <div class="exercise"><div class="ex-num">EX 03.3</div><p>Lights-on tomorrow, PPFD is going from 700 to 900. Walk forward from Node 1 and list, for each subsequent node, what you expect to change and what (if anything) you should do in advance.</p></div>
+      </div>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 04 — THE COST OF A LEVER (worked example: light)
+// ============================================================================
+chapters["04"] = {
+  title: "The Cost of a Lever",
+  render: () => `
+    <div class="chapter-meta">Part II &middot; The Course &middot; Chapter 04</div>
+    <h1>The Cost of a Lever</h1>
+
+    <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+      Every lever has a price tag denominated in other levers. This chapter works one example
+      — raising PPFD — from end to end, tracing every downstream cost. The point is not the
+      example. The point is the discipline: every lever you move forces other levers to move
+      with it, and the failure mode of a clean run is forgetting one of them.
+    </p>
+
+    <h2>The setup</h2>
+    <p>
+      We are in flower bulk, week 4. Current state: PPFD 750 μmol/m²/s, CO₂ 1200 ppm, leaf
+      temp ~24 °C, leaf-VPD 1.15 kPa, feed EC 3.0, runoff EC 4.4, dryback 6 %/cycle, room RH
+      62 %. The crop is on plan. The boss wants to push to 1000 PPFD for the next two weeks.
+    </p>
+
+    <h2>Walking the chain forward</h2>
+
+    <h3>Step 1 — Node 1: Light at canopy goes up 33 %</h3>
+    <p>
+      Direct effect: more photons land on the leaf. Photosynthesis rises — but only if every
+      downstream node also rises. If any one of them does not, the additional light is at
+      best wasted and at worst harmful.
+    </p>
+
+    <h3>Step 2 — Node 2: Leaf temperature rises</h3>
+    <p>
+      Light absorbed becomes leaf radiative load. With transpiration holding, leaf still runs
+      below air, but the delta narrows from ~2 °C to ~1 °C. If transpiration cannot keep up,
+      leaf rises to air or above. Hot spots immediately below fixtures appear first. The
+      first reading to watch with an IR thermometer.
+    </p>
+
+    <h3>Step 3 — Node 3: Leaf-VPD rises</h3>
+    <p>
+      A warmer leaf has a higher saturation vapour pressure. With the same air conditions,
+      leaf-VPD climbs. You will see this in the controller as a 0.1–0.2 kPa rise on the leaf
+      calculation. If it pushes past 1.5 kPa, the next node inverts (stomata close in
+      defence, transpiration falls instead of rising).
+    </p>
+
+    <div class="warn-box">
+      <h4>Decision point</h4>
+      <p style="margin:0">If leaf-VPD is on track to go past 1.4 kPa, lift RH a few points <em>before</em> PPFD comes up. If you cannot — dehumidifier already at minimum and humidifier not available — lift the PPFD more gradually so the canopy adapts.</p>
+    </div>
+
+    <h3>Step 4 — Node 4: Transpiration rises (~25 %)</h3>
+    <p>
+      More vapour leaving leaves. Useful: more calcium and magnesium delivered with the
+      water column, leaf cooling sustained. Costly: room latent load climbs. A 100 m² flower
+      room going from 4.0 to 5.0 L/m²/day has added 100 L of daily water removal to the
+      dehumidifier's job.
+    </p>
+
+    <div class="warn-box">
+      <h4>Decision point</h4>
+      <p style="margin:0">Check dehumidifier headroom. If it was already running 70 %+ duty before the change, you are about to find out it cannot keep up. Schedule the change for after a maintenance check or stagger.</p>
+    </div>
+
+    <h3>Step 5 — Node 5: Substrate dryback accelerates</h3>
+    <p>
+      More water leaving the leaf = more water pulled from substrate = faster WC drop
+      between irrigations. If you do nothing, dryback will exceed the target band (e.g. 6 %
+      becomes 9 %). The substrate will hit the irrigation trigger sooner, but if your
+      irrigation is on a clock instead of a sensor, it will not fire.
+    </p>
+
+    <div class="warn-box">
+      <h4>Decision point</h4>
+      <p style="margin:0">Switch irrigation from clock to WC trigger (or shorten the clock by ~20 %). Add one extra shot mid-day. Confirm runoff fraction holds at the target band.</p>
+    </div>
+
+    <h3>Step 6 — Node 6: Pore EC climbs faster</h3>
+    <p>
+      Deeper dryback per cycle = more concentration per cycle. If you add more shots but
+      runoff stays the same, pore EC still drifts up because feed concentration is
+      delivering more total salt per day. If you also raise runoff fraction by 5 %, you
+      leach the additional salt back out and pore EC stays in band.
+    </p>
+
+    <div class="warn-box">
+      <h4>Decision point</h4>
+      <p style="margin:0">Lift runoff fraction 3–5 %. Check pore EC daily for the first three days post-change. If pore EC drifts above your alarm threshold, drop feed EC 0.1–0.2 BEFORE lowering PPFD — but only if leaf damage has not already begun.</p>
+    </div>
+
+    <h3>Step 7 — Node 7: Plant water status</h3>
+    <p>
+      If pore EC stayed in band and irrigation kept up, water status holds. If pore EC drifted
+      up, root uptake slows, leaf water status falls, and the plant defends by closing
+      stomata — which inverts the chain back at Node 3. You now have closed stomata at higher
+      PPFD: classic recipe for photoinhibition on the top of the cola.
+    </p>
+
+    <h3>Step 8 — Node 8: Photosynthesis</h3>
+    <p>
+      The point of the whole exercise. If every previous node held, A (assimilation rate)
+      rises by 15–25 %. If any node failed, A is flat or falling. The headline number on the
+      flower scale will eventually tell you which.
+    </p>
+
+    <h3>Step 9 — Node 9: CO₂ uptake rises in lockstep</h3>
+    <p>
+      More photosynthesis = more CO₂ pulled from air. Existing CO₂ injection rate may not
+      keep up at the new PPFD. Either the ppm sags during the most-demanding hours, or
+      injection rate scales up automatically. Verify the controller responds, and that
+      monthly gas usage rises proportionally — if it does not, supply is the new limit, not
+      light.
+    </p>
+
+    <h3>Step 10 — Node 10: HVAC and dehum loads up across the board</h3>
+    <p>
+      Latent load up because transpiration is up. Sensible load up because the dehumidifier
+      is working harder (and dumping more heat) AND because higher-wattage lighting is
+      adding more sensible directly. AC has to absorb both. Headroom check is mandatory at
+      both AC and dehum before the change.
+    </p>
+
+    <h3>Step 11 — Node 11: Disease pressure</h3>
+    <p>
+      If every previous node held, disease pressure is unchanged or marginally lower
+      (drier-running leaves overall). If Node 10 fell short and overnight RH crept up,
+      disease pressure rises. The cost of an unanaged PPFD change shows up at Node 11 about
+      a week later — by which time the cause is two steps removed from your view.
+    </p>
+
+    <h2>The summary cost</h2>
+    <p>
+      Raising PPFD 750 → 1000 (a 33 % move) typically requires:
+    </p>
+    <ul>
+      <li>+10–15 % CO₂ injection rate</li>
+      <li>+15–25 % irrigation volume (more shots, similar shot size, higher runoff fraction)</li>
+      <li>+15–25 % dehumidifier capacity headroom</li>
+      <li>+10–15 % AC sensible capacity headroom</li>
+      <li>Feed EC unchanged but pore EC monitored daily</li>
+      <li>RH lifted 2–4 points to hold leaf-VPD below 1.4 kPa</li>
+      <li>Calibrated quantum sensor walk to confirm the canopy actually saw +33 %, not +50 % at top and +20 % at bottom</li>
+    </ul>
+
+    <div class="key-idea">
+      <h4>The general rule</h4>
+      <p style="margin:0">The cost of a lever is the list of other levers you also need to move so the four balances stay closed. The size of the move on the headline lever is bounded by the smallest available headroom on any of the compensating moves. Push past that bound and you have made the limiting downstream lever worse, not the headline lever better.</p>
+    </div>
+
+    <div class="exercises">
+      <h3>End-of-Chapter Exercises</h3>
+      <div class="exercise"><div class="ex-num">EX 04.1</div><p>Now do it for a different lever. Boss wants to drop air temp 2 °C overnight in week 7 to push colour. Walk the chain. What needs to move with it? What is the most likely place a failure shows up first?</p></div>
+      <div class="exercise"><div class="ex-num">EX 04.2</div><p>You only have headroom on the dehum (20 % spare) and the AC (10 % spare). Feed system is at capacity. What is the maximum PPFD lift you can safely chase from a starting point of 750? Show your reasoning.</p></div>
+      <div class="exercise"><div class="ex-num">EX 04.3</div><p>Explain to a workmate the difference between "this lever costs more energy" and "this lever costs other levers". Use the worked example above.</p></div>
+    </div>
+  `
+};
+
+// ============================================================================
+//  CHAPTER 05 — HOW ROOMS FAIL
+// ============================================================================
+chapters["05"] = {
+  title: "How Rooms Fail",
+  render: () => {
+    const cards = FAILURES.map(f => `
+      <details class="failure">
+        <summary><span class="code">${f.code}</span><span class="name">${escapeHtml(f.name)}</span></summary>
+        <div class="body">
+          <p style="margin:0 0 0.8em">${escapeHtml(f.summary)}</p>
+          <h5>Mechanism</h5>
+          <p>${escapeHtml(f.mechanism)}</p>
+          <h5>What you see</h5>
+          <ul>${f.signals.map(s => `<li>${escapeHtml(s)}</li>`).join("")}</ul>
+          <h5>Correction</h5>
+          <p style="margin:0">${escapeHtml(f.correction)}</p>
+        </div>
+      </details>
+    `).join("");
+    return `
+      <div class="chapter-meta">Part II &middot; The Course &middot; Chapter 05</div>
+      <h1>How Rooms Fail</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        Six recurring failure modes. Almost every problem a Cultivation room will throw at you
+        is one of these six. Learn to recognise them by the pattern of signals — not by the
+        first symptom — and you will know which lever to reach for before you finish looking.
+      </p>
+
+      <h2>The six modes</h2>
+      <p>Click each to expand. Each card includes the mechanism (so you understand why), the signals (so you can recognise the pattern), and the correction (so you know what to do).</p>
+
+      ${cards}
+
+      <h2>Pattern recognition, not symptom-chasing</h2>
+      <p>
+        Notice that the same symptom (e.g. tip burn) can appear in F-01, F-03, F-04, or F-06,
+        but the cause and the right correction differ in each case. Beginners chase the symptom
+        and end up flipping levers. Experienced operators read three or four signals together
+        and name the failure mode — and then the right lever is obvious. The troubleshooting
+        table in Chapter 06 is built around this principle.
+      </p>
+
+      <div class="key-idea">
+        <h4>One symptom is never the diagnosis</h4>
+        <p style="margin:0">Always gather a second and a third confirming signal before you decide which failure mode you are in. The cost of a wrong diagnosis is usually a second failure on top of the first.</p>
+      </div>
+
+      <div class="exercises">
+        <h3>End-of-Chapter Exercises</h3>
+        <div class="exercise"><div class="ex-num">EX 05.1</div><p>For each of F-01 through F-06, name the upstream lever change that most often causes it.</p></div>
+        <div class="exercise"><div class="ex-num">EX 05.2</div><p>You see edge burn on upper leaves AND the dehumidifier is at 100 % duty. Which two failure modes does this pattern fit, and how would you distinguish them in the next 10 minutes?</p></div>
+        <div class="exercise"><div class="ex-num">EX 05.3</div><p>Explain F-05 in your own words to someone who thinks "a dehumidifier just removes water and that's it".</p></div>
+      </div>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 06 — READING THE ROOM
+// ============================================================================
+chapters["06"] = {
+  title: "Reading the Room",
+  render: () => {
+    const filter = state.trouble.filter.toLowerCase();
+    const chip = state.trouble.chip;
+    const rows = TROUBLE.filter(r => {
+      if (chip && r.chip !== chip) return false;
+      if (filter && !(r.obs.toLowerCase().includes(filter) || r.causes.toLowerCase().includes(filter) || r.checks.toLowerCase().includes(filter))) return false;
+      return true;
+    });
+    const chipRow = TROUBLE_CHIPS.map(c =>
+      `<button class="chip ${chip === c.id ? "active" : ""}" data-action="trouble-chip" data-chip="${c.id}">${escapeHtml(c.label)}</button>`
+    ).join("");
+    return `
+      <div class="chapter-meta">Part II &middot; The Course &middot; Chapter 06</div>
+      <h1>Reading the Room</h1>
+
+      <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+        The walk-through you do at lights-on and at lights-off, the order in which you make
+        decisions, and the troubleshooting table you carry in your head (and on the wall). The
+        chapter that translates Chapters 01–05 into what you actually do on the floor.
+      </p>
+
+      <h2>The order of operations</h2>
+      <ol>
+        <li><strong>Look first; touch nothing.</strong> Walk the room. Top of canopy, middle, bottom. Above and below an under-canopy fan. Compare what your eyes and your IR gun report with what the controller is reporting. Disagreement is information; record it.</li>
+        <li><strong>Check what changed.</strong> A symptom now is almost always caused by a lever moved in the previous 24–72 hours. Read the controller's change log; ask the swing-shift; review the irrigation log.</li>
+        <li><strong>Confirm with one measurement, not an assumption.</strong> If you suspect pore EC drift, take a pore sample. If you suspect dehumidifier short-cycling, read the runtime log. Trust no signal that you have not actually measured.</li>
+        <li><strong>Walk the chain backward from the symptom.</strong> Identify the most upstream node that is out of band. That is your root cause.</li>
+        <li><strong>Make the smallest correction.</strong> Move one lever, by the smallest plausible amount, on the most upstream node. Resist the urge to "also fix" anything else at the same time.</li>
+        <li><strong>Wait one full cycle.</strong> Lights-on to lights-on, or one irrigation cycle. Then look again. Only then make the next change.</li>
+      </ol>
+
+      <div class="key-idea">
+        <h4>The rule that prevents most second failures</h4>
+        <p style="margin:0">Change one lever. Wait one cycle. Look again. The temptation to change three things at once is overwhelming and almost always wrong: when something improves or worsens, you cannot tell which change caused it.</p>
+      </div>
+
+      <h2>The morning walk</h2>
+      <p>Lights-on, before anything else:</p>
+      <ul>
+        <li>Read leaf temp at upper canopy (IR gun) — should be 1–3 °C below air.</li>
+        <li>Compare local RH at canopy to controller RH (carry a probe). Anything &gt;5 % apart is an air-mixing problem.</li>
+        <li>Check the wall surfaces nearest the AC return for condensation. Even a small film tells you dew point is at the wall.</li>
+        <li>Confirm CO₂ rose to setpoint within the first 20 minutes of lights-on. If it lags, dosing is short or the room is leaky.</li>
+        <li>Read pore EC and runoff EC from yesterday's last cycle.</li>
+        <li>Look at the lowest canopy. Soft, cool, wet underside? Start at F-02.</li>
+      </ul>
+
+      <h2>The evening walk</h2>
+      <p>30 minutes before lights-off:</p>
+      <ul>
+        <li>Read air temp setpoint vs actual. Drift?</li>
+        <li>Read RH at lights-off projected trajectory. Climbing too fast = under-sized night dehum.</li>
+        <li>Confirm last irrigation timed correctly — late shots mean wet substrate going into the dark cycle (slow dryback, hypoxia risk).</li>
+        <li>Walk the under-canopy. Smoke test if anything looks still.</li>
+      </ul>
+
+      <h2>The troubleshooting table</h2>
+      <p>Filter by symptom keyword or chip. Each row connects the observation to a chain node, the most likely causes, and the first measurements to take.</p>
+
+      <div class="chip-row">${chipRow}</div>
+      <div style="display:flex;gap:0.5em;align-items:center;margin:0.8em 0">
+        <input type="search" placeholder="Filter observations or causes…" value="${escapeHtml(state.trouble.filter)}" data-input="trouble.filter" style="max-width:340px">
+        <button class="btn ghost" data-action="clear-trouble">Clear</button>
+      </div>
+
+      <table class="compact">
+        <thead><tr><th>Observation</th><th>Chain location</th><th>Likely causes</th><th>First checks</th></tr></thead>
+        <tbody>
+          ${rows.length === 0
+            ? `<tr><td colspan="4" style="text-align:center;color:var(--ink-3);font-style:italic">No rows match the current filter.</td></tr>`
+            : rows.map(r => `
+              <tr>
+                <td><strong>${escapeHtml(r.obs)}</strong></td>
+                <td><small>${escapeHtml(r.chain)}</small></td>
+                <td>${escapeHtml(r.causes)}</td>
+                <td>${escapeHtml(r.checks)}</td>
+              </tr>
+            `).join("")}
+        </tbody>
+      </table>
+
+      <h2>The two principles to repeat</h2>
+      <ol>
+        <li><strong>Walk the chain backward, not the symptom.</strong> The fix is rarely at the symptom node.</li>
+        <li><strong>One change per cycle.</strong> Then look again. The room speaks back; let it.</li>
+      </ol>
+
+      <div class="exercises">
+        <h3>End-of-Chapter Exercises</h3>
+        <div class="exercise"><div class="ex-num">EX 06.1</div><p>List the six items on the morning walk in order. What do you do if the leaf temp reads ABOVE air temp?</p></div>
+        <div class="exercise"><div class="ex-num">EX 06.2</div><p>Filter the troubleshooting table by "tip-burn". Three rows appear. Walk through how you would distinguish between them on the floor.</p></div>
+        <div class="exercise"><div class="ex-num">EX 06.3</div><p>Explain to a workmate why "change one lever, wait one cycle" is the rule. What temptation does it defend against?</p></div>
+      </div>
+    `;
+  }
+};
+
+// ============================================================================
+//  CHAPTER 01 — HOW THE PLANT WORKS
+// ============================================================================
+chapters["01"] = {
+  title: "How the Plant Works",
+  render: () => `
+    <div class="chapter-meta">Part I &middot; Foundations &middot; Chapter 01</div>
+    <h1>How the Plant Works</h1>
+
+    <p class="lead" style="font-size:1.08rem;color:var(--ink-2);font-style:italic;max-width:68ch">
+      This is the anchor chapter. Every chapter that follows uses the terms defined here. If
+      a word in a later chapter feels strange, the definition for it lives somewhere on this
+      page or in the glossary in Chapter 10.
+    </p>
+
+    <h2>The three things a leaf is doing all day</h2>
+    <p>
+      A cannabis leaf in light is doing three coupled jobs simultaneously. It is taking in
+      CO₂, splitting water, and assembling sugars. None of the three runs independently of
+      the others. If one stops, the other two cannot proceed.
+    </p>
+
+    <div class="key-idea">
+      <h4>Photosynthesis in one sentence</h4>
+      <p style="margin:0">
+        Light energy splits water inside the chloroplast and uses the result, together with
+        CO₂ pulled in from the air, to build sugar — which is then exported through the leaf
+        and turned into roots, stems, flowers, and resin.
+      </p>
+    </div>
+
+    <p>
+      Three inputs are required at every instant: <strong>photons</strong> (light),
+      <strong>water</strong> (from the roots, via the xylem), and <strong>CO₂</strong> (from
+      the air, via the stomata). Whichever of these is in shortest supply caps the whole
+      operation. Pour more of the other two in and you make no extra sugar. You can only
+      waste the abundance, or break something.
+    </p>
+
+    <h3>Transpiration — the engine that powers everything else</h3>
+    <p>
+      Water enters the plant at the roots, climbs the xylem under tension, and leaves
+      through the stomata as vapour. This evaporation is called transpiration, and it does
+      three jobs that the plant cannot do any other way:
+    </p>
+    <ol>
+      <li><strong>It cools the leaf.</strong> Each gram of water that evaporates from the leaf carries roughly 2.4 kilojoules of latent heat with it. A healthy, transpiring canopy sits 1–3 °C BELOW the air temperature around it — not above, not equal. If you measure the leaf and it has risen to meet the air, transpiration has stalled and you should already be reaching for the dehumidifier or the airflow fan.</li>
+      <li><strong>It delivers nutrients.</strong> Some nutrients move freely once inside the plant, but calcium, magnesium, manganese, and boron travel essentially only in the transpiration stream. A plant that has stopped transpiring also stops delivering calcium to its new tissue, which is why low-VPD failures show up first as soft growth, tip-rot, and leaf curl on the upper canopy.</li>
+      <li><strong>It creates the suction that pulls water from the roots.</strong> No separate pump exists in the plant. Evaporation at the leaf creates negative pressure in the xylem, which pulls a continuous water column upward from root to canopy.</li>
+    </ol>
+
+    <div class="science">
+      <h4>Scientific note — leaf temperature</h4>
+      <p style="margin:0">
+        Operator mental models commonly assume leaf ≈ air. This is wrong even in a sealed,
+        well-mixed room. Healthy canopies are <strong>1–3 °C below air</strong> due to evaporative
+        cooling. A leaf that reads at or above air temperature has either lost stomatal control
+        (closed in response to high VPD) or run out of root-zone water — both of which require
+        immediate intervention before they become calcium deficiency, edge burn, or
+        photoinhibition on the top of the cola.
+      </p>
+    </div>
+
+    <h3>Stomata — the gate the plant manages itself</h3>
+    <p>
+      Stomata are microscopic pores on the underside of every leaf. They open in light and
+      close in dark. They are also the only path by which CO₂ enters the leaf, so when they
+      close — for any reason — photosynthesis stops. The plant closes them for two main
+      reasons inside our control:
+    </p>
+    <ul>
+      <li><strong>Dark.</strong> Lights off, stomata closed. Nothing to do during the dark cycle.</li>
+      <li><strong>High vapour pressure deficit.</strong> When the air is much drier than the leaf, the plant senses imminent water loss and shuts the stomata <em>in anticipation</em>, before it actually runs out. In cannabis this anticipatory closure begins around <strong>VPD 1.5–1.6 kPa</strong> at the leaf surface, well before tissue dehydration would otherwise force the issue.</li>
+    </ul>
+
+    <div class="science">
+      <h4>Scientific note — anticipatory stomatal closure</h4>
+      <p style="margin:0">
+        Cannabis runs a conservative water strategy. Stomata close <em>before</em> a water
+        deficit develops, not in response to one. Pushing the leaf-VPD above ~1.5–1.6 kPa
+        traps you in a paradox: you have made the climate harsher in an attempt to drive more
+        transpiration, and the plant has responded by stopping transpiration. The lever has
+        inverted on you. Veg can sit a touch higher; finish-stage flower wants to come back
+        down. The numbers in the Athena table in Chapter 11.3 reflect this.
+      </p>
+    </div>
+
+    <h2>Terms used throughout this manual</h2>
+    <p>
+      The definition cards below are referenced repeatedly. Read them once now so that
+      Chapters 02 through 09 read smoothly. They appear again, alphabetised, in the Glossary
+      (Chapter 10).
+    </p>
+
+    <h4>Light</h4>
+    <div class="def-grid">
+      ${defCard("PPFD")}
+      ${defCard("DLI")}
+      ${defCard("Photoperiod")}
+      ${defCard("Spectrum")}
+    </div>
+
+    <h4>Climate</h4>
+    <div class="def-grid">
+      ${defCard("RH")}
+      ${defCard("VPD (air)")}
+      ${defCard("VPD (leaf)")}
+      ${defCard("Air vs leaf temp")}
+      ${defCard("Dew point")}
+      ${defCard("ppm (CO₂)")}
+    </div>
+
+    <h4>Leaf and canopy</h4>
+    <div class="def-grid">
+      ${defCard("Stomata")}
+      ${defCard("Transpiration")}
+      ${defCard("Boundary layer")}
+      ${defCard("Sink capacity")}
+      ${defCard("Photoinhibition")}
+    </div>
+
+    <h4>Root zone</h4>
+    <div class="def-grid">
+      ${defCard("Substrate")}
+      ${defCard("Substrate WC")}
+      ${defCard("Air-filled porosity")}
+      ${defCard("Dryback")}
+      ${defCard("Runoff")}
+      ${defCard("EC (feed)")}
+      ${defCard("EC (substrate / pore)")}
+      ${defCard("pH")}
+      ${defCard("Osmotic stress")}
+      ${defCard("Hypoxia")}
+    </div>
+
+    <h4>Equipment & control</h4>
+    <div class="def-grid">
+      ${defCard("HVAC")}
+      ${defCard("Reheat")}
+      ${defCard("Sensible load")}
+      ${defCard("Latent load")}
+      ${defCard("Deadband")}
+      ${defCard("Stratification")}
+      ${defCard("Negative pressure")}
+    </div>
+
+    <h4>Pathogens</h4>
+    <div class="def-grid">
+      ${defCard("Botrytis")}
+      ${defCard("Powdery mildew (PM)")}
+    </div>
+
+    <h2>Putting it together</h2>
+    <p>
+      Light arrives at the canopy and lifts photosynthesis. Photosynthesis requires CO₂, so
+      the plant opens its stomata to let it in — and the act of opening the stomata
+      simultaneously releases water vapour. The water lost at the leaf is replaced by water
+      pulled up the xylem from the substrate, which carries dissolved nutrients into the
+      plant and concentrates the salts that remain in the rootzone. The water vapour
+      released to the air becomes the dehumidifier's job. The dehumidifier dumps heat back
+      into the room, which the AC has to remove. The AC removes both heat and (incidentally)
+      some water, which subtracts from the dehumidifier's job. None of these things happen
+      in isolation. Every one is dragged along by what the leaf is doing.
+    </p>
+
+    <div class="key-idea">
+      <h4>The chain you must be able to recite</h4>
+      <p style="margin:0">
+        Light → leaf temperature → VPD → transpiration → substrate dryback → pore EC →
+        plant water status → photosynthetic rate → CO₂ uptake → HVAC/dehum load → disease
+        pressure. We will walk this chain interactively in Chapter 03.
+      </p>
+    </div>
+
+    <div class="exercises">
+      <h3>End-of-Chapter Exercises</h3>
+      <div class="exercise"><div class="ex-num">EX 01.1</div><p>Explain to a workmate, without looking at the page, why a healthy leaf is cooler than the air around it. What single measurement would tell you that transpiration has stalled?</p></div>
+      <div class="exercise"><div class="ex-num">EX 01.2</div><p>Substrate EC has climbed even though feed EC is unchanged. Name the two distinct mechanisms responsible. Which would you expect to dominate in week 6 of flower under intense light, and why?</p></div>
+      <div class="exercise"><div class="ex-num">EX 01.3</div><p>The boss asks you to set leaf VPD to 1.8 kPa to "really push transpiration". What goes wrong with that plan? Which definition card on this page tells you so?</p></div>
+    </div>
+  `
+};
+
+// ============================================================================
+//  INIT
+// ============================================================================
+window.addEventListener("DOMContentLoaded", render);
+</script>
+</body>
+</html>

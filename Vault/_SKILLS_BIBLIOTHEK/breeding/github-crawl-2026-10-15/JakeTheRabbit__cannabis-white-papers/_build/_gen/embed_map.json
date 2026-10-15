@@ -1,0 +1,155 @@
+{
+ "airflow-design": {
+  "gallery": [],
+  "sequences": []
+ },
+ "cloning": {
+  "gallery": [],
+  "sequences": []
+ },
+ "closed-loop": {
+  "gallery": [],
+  "sequences": []
+ },
+ "coco-crop-steering": {
+  "gallery": [],
+  "sequences": []
+ },
+ "defoliation-training": {
+  "gallery": [],
+  "sequences": []
+ },
+ "f2-crop-steering": {
+  "gallery": [],
+  "sequences": []
+ },
+ "facility-3d": {
+  "gallery": [],
+  "sequences": []
+ },
+ "flowering-stages": {
+  "gallery": [],
+  "sequences": []
+ },
+ "gmp-hash-lab": {
+  "gallery": [],
+  "sequences": []
+ },
+ "grow-room-systems": {
+  "gallery": [],
+  "sequences": []
+ },
+ "harvest-dry-trim-cure": {
+  "gallery": [],
+  "sequences": []
+ },
+ "ipm-sop": {
+  "gallery": [],
+  "sequences": []
+ },
+ "irrigation-manual": {
+  "gallery": [],
+  "sequences": []
+ },
+ "light-acclimation": {
+  "gallery": [
+   [
+    "Photoinhibition and bleaching",
+    "assets/img/t-light-acclimation-photoinhibition-bleaching.jpg"
+   ]
+  ],
+  "sequences": []
+ },
+ "lighting-fundamentals": {
+  "gallery": [],
+  "sequences": []
+ },
+ "mould-risk": {
+  "gallery": [
+   [
+    "Bud rot (Botrytis)",
+    "assets/img/t-mould-risk-bud-rot-botrytis.jpg"
+   ],
+   [
+    "Powdery mildew (PM)",
+    "assets/img/t-mould-risk-powdery-mildew-pm.jpg"
+   ]
+  ],
+  "sequences": []
+ },
+ "nutrient-deficiencies": {
+  "gallery": [
+   [
+    "Chlorosis",
+    "assets/img/t-nutrient-deficiencies-chlorosis.jpg"
+   ],
+   [
+    "Necrosis",
+    "assets/img/t-nutrient-deficiencies-necrosis.jpg"
+   ]
+  ],
+  "sequences": []
+ },
+ "nutrient-mixing-athena": {
+  "gallery": [],
+  "sequences": []
+ },
+ "pest-id": {
+  "gallery": [
+   [
+    "Biocontrol / beneficial",
+    "assets/img/t-pest-id-biocontrol-beneficial.jpg"
+   ],
+   [
+    "Loupe / scope",
+    "assets/img/t-pest-id-loupe-scope.jpg"
+   ],
+   [
+    "Frass, honeydew, stippling",
+    "assets/img/t-pest-id-frass-honeydew-stippling.jpg"
+   ]
+  ],
+  "sequences": []
+ },
+ "ph-management": {
+  "gallery": [],
+  "sequences": []
+ },
+ "plant-state-dashboard": {
+  "gallery": [],
+  "sequences": []
+ },
+ "root-zone-teros12": {
+  "gallery": [],
+  "sequences": []
+ },
+ "seeds-germination": {
+  "gallery": [],
+  "sequences": []
+ },
+ "signal-and-noise": {
+  "gallery": [],
+  "sequences": []
+ },
+ "smart-watering-vrwe": {
+  "gallery": [],
+  "sequences": []
+ },
+ "substrates-overview": {
+  "gallery": [],
+  "sequences": []
+ },
+ "tissue-culture": {
+  "gallery": [
+   [
+    "Hyperhydricity (vitrification)",
+    "assets/img/t-tissue-culture-hyperhydricity-a-k-a-vitrification.jpg"
+   ]
+  ],
+  "sequences": []
+ },
+ "water-quality": {
+  "gallery": [],
+  "sequences": []
+ }
+}

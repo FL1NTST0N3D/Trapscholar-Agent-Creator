@@ -1,0 +1,23 @@
+<article class="strain" data-strain-id="{{id}}">
+  <header class="strain__header">
+    <h1>{{name}}</h1>
+    {{aliases}}
+    {{chips}}
+  </header>
+  {{stub_notice}}
+  {{summary}}
+  {{facts}}
+  {{chemotype}}
+  <section class="lineage" aria-labelledby="lineage-heading">
+    <h2 id="lineage-heading">Lineage</h2>
+    {{parents}}
+    {{children}}
+    <div class="lineage-graph" id="lineage-graph" data-strain-id="{{id}}">{{lineage_graph}}</div>
+    <p class="lineage__elsewhere">{{timeline_link}} &middot; {{map_link}}</p>
+  </section>
+  {{sources}}
+  <footer class="strain__footer">
+    <p>Card updated {{updated}}.</p>
+    <p><a href="{{base}}">Search another strain</a> &middot; <a href="{{base}}about/">How to read this card</a></p>
+  </footer>
+</article>

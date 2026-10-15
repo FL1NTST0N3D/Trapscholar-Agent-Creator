@@ -1,0 +1,82 @@
+version: '3'
+
+tasks:
+  default:
+    desc: 'Default task is to "build"'
+    deps:
+      - build
+
+  list:
+    desc: 'Lists available tasks'
+    cmds:
+      - task --list-all
+
+  tidy:
+    desc: 'Tidy all'
+    cmds:
+      - go mod tidy
+    sources:
+      - "*.go"
+      - "data/**/**/*.go"
+      - "internal/**/*.go"
+      - go.mod
+      - go.sum
+
+  build:
+    desc: 'Build the dank-mcp service'
+    deps: [tidy]
+    cmds:
+      - go build -o bin/dank-mcp
+    generates:
+      - bin/dank-mcp
+    sources:
+      - "*.go"
+      - "data/**/**/*.go"
+      - "internal/**/*.go"
+      - go.mod
+      - go.sum
+
+  test:
+    desc: 'Run Go tests'
+    cmds:
+      - go test ./...
+    sources:
+      - "*.go"
+      - "data/**/*.go"
+      - "internal/**/*.go"
+      - "pkg/**/*.go"
+
+  clean-cache:
+    desc: 'Clean cache dir'
+    cmds:
+      - rm -rf .dank
+
+  clean:
+    desc: 'Clean all build products'
+    deps: [clean-cache]
+    cmds:
+      - rm -f bin/dank-mcp
+
+  stdio-schema:
+    desc: 'Extracts the schema from the stdio server'
+    deps: [build]
+    cmds:
+      - echo '{"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}' | ./bin/dank-mcp 2>/dev/null
+      - echo '{"method":"resources/list","params":{},"jsonrpc":"2.0","id":1}' | ./bin/dank-mcp 2>/dev/null
+
+  goreleaser:check:
+    desc: 'Validate GoReleaser configuration'
+    cmds:
+      - goreleaser check
+
+  goreleaser:build:
+    desc: 'Build binary for current platform only (fast, no publish)'
+    deps: [goreleaser:check]
+    cmds:
+      - goreleaser build --snapshot --clean --single-target
+
+  goreleaser:snapshot:
+    desc: 'Build full local snapshot (archives, checksums, no publish). Requires CGO cross-compilers for non-host targets.'
+    deps: [goreleaser:check]
+    cmds:
+      - goreleaser release --snapshot --clean

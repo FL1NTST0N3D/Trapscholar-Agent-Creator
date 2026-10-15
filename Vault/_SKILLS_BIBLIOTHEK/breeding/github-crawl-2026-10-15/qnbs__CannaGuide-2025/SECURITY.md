@@ -1,0 +1,198 @@
+# Security Policy
+
+## Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.9.x   | :white_check_mark: |
+| 1.8.x   | :white_check_mark: |
+| < 1.8   | :x:                |
+
+## Cloud sync encryption (GitHub Gist)
+
+> **Currently disabled in the UI** (`CLOUD_SYNC_DISABLED` in `apps/web/constants.ts`): push/pull
+> never sent an `Authorization` header, and the production CSP does not allow `api.github.com`, so
+> every sync attempt would fail immediately. The optional-E2EE design documented below is the
+> **pre-remediation baseline**, not the target: `docs/AUDIT_REMEDIATION_PLAN.md` requires E2EE to
+> become mandatory, not opt-in, as a condition of re-enabling this feature -- the payload is a full
+> app-state backup sitting in a Gist that is unlisted but not access-controlled.
+
+Optional **end-to-end encryption** for the CRDT sync blob stored in a private/unlisted GitHub Gist
+(pre-remediation design, see the note above):
+
+- **With encryption key set** (Settings → Data → Cloud sync → E2EE): the gist file content is encrypted with **AES-256-GCM** via [`apps/web/services/syncEncryptionService.ts`](apps/web/services/syncEncryptionService.ts) before upload; pulls decrypt using the same user-managed key.
+- **Without a key:** the sync payload is still wrapped as structured CRDT JSON (`crdt-v1`), but the gist file is **not** E2EE — rely on GitHub account security and gist secrecy (unlisted + URL obscurity). Users handling sensitive grow data should generate or supply a key.
+
+Automated tests for encrypt/decrypt roundtrips and plaintext detection live in `apps/web/services/syncEncryptionService.test.ts`; transport behaviour is covered in `apps/web/services/syncService.test.ts` (push/pull with and without keys).
+
+## Reporting a Vulnerability
+
+If you believe you have found a security vulnerability, **do not open a public issue**.
+
+Please report it privately by following one of these paths:
+
+1. **GitHub Security Advisories (preferred):** Use [GitHub's private vulnerability reporting](https://github.com/qnbs/CannaGuide-2025/security/advisories/new) to create a private advisory.
+2. **Email:** Contact the repository maintainers through the channels listed in the project profile.
+
+### What to Include
+
+- A short description of the issue.
+- The affected file, workflow, dependency, or feature.
+- Steps to reproduce.
+- Any proof-of-concept or log output that is safe to share.
+
+### Disclosure Timeline
+
+- **Acknowledgement:** We will acknowledge receipt within **48 hours**.
+- **Assessment:** We aim to confirm the vulnerability within **5 business days**.
+- **Remediation:** A fix will be developed and released as soon as possible, typically within **30 days** for critical issues.
+- **Disclosure:** We coordinate public disclosure only after a fix is available.
+
+We will review reports as quickly as possible and coordinate remediation before public disclosure.
+
+## CI operations
+
+Merge policy, gate inventory, deploy E2E/Lighthouse notes, and remaining risks are documented in [`.github/CI-AUDIT.md`](.github/CI-AUDIT.md). Required check on `main`: **✅ CI Status** (build, unit tests and coverage, lint/types, security, and blocking Chromium E2E). Cloudflare Workers build status from the dashboard integration is informational only and does not block merges.
+
+### Code scanning configuration
+
+If the Security tab shows **Code scanning configuration error** for CodeQL or Snyk Open Source, the repo workflows are aligned with **CodeQL default setup** (see [docs/code-scanning-setup.md](docs/code-scanning-setup.md)). Per-repo **Switch to advanced** is often unavailable when the **organization** manages CodeQL via a security configuration — that is expected.
+
+## Supply-Chain Security
+
+### SHA-Pinning Mandate
+
+All third-party GitHub Actions **must** be pinned to a full 40-character commit SHA. Mutable tags (`@v4`, `@latest`, `@main`) are **never** permitted in any workflow.
+
+```yaml
+# ✅ CORRECT — pinned to immutable commit SHA
+uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+# ❌ FORBIDDEN — mutable tag can be force-pushed by attacker
+uses: actions/checkout@v4
+```
+
+### Docker Image Pinning
+
+All `FROM` directives in Dockerfiles **must** include an `@sha256:` digest alongside the human-readable tag.
+
+```dockerfile
+# ✅ CORRECT
+FROM node:24-alpine@sha256:b88333c42c23fbd91596ebd7fd10de239cedab9617...
+
+# ❌ FORBIDDEN
+FROM node:24-alpine
+```
+
+### Rationale
+
+These policies were adopted on 2026-03-24 in response to the [Trivy supply-chain attack](https://github.com/advisories/GHSA-69fq-xp46-6x23) (March 2026), where mutable tags in `aquasecurity/trivy-action` and `aquasecurity/setup-trivy` were force-pushed to malicious commits, exfiltrating GitHub Secrets from CI runners. SHA-pinning ensures immutability: even if a tag is compromised, the workflow always runs the exact audited code.
+
+### Removed Tools
+
+- **Trivy** (`aquasecurity/trivy-action`): Removed from all workflows on 2026-03-24 due to the supply-chain attack ([GHSA-69fq-xp46-6x23](https://github.com/advisories/GHSA-69fq-xp46-6x23)). This was the second compromise of the Aqua Security service account within one month, rendering the entire Trivy ecosystem unreliable. Replaced by **Grype** (`anchore/scan-action`) for container image and filesystem scanning in `docker.yml` and `security-full.yml`. Remaining filesystem coverage is provided by CodeQL, Snyk, Semgrep, Gitleaks, and `pnpm audit`.
+
+### GitHub Build Attestation
+
+Every tagged release generates **GitHub build provenance attestation**
+via `actions/attest-build-provenance` and **SBOM attestation** via
+`actions/attest-sbom`. These attestations are stored in the GitHub
+Attestations database and verifiable via the `gh` CLI.
+
+> **Note:** `slsa-framework/slsa-github-generator` (SLSA L3) was
+> removed in April 2026 due to Go build failures on ubuntu-24.04
+> runners. GitHub-native attestations provide equivalent build
+> provenance verification.
+
+- **Verification:** Use `gh attestation verify` to validate:
+
+```bash
+# Verify build provenance
+gh attestation verify cannaguide-v*.tar.gz --repo qnbs/CannaGuide-2025
+
+# Verify SBOM attestation
+gh attestation verify cannaguide-v*.tar.gz \
+  --repo qnbs/CannaGuide-2025 \
+  --predicate-type https://cyclonedx.org/bom
+```
+
+### CycloneDX SBOM
+
+Every release includes a **CycloneDX JSON** Software Bill of Materials
+generated by [Syft](https://github.com/anchore/syft) via `anchore/sbom-action`.
+The SBOM is signed with `actions/attest-sbom` and attached as a release asset
+(`cannaguide-sbom.cyclonedx.json`).
+
+The SBOM covers:
+
+- All pnpm workspace packages and their dependencies
+- The full monorepo dependency tree from `pnpm-lock.yaml`
+- NTIA minimum elements compliant
+
+### Transitive dependency remediation (pnpm overrides)
+
+When Dependabot flags a **transitive** npm package and maintainers of direct dependencies have not yet adopted a patched release, this repository forces a **minimum safe version** using root **`pnpm.overrides`** in `pnpm-workspace.yaml` (pnpm 11 ignores `package.json`'s `pnpm` field). Each intentional override is recorded here for auditors and agents.
+
+| Package                      | Minimum version | Advisory                                                                                                                                                                                                           | Typical chain                                                                                                             | Notes                                                                                                                                          |
+| ---------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ip-address`                 | 10.3.1 (&lt;11) | [GHSA-v2v4-37r5-5v8g](https://github.com/advisories/GHSA-v2v4-37r5-5v8g) (CVE-2026-42338, medium, XSS)                                                                                                             | `socks` → `socks-proxy-agent` → `pac-proxy-agent` → `proxy-agent` → `@lhci/cli` / Puppeteer (Lighthouse CI)               | Advisory affects HTML-emitting `Address6` helpers; resolution only affects **dev** tooling (e.g. Lighthouse). Lockfile resolves to **10.4.0**. |
+| `undici`                     | 7.29.1 (&lt;8)  | [GHSA-w293-vg96-wgc3](https://github.com/advisories/GHSA-w293-vg96-wgc3) (high, BalancedPool TLS) plus earlier moderate undici advisories                                                                          | `jsdom` → `undici` (Vitest/jsdom test environment)                                                                        | Capped at **&lt;8.0.0** — undici 8.x breaks jsdom 29 `require()` integration. Lockfile resolves to **7.30.0**.                                 |
+| `linkify-it`                 | 5.0.1           | [GHSA-22p9-wv53-3rq4](https://github.com/advisories/GHSA-22p9-wv53-3rq4) (high, ReDoS)                                                                                                                             | `typedoc` → `markdown-it` → `linkify-it`                                                                                  | Dev-only TypeDoc markdown plugin chain. The open floor has resolved past 5.x. Lockfile resolves to **6.0.0**.                                  |
+| `markdown-it`                | 14.2.0          | [GHSA-6v5v-wf23-fmfq](https://github.com/advisories/GHSA-6v5v-wf23-fmfq) (moderate, DoS)                                                                                                                           | `typedoc` → `markdown-it`                                                                                                 | Dev-only TypeDoc. Lockfile resolves to **14.3.0**.                                                                                             |
+| `js-yaml`                    | 3.15.2 / 4.3.2  | [GHSA-2883-xcg3-v3hh](https://github.com/advisories/GHSA-2883-xcg3-v3hh) (high, merge-key CPU)                                                                                                                     | `@lhci/cli` → `@lhci/utils` (v3); `eslint` → `@eslint/eslintrc` (v4)                                                      | Scoped overrides `js-yaml@3` and `js-yaml@4`. Do not open the floor onto 5.x. Lockfile resolves to **3.15.2** / **4.3.2**.                     |
+| `fast-uri`                   | 4.1.5 (&lt;5)   | [GHSA-qw65-cvwx-89v3](https://github.com/fastify/fast-uri/security/advisories/GHSA-qw65-cvwx-89v3) (high, authority/host confusion)                                                                                | AJV / JSON schema consumers                                                                                               | Floor stays on 4.x. Lockfile resolves to **4.2.1**.                                                                                            |
+| `sharp`                      | 0.35.4 (&lt;1)  | [GHSA-rgj7-g3m4-5g8c](https://github.com/advisories/GHSA-rgj7-g3m4-5g8c) (high, libheif)                                                                                                                           | `@xenova/transformers` (optional, Node) and `wrangler` → `miniflare`                                                      | Not bundled into the browser PWA. Lockfile resolves to **0.35.5**.                                                                             |
+| `@tauri-apps/plugin-updater` | 2.13.1          | [SNYK-JS-TAURIAPPSPLUGINUPDATER-20081664](https://security.snyk.io/vuln/SNYK-JS-TAURIAPPSPLUGINUPDATER-20081664) (high, signature/version validation)                                                              | `apps/desktop` direct dependency; Rust crate `tauri-plugin-updater` pinned to the same line                               | Paired JS + Rust bump. Desktop release lane must not ship below 2.12.0.                                                                        |
+| `handlebars`                 | 4.7.10 (&lt;5)  | [GHSA-8r5x-fm3f-whwj](https://github.com/advisories/GHSA-8r5x-fm3f-whwj), [GHSA-p8wg-vrv2-v86f](https://github.com/advisories/GHSA-p8wg-vrv2-v86f) (critical; AST injection in `compile`, prototype-method bypass) | `conventional-changelog-cli` → `conventional-changelog` → `conventional-changelog-core` → `conventional-changelog-writer` | Dev-only changelog tooling. Floor stays on 4.x. Lockfile resolves to **4.7.10**.                                                               |
+
+After merging an override, confirm in GitHub **Security → Dependabot** that the related alert moves to **resolved** (or dismiss with justification if a false positive).
+
+```bash
+# Inspect SBOM component count and root component
+jq '.metadata.component.name, (.components | length)' cannaguide-sbom.cyclonedx.json
+
+# Verify SBOM attestation
+gh attestation verify cannaguide-v*.tar.gz \
+  --repo qnbs/CannaGuide-2025 \
+  --predicate-type https://cyclonedx.org/bom
+```
+
+### Audit Verification Status (2026-04-10)
+
+Independent audit verified on 2026-04-10 (Session 121):
+
+- **SLSA L3 Provenance:** Replaced by GitHub-native build attestation
+  via `actions/attest-build-provenance@v4.1.0` (2-job architecture:
+  `build` -> `release`) in `release-publish.yml`. SLSA L3 via
+  `slsa-github-generator` removed April 2026 (Go build failures
+  on ubuntu-24.04 runners).
+- **CycloneDX SBOM:** Generated via `anchore/sbom-action@v0.18.0`,
+  signed via `actions/attest-sbom@v4.1.0`, uploaded as release asset
+- **SHA-Pinning:** All 10 GitHub Actions pinned to 40-char commit SHAs
+- **Build Provenance:** Generated on GitHub-hosted runner via
+  `actions/attest-build-provenance` reusable action
+- **Backward Compat:** `gh attestation verify` provides full
+  attestation verification for both build provenance and SBOM
+
+### Actions Allowlist
+
+GitHub Actions are restricted to a curated allowlist (`allowed_actions: selected`):
+
+- GitHub-owned actions (e.g., `actions/*`, `github/*`, `docker/*`)
+- Verified marketplace creators
+- Explicitly approved third-party: `anchore/*`, `gitleaks/*`, `ossf/*`, `snyk/*`, `Swatinem/*`, `dtolnay/*`, `google/clusterfuzzlite/*`, `peter-evans/*`, `slsa-framework/*`
+
+Adding a new third-party action requires updating the allowlist via repository Settings > Actions > General.
+
+### AI Input Sanitization (2026-06-29)
+
+All user-controlled strings reaching LLM prompts must pass through
+[`apps/web/services/ai/safetyPipeline.ts`](apps/web/services/ai/safetyPipeline.ts)
+(`sanitizeForPrompt`). As of the 2026-06-29 audit, secondary paths were hardened:
+
+- Stream mentor (`aiService.buildMentorStreamPrompt`)
+- Deep-dive guides (`aiService` / `geminiService.generateDeepDive`)
+- Strain AI lookup (`externalStrainLookups.lookupWithAI`)
+- Local AI handlers (`local-ai/inference/promptHandlers`)
+
+See [`docs/audits/AUDIT-REPORT-2026-06-29.md`](docs/audits/AUDIT-REPORT-2026-06-29.md) finding **S-08**.

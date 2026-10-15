@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Grow Room Training</title>
+<meta name="description" content="Mobile-first manual, textbook, and LLM agent playbook for cannabis grow-room systems — four balances, eleven levers, six failure modes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f1;
+    --surface: #ffffff;
+    --ink: #1a1814;
+    --ink-soft: #5a5448;
+    --line: #e6e0d4;
+    --accent: #2d5a3d;
+    --accent-soft: #e8f0ea;
+    --shadow: 0 1px 2px rgba(26,24,20,.04), 0 8px 24px rgba(26,24,20,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --surface: #1e1c17;
+      --ink: #f0ede5;
+      --ink-soft: #a8a195;
+      --line: #2e2a22;
+      --accent: #8ec19a;
+      --accent-soft: #1f2a23;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+  header {
+    padding: 24px 0 32px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(32px, 6vw, 48px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    margin: 0 0 12px;
+  }
+  .lede {
+    font-size: clamp(16px, 2.2vw, 19px);
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin: 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  @media (min-width: 720px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .grid .card.feature { grid-column: 1 / -1; }
+  }
+  .card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .card .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .card h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    margin: 0 0 8px;
+  }
+  .card.feature h2 { font-size: 26px; }
+  .card p {
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    font-size: 15px;
+  }
+  .card .arrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .meta {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .meta h3 {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .meta ul { padding-left: 20px; margin: 0 0 20px; }
+  .meta li { margin: 4px 0; }
+  .meta a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  .meta a:hover { border-bottom-color: var(--accent); }
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Grow Room Training</div>
+    <h1>Four balances. Eleven levers. Six failure modes.</h1>
+    <p class="lede">Mobile-first manual, deep textbook, and LLM agent playbook for cannabis grow-room systems &mdash; restructured around the levers operators actually pull and the diagnostic chain from light to disease.</p>
+  </header>
+
+  <div class="grid">
+
+    <a class="card feature" href="training/grow-room-systems-manual.html">
+      <span class="tag">Start here &middot; Manual</span>
+      <h2>Grow-Room Systems Manual</h2>
+      <p>Mobile-first visual manual. Landing page with six navigation cards; floating menu for jumping anywhere. Big titles, diagrams everywhere, modern UI.</p>
+      <span class="arrow">Open manual &rarr;</span>
+    </a>
+
+    <a class="card" href="training/grow-room-systems-training.html">
+      <span class="tag">Textbook</span>
+      <h2>Systems Training</h2>
+      <p>15 chapters with end-of-chapter exercises, full glossary, four printable field cards, auto-scored MCQ + scenario assessment, and a printable certificate.</p>
+      <span class="arrow">Open textbook &rarr;</span>
+    </a>
+
+    <a class="card" href="training/grow-room-systems-app.html">
+      <span class="tag">Reference</span>
+      <h2>Earlier Interactive App</h2>
+      <p>The first interactive learning app for the same content. Superseded by the manual above; kept for reference.</p>
+      <span class="arrow">Open app &rarr;</span>
+    </a>
+
+    <a class="card" href="https://github.com/JakeTheRabbit/grow-room-training/blob/main/docs/training/grow-room-agent-playbook.md">
+      <span class="tag">Machine-oriented</span>
+      <h2>LLM Agent Playbook</h2>
+      <p>Capability map by entity_id, stage envelopes as JSON, 11 levers with magnitude limits and cool-downs, 6 failure-mode detection rules, decision algorithm, hard safety rails, response-protocol schema.</p>
+      <span class="arrow">View on GitHub &rarr;</span>
+    </a>
+
+  </div>
+
+  <section class="meta">
+    <h3>What's inside</h3>
+    <ul>
+      <li><strong>The four balances</strong> &mdash; energy, moisture, CO<sub>2</sub>, salt</li>
+      <li><strong>The eleven levers</strong> &mdash; six environmental, three root-zone, two crop</li>
+      <li><strong>The chain</strong> &mdash; eleven nodes from PPFD at canopy through transpiration, dryback, pore EC, photosynthesis, HVAC load, to disease pressure</li>
+      <li><strong>The six failure modes</strong> (F-01 to F-06) with mechanism, signals, and fix</li>
+      <li><strong>Twelve symptoms</strong> with probable causes and first-action lookup</li>
+      <li><strong>Athena-style stage targets</strong> from tissue culture through dry &amp; cure</li>
+      <li><strong>Glossary</strong> &mdash; 34 terms</li>
+    </ul>
+
+    <h3>Scientific anchors</h3>
+    <p>Opinionated about seven points commonly mis-stated in operator-level material &mdash; healthy leaf temp is 1&ndash;3&nbsp;&deg;C BELOW air; pore EC drifts via two mechanisms not one; light saturation is conditional on CO<sub>2</sub>; cannabis stomata begin anticipatory closure around leaf-VPD 1.5&ndash;1.6&nbsp;kPa; botrytis needs sustained RH &gt;93&ndash;95% or free water; F-02 explains how a "perfect" room sensor coexists with a sick canopy; a refrigerant dehumidifier is a net heater.</p>
+
+    <footer>
+      <a href="https://github.com/JakeTheRabbit/grow-room-training">View source on GitHub &rarr;</a>
+    </footer>
+  </section>
+
+</div>
+</body>
+</html>

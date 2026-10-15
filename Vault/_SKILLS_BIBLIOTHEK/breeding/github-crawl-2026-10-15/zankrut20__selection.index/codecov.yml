@@ -1,0 +1,32 @@
+comment: false
+
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+        informational: true
+        branches:
+          - main
+          - master
+          - develop
+          - development
+          - "feature/*"
+          - "bugfix/*"
+          - "hotfix/*"
+          - "fix/*"
+    patch:
+      default:
+        target: auto
+        threshold: 1%
+        informational: true
+        branches:
+          - main
+          - master
+          - develop
+          - development
+          - "feature/*"
+          - "bugfix/*"
+          - "hotfix/*"
+          - "fix/*"

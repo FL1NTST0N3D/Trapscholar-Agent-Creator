@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>📏 Zelt-Rechner — 420Forum.de</title>
+<style>
+body { font-family: Arial, sans-serif; background:#111; color:#eee; padding:20px; }
+h1 { color:#37e57c; }
+label { display:block; margin-top:10px; }
+input { width:100%; padding:8px; border-radius:6px; border:1px solid #333; margin-top:5px; background:#1a1a1a; color:#eee; }
+button { margin-top:15px; padding:10px; width:100%; border:none; border-radius:6px; background:#37e57c; color:#000; font-weight:bold; }
+.result { margin-top:15px; padding:10px; background:#1a1a1a; border-radius:6px; }
+</style>
+</head>
+<body>
+<h1>📏 Zeltflächen- & Topfrechner</h1>
+<label>Zeltlänge (cm):</label>
+<input type="number" id="laenge" placeholder="z. B. 100">
+
+<label>Zeltbreite (cm):</label>
+<input type="number" id="breite" placeholder="z. B. 100">
+
+<label>Durchmesser pro Topf (cm):</label>
+<input type="number" id="topf" placeholder="z. B. 25">
+
+<button onclick="calc()">Berechnen</button>
+
+<div class="result" id="res"></div>
+
+<script>
+function calc(){
+  let laenge = parseFloat(document.getElementById('laenge').value) || 0;
+  let breite = parseFloat(document.getElementById('breite').value) || 0;
+  let topf = parseFloat(document.getElementById('topf').value) || 0;
+
+  let flaeche = (laenge * breite) / 10000;
+  let proReihe = Math.floor(laenge / topf);
+  let reihen = Math.floor(breite / topf);
+  let anzahl = proReihe * reihen;
+
+  document.getElementById('res').innerHTML = 
+    `<b>Zeltfläche:</b> ${flaeche.toFixed(2)} m²<br>` +
+    `<b>Max. Töpfe:</b> ${anzahl} Stück`;
+}
+</script>
+</body>
+</html>

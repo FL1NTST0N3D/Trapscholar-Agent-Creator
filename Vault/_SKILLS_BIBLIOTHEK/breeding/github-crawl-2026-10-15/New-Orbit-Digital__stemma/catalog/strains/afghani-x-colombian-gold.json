@@ -1,0 +1,41 @@
+{
+  "id": "afghani-x-colombian-gold",
+  "name": "Afghani x Colombian Gold (proto-Skunk)",
+  "aliases": [
+    "Afghan x Colombian Gold"
+  ],
+  "kind": "cultivar",
+  "status": "draft",
+  "summary": "This unnamed cross, sometimes called proto-Skunk, paired [[afghani|Afghani]] with [[colombian-gold|Colombian Gold]] and was the first stage behind [[skunk-1|Skunk #1]]. It matured late, which led the Sacred Seeds collective to add [[acapulco-gold|Acapulco Gold]] and shorten flowering. Accounts differ on who made the original cross; one popular account credits a grower known as Jingles, before the seeds reached Santa Cruz.",
+  "born": {
+    "unknown": true,
+    "display": "1970s (undated)"
+  },
+  "origin": {
+    "unknown": true
+  },
+  "breeder": null,
+  "parents": [
+    "afghani",
+    "colombian-gold"
+  ],
+  "traditional_label": "hybrid",
+  "sources": [
+    {
+      "title": "Sam the Skunkman: The Evolution of Hybrids",
+      "publisher": "Sensi Seeds",
+      "category": "breeder",
+      "url": "https://sensiseeds.com/en/blog/sam-the-skunkman-the-evolution-of-hybrids/",
+      "accessed": "2026-09-23"
+    },
+    {
+      "title": "The Story Of Skunk #1",
+      "publisher": "Carters Cannabis",
+      "category": "breeder",
+      "url": "https://www.carterscannabis.com/blog/genetics-blog-1/the-story-of-skunk-1-columbian-gold-x-afghani-cannabis-genetics-explained-55",
+      "accessed": "2026-09-23",
+      "note": "Popular retelling, including the Jingles story."
+    }
+  ],
+  "updated": "2026-09-24"
+}

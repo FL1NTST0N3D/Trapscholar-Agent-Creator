@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Seedfinder Genotyper</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="seedfinderverification" content="Open Sesame!" />
+	<style>
+		h1 {
+			background: -webkit-linear-gradient(180deg, #1E90FF, #008000);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		
+		label {
+			background-color: #EEEEEE;
+			border-radius: 0.5rem;
+			padding: 0.5rem;
+			margin: 0.2rem;
+			display: inline-block;
+		}
+		
+		.textbox {
+			background-color: rgba(0,0,0,0.1);
+			border-radius: 0.5rem;
+			padding: 0.2rem;
+			margin: 0 0.2rem 0 0.2rem;
+		}
+		
+		.loader {
+			width: 48px;
+			height: 48px;
+			border: 5px solid #FFF;
+			border-bottom-color: transparent;
+			border-radius: 50%;
+			display: inline-block;
+			box-sizing: border-box;
+			animation: rotation 1s linear infinite;
+		}
+		
+		.settingGroup {
+			border: 2px solid  #E4E4E4; border-radius: 0.5rem;
+			padding: 0.2rem;
+			align-items: center;
+			display: flex;
+		}
+
+		@keyframes rotation {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		} 
+	
+	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+	<script src="https://unpkg.com/alpinejs" defer></script>
+	<script src="api_token.js"></script>
+	<script>
+		if ( localStorage.getItem ('updated') == null || Number ( localStorage.getItem ('updated') ) < 1722021389035 ) {
+			localStorage.clear();
+			localStorage.setItem ('updated', 1722021389036);
+		}
+		
+		function App() {
+			return {
+				strains: {},
+				url: '',
+				error: null,
+				status: null,
+				settings: {
+					distinguish_breeder: true,
+					group: 'order',
+				},
+				filter: '',
+				nodes: JSON.parse ( localStorage.getItem ('nodes') || '{}' ),
+				
+				fetch: function  (node, factor, order, ignore=[]) {
+					return new Promise( async (resolve, reject) => {
+						let url  = `https://en.seedfinder.eu/api/json/strain.json?br=${node.br}&str=${node.id}&lng=en&parents=1&ac=${api_token}`;
+							
+						if ( ! (`${node.id}__${node.br}` in this.nodes) )
+						{
+							console.log (`fetch ${url}`);
+							const result = await fetch (url)
+											   .then(response => response.json());
+							if ( !('id' in result && 'name' in result && 'brinfo' in result) )
+							{
+								this.error = 'got invalid response from seedfinder. Your entered URL might be wrong';
+								resolve (false);
+								return;
+							}
+							
+							this.nodes[`${node.id}__${node.br}`] = {id: result.id, name: result.name, br: result.brinfo.name, parents: result.parents, brinfo: {id: result.brinfo.id, name: result.brinfo.name}};
+							localStorage.setItem ( 'nodes', JSON.stringify (this.nodes) );
+								
+							console.log (`walk ${node.id}__${node.br} order ${order} factor ${factor}`);
+							await this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, ignore);
+						}
+						else {
+							console.log (`walk cache ${node.id}__${node.br} order ${order} factor ${factor}`);
+							await this.walk (this.nodes[`${node.id}__${node.br}`], factor, order, ignore);
+						}
+						
+						resolve (true);
+						return;
+					});
+				},
+				walk: async function (node, factor, order, ignore=[]) {
+					let p = node.parents;
+					this.status = `Loading<br /> ${node.id}`;
+					//console.log ('info', node, p.info, factor);
+					
+					let strain_key = this.settings.distinguish_breeder ? `${node.id}__${node.brinfo.id}` : node.id;
+					
+					if ( ! (strain_key in this.strains) ) {
+						this.strains[strain_key] = {amount: 0, order: order, name: node.name, brname: node.brinfo.name};
+					}
+					
+					if ( !ignore.includes (strain_key) )
+					{
+						this.strains[strain_key].amount += factor;
+					}
+					
+					let _ignore = ignore;
+					if (!this.settings.distinguish_breeder)
+					{
+						_ignore = [...ignore, node.id];
+					}
+					
+					this.strains[strain_key].order = Math.max (order, this.strains[strain_key].order);
+					
+					if (p) {
+						p.info = p.info.replace(/ +(?= )/g, '');
+						
+						let p1 = p.strains.aaa;
+						let p2 = p.strains.bbb;
+						let p3 = p.strains.ccc;
+						let p4 = p.strains.ddd;
+						
+						let pr1 = {id: p1.id, br: p1.brid};
+						
+						if (p.info == 'aaa') {
+							await this.fetch (pr1, factor, order + 1, _ignore);
+							return;
+						}
+						else if ( p.info.includes ('bbb') )
+						{
+							let pr2 = {id: p2.id, br: p2.brid};
+							if ( ['aaa x bbb', 'bbb x aaa', 'bbb x aaa'].includes (p.info) ) {
+								await this.fetch (pr1, factor * 0.5, order + 1, _ignore);
+								await this.fetch (pr2, factor * 0.5, order + 1, _ignore);
+								return;
+							}
+							else if ( ['{aaa x bbb} x aaa', 'aaa x {aaa x bbb}'].includes (p.info) ) {
+								await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+								await this.fetch (pr2, factor * 0.25, order + 2, _ignore);
+								await this.fetch (pr1, factor * 0.5, order + 1, _ignore );
+								return;
+							}
+							else if (['{aaa x bbb} x {bbb x aaa}', '{bbb x aaa} x {aaa x bbb}'].includes (p.info) ) {
+								await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+								await this.fetch (pr2, factor * 0.25, order + 2, _ignore);
+								await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+								await this.fetch (pr2, factor * 0.25, order + 2, _ignore );
+								return;
+							}
+							
+							else if ( p.info.includes ('ccc') ) {
+								let pr3 = {id: p3.id, br: p3.brid};
+								
+								if ( ['aaa x bbb x ccc', 'aaa x ccc x bbb', 'bbb x aaa x ccc', 'bbb x ccc x aaa', 'ccc x aaa x bbb', 'ccc x bbb x aaa'].includes (p.info) ) {
+									// Not sure what this means, let's say 1/3 each, even if
+									// it does not make sense
+									await this.fetch (pr1, factor * 1/3, order + 1, _ignore);
+									await this.fetch (pr2, factor * 1/3, order + 1, _ignore);
+									await this.fetch (pr3, factor * 1/3, order + 1, _ignore);
+									return;
+								}
+								else if ( ['aaa x {bbb x ccc}', 'aaa x {ccc x bbb}'].includes (p.info) ) {
+									await this.fetch (pr1, factor * 0.5, order + 1, _ignore );
+									await this.fetch (pr2, factor * 0.25, order + 2, _ignore);
+									await this.fetch (pr2, factor * 0.25, order + 2, _ignore);
+									await this.fetch (pr3, factor * 0.25, order + 2, _ignore );
+									return;
+								}
+								else if (p.info == '{aaa x bbb} x ccc') {
+									await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+									await this.fetch (pr2, factor * 0.25, order + 2, _ignore);
+									await this.fetch (pr3, factor * 0.5, order + 1, _ignore );
+									return;
+								}
+								else if (p.info == '{aaa x ccc} x bbb') {
+									await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+									await this.fetch (pr3, factor * 0.25, order + 2, _ignore);
+									await this.fetch (pr2, factor * 0.5, order + 1, _ignore );
+									return;
+								}
+								else if (p.info == '{(aaa x aaa) x bbb} x {(aaa x aaa) x ccc}') {
+									await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+									await this.fetch (pr2, factor * 0.25, order + 2, _ignore);
+									await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+									await this.fetch (pr3, factor * 0.25, order + 2, _ignore );
+									return;
+								}
+								else if (p.info == '{bbb x aaa} x {ccc x aaa}') {
+									await this.fetch (pr2, factor * 0.25, order + 2, _ignore );
+									await this.fetch (pr1, factor * 0.25, order + 2, _ignore);
+									await this.fetch (pr3, factor * 0.25, order + 2, _ignore );
+									await this.fetch (pr1, factor * 0.25, order + 2, _ignore );
+									return;
+								}
+								else if ( p.info.includes ('ddd') ) {
+									let pr4 = {id: p4.id, br: p4.brid};
+									
+									if (p.info == 'aaa x bbb x ccc x ddd') {
+										await this.fetch (pr1, factor * 0.25, order + 1, _ignore );
+										await this.fetch (pr2, factor * 0.25, order + 1, _ignore);
+										await this.fetch (pr3, factor * 0.25, order + 1, _ignore );
+										await this.fetch (pr4, factor * 0.25, order + 1, _ignore );
+										return;
+									}
+									
+								}
+							}
+							
+							this.error = `${strain_key}: unknown parent constellation ${p.info}`;
+							
+							return;
+						}
+					}
+					
+					return;					
+				},
+				raw_result: null,
+				result: null,
+				process: function() {
+					this.status = 'loading';
+					this.strains = {};
+					this.result = null;
+					this.error = null;
+					
+					let regexp = new RegExp (/https:\/\/.*seedfinder\.eu\/strain\-info\/([a-zA-Z0-9_\-]*)\/([a-zA-Z0-9_\-]*)/, "g");
+					let groups = regexp.exec (this.url);
+					if (groups == null || groups.length < 3) {
+						this.error = 'Invalid url';
+					}
+					else {
+						let node = {id: groups[1], br: groups[2]};
+						this.run (node);
+					}
+				}, 
+				run: function (node) {
+					console.log ('start');
+					this.fetch (node, 1, 0).then ( r => {
+						console.log ('end');
+						let result = Object.entries (this.strains);
+						/*for (let r of result) {
+							if (r[1].pass != null) {
+								console.log (r[1]);
+								let id1 = `${r[1].pass.id}_${r[1].pass.brinfo.id}`;
+								//console.log (1);
+								r[0] = `${id1} / ${r[0]}`;
+								//delete strains[id1];
+							}
+						}*/
+						result.sort ( (a, b) => a[1].order < b[1].order ? 1 : -1 );
+						
+						/*let groups = [];
+						let group = [];
+						let sum = 0;
+						for (let r of result.reverse()) {
+							
+							if ( r[1].amount == 1) {
+								console.log (r[0], r[1].amount);
+								groups.push ([r]);
+								group = [];
+								sum = 0;
+							}
+							
+							else if ( (sum + r[1].amount) < 1)
+							{
+								sum += r[1].amount;
+								group.push (r);
+							}
+							
+							else
+							{
+								groups.push (group);
+								group = [];
+								sum = 0;
+							}
+						}*/
+						
+						/*let i=groups.length - 1; 
+						while ()
+							let group = groups[i];
+							if (group == null) {
+								groups.splice (i, 1);
+							}
+							else {
+								let sum = group.map ( g => g[1].amount ).reduce ( (accumulator, currentValue) => accumulator + currentValue, 0 );
+								console.log (group);
+								console.log (sum);
+								if (sum < 1 && i > 0) {
+									console.log (1);
+									let sum_prev = sum = groups[i - 1].map ( g => g[1].amount ) .reduce ( (accumulator, currentValue) => accumulator + currentValue, 0 );
+									if (sum + sum_prev <= 1) {
+										for (let e of group) {
+											groups[i - 1].push (e);
+										}
+										
+										groups.splice (i, 1);
+										console.log (3);
+									}
+								}
+							}
+						}*/
+						this.raw_result = result;
+						this.status = null;
+						this.grouping();
+					});
+				},
+				grouping: function () {
+					if (this.settings.group == 'order') {
+						let groups = [];
+						for (let r of this.raw_result) {
+							if (groups[r[1].order] == null) {
+								groups[r[1].order] = [];
+							}
+
+							groups[r[1].order].push (r[1]);
+						}
+						this.result = Object.entries (groups);
+					}
+					else if (this.settings.group == 'breeder') {
+						let groups = {};
+						for (let r of this.raw_result) {
+							if (groups[r[1].brname] == null) {
+								groups[r[1].brname] = [];
+							}
+							
+							groups[r[1].brname].push (r[1]);
+						}
+						this.result = Object.entries (groups);
+					}
+					else if (this.settings.group == 'no') {
+						let result = {}
+						for (let r of this.raw_result) {
+							result[r[0]] = [r[1]];
+						}
+
+						result = Object.entries (result);
+						result.sort ( function (a, b) {
+							 return a[1][0].amount < b[1][0].amount ? 1 : -1;
+							});
+						this.result = result;
+					}
+				},
+				
+				colors: ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', '#ffffff', '#000000'],
+				tooltip: null,
+				addTooltip: function (node, parent) {
+					let rect = parent.getBoundingClientRect();
+					this.tooltip = {node: node,
+									x: rect.left + window.scrollX,
+									y: rect.top + window.scrollY,
+									element: parent};
+				}
+			}
+		}
+		
+	</script>
+	
+</head>
+
+<body x-data="App()">
+	<div style="display: flex; justify-content: space-between;">
+		<h1>
+			<i class="fa-solid fa-cannabis" style="color: #006708;"></i>
+			Seedfinder Genotyper
+			<i class="fa-solid fa-dna" style="color: #32AEFF;"></i>
+		</h1>
+		<div style="display: flex; align-items: center;">
+			<a href="https://seedfinder.eu"><img src="https://de.seedfinder.eu/pics/banner/seedfinder-code.png" /></a>
+			<a href="https://github.com/fiorellis/seedfinder-genotyper/tree/main"><i class="fa-brands fa-github fa-2xl" style="color: black;"></i></a>
+		</div>
+	</div>
+	<div style="margin: 0xp auto; display: flex; justify-content: center; flex-direction: column;">
+		<input type="text"
+			   x-model="url"
+			   placeholder="enter strain url, e.g. https://de.seedfinder.eu/strain-info/Jack_Herer/Sensi_Seeds/"
+			   style="font-size: 1rem; padding: 0.2rem; border-radius: 0.5rem;" />
+		<div style="padding: 0.2rem; margin: 0.2rem; display: flex; justify-content: space-between;">
+			<label class="settingGroup">
+				<input type="checkbox"
+					   x-model="settings.distinguish_breeder"
+					   :disabled="status != null"
+					   @change="if (result != null) process();" />
+				distinguish breeder
+			</label>
+			<form class="settingGroup">
+				group by
+				<template x-for="g in [['no grouping', 'no'], ['order', 'order']]">
+					<label>
+						<input type="radio"
+							   x-model="settings.group"
+							   :value="g[1]"
+							   :disabled="status != null"
+							   @change="if (result != null) grouping();" />
+						<span x-html="g[0]"></span>
+					</label>
+				</template>
+			</form>
+			
+			<input type="text" x-model="filter" :disabled="result == null" size="30" placeholder="filter, e.g. &quot;indica&quot;, &quot;skunk&quot; or &quot;haze&quot;" />
+		</div>
+		<button @click="process()" type="button" style="margin-top: 0.2rem;">Fetch</button>
+	</div>
+	
+	<template x-if="error != null">
+		<div style="background-color: #C40D0A; padding: 0.5rem; border-radius: 0.5rem; margin: 0.5rem; color: white;">
+			<b>Error:</b>
+			<span x-html="error"></span>
+		</div>
+	</template>
+	
+	<template x-if="status != null && error == null">
+		<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #E4E4E4; text-align: center; padding: 0.2rem; border-radius: 0.5rem; margin: 1rem;">
+			<span class="loader" style="display: inline-block; margin: 0.5rem;"></span>
+			<span x-html="status"></span>
+		</div>
+	</template>
+	
+	<template x-if="result != null">
+		<div style="width: 100%;">
+			
+			<template x-if="settings.group">
+				<template x-for="[g, group] in result" :key="g">
+					<div style="width: 100%; display: flex;">
+						<!--<div x-html="g" style="width: 2rem;"></div>-->
+						<template x-for="(r, ri) in group" :key="ri">	
+							<template x-if="r.name.toLowerCase().includes ( filter.toLowerCase() )">
+								<div style="padding: 1rem;
+											margin: 0.2rem;
+											text-align: center;
+											height: 2rem; 
+											text-overflow: hidden;
+											overflow: hidden;
+											font-size: 100%;
+											display: flex;
+											align-items: center;
+											justify-content: space-between;
+											flex-wrap: no-wrap;
+											container-type: inline-size;"
+									 :style="{width: `${r.amount * 100}%`,
+											 'background-color': colors[ri % colors.length],
+											 'font-size': `${ 40 / ( r.name.length + String (Math.round (r.amount * 100 * 100) / 100).length + 1 + (settings.distinguish_breeder ? r.brname.length + 2 : 0 ) ) }cqw`}"
+									 @mouseenter="addTooltip (r, $el)"
+									 @mouseleave="console.log (1, $event.relatedTarget?.className); tooltip = $event.relatedTarget?.className != 'tooltip' ? null : tooltip">
+										<span x-html="r.name"
+										      class="textbox"></span>
+										<span x-show="settings.distinguish_breeder"
+											  x-html="`(${r.brname})`"
+											  class="textbox"></span>
+										<span x-html="`${Math.round (r.amount * 100 * 100) / 100}%`"
+											  class="textbox"></span>
+
+								</div>
+							</template>
+						</template>
+					</div>
+				</template>
+			</template>
+			<!--<template x-if="!settings.group && result != null">
+				<template x-for="(r, ri) in result" :key="ri">
+					<template x-if="Array.isArray (r) && r.length > 1 && r[1].name.toLowerCase != null && r[1].name.toLowerCase().includes ( filter.toLowerCase() )">
+						<div style="padding-top: 1rem;
+								padding-bottom: 1rem;
+								margin: 0.2rem;
+								text-align: center;
+								height: 2rem; 
+								text-overflow: hidden;
+								overflow: hidden;
+								font-size: 100%;"
+							:style="{width: `${r[1].amount * 100}%`, 'background-color': colors[ri % colors.length]}"
+							:title="`${r[1].name} ${Math.round (r[1].amount * 100 * 100) / 100} %`">
+							<span x-html="r[1].name"></span>
+							<span x-show="settings.distinguish_breeder" x-html="`(${r[1].brname})`"></span>
+							<span x-html="`${Math.round (r[1].amount * 100 * 100) / 100}%`"></span>
+						 </div>
+					</template>
+				</template>-->
+			</template>
+		</div>
+	</template>
+	
+	<template x-if="tooltip != null">
+		<div style="position: absolute;
+					background-color: white;
+					border: 1px solid black;
+					padding: 1rem;
+					display: flex;
+					align-items: center;
+					"
+			  class="tooltip"
+			 :style="{left: `${tooltip.x}px`, top: `${tooltip.y}px`}"
+			 @mouseleave="console.log (1, $event.relatedTarget?.className); tooltip = $event.relatedTarget != tooltip.element ? null : tooltip">
+			<span x-html="tooltip.node.name" class="textbox"></span>
+			<span x-show="settings.distinguish_breeder"
+				  x-html="`(${tooltip.node.brname})`"
+				  class="textbox tooltip"></span>
+			<span x-html="`${Math.round (tooltip.node.amount * 100 * 100) / 100}%`"
+				  class="textbox tooltip"></span>
+		</div>
+	</template>
+</body>
+
+</html>

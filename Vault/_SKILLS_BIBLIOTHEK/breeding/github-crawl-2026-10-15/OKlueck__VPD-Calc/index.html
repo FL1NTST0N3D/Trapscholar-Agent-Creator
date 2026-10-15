@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VPD-Rechner — Berechne das Vapor Pressure Deficit für optimale Pflanzenbedingungen">
+  <meta name="theme-color" content="#2d6a4f">
+  <title>VPD-Rechner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <main>
+    <h1>VPD-Rechner</h1>
+    <p class="subtitle">Vapor Pressure Deficit für optimale Pflanzenbedingungen</p>
+
+    <form id="vpd-form" aria-label="VPD-Berechnung">
+      <div class="input-group">
+        <label for="temperature">Lufttemperatur (°C)</label>
+        <input
+          type="number"
+          id="temperature"
+          name="temperature"
+          value="25"
+          min="-10"
+          max="50"
+          step="0.1"
+          required
+          inputmode="decimal"
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="humidity">Relative Luftfeuchtigkeit (%)</label>
+        <input
+          type="number"
+          id="humidity"
+          name="humidity"
+          value="60"
+          min="0"
+          max="100"
+          step="1"
+          required
+          inputmode="decimal"
+        >
+        <input
+          type="range"
+          id="humidity-slider"
+          aria-label="Luftfeuchtigkeit Schieberegler"
+          min="0"
+          max="100"
+          step="1"
+          value="60"
+        >
+      </div>
+
+      <details>
+        <summary>Blatttemperatur (optional)</summary>
+        <div class="input-group">
+          <label for="leaf-offset">Blatt-Offset (°C)</label>
+          <input
+            type="number"
+            id="leaf-offset"
+            name="leaf-offset"
+            value="-2"
+            min="-10"
+            max="10"
+            step="0.1"
+            inputmode="decimal"
+          >
+          <small>Blatttemperatur ist typischerweise 1–3 °C unter der Lufttemperatur</small>
+        </div>
+      </details>
+    </form>
+
+    <section id="result" aria-live="polite" aria-atomic="true">
+      <div class="vpd-value-container">
+        <span class="vpd-label">VPD</span>
+        <span id="vpd-value" class="vpd-value">—</span>
+        <span class="vpd-unit">kPa</span>
+      </div>
+      <div id="leaf-vpd-container" class="vpd-value-container vpd-secondary" hidden>
+        <span class="vpd-label">Blatt-VPD</span>
+        <span id="leaf-vpd-value" class="vpd-value">—</span>
+        <span class="vpd-unit">kPa</span>
+      </div>
+      <div id="zone-indicator" class="zone-indicator" role="status">
+        <span id="zone-label" class="zone-label"></span>
+        <span id="zone-description" class="zone-description"></span>
+      </div>
+    </section>
+
+    <section class="vpd-chart" aria-label="VPD-Zonen Übersicht">
+      <h2>VPD-Zonen</h2>
+      <div class="zone-bar">
+        <div class="zone-segment zone-danger-low" aria-label="Zu niedrig: unter 0,4 kPa">
+          <span class="zone-range">&lt; 0,4</span>
+          <span class="zone-name">Zu niedrig</span>
+        </div>
+        <div class="zone-segment zone-early-veg" aria-label="Stecklinge / Frühe Veg: 0,4 bis 0,8 kPa">
+          <span class="zone-range">0,4 – 0,8</span>
+          <span class="zone-name">Stecklinge</span>
+        </div>
+        <div class="zone-segment zone-late-veg" aria-label="Späte Veg / Frühe Blüte: 0,8 bis 1,2 kPa">
+          <span class="zone-range">0,8 – 1,2</span>
+          <span class="zone-name">Veg. / Blüte</span>
+        </div>
+        <div class="zone-segment zone-mid-flower" aria-label="Mittlere / Späte Blüte: 1,2 bis 1,6 kPa">
+          <span class="zone-range">1,2 – 1,6</span>
+          <span class="zone-name">Späte Blüte</span>
+        </div>
+        <div class="zone-segment zone-danger-high" aria-label="Zu hoch: über 1,6 kPa">
+          <span class="zone-range">&gt; 1,6</span>
+          <span class="zone-name">Zu hoch</span>
+        </div>
+      </div>
+      <div id="zone-pointer" class="zone-pointer" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Berechnung nach Tetens-Formel · Keine Daten werden übertragen · <a href="tests/vpd.test.html">Tests</a></p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

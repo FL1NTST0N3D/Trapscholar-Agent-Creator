@@ -1,0 +1,609 @@
+"""Plant/tent lifecycle context and stage-derived environmental targets.
+
+Single source of truth for "what stage is the scoped tent in right now"
+and "what temp/RH/VPD should we target at this stage". Consumed by the voice
+status tool (sensors.py) and the VPD-targeting humidifier loop.
+
+Stage bands are hardcoded domain knowledge rather than DB rows: they change
+rarely and via code review, not a UI toggle.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Callable
+from dataclasses import dataclass
+from datetime import UTC, date, datetime, time, timedelta
+from typing import Literal
+from zoneinfo import ZoneInfo
+
+from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlmodel import select
+from sqlmodel.ext.asyncio.session import AsyncSession
+
+from dirt_shared.config import GROW_START
+from dirt_shared.models.plant import Plant, PlantLine, PlantLocationHistory
+from dirt_shared.models.schedule import Schedule
+from dirt_shared.services.scope import (
+    require_default_site_pk,
+    require_default_tent_pk,
+)
+
+Stage = Literal["veg", "flower_early", "flower_late"]
+
+# Early flower covers weeks 1-3 of 12/12 (days 0-20); late flower begins day 21.
+_LATE_FLOWER_DAY = 21
+
+
+# Stage → metric → (low, high) target band.
+#
+# Semantics by metric:
+#
+#   temperature_f, vpd_kpa  — primary targets. Controller setpoints; what we're
+#                              actively trying to hold the tent at.
+#
+#   humidity_pct            — *envelope*, not a setpoint. RH and VPD are
+#                              mathematically coupled at constant T (RH = 1 - VPD/SVP),
+#                              so an RH "target" duplicating the VPD target is
+#                              a bug. Instead, the RH band is a horticultural
+#                              envelope: the lower edge protects against
+#                              defensive stomatal closure (too dry); the upper
+#                              edge is the mold/bud-rot threshold for the
+#                              stage. The bands intentionally span more than the
+#                              VPD target's RH-equivalent range so envelope
+#                              guards (e.g. humidifier PI ceiling) only fire on
+#                              real envelope violations, not on every VPD-in-band
+#                              sample. See wiki/concepts/control-theory-primer.md
+#                              §13 and wiki/concepts/vpd.md.
+#
+#   fan_pct                 — operational envelope, not a setpoint. The fan
+#                              firmware (firmware/fan_controller/src/main.cpp:
+#                              fan_speed_to_wire_duty) abstracts the motor's
+#                              22% wire-duty stall threshold internally: API
+#                              speed_pct=0 is off, speed_pct=1..100 maps
+#                              linearly onto the full running range. So the
+#                              band here is a free policy choice — currently
+#                              "fairly slow but running" (20%) up to a
+#                              "suspicious if sustained" ceiling (80%). Same
+#                              across all stages until closed-loop fan control
+#                              lands and per-stage targets become meaningful.
+STAGE_TARGETS: dict[Stage, dict[str, tuple[float, float]]] = {
+    "veg": {
+        "temperature_f": (70, 82),
+        "humidity_pct": (40, 70),  # envelope: <40 stomata close, >70 mold risk
+        "vpd_kpa": (0.9, 1.1),
+        "fan_pct": (20, 80),
+    },
+    "flower_early": {
+        "temperature_f": (68, 80),
+        "humidity_pct": (40, 60),  # envelope: bud rot risk climbs above 60 in flower
+        "vpd_kpa": (1.0, 1.3),
+        "fan_pct": (20, 80),
+    },
+    "flower_late": {
+        "temperature_f": (65, 78),
+        "humidity_pct": (35, 55),  # envelope: bud rot is the dominant late-flower risk
+        "vpd_kpa": (1.2, 1.5),
+        "fan_pct": (20, 80),
+    },
+}
+
+
+@dataclass(frozen=True)
+class LightsState:
+    on: bool
+    minutes_until_off: float  # always positive; counts to next lights-off
+    minutes_until_on: float  # always positive; counts to next lights-on
+
+
+@dataclass(frozen=True)
+class GrowContext:
+    """Snapshot of stage + lights + target bands from one context fetch.
+
+    Callers in hot paths (control loops ticking every ~30s) should prefer
+    ``GrowStateService.current_context()`` over separate ``current_stage()``/
+    ``lights_state()``/``current_targets()`` calls, which each round-trip to the
+    DB for the same row.
+    """
+
+    stage: Stage
+    lights: LightsState
+    targets: dict[str, tuple[float, float]]
+
+
+@dataclass(frozen=True)
+class TentPlantContext:
+    germination_date: date
+    flower_start_date: date | None
+    strain: str
+    plant_count: int
+    timezone: str
+
+
+@dataclass(frozen=True)
+class GrowCurrentPayload:
+    germination_date: date
+    flower_start_date: date | None
+    day_number: int  # today - germination_date + 1
+    grow_week_number: int  # 1-indexed since germination_date
+    flower_week_number: int | None  # 1-indexed since flower_start_date; None in veg
+    stage: Stage
+    strain: str
+    plant_count: int
+    lights: LightsState
+    lights_on_local: time
+    lights_off_local: time
+
+
+@dataclass(frozen=True)
+class LightSchedule:
+    site_pk: int
+    tent_pk: int
+    starts_local: time
+    ends_local: time
+    timezone: str
+    enabled: bool
+    source: str
+
+
+def derive_lights_from_times(
+    on_time: time,
+    off_time: time,
+    now_local: datetime,
+) -> LightsState:
+    """Derive current light state and next transitions from a local time window."""
+    tz = now_local.tzinfo
+    now_t = now_local.time()
+    if on_time < off_time:
+        on = on_time <= now_t < off_time
+    else:
+        # Lights-on crosses midnight.
+        on = now_t >= on_time or now_t < off_time
+
+    off_dt = datetime.combine(now_local.date(), off_time, tzinfo=tz)
+    if off_dt <= now_local:
+        off_dt = datetime.combine(
+            now_local.date() + timedelta(days=1), off_time, tzinfo=tz
+        )
+    minutes_until_off = (off_dt - now_local).total_seconds() / 60.0
+
+    on_dt = datetime.combine(now_local.date(), on_time, tzinfo=tz)
+    if on_dt <= now_local:
+        on_dt = datetime.combine(
+            now_local.date() + timedelta(days=1), on_time, tzinfo=tz
+        )
+    minutes_until_on = (on_dt - now_local).total_seconds() / 60.0
+
+    return LightsState(
+        on=on,
+        minutes_until_off=minutes_until_off,
+        minutes_until_on=minutes_until_on,
+    )
+
+
+# ============================================================
+# Pure helper used by every endpoint that returns ok|warn|crit.
+# ============================================================
+
+BandStatus = Literal["ok", "warn", "crit"]
+
+
+def band_status(value: float, band: tuple[float, float] | None) -> BandStatus:
+    """Classify ``value`` against a target ``band=(lo, hi)``."""
+    if band is None:
+        return "ok"
+    lo, hi = band
+    if lo <= value <= hi:
+        return "ok"
+    half_width = (hi - lo) / 2
+    if lo - half_width <= value <= hi + half_width:
+        return "warn"
+    return "crit"
+
+
+def in_band(value: float, band: tuple[float, float] | None) -> bool:
+    """True iff ``value`` is inside ``band=(lo, hi)`` (inclusive endpoints).
+
+    ``band=None`` means "no target defined" → always in-band (vacuously true)."""
+    if band is None:
+        return True
+    lo, hi = band
+    return lo <= value <= hi
+
+
+def above_band(value: float, band: tuple[float, float] | None) -> bool:
+    """True iff ``value`` is strictly above the band's upper edge.
+
+    The one-sided comparison used by envelope guards — e.g. the humidifier
+    PI controller's RH ceiling: "stop adding moisture if RH walked above
+    the stage's mold-prevention upper edge regardless of what VPD says."
+    ``band=None`` → never above (no envelope defined)."""
+    if band is None:
+        return False
+    return value > band[1]
+
+
+def below_band(value: float, band: tuple[float, float] | None) -> bool:
+    """True iff ``value`` is strictly below the band's lower edge.
+
+    Symmetric counterpart to ``above_band`` — used by future dehumidifier
+    guards / floor-only comparisons. ``band=None`` → never below."""
+    if band is None:
+        return False
+    return value < band[0]
+
+
+class GrowStateService:
+    """Grow-stage queries + lights schedule. Constructor-inject the engine.
+
+    The clock is constructor-injected and threads through every method's
+    "what time is it now" reads. Composition roots wire one shared clock
+    (see ``app_wiring.build_core_services``); tests pass a frozen clock
+    for deterministic stage / week / lights-state assertions.
+    """
+
+    def __init__(
+        self,
+        engine: AsyncEngine,
+        *,
+        clock: Callable[[], datetime] = lambda: datetime.now(UTC),
+    ) -> None:
+        self._engine = engine
+        self._clock = clock
+
+    async def today(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> date:
+        """The tent's current date in its wall-clock timezone."""
+        context = await self.get_tent_context(site_pk=site_pk, tent_pk=tent_pk)
+        return self._clock().astimezone(ZoneInfo(context.timezone)).date()
+
+    async def get_tent_context(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> TentPlantContext:
+        """Return lifecycle context for current plants in a site/tent scope."""
+        schedule = await self.current_light_schedule(site_pk=site_pk, tent_pk=tent_pk)
+        tz = ZoneInfo(schedule.timezone)
+        async with AsyncSession(self._engine) as session:
+            site_pk = schedule.site_pk
+            tent_pk = schedule.tent_pk
+            result = await session.exec(
+                select(
+                    Plant.germinated_at,
+                    Plant.flower_started_at,
+                    PlantLine.strain,
+                    PlantLine.cultivar,
+                )
+                .join(PlantLocationHistory, PlantLocationHistory.plant_id == Plant.id)
+                .join(PlantLine, PlantLine.id == Plant.line_id)
+                .where(PlantLocationHistory.site_id == site_pk)
+                .where(PlantLocationHistory.tent_id == tent_pk)
+                .where(PlantLocationHistory.end_at.is_(None))
+                .order_by(PlantLocationHistory.grid_position, Plant.key)
+            )
+            rows = result.all()
+        if not rows:
+            return _fallback_tent_context(
+                timezone=schedule.timezone,
+            )
+
+        germination_dates = [
+            _date_in_timezone(germinated_at, tz)
+            for germinated_at, _, _, _ in rows
+            if germinated_at is not None
+        ]
+        flower_start_dates = [
+            _date_in_timezone(flower_started_at, tz)
+            for _, flower_started_at, _, _ in rows
+            if flower_started_at is not None
+        ]
+        line_labels = [_line_label(strain, cultivar) for _, _, strain, cultivar in rows]
+        strain = line_labels[0]
+        if any(label != strain for label in line_labels):
+            strain = "Mixed"
+
+        germination_date = min(germination_dates) if germination_dates else GROW_START
+        flower_start_date = min(flower_start_dates) if flower_start_dates else None
+        return TentPlantContext(
+            germination_date=germination_date,
+            flower_start_date=flower_start_date,
+            strain=strain,
+            plant_count=len(rows),
+            timezone=schedule.timezone,
+        )
+
+    @staticmethod
+    def _derive_stage(context: TentPlantContext, today: date) -> Stage:
+        if context.flower_start_date is None or today < context.flower_start_date:
+            return "veg"
+        days_in_flower = (today - context.flower_start_date).days
+        if days_in_flower < _LATE_FLOWER_DAY:
+            return "flower_early"
+        return "flower_late"
+
+    @staticmethod
+    def _derive_lights_from_times(
+        on_time: time,
+        off_time: time,
+        now_local: datetime,
+    ) -> LightsState:
+        return derive_lights_from_times(on_time, off_time, now_local)
+
+    @staticmethod
+    def _lights_on_duration_seconds(on_time: time, off_time: time) -> float:
+        on_seconds = (
+            on_time.hour * 60 * 60
+            + on_time.minute * 60
+            + on_time.second
+            + on_time.microsecond / 1_000_000
+        )
+        off_seconds = (
+            off_time.hour * 60 * 60
+            + off_time.minute * 60
+            + off_time.second
+            + off_time.microsecond / 1_000_000
+        )
+        return (off_seconds - on_seconds) % (24 * 60 * 60)
+
+    async def current_stage(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> Stage:
+        """Veg vs early vs late flower, derived from flower_start_date."""
+        context = await self.get_tent_context(site_pk=site_pk, tent_pk=tent_pk)
+        today = self._clock().astimezone(ZoneInfo(context.timezone)).date()
+        return self._derive_stage(context, today)
+
+    async def grow_week(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> int:
+        """1-indexed week since germination. Day 1-7 = week 1."""
+        context = await self.get_tent_context(site_pk=site_pk, tent_pk=tent_pk)
+        today = self._clock().astimezone(ZoneInfo(context.timezone)).date()
+        return (today - context.germination_date).days // 7 + 1
+
+    async def current_targets(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> dict[str, tuple[float, float]]:
+        """Temp / RH / VPD band for the current stage."""
+        return STAGE_TARGETS[await self.current_stage(site_pk=site_pk, tent_pk=tent_pk)]
+
+    async def lights_state(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> LightsState:
+        """Are lights on right now, and how long until the next on/off transition?"""
+        schedule = await self.current_light_schedule(site_pk=site_pk, tent_pk=tent_pk)
+        now_local = self._clock().astimezone(ZoneInfo(schedule.timezone))
+        return self._derive_lights_from_times(
+            schedule.starts_local,
+            schedule.ends_local,
+            now_local,
+        )
+
+    async def current_context(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> GrowContext:
+        """Stage + lights + target bands from one plant/tent context fetch.
+
+        Hot-path helper for control loops — avoids three DB round-trips per tick.
+        """
+        schedule = await self.current_light_schedule(site_pk=site_pk, tent_pk=tent_pk)
+        context = await self.get_tent_context(
+            site_pk=schedule.site_pk,
+            tent_pk=schedule.tent_pk,
+        )
+        now_local = self._clock().astimezone(ZoneInfo(schedule.timezone))
+        stage = self._derive_stage(context, now_local.date())
+        lights = self._derive_lights_from_times(
+            schedule.starts_local,
+            schedule.ends_local,
+            now_local,
+        )
+        return GrowContext(stage=stage, lights=lights, targets=STAGE_TARGETS[stage])
+
+    async def current_light_schedule(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> LightSchedule:
+        """Return the scoped lights schedule, projected from ``schedule``."""
+        async with AsyncSession(self._engine) as session:
+            if site_pk is None:
+                site_pk = await require_default_site_pk(session)
+            if tent_pk is None:
+                tent_pk = await require_default_tent_pk(session, site_pk=site_pk)
+            schedule = (
+                await session.exec(
+                    select(Schedule)
+                    .where(Schedule.site_id == site_pk)
+                    .where(Schedule.tent_id == tent_pk)
+                    .where(Schedule.kind == "lights")
+                    .where(Schedule.enabled.is_(True))
+                    .order_by(Schedule.id.desc())
+                    .limit(1)
+                )
+            ).first()
+            if (
+                schedule is not None
+                and schedule.starts_local is not None
+                and schedule.ends_local is not None
+            ):
+                return LightSchedule(
+                    site_pk=site_pk,
+                    tent_pk=tent_pk,
+                    starts_local=schedule.starts_local,
+                    ends_local=schedule.ends_local,
+                    timezone=schedule.timezone,
+                    enabled=schedule.enabled,
+                    source="schedule",
+                )
+        return LightSchedule(
+            site_pk=site_pk,
+            tent_pk=tent_pk,
+            starts_local=time(5, 0),
+            ends_local=time(23, 0),
+            timezone="America/Denver",
+            enabled=True,
+            source="default",
+        )
+
+    async def get_grow_current_payload(
+        self,
+        *,
+        site_pk: int | None = None,
+        tent_pk: int | None = None,
+    ) -> GrowCurrentPayload:
+        """One-shot assembler for ``GET /api/grow/current``."""
+        schedule = await self.current_light_schedule(site_pk=site_pk, tent_pk=tent_pk)
+        context = await self.get_tent_context(
+            site_pk=schedule.site_pk,
+            tent_pk=schedule.tent_pk,
+        )
+        now_local = self._clock().astimezone(ZoneInfo(schedule.timezone))
+        today = now_local.date()
+
+        stage = self._derive_stage(context, today)
+        lights = self._derive_lights_from_times(
+            schedule.starts_local,
+            schedule.ends_local,
+            now_local,
+        )
+
+        germination_date = context.germination_date
+        grow_week_number = (today - germination_date).days // 7 + 1
+        day_number = (today - germination_date).days + 1
+        if context.flower_start_date is not None and today >= context.flower_start_date:
+            flower_week_number: int | None = (
+                today - context.flower_start_date
+            ).days // 7 + 1
+        else:
+            flower_week_number = None
+
+        return GrowCurrentPayload(
+            germination_date=germination_date,
+            flower_start_date=context.flower_start_date,
+            day_number=day_number,
+            grow_week_number=grow_week_number,
+            flower_week_number=flower_week_number,
+            stage=stage,
+            strain=context.strain,
+            plant_count=context.plant_count,
+            lights=lights,
+            lights_on_local=schedule.starts_local,
+            lights_off_local=schedule.ends_local,
+        )
+
+    async def flip_to_flower(
+        self,
+        *,
+        flower_start_date: date,
+        lights_on_local: time,
+        lights_off_local: time,
+    ) -> GrowCurrentPayload:
+        """Persist current plants' first flower day and 12/12 light schedule."""
+        if (
+            self._lights_on_duration_seconds(lights_on_local, lights_off_local)
+            != 12 * 60 * 60
+        ):
+            raise ValueError("flower light schedule must be exactly 12 hours on")
+
+        async with AsyncSession(self._engine) as session:
+            site_pk = await require_default_site_pk(session)
+            tent_pk = await require_default_tent_pk(session, site_pk=site_pk)
+
+            context = await self.get_tent_context()
+            if flower_start_date < context.germination_date:
+                raise ValueError("flower_start_date cannot be before germination_date")
+
+            if (
+                context.flower_start_date is not None
+                and context.flower_start_date != flower_start_date
+            ):
+                raise ValueError("flower_start_date is already set")
+
+            schedule = (
+                await session.exec(
+                    select(Schedule)
+                    .where(Schedule.site_id == site_pk)
+                    .where(Schedule.tent_id == tent_pk)
+                    .where(Schedule.kind == "lights")
+                    .limit(1)
+                )
+            ).first()
+            if schedule is None:
+                schedule = Schedule(
+                    site_id=site_pk,
+                    tent_id=tent_pk,
+                    schedule_id=f"tent-{tent_pk}-lights-photoperiod",
+                    kind="lights",
+                )
+            schedule.starts_local = lights_on_local
+            schedule.ends_local = lights_off_local
+            schedule.enabled = True
+            session.add(schedule)
+            flower_started_at = datetime.combine(
+                flower_start_date,
+                time.min,
+                tzinfo=ZoneInfo(schedule.timezone),
+            )
+            plants = (
+                await session.exec(
+                    select(Plant)
+                    .join(
+                        PlantLocationHistory,
+                        PlantLocationHistory.plant_id == Plant.id,
+                    )
+                    .where(PlantLocationHistory.site_id == site_pk)
+                    .where(PlantLocationHistory.tent_id == tent_pk)
+                    .where(PlantLocationHistory.end_at.is_(None))
+                )
+            ).all()
+            for plant in plants:
+                plant.flower_started_at = flower_started_at
+                session.add(plant)
+            await session.commit()
+
+        return await self.get_grow_current_payload()
+
+
+def _fallback_tent_context(
+    *,
+    timezone: str = "America/Denver",
+) -> TentPlantContext:
+    return TentPlantContext(
+        germination_date=GROW_START,
+        flower_start_date=None,
+        strain="Sirius Black × BS01",
+        plant_count=0,
+        timezone=timezone,
+    )
+
+
+def _date_in_timezone(value: datetime, tz: ZoneInfo) -> date:
+    return value.astimezone(tz).date()
+
+
+def _line_label(strain: str, cultivar: str) -> str:
+    if cultivar and cultivar not in strain:
+        return f"{strain} × {cultivar}"
+    return strain

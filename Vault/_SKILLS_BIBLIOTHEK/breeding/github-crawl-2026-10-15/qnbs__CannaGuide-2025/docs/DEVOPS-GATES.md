@@ -1,0 +1,227 @@
+# DevOps Quality Gates
+
+Inventory of automated gates in CannaGuide 2025 — what runs where, and how to reproduce locally.
+
+Last updated: 2026-07-01
+
+---
+
+## Merge gate (required)
+
+GitHub Actions job **`CI Status`** passes only when the `build`, `test`, `verify`, `security` and `e2e` (Chromium, 2 shards) jobs all succeed (plus `rust` when `apps/desktop/**` changed) (see `.github/workflows/ci.yml`). E2E was advisory until 2026-08-04: it was absent from the gate's `needs:`, so the required check reached SUCCESS while the browser shards were still running -- observed three times on PR #474 alone. `e2e-cross-browser` (Firefox/WebKit) remains advisory.
+
+| Gate                                                | CI step    | Local command                                                                                                                                |
+| --------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lint (changed)                                      | `verify`   | `pnpm run lint:changed`                                                                                                                      |
+| Lint (strict scopes)                                | `verify`   | `pnpm run lint:scopes`                                                                                                                       |
+| Graphify MCP doctor                                 | `verify`   | `pnpm run graphify:mcp:doctor`                                                                                                               |
+| Typecheck                                           | `verify`   | `pnpm verify`                                                                                                                                |
+| Zero `any` in app source                            | `verify`   | inline grep in `ci.yml`                                                                                                                      |
+| Unit tests + global coverage floors                 | `test`     | `pnpm run test:coverage`                                                                                                                     |
+| **Critical path coverage (≥80% lines/functions)**   | `test`     | `pnpm run check:critical-path-coverage`                                                                                                      |
+| **File budget (≤700 LOC on changed files)**         | `verify`   | `pnpm run check:file-budget`                                                                                                                 |
+| Build                                               | `build`    | `pnpm run build`                                                                                                                             |
+| **Artifact identity (`version.json` == build SHA)** | `build`    | `node scripts/stamp-build-metadata.mjs --verify`                                                                                             |
+| Bundle budget                                       | `build`    | `node scripts/check-bundle-budget.mjs apps/web/dist/assets`                                                                                  |
+| Service dependency acyclic                          | `verify`   | `node scripts/generate-service-map.mjs`                                                                                                      |
+| i18n completeness                                   | `verify`   | `pnpm run check:i18n`                                                                                                                        |
+| Strain catalog integrity                            | `verify`   | `pnpm run strains:check-integrity`                                                                                                           |
+| Documentation metrics (badges ↔ source)             | `verify`   | `pnpm run check:doc-metrics`                                                                                                                 |
+| **jsx-a11y warning ratchet (may only drop)**        | `verify`   | `pnpm run check:a11y-ratchet`                                                                                                                |
+| Audit backlog (open CRITICAL/HIGH)                  | `verify`   | `node scripts/check-audit-backlog.mjs`                                                                                                       |
+| E2E selector stability                              | `verify`   | `node scripts/check-e2e-selectors.mjs`                                                                                                       |
+| CSP consistency                                     | `verify`   | `node scripts/security/check-csp-consistency.mjs`                                                                                            |
+| CSP fetch host gate                                 | `security` | `node scripts/security/check-csp-fetch-hosts.mjs`                                                                                            |
+| **Rust fmt / clippy / tests (Tauri)**               | `rust`     | `cd apps/desktop/src-tauri && cargo fmt --all -- --check && cargo clippy --locked --all-targets -- -D warnings && cargo test --locked --lib` |
+| pnpm audit (high, prod)                             | `security` | `pnpm audit --audit-level=high --prod`                                                                                                       |
+| pnpm audit (high, all deps)                         | `security` | `pnpm audit --audit-level=high`                                                                                                              |
+| **Override / dependabot-ignore drift**              | `security` | `node scripts/security/check-override-floors.mjs`                                                                                            |
+| Trojan-source scan                                  | `security` | `pnpm run security:trojan-source`                                                                                                            |
+| **Workflow credential scope**                       | `security` | `node scripts/security/check-workflow-credential-scope.mjs`                                                                                  |
+| **Release publish token scope**                     | `security` | `node scripts/security/check-release-publish-token.mjs`                                                                                      |
+| Gitleaks                                            | `security` | `pnpm run security:secrets`                                                                                                                  |
+
+Every **scan** step in the `security` job is guarded with
+`always() && <its prerequisite> succeeded` -- the audits, the drift check and the Trojan-Source
+scan require the setup step, the Gitleaks scan only the checkout (it needs the working tree, not
+`node_modules`). The harden-runner, checkout and setup steps themselves are deliberately
+unguarded: if any of those fails there is nothing to scan.
+The scans are independent controls, so one failure must not skip the others -- before that guard, a
+red dependency audit silently skipped both the Trojan-Source scan and the Gitleaks secret scan,
+and a green `Security` job was the only evidence they had ever run. The guards do **not** soften
+the gate: there is still no `continue-on-error`, so any failing scan fails the job and with it
+`CI Status`.
+
+Both audits run at `--audit-level=high`. The production audit used to run at `critical`, i.e. a
+_laxer_ bar for shipped code than for dev tooling -- it printed `Severity: 1 high` and exited 0.
+Production must never be held to a lower threshold than the dev graph.
+
+### Rust (Tauri)
+
+Path-gated on `apps/desktop/**`. It is required by `CI Status` **only when it actually ran** --
+a PR that does not touch the desktop legitimately skips it, and the gate must not read that
+skip as a failure. It must equally not accept a skip while desktop files _did_ change, so the
+condition keys off `needs.changes.outputs.desktop`, not off the job result alone.
+
+It exists because Rust was otherwise compiled only by `desktop-build.yml`, which fires on `v*`
+tags -- a broken Rust change was first discovered while cutting a release. The job stops at
+`cargo check`-level work (fmt, clippy, `--lib` tests); the full platform bundle stays in
+`desktop-build.yml`. Note the desktop app cannot be built on the maintainer's low-end machine
+(`libwebkit2gtk-4.1-dev` is absent), so this job is the only pre-merge verification Rust gets.
+
+### Override / dependabot-ignore drift
+
+`overrides:` in `pnpm-workspace.yaml` and `ignore:` in `.github/dependabot.yml` are a pair: a
+package is silenced for Dependabot **because** it is pinned by an override. `check-override-floors.mjs`
+fails when that pair rots:
+
+- the `overrides:` block in `pnpm-workspace.yaml` disagreeing with the copy pnpm mirrors into
+  `pnpm-lock.yaml` -- `pnpm install --frozen-lockfile` refuses to run on any difference
+  (`ERR_PNPM_LOCKFILE_CONFIG_MISMATCH`), so editing an override without regenerating the
+  lockfile turns **every** CI job red in its install step, which looks far worse than the
+  one-line cause;
+- a fully-ignored npm package with **no override** -- silenced with nothing standing in;
+- a major-scoped key (`js-yaml@3`) matching **no version resolved** in `pnpm-lock.yaml` -- an
+  orphaned pin;
+- a **new** override floor with no upper bound (`>=x` with no `<y`).
+
+An open floor resolves to the newest major in the registry. That is not theoretical here:
+`fast-uri: '>=3.1.2'` resolved to 4.1.0, the version GHSA-v2hh-gcrm-f6hx names, and
+`js-yaml@3: '>=3.15.0'` resolved depcheck's `js-yaml@^3` up two majors to 5.2.1 -- **creating**
+GHSA-pm4m-ph32-ghv5 rather than preventing it.
+
+The unbounded rule is a **ratchet**. The 11 pre-existing unbounded pins are listed in
+`LEGACY_UNBOUNDED` inside the script and warn rather than fail; that list may only shrink, and
+bounding a pin without delisting it fails too. Retiring them is a per-package call, because
+two have already crossed a major (`uuid` -> 14.0.0, `linkify-it` -> 6.0.0). `basic-ftp` was
+retired onto `>=6.2.1 <7`. `@babel/core` resolves to nothing at all. Offline -- lockfile and config only, no registry call.
+
+### Bundle and precache budget
+
+`scripts/check-bundle-budget.mjs` enforces three things:
+
+- **entry chunk** `index-*.js`: 300 KB gzip / 280 KB brotli;
+- **vendor chunks**: 500 KB gzip / 450 KB brotli;
+- **lazy chunks**: explicit per-chunk gzip ceilings in `LAZY_BUDGETS_GZIP_KB`.
+
+The lazy ceilings replaced a blanket exempt list. `ai-runtime` was exempt **by name**
+and grew to 2.29 MB gzip -- roughly 2.4x its size at the previous audit -- while the gate
+printed `[PASS]` the whole time. A budget that excuses the largest artifact is not a budget.
+Raising a ceiling is a visible decision in review, not a config detail.
+
+**Precache budget: 12 MiB.** This sums raw, uncompressed on-disk bytes of everything the
+service worker precaches at install -- not a network-transfer-size budget, since gzip/Brotli
+still shrink what actually crosses the wire -- but every visitor still fetches all of it at
+install, and nothing measured it before this gate: the only constraint was workbox's per-file
+`maximumFileSizeToCacheInBytes`, an inclusion filter rather than a gate, with its size warning
+explicitly silenced (`showMaximumFileSizeToCacheInBytesWarning: false`).
+It had reached **247 entries / 19.15 MiB**, including 8.57 MiB of local-AI runtime that is
+lazily imported and only used if the user enables local AI. Excluding those via
+`injectManifest.globIgnores` brings it to **243 entries / 10.57 MiB**; the gate parses the
+generated manifest out of `dist/sw.js` and fails closed if it cannot parse one at all.
+
+### Critical path coverage
+
+Enforced files (see `scripts/check-critical-path-coverage.mjs`):
+
+- `apps/web/services/ai/safetyPipeline.ts`
+- `apps/web/services/syncEncryptionService.ts`
+- `apps/web/services/plantSimulationService.ts`
+- `apps/web/services/local-ai/vision/diagnosisService.ts`
+
+Minimum: **80% lines** and **80% functions** per file. Branch coverage is reported as advisory until the P1 coverage sprint closes.
+
+### File budget
+
+- Max **700 LOC** per file in `services/`, `stores/`, `components/`, `hooks/`, `workers/`, `utils/`, `packages/ai-core/src`
+- **Changed files** over budget → **fail**
+- Grandfathered god-files → warn only (see `scripts/check-file-budget.mjs`)
+
+### jsx-a11y warning ratchet
+
+The `jsx-a11y` recommended rules run as **warnings** (`eslint.config.js`, `LINT_A11Y=1`), so they
+never block lint-staged. `scripts/check-a11y-ratchet.mjs` keeps them from silently accumulating: it
+counts the warnings over `apps/web` + `packages/ui` `.tsx`/`.jsx` (tests/stories excluded) with an
+own **AST-only** ESLint instance — no type-checking, so it is fast and low-memory enough to run on
+every PR.
+
+- The count is compared to the committed baseline in [`.a11y-baseline.json`](../.a11y-baseline.json).
+- Count **rises above** the baseline → **fail** (fix the new violation; do **not** raise the baseline).
+- Count **drops** → run `pnpm run check:a11y-ratchet -- --update` (or `node scripts/check-a11y-ratchet.mjs --update`)
+  **in the same PR** to lower the baseline. The ratchet only moves down.
+- The baseline is a warning **count**, not a rule flip — rules stay `warn`. Promoting individual
+  rules to `error` once their count reaches zero is a deliberate, separate follow-up.
+
+---
+
+## Advisory (non-blocking)
+
+| Gate                    | CI job              | Local command                                       |
+| ----------------------- | ------------------- | --------------------------------------------------- |
+| E2E Chromium            | `e2e`               | `pnpm run build && pnpm run test:e2e`               |
+| E2E cross-browser       | `e2e-cross-browser` | Playwright firefox/webkit                           |
+| Critical path JS size   | `advisory`          | `pnpm run measure:critical-path`                    |
+| File budget (full scan) | `advisory`          | `FILE_BUDGET_ADVISORY=1 pnpm run check:file-budget` |
+| localStorage allowlist  | `advisory`          | `pnpm run check:localstorage`                       |
+
+---
+
+## Pre-commit / pre-push
+
+| Hook                           | Command                                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `pre-commit`                   | commit identity + serialized `lint-staged --concurrent 1` (security + eslint + prettier)           |
+| `commit-msg`                   | commitlint conventional commits                                                                    |
+| `pre-push`                     | single-hook lock + memory/dependency preflight + scoped typecheck + changed lint + local gates     |
+| **`gate:push`** (manual, full) | `pnpm run gate:push` — identity, lint, mdc, graphify, typecheck, tests, scopes, file-budget, build |
+
+Skip hooks (emergency only): `git push --no-verify`
+
+The dependency preflight never launches pnpm. The explicit frozen install records a local stamp
+covering repository dependency inputs, the platform-specific installed lock snapshot, and the
+repository-pinned pnpm version; hooks compare that stamp before resolving installed tools directly.
+
+---
+
+## Local CI mirror
+
+```bash
+export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh"
+if ! CANNAGUIDE_NODE="$(nvm which 24)" || [ ! -x "$CANNAGUIDE_NODE" ]; then
+  echo "Node.js 24 is unavailable; PATH was not modified." >&2
+  return 1 2>/dev/null || exit 1
+fi
+CANNAGUIDE_NODE_VER="$("$CANNAGUIDE_NODE" -p "process.versions.node")"
+CANNAGUIDE_NODE_MAJOR="${CANNAGUIDE_NODE_VER%%.*}"
+CANNAGUIDE_NODE_MINOR="${CANNAGUIDE_NODE_VER#*.}"
+CANNAGUIDE_NODE_MINOR="${CANNAGUIDE_NODE_MINOR%%.*}"
+if [ "$CANNAGUIDE_NODE_MAJOR" -ne 24 ] || [ "$CANNAGUIDE_NODE_MINOR" -lt 15 ]; then
+  echo "Node.js ${CANNAGUIDE_NODE_VER} is outside >=24.15.0 <25; PATH was not modified." >&2
+  return 1 2>/dev/null || exit 1
+fi
+CANNAGUIDE_NODE_BIN="$(dirname "$CANNAGUIDE_NODE")"
+export PATH="$CANNAGUIDE_NODE_BIN:$PATH"
+corepack enable pnpm
+pnpm --version # must match package.json packageManager
+
+pnpm run ci:audit          # lightweight subset
+pnpm run gate:push         # full pre-push gate
+```
+
+---
+
+## Security / Dependabot
+
+Transitive vulnerabilities remediated via root `pnpm.overrides` are documented in [`SECURITY.md`](../SECURITY.md#transitive-dependency-remediation-pnpm-overrides).
+
+After adding overrides: deliberately regenerate with `corepack pnpm install --lockfile-only`, reject
+unrelated changes in `pnpm-lock.yaml`, then run `corepack pnpm install --frozen-lockfile` and
+`corepack pnpm audit`. Confirm GitHub **Security → Dependabot** alerts are resolved.
+
+---
+
+## Related docs
+
+- [`.github/CI-AUDIT.md`](../.github/CI-AUDIT.md) — audit history and dashboard
+- [`docs/HOUSEKEEPING.md`](./HOUSEKEEPING.md) — release checklist
+- [`AGENTS.md`](../AGENTS.md) — Cloud Agent workflow

@@ -1,0 +1,122 @@
+---
+title: Green Cannabis Grow Bible Breeding Genetics And True Breeding
+created: 2026-04-26
+tags:
+  - breeding
+  - genetics
+  - mendelian
+  - true-breeding
+  - cubing
+date: 2026-04-25
+updated: 2026-04-25
+sources:
+  - "raw/papers/greg-green-the-cannabis-grow-bible.md"
+type: concept
+---
+## Cannabis Breeding, Genetics, and True Breeding
+Chapter 15 of [[big-bud]]
+x Skunk). Offspring will vary: some lean toward one parent, others
+toward the other. Uniform plants require more advanced breeding.
+## Genetic Terminology
+Understanding these terms is essential for breeding:
+- Genes: Units of heredity controlling individual characteristics.
+- Alleles: Alternative forms of one gene (e.g., purple or dark red bud).
+- Homozygous: Identical alleles at a locus (breeds true for that trait).
+- Heterozygous: Different alleles at a locus (may not breed true).
+- Phenotype: Observable features (appearance, smell, taste).
+- Genotype: The genetic constitution (hidden traits that can be
+  inherited).
+- Dominant: Expressed even when inherited from only one parent (noted
+  with capital letters, e.g., B).
+- Recessive: Only expressed when both alleles are recessive (noted with
+  lowercase, e.g., b).
+- Locus: A position on a chromosome where a particular gene is located.
+## Gene Pairs and Dominance
+Each gene locus contains two genes, one from each parent. Notation uses
+capital for dominant and lowercase for recessive. For example:
+- BB = Homozygous Dominant (Big Bud)
+- Bb = Heterozygous (Big Bud, because B dominates b)
+- bb = Homozygous Recessive (small bud)
+For a recessive trait to express, both genes must be recessive.
+## Hardy-Weinberg Equilibrium
+This principle describes a theoretical population where gene frequencies
+remain unchanged generation after generation. The formula:
+(c + d) x (c + d) = cc + 2cd + dd = BB + Bb + bb = 1
+Gene frequencies remain stable if:
+1. The population is large enough.
+2. There are no mutations.
+3. There are no mating preferences.
+4. No outside population exchanges genes.
+5. Natural selection does not favor specific individuals.
+Breaking these laws (through selective breeding) allows breeders to
+manipulate gene frequencies. Breeding is essentially the controlled
+manipulation of gene frequencies in a population.
+## The Test Cross
+To determine if a plant showing a dominant trait is homozygous (BB)
+or heterozygous (Bb), cross it with a plant that is homozygous
+recessive (bb) for the same trait.
+Rules:
+1. The plant with the dominant trait is crossed with a recessive plant.
+2. If ANY offspring show the recessive trait, the parent is
+   heterozygous (Bb).
+3. If ALL offspring show the dominant trait, the parent is homozygous
+   dominant (BB).
+4. Large numbers (100+) are needed for reliable results.
+## True Breeding a Strain
+Creating a true-breeding strain (IBL) involves locking down traits so
+they are homozygous in the population:
+1. Identify the traits you want to preserve.
+2. Determine the genotype of each trait through test crosses.
+3. Find "donor" plants with homozygous dominant traits.
+4. Isolate MM or bb genotypes by running multiple test crosses.
+5. Keep parent plants alive through cloning.
+6. Lock down one trait at a time while monitoring other traits.
+7. Record everything to build your own gene map.
+Important caveats:
+- Known true-breeding strains like Skunk #1 and Afghani #1 took 20
+  years to develop.
+
+## See Also
+- [[green-cannabis-grow-bible-cloning-and-seed-propagation]]
+- [[green-cannabis-grow-bible-plant-training-pruning-and-yield]]
+- [[green-cannabis-grow-bible-cloning-and-seed-propagation]]
+- [[green-cannabis-grow-bible-soil-and-medium-preparation]]
+- [[green-cannabis-grow-bible-hash-making-and-trichome-extraction]]
+## Practical Applications
+The principles discussed here have direct applications in agricultural systems, ecological restoration, and sustainable resource management.
+Practitioners have demonstrated successful implementation across diverse climates and soil conditions.
+Adaptation to local conditions and careful observation remain central to effective application.
+Field trials provide essential data for validating theoretical approaches and refining methodologies.
+
+## Research Directions
+Current research explores the intersections between traditional knowledge and modern scientific understanding.
+Comparative studies across different bioregions provide valuable insights into generalizable principles.
+Long-term monitoring and documentation continue to build the evidence base for these approaches.
+Collaborative research networks facilitate knowledge exchange and accelerate innovation.
+Peer-reviewed publications and practitioner reports contribute complementary perspectives.
+
+## Key Considerations
+Context-specific implementation requires attention to local ecology, climate patterns, and community needs.
+Integration with existing systems often yields better results than complete replacement strategies.
+Monitoring and adaptive management are essential for long-term success and continuous improvement.
+Economic viability must be considered alongside ecological and social sustainability goals.
+
+## Integration Strategies
+Successful implementation often draws on multiple complementary approaches working in concert.
+Scale-appropriate solutions range from backyard gardens to broadacre agricultural systems.
+Knowledge sharing between practitioners accelerates collective learning and refinement of methods.
+Regional networks and demonstration sites play crucial roles in technology transfer.
+
+## Implementation Notes
+Start with small-scale trials before expanding to larger operations.
+Maintain detailed records of conditions, inputs, and outcomes for iterative refinement.
+Regular review and adjustment of strategies based on observed results ensures continuous improvement.
+## Practical Considerations
+Successful implementation requires attention to detail and adaptation to local conditions.
+Field experience and systematic observation remain the most reliable guides for practitioners.
+Documentation of results enables continuous improvement and knowledge sharing.
+
+## Future Directions
+Emerging research continues to validate and refine traditional approaches.
+Integration with modern technology offers new possibilities for monitoring and optimization.
+Collaborative networks facilitate rapid dissemination of innovations and best practices.

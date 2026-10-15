@@ -1,0 +1,105 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT -->
+<!-- Copyright (c) 2026 The Cannabis Landrace Atlas contributors -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Cannabis Landrace Atlas</title>
+    <link rel="icon" href="assets/leaf.svg" type="image/svg+xml" />
+    <meta name="description" content="An interactive world map of traditional cannabis landraces — explore varieties by region, climate, morphotype, chemotype, height, and flowering time." />
+
+    <!-- Open Graph / Twitter Card (link previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Cannabis Landrace Atlas" />
+    <meta property="og:title" content="The Cannabis Landrace Atlas" />
+    <meta property="og:description" content="An interactive world map of traditional cannabis landraces — explore varieties by region, climate, morphotype, chemotype, height, and flowering time." />
+    <meta property="og:url" content="https://brooklyncannabiscompany.github.io/cannabis-landrace-atlas/" />
+    <meta property="og:image" content="https://brooklyncannabiscompany.github.io/cannabis-landrace-atlas/assets/og-cover.png" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:image:alt" content="The Cannabis Landrace Atlas — a cannabis leaf above the project title." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The Cannabis Landrace Atlas" />
+    <meta name="twitter:description" content="An interactive world map of traditional cannabis landraces." />
+    <meta name="twitter:image" content="https://brooklyncannabiscompany.github.io/cannabis-landrace-atlas/assets/og-cover.png" />
+
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Cloudflare Turnstile: spam gate for the account-less contribution forms. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  </head>
+  <body class="panel-closed">
+    <header class="ribbon">
+      <button id="menu-btn" class="menu-btn" type="button" aria-label="Menu" aria-haspopup="true" aria-expanded="false">☰</button>
+      <nav id="app-menu" class="app-menu" hidden>
+        <button type="button" class="app-menu-item" data-menu="about">About</button>
+        <div class="app-menu-divider" role="separator"></div>
+        <button type="button" class="app-menu-item" data-menu="index">Index</button>
+        <div class="app-menu-divider" role="separator"></div>
+        <button type="button" class="app-menu-item app-menu-check" data-menu="graticule" role="menuitemcheckbox" aria-checked="false">Latitude/Longitude</button>
+        <button type="button" class="app-menu-item app-menu-check" data-menu="labels" role="menuitemcheckbox" aria-checked="false">Labels</button>
+        <button type="button" class="app-menu-item app-menu-check" data-menu="states" role="menuitemcheckbox" aria-checked="false">States &amp; Provinces</button>
+        <button type="button" class="app-menu-item app-menu-check" data-menu="rivers" role="menuitemcheckbox" aria-checked="false">Rivers</button>
+        <button type="button" class="app-menu-item app-menu-check" data-menu="terrain" role="menuitemcheckbox" aria-checked="false">Terrain</button>
+        <button type="button" class="app-menu-item app-menu-sub-toggle" data-submenu="heatmaps" aria-expanded="false" aria-haspopup="true">Heat Maps</button>
+        <div class="app-menu-sub-items" data-submenu="heatmaps" role="group" aria-label="Heat Maps" hidden>
+          <button type="button" class="app-menu-item app-menu-check" data-menu="flowering" role="menuitemradio" aria-checked="false">Flowering</button>
+          <button type="button" class="app-menu-item app-menu-check" data-menu="temp" role="menuitemradio" aria-checked="false">Growing Season Temperature</button>
+          <button type="button" class="app-menu-item app-menu-check" data-menu="rain" role="menuitemradio" aria-checked="false">Growing Season Rainfall</button>
+          <button type="button" class="app-menu-item app-menu-check" data-menu="daylight" role="menuitemradio" aria-checked="false">Growing Season Daylight</button>
+          <button type="button" class="app-menu-item app-menu-check" data-menu="solar" role="menuitemradio" aria-checked="false">Growing Season Solar Energy</button>
+        </div>
+        <div class="app-menu-divider" role="separator"></div>
+        <button type="button" class="app-menu-item" data-menu="references">References</button>
+        <button type="button" class="app-menu-item" data-menu="license">License</button>
+        <button type="button" class="app-menu-item" data-menu="suggest">Suggest Addition</button>
+        <button type="button" class="app-menu-item" data-menu="contact">Contact Us</button>
+      </nav>
+      <div class="wordmark">The Cannabis Landrace Atlas</div>
+      <div class="search-group">
+        <button id="index-btn" class="icon-btn" type="button" aria-label="Open index" title="Index">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+          </svg>
+        </button>
+        <div class="search">
+          <input id="search-input" type="search" autocomplete="off" spellcheck="false"
+                 placeholder="Search names, AKA, regions, countries…" aria-label="Search landraces"
+                 role="combobox" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false" />
+          <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+        </div>
+      </div>
+      <button id="submit-btn" class="icon-btn" type="button" aria-label="Suggest Addition" data-tip="Suggest Addition">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+      <button id="contact-btn" class="icon-btn" type="button" aria-label="Contact Us" data-tip="Contact Us">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="layout">
+      <div id="map" class="map"></div>
+      <aside id="panel" class="panel" aria-live="polite"></aside>
+    </main>
+
+    <div id="modal" class="modal" hidden>
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" type="button" aria-label="Close" data-close>×</button>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Vendored globals (classic scripts) must load before the module that uses them. -->
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="lib/marked.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
