@@ -1,0 +1,274 @@
+# Changelog
+
+All notable changes to brandmd are documented here. The format roughly follows [Keep a Changelog](https://keepachangelog.com/), versions follow [Semver](https://semver.org/).
+
+## [0.18.7] - 2026-10-08
+
+### Fixed
+
+- **A clamped pill radius reads as 9999px.** Chromium computes `calc(infinity * 1px)` (Tailwind v4's `rounded-full`) as `3.35544e+07px`, and the Buttons, Cards and Inputs prose, `brandmd diff` and the ghost-button grouping used that raw string; clerk, huggingface, resend and vercel printed it as their button radius. A uniform radius at or past 999px on a chosen component now reads as `9999px`, the value the page-level radii list already uses; compound and percentage radii stay as observed. Four examples and the stripe-vs-vercel diff regenerated.
+
+## [0.18.6] - 2026-10-08
+
+### Fixed
+
+- **The CTA guideline names the observed primary button.** "Do use `X` for primary actions and CTAs" printed `colors.primary`, which the analyzer ranks from accent evidence (a link, accent or focus colour) before the rendered button, so on 21 of the 29 examples it named a colour no button on the page uses (cursor: blue, the button is orange; vercel: red, the button is white). The line now names `button-primary`'s background when a solid button was observed (alpha kept), points at the `button-primary` gradient for a gradient button, and falls back to the accent when no solid button was seen or the button is in the page's own colour. `colors.primary` is unchanged. 20 examples regenerated.
+- **A solid fill under a gradient overlay is the button's base.** A `background-color` under a gradient `background-image` (supabase's green CTA under a 1.6% white-to-black overlay) printed only the overlay in the Buttons prose and skipped the first overlay stop in the YAML. The prose now prints the base under the gradient, every overlay stop rides as a `button-primary-gradient-stop-N` variant, and the CTA guideline names the base. Gradient-only buttons are unchanged.
+
+## [0.18.5] - 2026-10-08
+
+### Fixed
+
+- **A button candidate has to be 16px to 100px tall.** The button selector also matched a 2x2 "expand image" control on docs.replit.com and 76x480 testimonial cards with `role="button"` on supabase.com; the first became the primary button on document order, the second on HSL saturation (rgb(0, 37, 51) scores 1.0), and three examples carried ghost buttons 102px to 676px tall. The gate runs in the picker and again before the multi-page merge weights, so a rejected box no longer dilutes its page's vote; a missing height (older captures) is kept. `examples/` intercom, replit, sentry and stripe regenerated.
+
+## [0.18.4] - 2026-10-08
+
+### Fixed
+
+- **A page that paints no background gets the browser's canvas colour as its background.** tailwindcss.com, stripe.com, atlassian.com and mintlify.com paint nothing on `html`, `body` or any wrapper; the white the viewport shows is the browser's own backing. The probe read that as "unknown", so those captures had no page background and their text roles were luminance guesses (tailwindcss.com's `on-background` had drifted to #90a1b9 at 2.63:1 on white). The backing is now the browser's canvas for the root's used `color-scheme`, resolved from the CSS `color-scheme` (the `color-scheme` meta when CSS says `normal`) without touching the DOM: white in light, `rgb(18, 18, 18)` in Chromium's dark, so a `--dark` capture of a `color-scheme: dark` page without a background gets its dark backing. A translucent cover over nothing composites over the backing; an image or an unreadable colour still leaves the canvas unknown. `examples/` atlassian, mintlify, stripe and tailwindcss regenerated with text roles by contrast.
+- **The page background probe reads `oklch()`, `lab()`, `color()` and `color-mix()` backgrounds.** Chromium serialises those computed values in their own syntax and the probe only parsed `rgb()`/`rgba()`. Anything else is now read back as the pixel a 1x1 canvas paints: sRGB, gamut-clamped (display-p3 red clips to `rgb(255, 0, 0)`), the alpha from the colour string with the fill made opaque first, so a translucent oklch composites exactly like `rgba()` (that path is unchanged). A missing or failing canvas leaves the colour unknown, as before.
+
+## [0.18.3] - 2026-10-08
+
+### Fixed
+
+- **Text roles come from contrast on the captured page background.** `on-background` was the first palette colour with the "Primary text" role, a role given by luminance, so a dark page got black text on a black background (github.com, spotify.com), and a text colour whose hex a fill already took was lost to the palette dedup (white text on a page of white cards). Captures that resolved the page background now pick `on-background` as the most frequent solid text colour at 4.5:1 or better, alpha composited first (50% black on white is about 4:1, not 21:1); with none the token is omitted and the Colors prose names the closest candidate and its ratio. `on-surface-variant` is the next text colour that reads on the background and on the surface. The character line uses the same pair, the Dark Mode Overrides list it, and the input component takes `on-background` only where it reads on the input's own surface, alpha composited. Captures without a page background keep the old roles. `brandmd check` against an older baseline reports a removed `on-background` as major drift where the old value never read; expected.
+- **Multi-page captures judge the text roles on the first page's text.** The merged text of every page stays palette evidence.
+
+## [0.18.2] - 2026-10-08
+
+### Fixed
+
+- **`background` is the surface the viewport shows.** It was the first palette colour whose role was "Page background", a role given by luminance, so a dark page with a few white cards (sentry.io, shopify.com, resend.com, apple.com) was written up with a white background while the character line said black. The capture now records the surface covering at least 80% of the top-of-page viewport (later elements win; fixed and sticky elements and what is inside them are skipped, hidden ones too; a translucent cover is composited over what it covers; a cover inside an opacity group, with a background image or in a colour outside `rgb()`/`rgba()` leaves it unknown until an opaque element covers it) and the canvas as fallback (html's background when it paints one, else body's, at html's opacity over the white backing; an image or an unreadable colour leaves it unknown); the character line, the button tie-break, the `background` token and the Dark Mode Overrides list all use it. Captures without the field, such as the test fixtures and raw files from older versions, keep the old rule. `brandmd check` against a baseline written by an older version can report the background as major drift where that baseline carried the lightest colour rather than the page; `brandmd diff` compares colour sets, so a background that moved to a colour already in the file does not show. Known limits: z-index and transforms are ignored, iframes and shadow roots are not entered, and this describes the top of the page, not the whole site.
+- **`--dark` captures with the same `--viewport`, `--locale` and `--reduced-motion` as the light capture.** They were applied to the light pass only.
+- **The capture's scroll pass is instant.** Sites with `scroll-behavior: smooth` animated each `scrollTo`, so the reset to the top was still running when the colour reads and the page background probe ran; shopify.com was read at y=3474 and came back black. Seven of the 30 example sites were affected: claude.com, figma.com, github.com, notion.so, sentry.io, shopify.com, supabase.com.
+
+## [0.18.1] - 2026-10-08
+
+### Fixed
+
+- **Translucent colours never become fill, text or accent tokens.** A colour with alpha 0 (Tailwind's ring and gradient plumbing, `transparent` borders) was clustered like any other and could land in `primary`, `secondary` or an outline; a 12% tint could do the same through the positional fallbacks. Alpha-0 colours are dropped before clustering, a colour under 50% alpha never merges with a solid one (deltaE ignores alpha, so a 10% scrim seen first used to swallow the solid colour under it), and `background`, `surface`, the text roles, `primary` and `secondary` now come from the solid part of the palette (alpha 0.5 or more). Outlines may still be translucent: a 10% black divider is how most sites draw one. Translucent colours stay in the Colors prose as overlays, scrims and dividers. With no solid accent left, `primary` mirrors the background neutral with the existing low-confidence note. Known limits: `--css` and `--tailwind` variable names can shift where a transparent colour used to take a slot, and the legacy form `rgba(r, g, b, 12%)` still parses as opaque (chroma-js 3.2; browsers serialize computed colours with a decimal alpha, so live captures are not affected). `examples/` posthog and clerk regenerated.
+
+## [0.18.0] - 2026-10-07
+
+### Changed
+
+- **Type levels are named by size.** With no heading at 32px or more, the largest heading was written over by the second largest and never reached the tokens. Headings now take `headline-lg` and `headline-md` from the top. The second body size is `body-lg` when it is larger than `body-md` and `body-sm` when it is smaller (it was always `body-lg`). `body-md` keeps its value.
+- **`--css` and `--tailwind` name radii by size.** They were named by position, which could make `--radius-sm` an asymmetric radius. Uniform radii are now `sm` to `3xl` by size, then `4xl` and `5xl`, with `full` only for a real pill, as in the `rounded` tokens. Asymmetric and percentage radii get no variable.
+- **`--tailwind` no longer writes `--spacing-N` keys.** Tailwind v4 reads `--spacing-4` as the value behind `p-4`, `m-4` and `gap-4`, so the numbered keys resized those utilities for anyone who pasted the block. The observed values are a comment now. Breaking if you used those variables.
+
+## [0.17.1] - 2026-10-07
+
+### Fixed
+
+- **`--agent` wrappers pointed at sections that do not exist.** The Cursor rule sent the agent to a "Color Palette" section and the skill to "Component Stylings". `DESIGN.md` has called them Colors and Components since 0.14, and the wrappers now say so.
+- **Shadows carried layers that paint nothing.** Tailwind pads `box-shadow` with `rgba(0, 0, 0, 0) 0px 0px 0px 0px` ring and offset placeholders, and they were written into the Level lines, the card shadow, `--css` and `--tailwind`. Zero-alpha layers are dropped, shadows that then match count as one, and a multi-page run drops them before it merges pages. The Level order and `--shadow-sm`, `-md`, `-lg` can point at a different shadow than before.
+
+## [0.17.0] - 2026-09-30
+
+### Fixed
+
+- **`--vision` called a retired model and hid the failure.** `gemini-2.0-flash` is gone, so every vision run warned and exited 0 with a `DESIGN.md` missing the vision sections. The call now pins `gemini-3.8-flash`, the model Google names for new projects (`BRANDMD_VISION_MODEL` overrides it). A failed screenshot or vision call still writes the CSS-only `DESIGN.md` but exits 1 and says why.
+
+## [0.14.0] - 2026-07-20
+
+Spec + truth release: conform to the official DESIGN.md spec and stop the confident lies.
+
+### Added
+
+- **Official DESIGN.md format.** Output is now YAML frontmatter (machine-readable `colors`, `typography`, `rounded`, `spacing`, `components` tokens) plus canonical prose sections in canonical order (Overview, Colors, Typography, Layout, Elevation & Depth, Shapes, Components, Do's and Don'ts), per [github.com/google-labs-code/design.md](https://github.com/google-labs-code/design.md). Every generated file passes `npx @google/design.md lint` with zero errors and zero warnings. Colors map to Material-style role tokens (`primary`, `background`, `on-surface`, `outline`, …); brandmd's tiered palette, evidence-based visual character, confidence tags, and observed component styles stay in the prose.
+- **Fail-closed refusals with an exit-code contract.** `0` = success, `1` = operational/validation error, `2` = refused. Block / access-denied pages, login / sign-in wall landings (on any page of a multi-URL run), and evidence-thin pages (no rendered text, empty palette) refuse in every format and write no artifact, so a bad capture can't overwrite a good `DESIGN.md`. `--allow-blocked` forces output; the forced artifact carries a block marker in every format (Markdown callout, CSS/Tailwind comment header, HTML banner, JSON `blockLikely`).
+- **Shadow values in DESIGN.md.** The Elevation & Depth section prints each shadow's real CSS value instead of only a count, so agents can reproduce elevation.
+- **Redirect / login provenance.** brandmd records the final URL after redirects for every page. Login-like landings refuse (see above); plain cross-origin redirects warn on stderr and are flagged in the output provenance, per page.
+- **`--debug`** prints raw error detail; browser-launch failures otherwise collapse to a one-line `npx playwright install chromium` remediation.
+
+### Changed
+
+- **CTA guideline names real action evidence, or nothing.** The "use X for primary actions" line ranks accent roles first, then the representative non-transparent button background, and excludes every text-neutral role, so it never sells the primary *text* color as the CTA color. Omitted when there's no action evidence.
+- **Representative button is the most-saturated solid** (tie-broken by contrast vs the page), not the most frequent, so a real CTA wins over the transparent nav buttons. Gradient buttons keep their full fill: the exact computed gradient prints in the Components prose, extra stops ride as `button-primary-gradient-stop-N` variant tokens in the YAML (the spec has no gradient sub-token), and every stop lands in `--json`. A ghost / secondary variant is emitted from the transparent cluster. Button prose always states the real radius, including a true `0px`.
+- **`colors.primary` is honest.** It's the brand accent when one was observed (Material semantics, matching the CTA guideline), otherwise the dominant background neutral with an explicit low-confidence note in the prose. Never the text ink, and no `button-primary` token is invented for a page with zero observed buttons.
+- **Honest tokens.** A count-1 font can never be Primary, even when it's the only font (the output says "low confidence" instead). Spacing is filtered before truncation, sizes cluster before truncation (a rare hero size survives a crowd of body sizes), line-heights pair with their font sizes, 0px line-heights are dropped, and the "Npx grid" claim is computed over the full weighted evidence before any truncation, at an 80% coverage bar. Sparse pages get per-section "low confidence" notes (typography, elevation, shapes, components, do's and don'ts) instead of confident rules derived from absence; Cards/Inputs sections are omitted entirely when no card or input elements were sampled.
+- **Transactional writes.** All artifacts commit via temp-file + rename with rollback: `-o`, the `--agent` set (DESIGN.md + all three wrappers commit together or not at all, previous versions restored on failure), and `brandmd diff`. Read-only targets, directories-at-target, broken symlinks, and duplicate target paths are refused up front; symlink targets are written through (the link survives, the referent updates); temp/backup names are collision-safe so nothing that brandmd didn't create is ever replaced or deleted. Atomicity is per process — concurrent runs against the same output directory are not coordinated.
+- Description and README lead with "spec-valid DESIGN.md (passes the official @google/design.md linter)" instead of "Stitch-ready".
+- **Every example regenerated on the v0.14 engine.** All 30 example `DESIGN.md` files and the gallery pages are fresh extractions that pass the official linter at 0 errors / 0 warnings (the old files predated v0.12 and still carried the bugs the changelog claimed were fixed). The `stitch.withgoogle.com` example is removed: the site renders no text for a headless browser, and v0.14 refuses to fabricate a design system from an empty page rather than shipping one.
+
+### Fixed
+
+- **`generate` → `parseDesign` → `diff` round-trips every emitted field.** The parser reads the YAML frontmatter as the source of truth — including the `components` tokens, so an edited machine value is diff-visible — plus the prose for the fields that aren't in it. The old `\z` regex (a literal `z` that truncated the last component), the "generated from" / "Extracted from" mismatch that nulled the source URL, and single-word-only role parsing are all fixed; multi-page source lists round-trip; CRLF files parse identically to LF; dark-theme colors stay out of the light palette.
+- Dark overrides are emitted under a uniquely-named section (no more duplicate `## 6`) as observed diffs in palette roles, the primary button background, and the shadow-style count. Full per-category dark diffs (typography, spacing, radii, shadow values) are v0.15.
+- Non-http(s) URL schemes are rejected instead of coerced (`ftp://x` no longer becomes `https://ftp://x`), filesystem-like arguments (`/tmp/x`) are errors instead of `https:///tmp/x`, and `--cf-wait-ms` must be a finite, non-negative integer.
+- Page titles are sanitized to a single line before they reach the YAML `name` scalar or the Markdown H1, so a hostile title with embedded newlines can't inject headings/guidelines or break the linter's quote parsing.
+- Duplicate variable-font families are merged ("Geist" / "Geist VF" → one), frequency values are rounded to 2 decimals in every output including `--json`, and hex casing is consistent (lowercase) across DESIGN.md, `--css`, `--tailwind`, `--html`, and `--json`.
+
+## [0.13.0] - 2026-07-06
+
+Robustness release: stop trusting block pages, and flag motion.
+
+### Added
+
+- **Block-page detection** (#7). Bot-protection and access-denied pages (Akamai, PerimeterX, generic WAF 403s) return real-looking HTML that sailed past the Cloudflare-specific check and produced a confident garbage DESIGN.md (rolex.com yielded a design system titled "Access Denied"). brandmd now combines independent weak signals — block-y title, 401/403/429 status, sub-200-char body, palette collapsed to fallback fonts + ≤2 colors — and requires 2+ to fire, so minimal-but-real landing pages don't false-positive. When flagged, it prints a stderr warning and prepends a warning callout to DESIGN.md, but still exits 0. The heuristic is a pure exported function (`detectBlockLikely`) with test coverage.
+- **Motion detection** (#6). DESIGN.md now notes when the site has animation surfaces — canvas, WebGL, Lottie, or inline `requestAnimationFrame`. Detection is presence-only and honest about its limits: bundled event listeners inside minified JS are not enumerable from the DOM, so this catches animation surfaces, not every interaction handler. The section is omitted entirely when nothing is found. It does not describe the animations (that's deferred).
+
+### Changed
+
+- `npm test` now runs a real suite (`node --test`, zero new dependencies): a captured real extraction fed through `analyze()` → `generate()` locking in the v0.12 token-quality fixes, plus block and motion coverage. Previously a no-op.
+
+## [0.12.0] - 2026-06-10
+
+Trust-repair release: five token-quality fixes found by extracting cognition.ai and comparing against the real page (#1-#5).
+
+### Changed
+
+- **`Overall mood` is now `Visual character`, and it is evidence-based** (#3). The old heuristic averaged luminance across the whole palette, so a dark footer could flip a cream editorial page to "Dark and moody". The new line is anchored to the dominant page background and cites its evidence: `Bright, high contrast; off-white background dominates with black text and vivid blue accents`. The parser accepts both labels, so pre-0.12 DESIGN.md files still work in the gallery and `diff`.
+- **Palette is tiered: dominant / accent / incidental** (#1). Backgrounds are now weighted by viewport area share, not just element count, so the page background outranks decorative chips. Saturated brand colors keep an accent floor even at low usage. Dominant tokens lead the palette section with a `(dominant)` tag; incidental values collapse to one "do not lead with these" line. `--json` carries the new `tier` field.
+- **Color naming moved to HSL-based heuristics** (#2). `#F7F6F5` is "Off-white" (was "Light Muted Orange"), `#2200FF` is "Vivid Blue" (was "Dark Blue"), `#0000000F` is "Near-transparent Black" (alpha was silently dropped). Tinted near-whites read as Cream/Off-white, high-saturation mid-tones read as Vivid, translucency is labeled. Green/cyan hue boundary corrected (`#00D66F` is Green, not Cyan).
+- **Translucent backgrounds get the role "Overlay / scrim"** instead of "Dark background / footer", and saturated backgrounds are "Accent background" even when their luminance is low.
+
+### Fixed
+
+- **Border radii no longer print in scientific notation** (#4). Computed pill radii like `3.35544e+07px` normalize to `9999px (pill)` in DESIGN.md while staying CSS-valid (`9999px`) in `--css` and `--tailwind` output. Sub-pixel radii round to 0.5px and merge. Shape language now ignores pill values, so a sharp-edged site with pill buttons reads "Sharp, geometric edges" instead of "Rounded, friendly".
+- **Type scale is clustered** (#5). Sub-pixel rendering noise like `11.05px` / `12.75px` merges into the nearest 0.5px step, so seven near-identical caption sizes collapse to the real scale.
+
+## [0.11.1] - 2026-06-04
+
+### Fixed
+
+- **Gallery: backticks in `DESIGN.md` values no longer leak into rendered HTML.** Component prop values and guideline lines like `` `#FFFFFF` `` now render as proper inline code instead of raw backtick characters.
+- **Gallery: font names in inline CSS are now stripped of unsafe characters** before being used in `font-family` declarations. Scraped font names were previously passed through with only HTML-escaping, leaving room for CSS-side issues on weird extractions.
+- **Parser: component names can contain spaces and punctuation.** Previously matched `\w+`, so headings like "Navigation Items" or "Form Inputs" would be skipped silently. Also strips backticks from component property values.
+- **Parser: shared `stripCodeMarks()` helper** removes wrapping or inline backticks from extracted token values so downstream consumers (gallery, diff) get clean strings.
+- **Diff: dead `tokenList()` helper removed.**
+- **Diff: markdown table cells now escape pipe characters** and collapse newlines so long radius/spacing strings do not break tables.
+- **Diff: synthesis section is sharper.** Generic "shared color signal" lines are gone. Replaced with role-level typography diffs ("headings font differs"), button-radius gap with concrete numbers ("4px vs 6px"), and overlap-aware spacing/radii warnings.
+- **Gallery: each brand page now has the `npx brandmd <url>` command in a copyable code block** and a "view raw `DESIGN.md` on GitHub" link.
+
+### Infrastructure
+
+- **GitHub Pages: HTTPS enforcement enabled** for `https://yuvrajangadsingh.me/brandmd/`. Certificate state is "approved", `https_enforced` is true.
+
+## [0.11.0] - 2026-06-03
+
+### Added
+
+- **Gallery at `/docs`**: 5-brand snapshot showroom (Stripe, Vercel, Linear, Anthropic, Mintlify) generated from existing `examples/` extractions. Enable GitHub Pages from the `/docs` folder to publish at `https://yuvrajangadsingh.github.io/brandmd/`. Each brand page shows color swatches, typography sample, components, layout tokens, and do/don't guidelines. Build with `node scripts/build-gallery.js`. Registry at `gallery/brands.yml`.
+- **`brandmd diff <a> <b> --out BRAND_DIFF.md`**: compares two `DESIGN.md` files and writes a markdown diff. Sections: shared and unique color palette, typography table, spacing & radii table, per-component property diff, and a "what to copy / what to avoid" synthesis. Local files only in v0.11; URL input deferred to a future release.
+- **`src/parse-design.js`**: shared DESIGN.md parser used by both the gallery builder and the diff command. Surfaces tokens for color, typography (primary/secondary font, by-role, scales, weights), components (props per component), layout (spacing scale, radii), and guidelines.
+- Example diff committed at `examples/diff-stripe-vs-vercel.md` showing the output format.
+
+### Why
+
+The gallery + diff are the "visible proof strangers can link to" pieces. Output (DESIGN.md) was previously a single-file artifact you had to extract yourself before evaluating brandmd. With the gallery, anyone can scan 5 well-known brand snapshots in 30 seconds without installing anything. With diff, brandmd starts answering comparative questions ("how is my brand different from Vercel") that a one-shot extraction couldn't.
+
+## [0.10.0] - 2026-06-01
+
+### Changed
+
+- **`--agent` now writes to the universal `.agents/skills/brand-style/SKILL.md` path** in addition to the existing `.claude/skills/brand-style/SKILL.md` location. The `.agents/skills/` path matches the [skills.sh](https://skills.sh) universal convention adopted by Claude Code, Cursor, Codex, Gemini CLI, Kiro CLI, and 50+ other agents. Existing `.claude/skills/` path is still written for backward compatibility with direct Claude Code users.
+
+### Why
+
+The Agent Skills ecosystem converged on `.agents/skills/` as the universal install path (with per-tool symlinks back to `.claude/skills/`, `.kiro/skills/`, etc). brandmd's `--agent` flag was previously single-target (Claude Code only). Now it produces output that any skills.sh-compatible agent reads natively, while keeping the legacy path so existing setups don't break.
+
+### Migration
+
+No action required. Existing Claude Code projects keep working because `.claude/skills/brand-style/SKILL.md` is still written. If you use any other skills.sh-compatible agent (Codex, Cursor, Gemini CLI, Kiro CLI, etc), it will now find the skill at `.agents/skills/brand-style/SKILL.md` automatically.
+
+## [0.9.2] - 2026-05-27
+
+### Added
+
+- `--agent` SKILL.md now includes a `compatibility:` frontmatter field, matching the schema used by [google/skills](https://github.com/google/skills) and the broader Agent Skills ecosystem. Existing `name` + `description` fields unchanged.
+
+### Docs
+
+- README clarifies that brandmd's generated `SKILL.md` is schema-compatible with Anthropic Claude Code Skills and google/skills.
+
+## [0.9.1] - 2026-05-26
+
+### Changed
+
+- Generator output now uses colons instead of em dashes in palette descriptions. `**White** (`#FFFFFF`): Page background` instead of `... — Page background`. Cleaner consistency across all generated DESIGN.md files.
+
+## [0.9.0] - 2026-05-21
+
+### Added
+
+- **`--agent` flag**: writes `.cursor/rules/brand.mdc` and `.claude/skills/brand-style/SKILL.md` alongside `DESIGN.md`, so Claude Code and Cursor pick up the brand context automatically without any manual wiring.
+  - The Cursor rule is Auto Attached on UI files (`**/*.{tsx,jsx,ts,vue,svelte,css,scss,html,astro,mdx}`)
+  - The Claude Code skill is auto-discoverable by description and points at `DESIGN.md` as the source of truth
+  - Wrappers reference `@DESIGN.md` rather than inlining tokens, so updates to `DESIGN.md` propagate automatically
+  - Works with `-o <file>`: filename in wrappers is dynamic (`-o STYLE.md` produces wrappers that reference `STYLE.md`)
+
+### Changed
+
+- CI now uses npm Trusted Publishing (OIDC) instead of a long-lived `NPM_TOKEN`. No secrets to rotate.
+
+## [0.8.0] - 2026-05-13
+
+### Added
+
+- **Smart Primary font derivation.** Cascades through display (hero) → heading → body → global, excluding monospace, default fallbacks (Times/Arial/Georgia), and icon fonts (Material Icons/Symbols, Font Awesome, Heroicons, etc.) from Primary candidates.
+- **Quote-aware font-family parser** handles `var(--font, 'Inter')` and backslash escapes.
+- **Per-role cascade** so heading/body sections are never blank.
+- 45s nav timeout for slow SPAs.
+
+### Fixed
+
+- Tested against 100 popular design system sites: fixes 7 of 9 cases where v0.7.2 returned the wrong Primary (Menlo on mantine.dev → Outfit, Inter on valura.ai → Manrope, JetBrains Mono on remix.run → Inter Variable, etc.).
+
+## [0.7.0] - 2026-05-10
+
+### Added
+
+- **Cloudflare challenge handling.** brandmd waits up to 20s for the JS challenge to auto-resolve.
+- **`--cf-wait-ms <ms>` flag** to override the default 20000ms wait when sites need longer.
+
+### Fixed
+
+- If the Cloudflare challenge persists, you now get a clear error instead of garbage tokens.
+
+## [0.6.0] - 2026-05-07
+
+### Added
+
+- **`--vision` flag.** Adds a "Visual Identity Beyond CSS" section to DESIGN.md covering illustration style, photography mood, copywriting voice, microcopy patterns. CSS can't see these. Requires a free [Gemini API key](https://aistudio.google.com/apikey).
+
+## [0.5.0] - 2026-04-16
+
+### Changed
+
+- Smarter DESIGN.md output structure and token analysis.
+
+## [0.4.0] - 2026-03-28
+
+### Added
+
+- **Multi-URL extraction.** Pass multiple URLs to merge brand tokens across pages.
+- **Dark mode extraction** via `--dark` flag.
+
+## [0.3.0] - 2026-03-26
+
+### Added
+
+- **CSS custom properties output** (`--css`)
+- **Tailwind v4 `@theme` output** (`--tailwind`)
+- **HTML brand guide output** (`--html`)
+- CSS variable extraction from `:root` declarations.
+
+### Fixed
+
+- XSS sanitization and edge-case URL handling.
+
+## [0.2.0] - 2026-03-25
+
+### Added
+
+- Page scroll before extraction (capture lazy-loaded styles).
+- Cookie banner dismissal.
+- Demo GIF in README.
+
+## [0.1.0] - 2026-03-25
+
+### Added
+
+- Initial release. Extract a website's design system into a `DESIGN.md` file readable by AI coding agents.

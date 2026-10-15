@@ -1,0 +1,91 @@
+import { roundedScale } from "./generate.js";
+
+/**
+ * Generate CSS custom properties from analyzed tokens.
+ */
+export function generateCSS(tokens) {
+  const lines = [];
+  if (tokens.blockLikely) {
+    lines.push("/* WARNING: the source looked like a block / access-denied page, not the real site.");
+    lines.push("   These tokens are probably meaningless. Generated under --allow-blocked. */");
+    lines.push("");
+  }
+  lines.push(":root {");
+
+  // Colors
+  if (tokens.palette.length > 0) {
+    lines.push("  /* Colors */");
+    const usedNames = new Set();
+    for (const color of tokens.palette) {
+      let name = toVarName(color.name, color.role);
+      // Deduplicate
+      let finalName = name;
+      let counter = 2;
+      while (usedNames.has(finalName)) {
+        finalName = `${name}-${counter++}`;
+      }
+      usedNames.add(finalName);
+      // Don't double-prefix if name already starts with color-
+      const prefix = finalName.startsWith("color-") ? "--" : "--color-";
+      lines.push(`  ${prefix}${finalName}: ${color.hex};`);
+    }
+    lines.push("");
+  }
+
+  // Typography (primary can be null when no font cleared min-support)
+  if (tokens.typography.primary || tokens.typography.secondary) {
+    lines.push("  /* Typography */");
+    if (tokens.typography.primary) lines.push(`  --font-primary: "${tokens.typography.primary}";`);
+    if (tokens.typography.secondary) {
+      lines.push(`  --font-secondary: "${tokens.typography.secondary}";`);
+    }
+    lines.push("");
+  }
+
+  // Spacing
+  if (tokens.spacing.length > 0) {
+    lines.push("  /* Spacing */");
+    const top = [...tokens.spacing]
+      .sort((a, b) => b.freq - a.freq)
+      .slice(0, 8)
+      .sort((a, b) => a.px - b.px);
+    top.forEach((s, i) => {
+      lines.push(`  --space-${i + 1}: ${s.val};`);
+    });
+    lines.push("");
+  }
+
+  // Radii
+  const rounded = Object.entries(roundedScale(tokens.radii, Infinity));
+  if (rounded.length > 0) {
+    lines.push("  /* Radii */");
+    for (const [name, val] of rounded) lines.push(`  --radius-${name}: ${val};`);
+    lines.push("");
+  }
+
+  // Shadows
+  if (tokens.shadows.length > 0) {
+    lines.push("  /* Shadows */");
+    const names = ["sm", "md", "lg", "xl", "2xl"];
+    tokens.shadows.forEach((s, i) => {
+      const suffix = names[i] || `${i + 1}`;
+      lines.push(`  --shadow-${suffix}: ${s.val};`);
+    });
+  }
+
+  lines.push("}");
+  return lines.join("\n");
+}
+
+function toVarName(name, role) {
+  // If name already looks like a CSS var, strip the --
+  if (name.startsWith("--")) {
+    return name.slice(2);
+  }
+  // Turn role into a slug
+  return role
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+$/, "")
+    .replace(/^-+/, "");
+}

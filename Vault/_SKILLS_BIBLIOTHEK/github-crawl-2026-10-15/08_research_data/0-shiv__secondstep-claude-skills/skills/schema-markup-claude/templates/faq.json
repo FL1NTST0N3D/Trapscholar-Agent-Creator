@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>We offer a 30-day return policy for all unused items in original packaging.</p><ul><li>Items must be in original condition</li><li>Include receipt or order confirmation</li><li>Refund processed within 5-7 business days</li></ul><p>Visit our <a href='https://example.com/returns'>returns page</a> to start a return.</p>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does shipping take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard shipping takes 3-7 business days within the continental US. Expedited shipping (1-2 business days) is available for an additional fee. Free shipping on orders over $50."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer international shipping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we ship to over 50 countries worldwide. International shipping typically takes 7-14 business days. Customs duties and taxes are the responsibility of the recipient."
+      }
+    }
+  ]
+}

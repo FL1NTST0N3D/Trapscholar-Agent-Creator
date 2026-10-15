@@ -1,0 +1,58 @@
+626 Labs POD Pipeline — License
+
+This repository contains two kinds of material under two different licenses.
+
+================================================================================
+1. CODE — MIT License
+================================================================================
+
+Applies to: all source code and documentation in this repository (Python
+scripts, slash-command definitions, configuration templates, and the .md
+documentation files).
+
+MIT License
+
+Copyright (c) 2026 626 Labs
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+2. ARTWORK AND BRAND — All Rights Reserved
+================================================================================
+
+Applies to: all images in this repository (including everything under
+showcase/), all product designs and design concepts described in the
+documentation, and the brand names and logos "Conundrum by Este" and
+"626 Labs" (including the logo image files at the repository root).
+
+Copyright (c) 2026 626 Labs. All rights reserved.
+
+The artwork and brand material are provided for viewing as part of this
+repository's documentation only. No license is granted to reproduce,
+redistribute, modify, print, sell, or otherwise commercially exploit any
+artwork, design, or brand material from this repository. In particular, using
+any design from this repository on print-on-demand or other merchandise is
+expressly prohibited.
+
+================================================================================
+3. FONTS
+================================================================================
+
+The fonts under fonts/ are third-party works licensed under the SIL Open Font
+License 1.1. Each font's license text is included alongside it (fonts/OFL-*.txt).

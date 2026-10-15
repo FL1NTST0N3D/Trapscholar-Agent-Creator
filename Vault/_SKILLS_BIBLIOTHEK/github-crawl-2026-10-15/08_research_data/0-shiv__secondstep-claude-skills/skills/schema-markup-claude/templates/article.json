@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/blog/article-slug"
+  },
+  "headline": "Article Headline Goes Here (Max 110 Characters Recommended)",
+  "description": "A brief meta description of the article content, ideally 150-160 characters for optimal search result display.",
+  "image": [
+    "https://example.com/images/article-hero-16x9.jpg",
+    "https://example.com/images/article-hero-4x3.jpg",
+    "https://example.com/images/article-hero-1x1.jpg"
+  ],
+  "datePublished": "2024-09-15T09:00:00-05:00",
+  "dateModified": "2024-09-20T14:30:00-05:00",
+  "author": {
+    "@type": "Person",
+    "name": "Jane Smith",
+    "url": "https://example.com/author/jane-smith",
+    "sameAs": [
+      "https://twitter.com/janesmith",
+      "https://linkedin.com/in/janesmith"
+    ],
+    "jobTitle": "Senior Editor",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Example Media"
+    }
+  },
+  "publisher": {
+    "@id": "https://example.com/#organization"
+  },
+  "articleSection": "Marketing",
+  "keywords": ["structured data", "schema markup", "SEO", "rich results"],
+  "wordCount": 2500,
+  "inLanguage": "en-US",
+  "isAccessibleForFree": true
+}

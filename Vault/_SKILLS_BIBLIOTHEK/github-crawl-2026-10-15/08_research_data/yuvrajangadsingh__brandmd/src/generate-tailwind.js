@@ -1,0 +1,89 @@
+import { roundedScale } from "./generate.js";
+
+/**
+ * Generate Tailwind v4 @theme CSS from analyzed tokens.
+ */
+export function generateTailwind(tokens) {
+  const lines = [];
+  if (tokens.blockLikely) {
+    lines.push("/* WARNING: the source looked like a block / access-denied page, not the real site.");
+    lines.push("   These tokens are probably meaningless. Generated under --allow-blocked. */");
+    lines.push("");
+  }
+  lines.push('@import "tailwindcss";', "", "@theme {");
+
+  // Colors
+  if (tokens.palette.length > 0) {
+    const usedNames = new Set();
+    for (const color of tokens.palette) {
+      let name = toVarName(color.name, color.role);
+      let finalName = name;
+      let counter = 2;
+      while (usedNames.has(finalName)) {
+        finalName = `${name}-${counter++}`;
+      }
+      usedNames.add(finalName);
+      const prefix = finalName.startsWith("color-") ? "--" : "--color-";
+      lines.push(`  ${prefix}${finalName}: ${color.hex};`);
+    }
+    lines.push("");
+  }
+
+  // Typography (primary can be null when no font cleared min-support)
+  if (tokens.typography.primary) {
+    const fb1 = isMono(tokens.typography.primary) ? "monospace" : "system-ui, sans-serif";
+    lines.push(`  --font-sans: "${tokens.typography.primary}", ${fb1};`);
+  }
+  if (tokens.typography.secondary) {
+    const fb2 = isMono(tokens.typography.secondary) ? "monospace" : "system-ui, sans-serif";
+    const secondaryKey = isMono(tokens.typography.secondary) ? "--font-mono" : "--font-secondary";
+    lines.push(`  ${secondaryKey}: "${tokens.typography.secondary}", ${fb2};`);
+  }
+  if (tokens.typography.primary || tokens.typography.secondary) lines.push("");
+
+  // Spacing is a note, not keys. Tailwind v4 reads --spacing-<n> as the value
+  // behind p-<n>, m-<n> and gap-<n>, so numbering the observed values
+  // (--spacing-4: 6px) would resize every utility on the scale.
+  if (tokens.spacing.length > 0) {
+    const top = [...tokens.spacing]
+      .sort((a, b) => b.freq - a.freq)
+      .slice(0, 8)
+      .sort((a, b) => a.px - b.px);
+    lines.push(`  /* Spacing observed: ${top.map((s) => s.val).join(", ")}.`);
+    lines.push("     Not written as --spacing-* keys: those replace the values behind p-4, gap-4 and the rest. */");
+    lines.push("");
+  }
+
+  // Radii
+  for (const [name, val] of Object.entries(roundedScale(tokens.radii, Infinity))) {
+    lines.push(`  --radius-${name}: ${val};`);
+  }
+
+  // Shadows
+  if (tokens.shadows.length > 0) {
+    lines.push("");
+    const names = ["sm", "md", "lg", "xl", "2xl"];
+    tokens.shadows.forEach((s, i) => {
+      const suffix = names[i] || `${i + 1}`;
+      lines.push(`  --shadow-${suffix}: ${s.val};`);
+    });
+  }
+
+  lines.push("}");
+  return lines.join("\n");
+}
+
+function toVarName(name, role) {
+  if (name.startsWith("--")) {
+    return name.slice(2);
+  }
+  return role
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+$/, "")
+    .replace(/^-+/, "");
+}
+
+function isMono(fontName) {
+  return /mono|consol|courier/i.test(fontName);
+}

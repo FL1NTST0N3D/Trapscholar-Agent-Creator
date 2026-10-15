@@ -1,0 +1,168 @@
+# geo-skills
+
+[![CI](https://github.com/TheSmokeDev/geo-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/TheSmokeDev/geo-skills/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/geoskills)](https://pypi.org/project/geoskills/)
+[![Release](https://img.shields.io/github/v/release/TheSmokeDev/geo-skills?sort=semver)](https://github.com/TheSmokeDev/geo-skills/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-f06424.svg)](LICENSE)
+
+A free, open-source GEO (Generative Engine Optimization) skill pack. Built as portable Agent Skills - runs in Claude Code, Codex, and other agents that read skill files.
+
+> If this saves you a paid dashboard or a week of GEO research, star the repo so
+> more operators can find it.
+
+![geo-skills: your site URL into the geo orchestrator, scored across 6 weighted categories into a GEO Score and a prioritized fix list](docs/geo-flow.png)
+
+Traditional SEO ranks you in Google's blue links. **GEO gets you quoted inside the AI answer** - by ChatGPT, Claude, Perplexity, Gemini, and Google AI Overviews. This pack scores how citable your site is to those engines and writes you a prioritized fix list. No dashboard subscription, no paid API required. It runs locally in Claude Code.
+
+## Quick start
+
+```bash
+python -m pip install geoskills==0.1.1
+geoskills inspect https://example.com --mode full --json
+```
+
+The CLI is read-only and machine-readable. To run the full agent-led audit,
+install the bundled skills and invoke `/geo audit https://example.com`; see
+[INSTALL.md](INSTALL.md).
+
+## What it does
+
+Point the orchestrator at a URL. It crawls your site, runs a panel of specialist subagents, and hands you a single **GEO Score (0-100)**, weighted across 6 categories:
+
+| Category | Weight | What it measures |
+|---|---|---|
+| AI Citability | 25% | How quotable and extractable your content is for an LLM |
+| Brand Authority | 20% | Third-party mentions and entity-recognition signals |
+| Content E-E-A-T | 20% | Experience, Expertise, Authoritativeness, Trustworthiness |
+| Technical GEO | 15% | AI crawler access, index/preview control (nosnippet), rendering, speed |
+| Schema / Structured Data | 10% | Schema.org markup for rich results and entity clarity |
+| Platform Optimization | 10% | Presence on the platforms AI models cite |
+
+Then it ranks every issue by severity (critical first, quick wins flagged) and gives you a 30-day action plan.
+
+## Paste-ready search intelligence prompts
+
+The optional [`prompt-packs/dataforseo-intelligence`](prompt-packs/dataforseo-intelligence/README.md)
+pack turns live search and AI-visibility data into decision-ready reports. It includes
+site explorer, keyword research, competitor gap, technical audit, AI visibility,
+community-demand, and owner-intent mapping prompts.
+
+These are not generic "write me an SEO report" prompts. Each one has a spend cap,
+coverage receipt, evidence-state labels, fail-closed missing-data rules, and an exact
+handoff. The owner-intent prompt is the front door to TokenMax: it decides whether to
+upgrade, create, consolidate, or hold a page before generation starts.
+
+## What's in the pack
+
+**GEO core (the flagship):**
+
+| Skill | What it does |
+|---|---|
+| `geo` | The orchestrator. Runs a full GEO audit and produces the composite score. |
+| `geo-audit` | Full website GEO+SEO audit with parallel subagent delegation. |
+| `geo-citability` | Scores content passages (0-100) for AI extractability, suggests rewrites. |
+| `geo-crawlers` | Audits robots.txt and headers for AI crawler access (GPTBot, ClaudeBot, PerplexityBot...). |
+| `geo-ai-index-access` | The hard prerequisites: Bing indexation + IndexNow (ChatGPT's retrieval pipeline), preview-control (nosnippet) audit, server-rendered HTML check. |
+| `geo-fanout` | Query fan-out / topic-cluster optimization: map the sub-query space engines actually retrieve from, engineer titles/slugs for it. |
+| `geo-youtube` | YouTube citation playbook: transcript-first videos, chapters, verbatim-query titles — the rank-free citation lane. |
+| `geo-measurement` | Volatility-aware measurement: share-of-citation prompt panels, position tracking, anti-overreaction reporting. |
+| `geo-llmstxt` | Anti-hallucination facts hedge: validates or generates an `llms.txt` so models get your details right (hygiene, not a visibility lever). |
+| `geo-brand-mentions` | Maps where your brand is cited across the web; scores brand authority. |
+| `geo-platform-optimizer` | Platform-specific optimization for Google AIO, ChatGPT, Perplexity, Gemini, Copilot. |
+| `geo-schema` | Detects, validates, and generates JSON-LD schema for rich results and entity clarity. |
+| `geo-technical` | Technical SEO + GEO checks (crawlability, SSR, rendering, Core Web Vitals). |
+| `geo-content` | E-E-A-T and content-quality assessment for AI citability. |
+| `geo-report` / `geo-report-pdf` | Business-facing GEO reports (markdown + professional PDF). |
+| `geo-proposal` / `geo-prospect` / `geo-compare` | Client tooling: proposals, pipeline, month-over-month deltas (optional, for agencies). |
+| `ai-seo` | The GEO strategy guide - the theory, the 3 pillars, platform-specific tactics. |
+| `token-max-factory` | Point-and-shoot programmatic page factory: scan a site, expand it into hundreds of validated 2,800+ word answer-first pages via [Archon](https://archon.diy). Hard uniqueness gates, packet-only facts, never deploys. Engine: [token-max-site-factory](https://github.com/TheSmokeDev/token-max-site-factory). |
+| `tokenmax-fleet-orchestrator` | Resumable, fail-closed controller for sequencing many TokenMax sites through consumer-defined audit, pilot, batch, build, deploy, live-proof, and indexing-queue stages. Includes atomic state, process locking, schema, tests, and systemd templates without hard-coded sites. |
+
+**Supporting SEO skills:**
+
+`programmatic-seo` · `schema-markup` · `competitor-alternatives` · `seo-audit` · `content-strategy` · `site-architecture`
+
+**Subagents** (in `agents/`, used by the orchestrator): `geo-ai-visibility`, `geo-content`, `geo-platform-analysis`, `geo-schema`, `geo-technical`.
+
+## Compatibility
+
+These are standard Agent Skills - each one is a `SKILL.md` instruction document plus a rubric and output format. That makes them portable:
+
+| Runtime | Status | Notes |
+|---|---|---|
+| **Claude Code** | Native | Full support, including the orchestrator's parallel subagents. |
+| **Codex** | Works | Drop the skills in `~/.codex/skills/`. Run skills directly. |
+| **Other agents** (Cursor, Hermes, etc.) | Works | Any agent that loads skill / instruction files can run the individual skills. |
+
+The individual skills (citability, crawlers, schema, content, and the rest) are plain instruction docs - any capable agent that can fetch a URL and write a file can run them. The one Claude Code-native piece is the `geo` orchestrator's **parallel** subagent fan-out (it launches 5 specialists at once). On other runtimes you invoke the skills directly, or the agent runs them in sequence - same checks, same output. The `allowed-tools` frontmatter is advisory and is safely ignored by agents that don't use it.
+
+## Install
+
+See [INSTALL.md](INSTALL.md). Short version: copy `skills/` into your agent's skills directory (`~/.claude/skills/` for Claude Code, `~/.codex/skills/` for Codex) and, on Claude Code, `agents/` into `~/.claude/agents/`. Then:
+
+```
+/geo audit https://yoursite.com
+```
+
+### Agent-native CLI
+
+Install from PyPI:
+
+```bash
+python -m pip install geoskills==0.1.1
+geoskills --json doctor
+```
+
+For development from a clone:
+
+```bash
+python -m pip install -e ".[web]"
+geoskills skills list --json
+geoskills prompts list --json
+```
+
+The CLI exposes deterministic discovery and validation without pretending every GEO
+workflow is a local script. It can validate all bundled Agent Skills, inspect a page,
+score citability, and validate the versioned owner-intent JSON handoff consumed by
+TokenMax:
+
+```bash
+geoskills --json validate
+geoskills inspect https://example.com --mode full --json
+geoskills citability https://example.com --json
+geoskills owner-map validate owner-intent-map.json --json
+```
+
+Every CLI command is read-only. Full LLM audits remain Agent Skills so the runtime,
+model, and any paid connector stay explicit.
+
+The command contract follows the agent-native principles demonstrated by
+[CLI-Anything](https://github.com/HKUDS/CLI-Anything): self-describing help,
+machine-readable output, installed-command tests, and real backend behavior. This
+implementation is purpose-built for GEO rather than generated from their harness.
+
+## Free-first
+
+Every skill in this pack works with no paid API. Where a third-party data tool could help (rank trackers, backlink suites), it is always marked optional and the skill degrades gracefully without it. Research figures cited in the skills come from published studies and are attributed inline.
+
+The optional DataForSEO prompt pack is intentionally separate from the free core. It
+uses DataForSEO's paid-per-use API through the official MCP server, requires an active
+account, and tells the agent to stop at the operator's task/row cap. No DataForSEO
+credentials belong in a prompt or repository file.
+
+The heavy-artillery skills are `token-max-factory`, which drives the free, MIT [Archon CLI](https://archon.diy) and [engine repo](https://github.com/TheSmokeDev/token-max-site-factory), and `tokenmax-fleet-orchestrator`, which sequences consumer-owned site/deploy adapters. They use the coding-agent subscription already running the pack (codex by default, claude opt-in). Still no SEO APIs, no data vendors, no dashboards.
+
+## License
+
+MIT. See [LICENSE](LICENSE). Built by SmokeDev. PRs welcome - see [CONTRIBUTING.md](CONTRIBUTING.md).
+If the toolkit supports published work, use GitHub's **Cite this repository** control
+backed by [CITATION.cff](CITATION.cff).
+
+## Example output
+
+- [GEO audit summary](examples/geo-audit-summary.json) - composite score,
+  evidence states, and a prioritized action list.
+- [Citability summary](examples/citability-summary.json) - passage-level
+  extractability findings with no invented traffic or ranking claims.
+
+Release history: [CHANGELOG.md](CHANGELOG.md).

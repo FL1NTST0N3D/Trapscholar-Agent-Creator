@@ -1,0 +1,52 @@
+{
+  "name": "brandmd",
+  "version": "0.18.7",
+  "description": "Stop Claude Code/Cursor from guessing UI. Extract any website's design system into a spec-valid DESIGN.md that passes the official @google/design.md linter.",
+  "type": "module",
+  "bin": {
+    "brandmd": "./bin/brandmd.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "design-system",
+    "design-system-cli",
+    "design-tokens",
+    "design-token-extractor",
+    "design-md",
+    "design-md-spec",
+    "css-variables",
+    "tailwind-v4",
+    "brand-guide",
+    "claude-code",
+    "cursor",
+    "gemini-cli",
+    "google-stitch",
+    "stitch",
+    "css",
+    "brand",
+    "ui",
+    "cli"
+  ],
+  "homepage": "https://github.com/yuvrajangadsingh/brandmd#readme",
+  "bugs": {
+    "url": "https://github.com/yuvrajangadsingh/brandmd/issues"
+  },
+  "author": "Yuvraj Angad Singh <yuvrajangad.s@gmail.com> (https://yuvrajangadsingh.com)",
+  "funding": "https://github.com/sponsors/yuvrajangadsingh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuvrajangadsingh/brandmd.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@google/genai": "^1.0.0",
+    "chroma-js": "^3.1.0",
+    "commander": "^12.0.0",
+    "playwright": "^1.50.0"
+  }
+}

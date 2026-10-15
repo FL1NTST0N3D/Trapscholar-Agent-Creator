@@ -1,0 +1,58 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://example.com/#organization",
+  "name": "Example Company",
+  "url": "https://example.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://example.com/images/logo.png",
+    "width": 250,
+    "height": 60
+  },
+  "image": "https://example.com/images/office.jpg",
+  "description": "A brief description of the organization and what it does.",
+  "foundingDate": "2020-01-15",
+  "founder": {
+    "@type": "Person",
+    "name": "Jane Founder"
+  },
+  "email": "contact@example.com",
+  "telephone": "+1-555-555-5555",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main Street, Suite 400",
+    "addressLocality": "Austin",
+    "addressRegion": "TX",
+    "postalCode": "78701",
+    "addressCountry": "US"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-555-5555",
+      "contactType": "customer service",
+      "areaServed": "US",
+      "availableLanguage": ["English", "Spanish"]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-555-6666",
+      "contactType": "sales",
+      "areaServed": "US",
+      "availableLanguage": "English"
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/example",
+    "https://twitter.com/example",
+    "https://www.facebook.com/example",
+    "https://www.instagram.com/example",
+    "https://www.youtube.com/@example",
+    "https://en.wikipedia.org/wiki/Example_Company"
+  ],
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "value": 50
+  }
+}

@@ -1,0 +1,127 @@
+---
+name: etsy-listing-helper
+description: >-
+  Generate complete, copy-paste-ready Etsy listing content (title, tags, description,
+  materials, category, attributes, alt text, variation ideas) from POD product spec text
+  and/or white-background product photos. Use this skill whenever the user provides
+  product information (Material Description, Product Size, Printing Technique, etc.)
+  and/or e-commerce product images and wants Etsy listing info, listing copy, SEO tags,
+  or anything related to publishing a product on Etsy — in any language. Also trigger
+  when the user only sends product images in a session where product base info was given
+  earlier — reuse that info. One image = one listing output.
+---
+
+# Etsy Listing Helper
+
+Turn POD (print-on-demand) product specs + designed product photos into ready-to-paste Etsy listing content, in a **fixed format** with translations and reasoning.
+
+## Language rules
+
+Two kinds of content appear in the output — keep them strictly separate:
+
+1. **Copy-paste blocks** (Title, Tags, Description, Materials, Alt Text): **English by default**, since Etsy's primary marketplace language is English. If the user explicitly asks for another listing language (e.g., German for Etsy DE), write these blocks in that language instead. Never mix languages inside a copy-paste block — the user pastes these into Etsy verbatim.
+2. **Annotations** (translation lines, rationale section, any commentary): use the **language the user is conversing in** — not the language of the product spec. A user chatting in Chinese with English spec text gets Chinese annotations; a user chatting in English gets English annotations.
+
+If the conversation language is the same as the listing language (e.g., both English), omit the translation lines entirely — they would be duplicates — but keep the rationale section.
+
+## Inputs you may receive
+
+1. **Product base info** (spec text: Material Description, Product Size, Design Area, Printing Technique, Product Performance, Applicable Scenario, Washing Instructions, Warm Reminder, Package Includes…)
+2. **One or more white-background product images** showing the design
+
+Rules:
+- **N images → N complete listings**, one per design. Number them Listing 1, Listing 2…
+- **Images only, no spec text** → reuse the most recent product base info from this conversation. If none exists in the session, ask the user for it.
+- **Spec text only, no image** → generate one listing; note that design-specific keywords (subject, style) are placeholders the user must fill.
+- Look carefully at each image: identify the design subject (e.g., French Bulldog wearing sunglasses with coffee), art style (vintage, watercolor, cartoon…), colors, and mood. These drive the keywords — the spec text alone produces generic, low-ranking listings.
+
+## Reference files — read before writing
+
+- [references/listing-fields.md](references/listing-fields.md) — **always read this one file**. Consolidated per-field rules merged from all official Etsy sources, in listing-form order: ranking mechanics, title (~15 words, official before/after examples), photos & alt text, description, tags (limits, dos/don'ts, the 7 brainstorming dimensions), materials, category, attributes, variations & personalization, shop-level advice.
+- [references/etsy-categories.md](references/etsy-categories.md) — Etsy's complete official category tree (~3,000 lines). Do NOT read whole; grep for the product keyword (e.g. "Lantern") or top-level category (e.g. "Home & Living") and pick the **deepest matching subcategory**. Use the exact official names in the Category path of section 5.
+- `references/sources/` — full original Seller Handbook articles, kept for provenance. Don't read during normal listing generation; consult only if the consolidated file leaves a question open.
+
+Validate every title ≤ 140 characters and every tag ≤ 20 characters before output.
+
+## SEO principles (from Etsy Seller Handbook)
+
+- Think like a buyer: keywords = **subject + product type + recipient/occasion + style** (e.g., "french bulldog gift", "solar garden lantern", "dog mom gift", "vintage patio decor"). Spread them across title, tags, description, and attributes — Etsy ranks holistically, so the title doesn't have to carry everything.
+- Title: **short and scannable, ~15 words or fewer** — clearly name the item, put its most important traits (subject, color, material, size) upfront, don't repeat words, no subjective fluff ("perfect", "beautiful"), no price/shipping/sale info. Include a holiday/occasion/recipient word only if it's essential to what the item IS (a "Halloween costume" yes; an item that merely makes a good gift, no — that goes in tags). Word order doesn't affect ranking directly, but a clear title earns clicks, and popularity feeds back into ranking.
+- Tags: always use **all 13**; multi-word phrases in natural language — official rule of thumb: *if you can't imagine someone typing it into Google, it shouldn't be a tag*. Don't repeat the category/attribute words verbatim; mix high-traffic and long-tail; cover several brainstorming dimensions (what it is, how it's made, who it's for, occasion, style, solution, size); no deliberate misspellings, no plural variants. Tags must be in the shop's language — foreign-language tags don't help search.
+- Description: keywords in descriptions power the second phase of search ranking. Put essential info (size, dimensions, colors) at the top, incorporate top keywords naturally in the first few sentences (they also feed Google's snippet) — don't copy the title verbatim; don't open with "Welcome to my shop"; end with the design's story in the brand's voice.
+- Categories and attributes act like extra tags — pick the deepest official category and fill every truly applicable attribute (choose the closest available option even if imperfect); don't waste tag slots duplicating them.
+- First photo is a search factor: advise white/clean background, no text overlays or collages, at least 635px (2000px+ recommended) — POD white-background renders qualify as-is.
+
+## Fixed output format
+
+Use this exact template for every listing. Copy-paste blocks must contain **only the listing language** (zero characters from other languages) so the user can paste directly into Etsy. The `> Translation:` lines and section 8 are annotations — write them in the user's conversation language, and label them naturally in that language (e.g. `> 中文翻译：` for a Chinese-speaking user, `> Traducción:` for Spanish).
+
+---
+
+```
+## Listing {N} — {design short name, e.g. "French Bulldog Coffee Lantern"}
+
+### 1. Title (~15 words, ≤140 chars)
+{listing-language title}
+
+> Translation: {title in conversation language — omit if same language}
+
+### 2. Tags (13 tags, ≤20 chars each)
+{tag1}, {tag2}, … {tag13}
+
+> Translation: {tag-by-tag translation — omit if same language}
+
+### 3. Description
+{listing-language description, structured as:}
+{• Opening hook sentence with main keywords (first ~160 chars feed the Google snippet)}
+{• ✨ DESIGN — describe the printed design}
+{• 📏 DETAILS — size, material, printing technique, design area}
+{• ☀️ FEATURES — solar/battery/waterproof etc. from Product Performance}
+{• 🎁 PERFECT FOR — scenarios & gift occasions}
+{• 🧼 CARE — washing instructions}
+{• 📦 PACKAGE — what's included}
+{• ⚠️ PLEASE NOTE — the production-variance reminder, rewritten in friendly customer-facing language}
+
+> Translation: {full description in conversation language — omit if same language}
+
+### 4. Materials (≤13)
+{e.g. Plastic, PVC, Solar panel}
+
+### 5. Category & Attributes
+- Category: {deepest official Etsy category path from etsy-categories.md}
+- Occasion: {…} / Holiday: {…} / Room: {…} / Color: {…} (only ones that truly apply)
+
+### 6. Photo Alt Text (≤250 chars)
+{listing-language alt text describing the image for accessibility/SEO}
+
+### 7. Variations (if applicable)
+{e.g. size options, single- vs double-sided printing, personalization offer — or "Not applicable"}
+
+### 8. Rationale
+{2-5 bullet points in the conversation language: why the title is ordered this way,
+how the tags balance head terms and long-tail, why this category/attribute set,
+variation reasoning}
+```
+
+---
+
+Multiple listings: repeat the template per image, separated by `---`. Keep section numbering and headings identical every time — consistency is the point; users batch-copy these into Etsy daily.
+
+## Maintaining this skill (when the user asks to add new Etsy info)
+
+The reference layer is deliberately two files: one consolidated rulebook + one lookup table. When integrating a new article, help-center page, or policy update, preserve that shape — the failure mode to avoid is a growing pile of per-article files that each get read at generation time.
+
+1. **Merge, don't append.** New field rules go into the matching section of `references/listing-fields.md`, deduplicated against what's already there. If new official guidance contradicts an existing rule, **replace** the old rule (this file states current best practice, not history). Each fact appears exactly once.
+2. **Originals to `sources/`.** Save the full original text as a new file in `references/sources/` with its URL and publication/fetch dates. Sources are provenance only — never wired into the generation workflow.
+3. **Never add a new always-read file.** Generation reads exactly `listing-fields.md` plus a grep of `etsy-categories.md`. If new content doesn't fit an existing section of the rulebook, add a section to it — not a new file.
+4. **Keep `etsy-categories.md` a pure lookup table.** Refresh it by re-extracting the official tree; don't annotate or mix commentary into it.
+5. **SKILL.md stays workflow-only.** It holds process, format, and a summary of SEO principles; detailed field facts live in the rulebook. Only touch the SEO-principles summary here when an update changes *strategy* (as the ~15-word title rule did), and keep it to one line per idea.
+6. **Update the README source list** when a new official source is integrated, and sync the installed copy at `~/.claude/skills/etsy-listing-helper/` with the repo.
+
+## Quality bar
+
+- Tags: count characters; anything over 20 chars must be shortened or split into phrasal chunks.
+- Title: never start with the shop name or generic words like "Beautiful"; start with the item's strongest identifying phrase, keep it ~15 words, and don't repeat words. Recipient/occasion angles ("dog mom gift") belong in tags unless they define the item itself.
+- Don't invent product facts not in the spec or visible in the image (e.g., don't claim "metal" if spec says plastic) — Etsy prohibits misleading descriptions.
+- Personalization: POD products usually support custom designs — if plausible, suggest it in Variations as it's a strong Etsy differentiator.
+- Remind the user once per session (not per listing): Etsy requires POD shops to disclose production partners under the Handmade Policy.

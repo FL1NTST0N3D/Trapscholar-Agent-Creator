@@ -1,0 +1,609 @@
+# USPTO Patent & Trademark MCP Server
+
+An [MCP server](https://github.com/modelcontextprotocol/python-sdk) (Python SDK 2.x, `MCPServer`) for accessing United States Patent and Trademark Office (USPTO) patent **and trademark** data through multiple APIs including the [Patent Public Search](https://www.uspto.gov/patents/search/patent-public-search) API, the [Open Data Portal (ODP) API](https://data.uspto.gov/home), PTAB API v3, the [TSDR](https://tsdr.uspto.gov/) trademark status API, and [USPTO trademark search](https://tmsearch.uspto.gov/). Using this server, Claude Desktop can pull data from USPTO APIs, search through PTAB proceedings and decisions, research prosecution history, run trademark clearance searches, track trademark status, and more:
+
+![Screen Capture of Claude Desktop using Patents MCP Server](screencap.gif)
+
+For an introduction to MCP servers see [Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol).
+
+Special thanks to [Parker Hancock](https://github.com/parkerhancock), author of the amazing [Patent Client project](https://github.com/parkerhancock/patent_client), for [blazing the trail](https://github.com/parkerhancock/patent_client/issues/63) to understanding of the string of requests and responses needed to pull data through the Public Search API.
+
+## Features
+
+This server provides **42 tools** across six live USPTO data sources (23 more, for APIs USPTO has shut down, stay in the code behind `ENABLE_LEGACY_TOOLS`):
+
+1. **Patent Search** - Full-text search of granted patents and published applications via PPUBS
+2. **Full Text Documents** - Get the text of a patent by number, or just its claims, abstract or front page to save context
+3. **PDF Downloads** - Download patents as PDF files (Claude Desktop doesn't support this as a client currently)
+4. **Prosecution History** - Transactions, file-wrapper document lists filtered by type (office actions, responses, notices of allowance), and the documents themselves as plain text or PDF via ODP
+5. **Office Action Search** - Search 19.9M office actions (2007 on) by examiner language, rejection statute, art unit and date, with counts by document code and statute
+6. **Claim-Level Rejections and Citations** - Which claims each office action rejected, objected to or allowed and under which statute, with Alice/Mayo/Myriad/Bilski flags (2012 on), and the references each action cited, searchable in reverse to find every application whose examiner cited a given patent
+7. **Petition Decisions** - Search 1.1M decisions on patent petitions (revival, reinstatement, make special, supervisory review) by text, type, outcome and office
+8. **Patent Family Data** - Continuity information, foreign priority, and related applications
+9. **Bulk Datasets** - Search and access USPTO bulk data products including PatentsView disambiguated data
+10. **Forward Citations** - Find the later patents that cite a patent
+11. **Trademark Search** - Full-text search of US federal trademarks by mark text, owner, goods/services, and class (clearance/knockout searches)
+12. **Trademark Status & Documents** - Authoritative live status, prosecution documents, and mark images via TSDR
+13. **Trademark Assignments** - Recorded ownership transfer records from 1955 to present (no API key needed)
+
+It runs locally over stdio for Claude Desktop and Claude Code, or over HTTP as a shared, stateless service — see [Remote hosting over HTTP](#remote-hosting-over-http).
+
+> **Note on unavailable APIs:** The PatentsView API (search.patentsview.org) was shut down on March 20, 2026, with its data migrated to ODP bulk datasets. The Office Action and Enriched Citation APIs (developer.uspto.gov) were decommissioned in early 2026; office action search, rejections and citations have since returned on ODP (`odp_search_office_actions`, `get_office_action_rejections`, `get_office_action_citations`). The Patent Litigation API is not offered on the USPTO Open Data Portal; litigation data is available as a bulk download. The 23 affected tools stay in the code but are not registered by default, since their schemas cost every client about 6k tokens per session and they can only fail; set `ENABLE_LEGACY_TOOLS=true` to register them, and each returns workaround guidance pointing to a live tool.
+
+## API Sources
+
+| Source | Description | Auth Required | Status |
+|--------|-------------|---------------|--------|
+| **ppubs.uspto.gov** | Full text documents, PDF downloads, advanced search (daily updates) | No | Active |
+| **api.uspto.gov (ODP)** | Metadata, continuity, transactions, assignments, prosecution history | Yes (ODP API Key) | Active |
+| **PTAB Trial API** | IPR/PGR/CBM proceedings, decisions, appeals | Yes (ODP API Key) | Active (ODP v3.0) |
+| **tsdrapi.uspto.gov (TSDR)** | Trademark status, prosecution documents, mark images | Yes (TSDR API Key — separate from ODP) | Active |
+| **tmsearch.uspto.gov** | Full-text trademark search (internal API behind the TESS replacement) | No | Active (unofficial) |
+| **assignmentcenter.uspto.gov** | Trademark ownership transfer records (1955-present) | No | Active |
+| **Patent Litigation API** | 74,000+ district court patent cases | N/A | Not offered on ODP (issue #16) |
+| **PatentsView API** | Disambiguated inventor/assignee data, advanced search | N/A | Shut down March 2026 |
+| **ODP Office Action Search** | Office actions 2007 on: text search, statutes, art units (text returned to 500 chars) | Yes (ODP API Key) | Active (2026-10) |
+| **ODP Petition Decisions** | Decisions on patent petitions, 1991 on | Yes (ODP API Key) | Active (2026-10) |
+| **ODP Office Action Rejections & Citations** | Claim-level rejections (2012 on) and cited references per office action | Yes (ODP API Key) | Active (2026-10) |
+| **Office Action APIs (developer.uspto.gov)** | Office action text and search | N/A | Decommissioned early 2026 |
+
+## Prerequisites
+
+- **Python 3.10-3.13** (3.12 recommended); the server builds on the MCP Python SDK 2.x (`mcp>=2,<3`)
+- **Claude Desktop** (for integration). Other models and MCP clients have not been tested.
+- **[UV](https://docs.astral.sh/uv/)** for Python version and dependency management
+
+If you're a Python developer but still unfamiliar with uv, you're in for a treat. It's faster and easier than having a separate Python version manager (like pyenv) and setting up, activating, and maintaining virtual environments with venv and pip.
+
+If you don't already have uv installed:
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+## Installation
+
+### From PyPI (no clone needed)
+
+[`uvx`](https://docs.astral.sh/uv/guides/tools/) downloads and runs the published package on demand. Point Claude Desktop at it in `claude_desktop_config.json`, passing your API keys in the environment:
+
+```json
+{
+  "mcpServers": {
+    "patents": {
+      "command": "uvx",
+      "args": ["patent-mcp-server"],
+      "env": {
+        "USPTO_API_KEY": "your_odp_key",
+        "TSDR_API_KEY": "your_tsdr_key"
+      }
+    }
+  }
+}
+```
+
+or in Claude Code:
+
+```shell
+claude mcp add patents -e USPTO_API_KEY=your_odp_key -e TSDR_API_KEY=your_tsdr_key -- uvx patent-mcp-server
+```
+
+The keys are optional (see [API Key Setup](#api-key-setup)); the PPUBS patent tools, trademark search and assignment search work without any. A `.env` file is read from the working directory, which under `uvx` is wherever the client started the server, so pass keys through `env` as above.
+
+### From source
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/riemannzeta/patent_mcp_server
+   cd patent_mcp_server
+   ```
+
+2. Install dependencies with uv:
+   ```bash
+   uv sync
+   ```
+
+3. Verify installation:
+   ```bash
+   uv run patent-mcp-server
+   ```
+   Should output:
+   ```
+   INFO     Starting USPTO Patent MCP server with stdio transport
+   ```
+
+## API Key Setup
+
+### USPTO ODP API Key (Required for most tools)
+
+To use the api.uspto.gov tools (ODP, PTAB), you need an Open Data Portal API key. Without it, these endpoints return `403 Forbidden`. The Patent Litigation API is not offered on ODP and does not require an API key.
+
+1. Create a USPTO.gov account at [data.uspto.gov](https://data.uspto.gov) (requires ID.me verification)
+2. Once signed in, visit **"My ODP"** in the site navigation to get your API key
+3. See the [Getting Started guide](https://data.uspto.gov/apis/getting-started) for detailed instructions
+4. Complete your data.uspto.gov customer profile (job title, organization, intended use). ODP deactivates keys whose profile is incomplete, and a key that stops working with 401/403 usually means this.
+
+5. Create a `.env` file in the patent_mcp_server directory:
+   ```bash
+   USPTO_API_KEY=your_actual_key_here
+   ```
+   Note: The PPUBS patent tools, trademark search (`tm_*` search tools), and trademark assignment search work without any API key.
+
+### TSDR API Key (Trademark status/document tools)
+
+The TSDR tools (`tsdr_*`) require a **TSDR-specific API key** sent as the `USPTO-API-KEY` header. **The ODP key does not work for TSDR** — it passes the gateway's auth check, but every request then fails with `BACKEND RESPONSE STATUS: 404`.
+
+1. Sign in to the [USPTO API Key Manager](https://account.uspto.gov/profile/api-manager) with a free MyUSPTO account
+2. Select the **TSDR API** product and click "Request API key" (the key is emailed and stored under your account)
+3. Add it to your `.env`:
+   ```bash
+   TSDR_API_KEY=your_tsdr_key_here
+   ```
+
+TSDR rate limits (peak hours 5am-10pm ET): 60 requests/minute general, 4 requests/minute for PDF document bundles (120/12 off-peak). Use `tsdr_list_trademark_documents` (metadata only, not rate-limited like PDFs) before downloading bundles.
+
+### Trademark search and AWS WAF (no key needed)
+
+`tm_search_trademarks` / `tm_get_trademark` use the internal API behind [tmsearch.uspto.gov](https://tmsearch.uspto.gov), which sits behind AWS WAF. It currently answers plain requests, but if USPTO tightens the WAF and searches start failing with 403/202 errors, copy the `aws-waf-token` cookie from a browser session on tmsearch.uspto.gov (valid ~4 days) and set:
+
+```bash
+TMSEARCH_WAF_TOKEN=your_cookie_value_here
+```
+
+## Configuration
+
+The server can be configured using environment variables in your `.env` file. All settings are optional with sensible defaults:
+
+```bash
+# API Keys
+USPTO_API_KEY=your_key_here      # ODP/PTAB tools
+TSDR_API_KEY=your_tsdr_key_here  # TSDR trademark tools (separate key — see above)
+TMSEARCH_WAF_TOKEN=...           # Optional - only if trademark search hits the WAF
+
+# Tool registration
+ENABLE_LEGACY_TOOLS=false  # Also register the 25 tools for shut-down APIs (they return API_UNAVAILABLE)
+
+# Logging
+LOG_LEVEL=INFO  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# MCP Transport (see "Remote hosting over HTTP" below)
+MCP_TRANSPORT=stdio    # stdio (default) or streamable-http
+MCP_HOST=127.0.0.1     # Bind address when serving over HTTP
+MCP_PORT=8000          # Port when serving over HTTP
+MCP_PATH=/mcp          # URL path of the MCP endpoint
+MCP_STATELESS=true     # Keep no per-client state between HTTP requests
+MCP_JSON_RESPONSE=false # Reply with plain JSON instead of an SSE stream
+
+# HTTP Settings
+REQUEST_TIMEOUT=30.0  # Request timeout in seconds
+MAX_RETRIES=3         # Maximum number of retry attempts
+RETRY_MIN_WAIT=2      # Minimum wait time between retries (seconds)
+RETRY_MAX_WAIT=10     # Maximum wait time between retries (seconds)
+
+# Session Management
+SESSION_EXPIRY_MINUTES=30  # How long to cache ppubs sessions
+ENABLE_CACHING=true        # Enable/disable session caching
+
+# API Endpoints (usually don't need to change)
+PPUBS_BASE_URL=https://ppubs.uspto.gov
+API_BASE_URL=https://api.uspto.gov          # ODP API endpoint (NOT data.uspto.gov)
+TSDR_BASE_URL=https://tsdrapi.uspto.gov/ts/cd
+TMSEARCH_BASE_URL=https://tmsearch.uspto.gov
+TM_ASSIGNMENT_BASE_URL=https://assignmentcenter.uspto.gov
+CPC_SCHEME_BASE_URL=https://www.uspto.gov/web/patents/classification/cpc/html
+```
+
+## Claude Desktop Configuration
+
+To integrate this MCP server with Claude Desktop:
+
+1. Update your Claude Desktop configuration file (`claude_desktop_config.json`):
+   ```json
+   {
+     "mcpServers": {
+       "patents": {
+         "command": "uv",
+         "args": [
+           "--directory",
+           "/Users/username/patent_mcp_server",
+           "run",
+           "patent-mcp-server"
+         ]
+       }
+     }
+   }
+   ```
+
+   You can find `claude_desktop_config.json` on a Mac by opening the Claude Desktop app, opening Settings (from the Claude menu or by Command + ' on the keyboard), clicking "Developer" in the sidebar, and "Edit Config."
+
+2. Replace `/Users/username/patent_mcp_server` with the actual path to your patent_mcp_server directory.
+
+When integrated with Claude Desktop, the server will be automatically started when needed and doesn't need to be run separately.
+
+## Claude Code Configuration
+
+To integrate this MCP server with Claude Code for a particular project, from the project root:
+
+```shell
+claude mcp add-json patents '{"command": "uv", "args": ["--directory", "/path/to/patent_mcp_server", "run", "patent-mcp-server"]}'
+```
+
+If you're already running Claude Code, you'll have to /exit and restart. Then /mcp to verify that it's configured.
+
+## Remote hosting over HTTP
+
+The server speaks stdio by default, which is what the Claude Desktop and
+Claude Code configurations above launch. It can instead serve the MCP
+endpoint over HTTP, so one deployment can back a whole team rather than
+every person running their own copy with their own API keys:
+
+```shell
+patent-mcp-server --transport streamable-http --host 0.0.0.0 --port 8000
+```
+
+The endpoint is then at `http://<host>:8000/mcp`. Point an MCP client at
+that URL — in Claude Code:
+
+```shell
+claude mcp add --transport http patents http://your-host:8000/mcp
+```
+
+**This endpoint has no authentication of its own, and it holds your USPTO
+and TSDR API keys.** Anyone who can reach it can spend your USPTO rate
+limits. Bind to `127.0.0.1` (the default) and put an authenticating reverse
+proxy in front of it, or otherwise restrict network access. The server logs
+a warning at startup when it is bound to anything other than loopback.
+
+Requests are stateless by default: the server keeps no per-client state
+between them, so it can run behind a load balancer with several replicas
+and no session affinity. Each worker holds its own upstream USPTO Public
+Search session, which it establishes on demand and refreshes when it
+expires.
+
+| Flag | Default | Purpose |
+| --- | --- | --- |
+| `--transport` | `stdio` | `stdio` or `streamable-http` |
+| `--host` | `127.0.0.1` | Bind address for HTTP |
+| `--port` | `8000` | Port for HTTP |
+| `--path` | `/mcp` | URL path of the MCP endpoint |
+| `--stateful` / `--no-stateful` | off | Keep per-client session state; needs session affinity to scale |
+| `--json-response` / `--no-json-response` | off | Reply with plain JSON instead of an SSE stream |
+
+Each flag has a matching environment variable (see Configuration above);
+the command line wins where both are set.
+
+## Available Tools
+
+### Utility Tools
+| Tool | Description |
+|------|-------------|
+| `check_api_status` | Check status of all USPTO APIs |
+| `get_cpc_info` | CPC title at any depth (section to subgroup) with hierarchy and children; groups come live from USPTO's scheme pages |
+| `get_status_code` | Look up USPTO status code meaning |
+| `get_trademark_class_info` | Look up a Nice/international trademark class (1-45) |
+| `get_trademark_status_code` | Look up a USPTO trademark status code meaning |
+
+### Patent Public Search (ppubs.uspto.gov)
+| Tool | Description |
+|------|-------------|
+| `ppubs_search_patents` | Search granted patents (full-text, daily updates) |
+| `ppubs_search_applications` | Search published patent applications |
+| `ppubs_get_full_document` | Get a document by GUID; `sections` picks biblio, abstract, claims or description |
+| `ppubs_get_patent_by_number` | Get a patent's text by number ("US 10,000,000 B2", "D845123" and "RE49123" all work), with the same `sections` option |
+| `ppubs_get_citing_patents` | Forward citations: later granted patents that cite a patent |
+| `ppubs_download_patent_pdf` | Download patent as PDF |
+
+### Open Data Portal (api.uspto.gov)
+| Tool | Description |
+|------|-------------|
+| `odp_get_application` | Get basic application data |
+| `odp_search_applications` | Search applications with filters |
+| `odp_get_application_metadata` | Get comprehensive metadata |
+| `odp_get_continuity` | Get patent family/continuity data |
+| `odp_get_assignment` | Get ownership/assignment records |
+| `odp_get_adjustment` | Get patent term adjustment data |
+| `odp_get_attorney` | Get attorney/agent of record |
+| `odp_get_foreign_priority` | Get foreign priority claims |
+| `odp_get_transactions` | Get prosecution transaction history |
+| `odp_get_documents` | List file wrapper documents, filtered by document code (CTNF, CTFR, NOA, REM, CLM, 892…) and direction |
+| `odp_download_document` | Read one file wrapper document as plain text (`format="text"`: office actions, remarks, claims with amendment markup) or as PDF |
+| `odp_search_office_actions` | Search office actions across applications by text, document code, rejection statute, art unit and date; previews are cut at 500 characters, so read hits with `odp_download_document(format="text")` |
+| `get_office_action_rejections` | Claims rejected, objected to or allowed in each office action, by statute (101/102/103/112/DP), with Alice/Mayo/Myriad/Bilski flags; filter by application, patent, date, art unit or case law |
+| `get_office_action_citations` | References each office action cited, with the 102/103 section; `cited_reference` finds every application whose examiner cited a given patent or publication |
+| `odp_search_petition_decisions` | Search petition decisions by text, petition type, outcome, deciding office and date, with outcome counts |
+| `odp_search_datasets` | Search bulk data products |
+| `odp_get_dataset` | Get dataset product details |
+
+### PTAB Trial API (api.uspto.gov ODP v3.0)
+| Tool | Description |
+|------|-------------|
+| `ptab_search_proceedings` | Search IPR/PGR/CBM proceedings by patent number, party, status |
+| `ptab_get_proceeding` | Get details for a specific proceeding by number |
+| `ptab_get_documents` | List documents filed in a proceeding |
+| `ptab_search_decisions` | Search PTAB decisions |
+| `ptab_get_decision` | Get a specific decision by trial number |
+| `ptab_search_appeals` | Search ex parte appeals |
+| `ptab_get_appeal` | Get details for a specific appeal |
+
+### TSDR - Trademark Status and Document Retrieval (tsdrapi.uspto.gov)
+| Tool | Description |
+|------|-------------|
+| `tsdr_get_trademark_status` | Get authoritative live status by serial or registration number |
+| `tsdr_list_trademark_documents` | List prosecution document metadata (no rate limit, no downloads) |
+| `tsdr_download_trademark_documents` | Download prosecution document bundle as PDF (4/min rate limit) |
+| `tsdr_get_trademark_image` | Get the mark image (drawing) as base64 |
+
+### Trademark Search & Assignments
+| Tool | Description |
+|------|-------------|
+| `tm_search_trademarks` | Full-text search by mark text, owner, goods/services, class, live/dead status |
+| `tm_get_trademark` | Get a trademark's search-index record by serial number |
+| `tm_search_assignments` | Search recorded ownership transfers, 1955-present (Assignment Center, no key) |
+
+> **Note:** `tm_search_trademarks` and `tm_get_trademark` use the undocumented internal API behind [tmsearch.uspto.gov](https://tmsearch.uspto.gov) (the TESS replacement) — the same situation as the PPUBS patent search API. USPTO offers no official REST API for full-text trademark search. The request/response contract was verified live on 2026-06-10, but these tools may break without notice if USPTO changes the internal API. TTAB proceedings (oppositions/cancellations) have no REST API; daily TTAB XML is available as bulk datasets via `odp_search_datasets`.
+
+### Legacy tools (hidden unless `ENABLE_LEGACY_TOOLS=true`)
+
+The 25 tools below are for APIs USPTO has shut down. They stay in the code and keep their names, but the server registers them only when `ENABLE_LEGACY_TOOLS=true`, because their schemas cost every client about 6k tokens per session and every call returns `API_UNAVAILABLE`. Each response carries a `workaround` naming the live tool that covers the need.
+
+#### Patent Litigation API (Unavailable — not offered on ODP, issue #16)
+
+All 4 Litigation tools return `API_UNAVAILABLE`. The Patent Litigation API is not listed in the ODP Swagger catalog. The OCE Patent Litigation dataset (74,000+ district court cases) is distributed as a bulk download at <https://www.uspto.gov/ip-policy/economic-research/research-datasets/patent-litigation-docket-reports-data>.
+
+| Tool | Workaround |
+|------|------------|
+| `search_litigation` | OCE Patent Litigation bulk dataset |
+| `get_litigation_case` | OCE Patent Litigation bulk dataset |
+| `get_patent_litigation` | OCE Patent Litigation bulk dataset or `ppubs_search_patents` |
+| `get_party_litigation` | OCE Patent Litigation bulk dataset |
+
+#### PatentsView API (Unavailable — shut down March 2026)
+
+All 14 PatentsView tools return `API_UNAVAILABLE` with workaround guidance. PatentsView data has been migrated to the USPTO Open Data Portal as bulk downloadable datasets. Use `ppubs_search_patents` for patent search, `odp_search_datasets` to find bulk datasets.
+
+| Tool | Workaround |
+|------|------------|
+| `patentsview_search_patents` | `ppubs_search_patents` |
+| `patentsview_get_patent` | `ppubs_get_patent_by_number` |
+| `patentsview_search_assignees` | `ppubs_search_patents` with `"name".as.` query |
+| `patentsview_get_assignee` | `odp_search_datasets` (bulk data) |
+| `patentsview_search_inventors` | `ppubs_search_patents` with `"name".in.` query |
+| `patentsview_get_inventor` | `odp_search_datasets` (bulk data) |
+| `patentsview_get_claims` | `ppubs_get_full_document` |
+| `patentsview_get_description` | `ppubs_get_full_document` |
+| `patentsview_search_by_cpc` | `ppubs_search_patents` with `code.cpc.` query |
+| `patentsview_lookup_cpc` | `get_cpc_info` |
+| `patentsview_search_attorneys` | `odp_get_attorney` (per-application) |
+| `patentsview_get_attorney` | `odp_get_attorney` (per-application) |
+| `patentsview_search_by_ipc` | `ppubs_search_patents` with IPC query |
+| `patentsview_lookup_ipc` | `odp_search_datasets` (bulk data) |
+
+#### Office Action APIs (Unavailable — decommissioned early 2026)
+
+These 2 Office Action tools return `API_UNAVAILABLE`; `odp_search_office_actions` replaces them. `get_office_action_citations` and `get_office_action_rejections` are live again on ODP (v1.8.0).
+
+| Tool | Workaround |
+|------|------------|
+| `get_office_action_text` | `odp_search_office_actions(app_num=...)` then `odp_download_document` |
+| `search_office_actions` | `odp_search_office_actions` |
+
+#### Enriched Citation APIs (Unavailable — decommissioned early 2026)
+
+All 3 Enriched Citation tools return `API_UNAVAILABLE`. Forward citations come from `ppubs_get_citing_patents`; the references a patent cites are on its front page (`ppubs_get_patent_by_number(sections=["biblio"])`).
+
+| Tool | Workaround |
+|------|------------|
+| `get_enriched_citations` | `ppubs_get_citing_patents` (forward) and `ppubs_get_patent_by_number(sections=["biblio"])` (backward) |
+| `search_citations` | `ppubs_get_citing_patents` |
+| `get_citation_metrics` | `ppubs_get_citing_patents` — `total` is the forward-citation count |
+
+### Resources and Prompts
+
+The server also provides **MCP Resources** (accessible via @ mentions):
+- `patents://cpc/{code}` - CPC classification information at any depth (groups from USPTO's scheme pages)
+- `patents://status-codes` - USPTO status code definitions
+- `patents://sources` - Data source information
+- `patents://search-syntax` - Query syntax guide (patents and trademarks)
+- `trademarks://classes` - Nice/international trademark classes (1-45)
+- `trademarks://status-codes` - Trademark status code definitions
+
+And **MCP Prompts** (workflow templates). Each takes optional arguments; whatever you give is placed in a Subject section ahead of the steps, so the workflow starts with your specifics instead of asking for them:
+- `prior_art_search` (`invention`, `keywords`, `cpc_codes`) - Comprehensive prior art search guide
+- `patent_validity_analysis` (`patent_number`) - Patent validity analysis workflow
+- `competitor_portfolio_analysis` (`company`, `technology`) - Competitor portfolio analysis
+- `ptab_proceeding_research` (`patent_number`, `proceeding_number`, `party`) - PTAB proceeding research guide
+- `freedom_to_operate` (`product`, `cpc_codes`) - FTO analysis workflow
+- `patent_landscape` (`technology`, `cpc_codes`) - Technology landscape mapping
+- `trademark_clearance_search` (`mark`, `goods_services`, `classes`) - Trademark clearance/knockout search guide
+- `trademark_portfolio_review` (`owner`) - Trademark portfolio and deadline review
+- `trademark_status_monitoring` (`serial_numbers`, `mark`) - Trademark status and conflict watching
+
+## Testing
+
+The project includes comprehensive test suites:
+
+```bash
+# Run unit tests (default - skips integration tests)
+uv run pytest
+
+# Run with verbose output
+uv run pytest -v
+
+# Run integration tests (requires network access)
+uv run pytest -m integration
+
+# Run all tests including integration
+uv run pytest -m ""
+
+# Run with coverage report
+uv run pytest --cov=patent_mcp_server
+```
+
+Test results are stored in `/test/test_results/`.
+
+The unit suite also runs in CI on every push to `main` and every pull request, across Python 3.10–3.13 (`.github/workflows/tests.yml`). Integration tests stay deselected there, so CI needs no API keys.
+
+### Development
+
+To install development dependencies:
+```bash
+uv sync --dev
+```
+
+## Publishing to PyPI
+
+```bash
+# Build distribution packages
+rm -rf dist/ && uv run python -m build
+
+# Upload to PyPI
+uv run twine upload dist/*
+```
+
+## Contributing
+
+Issues and PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guide, and [AGENTS.md](AGENTS.md) for guidance specific to AI agents. Use the [bug report](.github/ISSUE_TEMPLATE/bug_report.yml) or [feature request](.github/ISSUE_TEMPLATE/feature_request.yml) templates when filing an issue — they prompt for the tool call, the constructed request URL/body, and the raw API response, which is usually enough to land a fix in one turn.
+
+## Version History
+
+### v1.8.0 (Current)
+- **`get_office_action_rejections` and `get_office_action_citations` are live again**, on ODP's claim-level datasets (`/api/v1/patent/oa/oa_{rejections,citations}/v2/records`) instead of the decommissioned developer.uspto.gov paths. Rejections come grouped by office action: the statutes it applies (101, 102, 103, 112, double patenting), the Alice, Mayo, Myriad and Bilski flags, and which claims were rejected, objected to or allowed. Filter by application or patent number, mail date, date range, statute, case law, document code and art unit, so `case_law="alice", art_unit="3689"` finds an art unit's Alice rejections. Citations list each reference an action cited and the section it was applied under; `cited_reference` runs the lookup in reverse
+- Both tools return each action's `document_id`, which `odp_download_document(format="text")` reads
+- Coverage: rejections from 2012 on (93M rows), about a week behind the mail date
+- Tool count: 42 registered by default (65 with `ENABLE_LEGACY_TOOLS`)
+- Verified live 2026-10-15
+
+### v1.7.0
+- **Full text of file-wrapper papers**: `odp_download_document` takes `format="text"` and returns a paper's body as plain text from the XML USPTO publishes beside the PDF, so an office action (typically 10–20k characters) no longer has to be read as a base64 PDF. It covers office actions, notices of allowance, petition decisions, and applicant papers such as remarks (REM), claims (CLM) and IDS forms; amended claims keep their markup as `~~deleted~~` and `++inserted++`. Long papers come in 24k-character pages split at paragraph breaks (`text_offset` / `next_offset`). A document without XML returns `NO_TEXT_AVAILABLE`, and the PDF remains the default format
+- Parsed with the standard library; XML that declares entities is refused
+- Verified live 2026-10-14 on CTNF, CTFR, NOA, REM, CLM, IDS, PET.PCT, PETDEC and SPEC papers from 2011 to 2026
+
+### v1.6.0
+- **New `odp_search_office_actions`** searches ODP's Office Action dataset (19.9M actions mailed since mid-2007) by full text, document code, rejection statute (101/102/103/112/double patenting), art unit, date and patent number. Every response carries facet counts by document code and statute for the whole match set, so `limit=1` answers counting questions. The API returns only the first 500 characters of each action; a hit's `document_id` is the file-wrapper documentIdentifier, so `odp_download_document` reads the rest
+- **New `odp_search_petition_decisions`** searches 1.1M petition decisions (1991 on) by text, petition type code or words, outcome, deciding office, technology center, date and final-agency-action flag, with outcome, office and type facets. Query matches in the excerpt are marked «like this»; `include_full_text` adds each decision's full OCR text
+- The `get_office_action_text` and `search_office_actions` legacy stubs now point to the new tool; `check_api_status` lists both datasets as active
+- 401/403 from these endpoints carry a hint about ODP's customer-profile requirement
+- Tool count: 40 registered by default (65 with `ENABLE_LEGACY_TOOLS`)
+- Verified live 2026-10-14
+
+### v1.5.0
+- **CPC titles below subclass level**: `get_cpc_info` (and `patents://cpc/{code}`) used a bundled table that stopped at the class level, so `G06N 3/08` came back as "Computing; Calculating; Counting". Subclasses, main groups and subgroups now come from USPTO's published CPC scheme page for the subclass (`www.uspto.gov/web/patents/classification/cpc/html/cpc-G06N.html`; no key), fetched once a day per subclass: `G06N 3/08` → "Learning methods", with the hierarchy `G06N › 3/00 › 3/02 › 3/08` and the subgroups beneath it. Accepts every form the other tools print (`G06N3/08`, `G06N 3/08`, `H04B7/0417 20130101`). A code the scheme does not contain returns `NOT_FOUND` with the subclass's main groups; if the page cannot be fetched, the static section and class titles come back with a `scheme_error`
+- **Prompt arguments**: all nine workflow prompts take optional arguments (patent number, company, mark, CPC codes, …). Whatever you give appears in a Subject section ahead of the steps; with no arguments the prompts read as before
+- New `CPC_SCHEME_BASE_URL` setting; new `cpc_scheme` entry in `check_api_status`
+- Verified live 2026-09-26: G06N 3/08, G06N, A61K, H04B 7/0417, and an unknown subclass and group
+
+### v1.4.0
+- **`httpx` → `httpx2`** for the nine USPTO clients and the logging transport. `httpx2` is the successor from the same author (now under the pydantic organization) and is what mcp 2 already depends on; `httpx` 0.28.1 (December 2024) and `httpcore` 1.0.9 (April 2025) have stopped moving. The API is the same for everything this code uses (`AsyncClient`, `AsyncHTTPTransport`, `Cookies`, `build_request`/`send(stream=True)`, the exception classes), so the change is a rename across 20 files; `httpx` and `httpcore` leave the dependency tree entirely. The PPUBS session handling, PDF print job, TSDR XML document list, tmsearch, Assignment Center v3 and the ODP document download redirect were each re-verified live on 2026-09-26 (whole suite, nothing deselected)
+
+### v1.3.0
+- **MCP Python SDK 2.x**: the server now builds on `mcp>=2,<3` (`MCPServer`, the renamed `FastMCP`), which lifts the `mcp<2` pin v1.2.1 added. Tool names, arguments and results are unchanged; the `--host/--port/--path/--stateful/--json-response` flags and `MCP_*` variables keep their meaning. Under the hood the transport settings move from the server constructor to `run_streamable_http_async()`, the protocol tests use mcp 2's in-memory `Client`, and the dependency drops the `[cli]` extra (empty in 2.x)
+- **Structured output off**: mcp 2 sends every dict result twice by default, as JSON text and again as `structured_content`, against an output schema of "any object" — measured at 2.0x wire size on documents and searches. Tools register with `structured_output=False`, so results travel once, as before
+- Pinned `click>=8.3.3` (PYSEC-2026-2132; a transitive dependency via uvicorn that predates this release) so `pip-audit` is clean on the new tree
+- Verified 2026-09-26: unit suite on mcp 2.2.0; the live suite (unit plus integration, nothing deselected); a clean `uvx` install from the built wheel; stdio and streamable-http smoke tests through mcp 2's own client
+
+### v1.2.1
+- **Fixed fresh installs**: `mcp[cli]>=1.27` resolved to mcp 2.x, which renamed `mcp.server.fastmcp` to `mcp.server.mcpserver`, so `uvx patent-mcp-server` and `pip install patent-mcp-server` crashed on import (`ModuleNotFoundError: No module named 'mcp.server.fastmcp'`). mcp 2.0.0 shipped on 2026-07-28, so v1.1.1 and v1.2.0 were both affected; the checked-in `uv.lock` (mcp 1.28.1) hid it from local runs and CI. The dependency is now `mcp[cli]>=1.27,<2`. Migrating to the mcp 2 API is a separate piece of work
+
+### v1.2.0
+- **Fixed patent-number parsing**: `"US 9,876,543 B2"` was read as 98765432 (the kind code folded into the number) and `"D845123"` as 845123, a 1907 utility patent. Numbers now keep their D/RE/PP prefix and lose separators, a leading "US" and the kind code. The lookup also dropped a dead `patentNumber:"…"` query that returned nothing and cost ~3 s per call
+- **`sections` on `ppubs_get_full_document` and `ppubs_get_patent_by_number`**: choose `biblio`, `abstract`, `claims`, `description`. A whole document is ~24k tokens; `["biblio", "claims"]` is ~6k. Empty and search-highlight fields are dropped from every document
+- **Smaller search results**: each PPUBS hit carried two 7 KB references-cited lists; three hits are now 5k characters instead of 41k. `ppubs_search_*` default to `limit=20` (the truncation step cut larger responses to 20 anyway)
+- **New `odp_download_document`** fetches a file-wrapper document (office action, response, notice of allowance…) as PDF, following ODP's signed 30-second redirect; documents over 4 MB are refused. **`odp_get_documents`** gains `document_code` and `direction` filters, paging, and a per-code count of the whole wrapper
+- **New `ppubs_get_citing_patents`**: forward citations via the `.urpn.` field of granted patents; `total` is the citation count
+- **Legacy tools hidden by default**: the 25 tools for shut-down APIs made up 39% of the schema text sent to every client (~6k tokens). Set `ENABLE_LEGACY_TOOLS=true` to register them; the functions, names and workaround messages are unchanged
+- **Read-only annotations** on every tool, so clients that honor them need not confirm each call
+- The competitor-portfolio, freedom-to-operate and patent-landscape prompts, the `patentsview_*` workaround messages and this README still taught the slash-prefix search syntax that stopped working in August (`AN/`, `IN/`, `CPC/`); all now use `.as.`, `.in.`, `.cpc.` and `@pd`
+- Removed `test/test_patents.py`: two script-style live checks that logged errors instead of asserting, so they always passed while calling USPTO and rewriting `json/` and `pdfs/` on every default `pytest` run, including CI. The default suite now makes no network calls
+- **Fixed `tm_search_assignments`**: Assignment Center moved its search API from `/ipas/search/api/v2/` to `/v3/`, and CloudFront now refuses POST on the old path with a 403 HTML page. Same request body and response envelope; only the path changed
+- **429 handling** in the ODP and PTAB clients: a rate-limited call now waits (Retry-After, else exponential backoff) and retries up to `MAX_RETRIES` instead of returning the 429 to the caller. api.uspto.gov limits per key, so a burst of tool calls tripped it
+- Integration tests: `test/test_tools.py` and `test/test_tools_pytest.py` were duplicates; the pytest one survives under the shorter name, minus eight skipped PatentsView tests, with its `patentNumber:"…"` queries and `numFound` assertions (neither matched the live API or the tool envelope any more) fixed, and with live tests for `sections`, prefixed numbers, `ppubs_get_citing_patents`, the `odp_get_documents` filter and `odp_download_document`. `uv run pytest -m ""` runs the whole suite, unit and live, and passes
+- Live-verified 2026-09-26: `.pn.` with D/RE prefixes, `.urpn.`, the ODP document listing and download redirect, Assignment Center v3
+- Tool count: 38 registered by default (63 with `ENABLE_LEGACY_TOOLS`)
+
+### v1.1.1
+- **Fixed `ppubs_download_patent_pdf`**: USPTO moved the PDF download endpoint — the old `/api/internal/print/save/{pdfName}` path now returns 404; the client uses the live `/api/print/save/{pdfName}` endpoint (verified live 2026-08-05 with a real search, document fetch, and PDF download)
+- **Corrected PPUBS search syntax guidance**: the slash-prefix field qualifiers (`TTL/`, `IN/`, `AN/`, `CPC/`) no longer work on the live API — they silently return 0 results, and `TTL/"phrase"` returns a server 500. Search tool docstrings, the prior-art prompt, and the `patents://search-syntax` guide now teach the working dotted-suffix forms (`.ti.`, `.ab.`, `.clm.`, `.spec.`, `.in.`, `.as.`, `.pn.`, `.cpc.`, `@pd`/`@ad` date ranges), each verified live
+- Both breakages were USPTO-side drift predating v1.1.0 (confirmed by running the same live test against v1.0.0-era code)
+
+### v1.1.0
+- **Remote hosting over HTTP**: new `--transport streamable-http` mode serves the MCP endpoint over the network, so one deployment can back a whole team instead of every user running a local copy. `stdio` remains the default, so existing Claude Desktop and Claude Code configurations are unchanged. New flags `--host`, `--port`, `--path`, `--stateful`, `--json-response`, each with a matching `MCP_*` environment variable. See "Remote hosting over HTTP" for the security caveat — the endpoint holds your API keys and does not authenticate callers
+- **Stateless by default**: HTTP requests carry no per-client state, so the server can run behind a load balancer with several replicas and no session affinity
+- **Fixed a session race in the Public Search client** (affects stdio users too): concurrent tool calls each reset the shared cookie jar and raced to swap the access token, so requests already in flight could be signed with a half-replaced session. Session setup is now serialized, a 403 refresh is skipped when another call has already replaced the token, and the token travels per request instead of living on the shared client's default headers
+- **Fixed shutdown**: closing the nine HTTP clients no longer happens in an `atexit` hook that spun up a fresh event loop; it now runs in the loop the clients were opened on. Deliberately not a FastMCP lifespan — in stateless HTTP mode that runs once per request, which would close the clients after the first tool call
+- Raised the MCP SDK floor to `>=1.27` (was `>=1.3.0`, which allowed installs to resolve an SDK without streamable HTTP)
+- Added MCP protocol-layer tests: the suite previously called tool functions directly and never exercised schema generation, resource/prompt registration, or serialization. 19 new tests (378 total, up from 359)
+
+### v1.0.0
+- **Trademark support**: 9 new trademark tools across three new clients, all verified against the live USPTO services on 2026-06-10
+  - TSDR (`tsdr_get_trademark_status`, `tsdr_list_trademark_documents`, `tsdr_download_trademark_documents`, `tsdr_get_trademark_image`) — official trademark status/document API. Requires a TSDR-specific key (the ODP key does not work); error responses detect the wrong-key signature and explain how to get the right one. Document bundles above 4 MB are rejected with filter guidance (full wrappers can exceed 10 MB)
+  - Trademark search (`tm_search_trademarks`, `tm_get_trademark`) — full-text search by mark text, owner, goods/services, and Nice class via the internal Elasticsearch API behind tmsearch.uspto.gov (no official REST API exists). Verified live; handles AWS WAF rejections with `TMSEARCH_WAF_TOKEN` support
+  - Trademark assignments (`tm_search_assignments`) — USPTO Assignment Center public API (assignmentcenter.uspto.gov, no key required), searchable by serial/registration number, assignee, assignor, and reel/frame. Replaced the legacy assignment-api.uspto.gov XML API decommissioned June 5, 2026
+- New reference tools and resources: `get_trademark_class_info`, `get_trademark_status_code`, `trademarks://classes`, `trademarks://status-codes` (all 45 Nice classes, common trademark status codes)
+- 3 new workflow prompts: `trademark_clearance_search`, `trademark_portfolio_review`, `trademark_status_monitoring`
+- Fixed `ppubs_download_patent_pdf` (called `download_image` with the wrong signature, raising `TypeError`)
+- Rewrote patent workflow prompts to reference live tools (the old prompts still pointed at decommissioned PatentsView/Office Action/citation tools)
+- New env vars: `TSDR_API_KEY`, `TMSEARCH_WAF_TOKEN`, `TSDR_BASE_URL`, `TMSEARCH_BASE_URL`, `TM_ASSIGNMENT_BASE_URL`
+- Tool count: 61 registered (36 active, 25 unavailable)
+
+### v0.9.5
+- Re-enable 7 PTAB tools on USPTO ODP v3.0: `ptab_search_proceedings`, `ptab_get_proceeding`, `ptab_get_documents`, `ptab_search_decisions`, `ptab_get_decision`, `ptab_search_appeals`, `ptab_get_appeal` ([issue #23](https://github.com/riemannzeta/patent_mcp_server/issues/23)). PTAB data relocated to ODP `/api/v1/patent/trials/*` and `/api/v1/patent/appeals/*` (paths not in the ODP Swagger UI); the standalone-API decommission ([issue #16](https://github.com/riemannzeta/patent_mcp_server/issues/16)) was correct for the Patent Litigation API, but PTAB moved rather than disappeared.
+- Active tool count: 27 (up from 20); unavailable: 25 (down from 32); total registered remains 52
+
+### v0.9.4
+- Fix `ppubs_search_patents` / `ppubs_search_applications` query semantics ([issue #21](https://github.com/riemannzeta/patent_mcp_server/issues/21)): default operator changed from `OR` to `AND`, so multi-word queries like `machine learning` no longer match the entire corpus and collapse into the latest-grants fallback under `date_publ desc` sort.
+- Fix template-mutation bug in PPUBS client (`search_query.copy()` → `copy.deepcopy(...)`), eliminating a concurrency hazard between parallel calls.
+- Fix `odp_search_applications` filters being silently ignored upstream ([issue #21](https://github.com/riemannzeta/patent_mcp_server/issues/21)): switched from GET query-string params to POST with a Lucene-style `q` body. `assignee_name`, `inventor_name`, `application_number`, `patent_number`, and filing-date ranges are now properly AND-combined into the search. Tool now returns `MISSING_FILTER` rather than dumping the full 12.8M-record corpus when called with no filters.
+- Updated `ppubs_search_patents` / `ppubs_search_applications` / `odp_search_applications` docstrings to reflect the corrected semantics and document Lucene query support on ODP.
+- Added `CONTRIBUTING.md`, `AGENTS.md`, bug-report + feature-request issue templates, and a PR template.
+
+### v0.9.0
+- Handle PTAB Trial API and Patent Litigation API unavailability on ODP ([issue #16](https://github.com/riemannzeta/patent_mcp_server/issues/16))
+- All 7 `ptab_*` tools and 4 litigation tools now return `API_UNAVAILABLE` with workaround guidance pointing to PPUBS tools and USPTO bulk datasets
+- Active tool count: 20 (down from 31); unavailable: 32 (up from 21); total registered remains 52
+- Added unit tests for all 11 newly-unavailable tools and extended the shared error-structure parametrization
+- Updated `check_api_status`, `resources.py` data sources, client docstrings, and README to reflect the shutdown
+
+### v0.8.0
+- Handle decommissioned PatentsView API (shut down March 20, 2026)
+- All 14 `patentsview_*` tools return `API_UNAVAILABLE` with workaround guidance
+- Fixed circular references in office_actions resources that pointed to unavailable PatentsView tools
+- Updated API Sources table, configuration, and documentation
+
+### v0.7.0
+- Handle decommissioned Office Action and Enriched Citation APIs (developer.uspto.gov)
+- All 7 affected tools return `API_UNAVAILABLE` with workaround guidance
+- Added `test/unit/test_unavailable_tools.py` for decommissioned tool testing
+- Code cleanup: removed dead code, improved docstrings
+
+### v0.6.2
+- Updated API key registration instructions: keys are now obtained from [data.uspto.gov](https://data.uspto.gov) ("My ODP")
+- Clarified that `api.uspto.gov` is the correct API endpoint (not `data.uspto.gov` which is the web portal)
+- Noted PTAB API v3 migration to ODP and Office Action API migration (early 2026)
+
+### v0.6.1
+- Added PatentsView attorney search tools (`patentsview_search_attorneys`, `patentsview_get_attorney`)
+- Added PatentsView IPC classification tools (`patentsview_lookup_ipc`, `patentsview_search_by_ipc`)
+- Fixed bug in `search_publications` method (pagination options not being passed)
+
+### v0.6.0
+- PyPI release preparation
+
+### v0.5.0
+- Focused on USPTO-only data sources
+- Renamed ODP tools with `odp_` prefix for clarity
+- Improved function signatures (using `query` instead of `q`)
+
+### v0.3.0
+- Added 33 new tools (PTAB, PatentsView, Office Actions, Citations, Litigation)
+- Rate limiting support for PatentsView API
+- Comprehensive async client architecture
+
+### v0.2.2
+- Centralized configuration with environment variables
+- Standardized error handling
+- Input validation with Pydantic
+- Retry logic with exponential backoff
+- Session caching for PPUBS
+
+## License
+
+MIT

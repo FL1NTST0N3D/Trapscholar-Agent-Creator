@@ -1,0 +1,99 @@
+{
+  "name": "google-ads-copy-claude",
+  "version": "1.0.0",
+  "description": "Google Ads copywriting skill for Claude Code — RSA generation, headline formulas, Ad Strength optimization, emotional triggers, CTA analysis, A/B testing, and ad copy auditing.",
+  "author": "Shivendra Rawat",
+  "github": "0-shiv/google-ads-copy-claude",
+  "license": "MIT",
+  "keywords": [
+    "google-ads",
+    "copywriting",
+    "rsa",
+    "ad-copy",
+    "headlines",
+    "ppc",
+    "sem",
+    "performance-marketing",
+    "claude-code",
+    "skill"
+  ],
+  "commands": [
+    {
+      "name": "copy generate",
+      "description": "Generate a full RSA with 15 headlines and 4 descriptions",
+      "skill": "skills/copy-rsa-generator/SKILL.md"
+    },
+    {
+      "name": "copy headlines",
+      "description": "Generate headline variations using 50+ proven formulas",
+      "skill": "skills/copy-headline-formulas/SKILL.md"
+    },
+    {
+      "name": "copy descriptions",
+      "description": "Write conversion-optimized descriptions",
+      "skill": "skills/copy-description-writer/SKILL.md"
+    },
+    {
+      "name": "copy dki",
+      "description": "Dynamic Keyword Insertion setup and rules",
+      "skill": "skills/copy-dki-helper/SKILL.md"
+    },
+    {
+      "name": "copy strength",
+      "description": "Ad Strength audit and optimization",
+      "skill": "skills/copy-ad-strength/SKILL.md"
+    },
+    {
+      "name": "copy competitor",
+      "description": "Competitor ad copy analysis and differentiation",
+      "skill": "skills/copy-competitor-analysis/SKILL.md"
+    },
+    {
+      "name": "copy emotional",
+      "description": "Emotional trigger scoring with 200+ power words",
+      "skill": "skills/copy-emotional-triggers/SKILL.md"
+    },
+    {
+      "name": "copy cta",
+      "description": "CTA analysis and optimization by industry",
+      "skill": "skills/copy-cta-optimizer/SKILL.md"
+    },
+    {
+      "name": "copy test",
+      "description": "A/B test variation generator with statistical framework",
+      "skill": "skills/copy-ab-testing/SKILL.md"
+    },
+    {
+      "name": "copy report",
+      "description": "Full ad copy audit report with scoring",
+      "skill": "skills/copy-report/SKILL.md"
+    }
+  ],
+  "agents": [
+    {
+      "name": "full-rsa-workflow",
+      "description": "End-to-end RSA creation with optimization",
+      "file": "agents/full-rsa-workflow.md"
+    },
+    {
+      "name": "bulk-ad-generator",
+      "description": "Generate RSAs for multiple ad groups at scale",
+      "file": "agents/bulk-ad-generator.md"
+    },
+    {
+      "name": "competitor-to-ad",
+      "description": "Analyze competitor ads and generate differentiated copy",
+      "file": "agents/competitor-to-ad.md"
+    },
+    {
+      "name": "copy-audit-agent",
+      "description": "Comprehensive account-level copy audit",
+      "file": "agents/copy-audit-agent.md"
+    }
+  ],
+  "scripts": [
+    "scripts/char_counter.py",
+    "scripts/ad_strength_scorer.py",
+    "scripts/rsa_csv_exporter.py"
+  ]
+}

@@ -1,0 +1,913 @@
+# Claude Skills Collection
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Skills](https://img.shields.io/badge/skills-20-blue.svg)](./skills)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-purple.svg)](https://claude.ai/code)
+[![TDD](https://img.shields.io/badge/methodology-TDD-green.svg)](https://en.wikipedia.org/wiki/Test-driven_development)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+[![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/valorisa/claude-skills/graphs/commit-activity)
+
+> **Community-contributed skills for [Claude Code](https://claude.ai/code) to enhance productivity, optimize token usage, and improve development workflows.**
+
+[🇫🇷 Version française](./README_FR.md)
+
+---
+
+## 📋 Table of Contents
+
+- [What Are Claude Skills?](#-what-are-claude-skills)
+- [Quick Start](#-quick-start-5-minutes)
+- [Which Skill Should I Use?](#-which-skill-should-i-use)
+- [Installation](#-installation)
+- [Complete Development Workflow](#-complete-development-workflow)
+- [Available Skills](#-available-skills-detailed-reference)
+- [TDD Methodology](#-tdd-methodology-explained)
+- [Acronyms & Terminology](#-acronyms--terminology)
+- [How Skills Work](#-how-skills-work)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## 🤔 What Are Claude Skills?
+
+**Skills** are reusable process guides that help Claude Code (and other AI agents) follow proven techniques, patterns, and workflows consistently.
+
+### Why Skills Matter
+
+Without skills, AI agents:
+
+- ❌ Make inconsistent decisions
+- ❌ Fall into common traps (token waste, verbose output, wrong tools)
+- ❌ Rationalize bad practices ("I'll explain first" = wasting tokens)
+
+With skills, AI agents:
+
+- ✅ Follow validated workflows
+- ✅ Apply battle-tested optimizations
+- ✅ Counter their own rationalizations
+- ✅ Deliver predictable, high-quality results
+
+### Skills vs. Prompts
+
+| Aspect | One-time Prompt | Persistent Skill |
+|--------|----------------|------------------|
+| **Scope** | Single conversation | All future conversations |
+| **Quality** | Untested, ad-hoc | TDD-validated, battle-tested |
+| **Maintenance** | Copy-paste every time | Installed once, updated centrally |
+| **Learning** | You teach agent each time | Agent learns pattern once |
+
+---
+
+## 🚀 Quick Start (5 minutes)
+
+**New to Claude Skills? Start here:**
+
+### Try Your First Skill
+
+```bash
+# 1. Clone this repository
+git clone https://github.com/valorisa/Claude-Skills.git
+cd Claude-Skills
+
+# 2. Install one skill to try (rescue-tokens is great for beginners)
+cp -r skills/rescue-tokens ~/.claude/skills/
+```
+
+### Test It in Claude Code
+
+1. Open Claude Code (CLI, desktop app, or web)
+2. Start a conversation and mention: **"I'm getting rate limit warnings"**
+3. Claude will automatically activate the `rescue-tokens` skill
+4. Watch how Claude optimizes its behavior to save tokens!
+
+### What Happens?
+
+**Without skill:** Claude might write verbose explanations (950 words), wasting tokens
+
+**With skill:** Claude responds concisely (97 words), taking immediate action
+
+### Next Steps
+
+- **Want the full development workflow?** → See [Complete Development Workflow](#-complete-development-workflow)
+- **Not sure which skill to use?** → See [Which Skill Should I Use?](#-which-skill-should-i-use)
+- **Ready to install all skills?** → See [Installation](#-installation)
+
+---
+
+## 🎯 Which Skill Should I Use?
+
+**Choose your path based on what you need:**
+
+### For Everyone
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [rescue-tokens](./skills/rescue-tokens/README.md) | Getting rate limits, context warnings, or slow responses | Prevents token waste that causes rate limits. **Start here if unsure!** |
+| [token-optimization](./skills/token-optimization/README.md) | High token costs, context bloat, slow sessions, cache invalidation | Systematic optimization across 4 axes: cache management, context forking, model selection, input filtering. Proven to reduce costs by 70-80%. |
+
+### For Starting New Work
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [spec-driven](./skills/spec-driven/README.md) | Starting a new feature or complex task | Prevents "coding too early" syndrome. Forces you to think through requirements before writing code, avoiding costly rewrites. |
+| [create-github-issues](./skills/create-github-issues/README.md) | You have a plan/spec and need to break it into tasks | Converts big plans into small, independent, shippable chunks. Each issue = complete feature slice (UI → API → DB). |
+
+### For Writing Code
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [tdd-hybrid](./skills/tdd-hybrid/README.md) | Implementing any feature or bugfix | Write tests before code = fewer bugs, better design. Prevents "it works on my machine" problems. |
+| [diagnose](./skills/diagnose/README.md) | Stuck on a hard bug or performance issue | Systematic debugging prevents guessing. Reproduce → minimize → fix → test. Ensures bug stays fixed. |
+
+### For Improving Existing Code
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [improve-codebase-architecture](./skills/improve-codebase-architecture/README.md) | Periodic codebase reviews, or code feels messy | Finds architectural improvements based on your domain language (CONTEXT.md). Suggests consolidation opportunities. |
+
+### For Advanced Decision-Making
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [grill-me](./skills/grill-me/README.md) | Stress-testing a plan or design before committing to it | Relentlessly interviews you branch-by-branch through the decision tree until blind spots surface. |
+| [llm-council](./skills/llm-council/README.md) | Big decisions, tradeoff analysis, architecture choices | Gets 5 independent AI perspectives, peer-reviewed. Catches blind spots you'd miss alone. |
+| [multi-llm-debate-grill-me](./skills/multi-llm-debate-grill-me/README.md) | Cross-checking a plan across several LLMs before committing to it | Runs a structured multi-model debate: silent grill-me framing, independent positions, cross-reading, revision, then a final judge synthesis. Complements `grill-me` (single-model) when you want independent models to challenge each other. |
+| [promptor](./skills/promptor/README.md) | Creating optimized prompts for AI tools | Generates production-ready prompts using 18 optimization techniques. Copy-paste-ready. |
+| [promptor-council](./skills/promptor-council/README.md) | High-stakes or production-critical prompts where self-critique alone isn't enough | Adds an optional 5-advisor council audit on top of promptor's pipeline, with blind peer review and a chairman verdict. |
+| [rodin](./skills/rodin/README.md) | Deep debates on politics, economics, philosophy | Socratic intellectual sparring partner for deep debates on politics, economics, philosophy - challenges positions with anti-compliance, steelmanning, and rigorous classification |
+
+### For Mathematics & Formal Proofs
+
+| Skill | When to Use | Why You Need This |
+| ----- | ----------- | ----------------- |
+| [maths-olympiad](https://github.com/valorisa/Claude-Skills/blob/main/skills/maths-olympiad/README.md) | Solving or verifying competition math problems (IMO, Putnam, USAMO, AIME) | Multi-agent parallel solving with adversarial verification and context isolation. Produces verified LaTeX proofs. Abstains rather than guessing. |
+
+### For Quality-Assured Work
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [fabuleux](./skills/fabuleux/README.md) | Any task where you want verified, honest, non-bloated output | Routes effort by task type: ARTEFACT (screenshot + vision loop), PROSE (subtraction pass), ANALYSIS (claim verification), AUDIT (honest diagnosis → correction), SIMPLE (direct answer). Eliminates "probably works" reporting. |
+
+### Setup (Run Once Per Repo)
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [setup-matt-pocock-skills](./skills/setup-matt-pocock-skills/README.md) | First time setting up a new repository | Configures issue tracker (GitHub, GitLab, or local markdown), triage label vocabulary, and single/multi-context domain doc layout. One-time setup, manually invoked only. |
+
+### Utilities
+
+| Skill | When to Use | Why You Need This |
+|-------|-------------|-------------------|
+| [skills-smart-manager](./skills/skills-smart-manager/README.md) | Session feels slow, context >60%, managing loaded skills, optimizing token usage | Meta-skill that monitors and manages all other skills. Automatically unloads stale skills, detects conflicts, recommends skills based on project type, and performs health checks. Prevents context bloat and optimizes session performance. |
+| [skill-factory](./skills/skill-factory/README.md) | Creating production-ready skills with validation and tests | Advanced meta-skill following Anthropic's official guide. Generates complete skill packages with validation scripts, test suites, and distribution-ready structure. Use for professional-grade skills. |
+| [skill-creator](./skills/skill-creator/README.md) | Quick prototyping of custom skills | Lightweight tool for fast iteration. Guides you through basic structure. Use for simple skills or rapid experimentation. |
+| [find-bugs](./skills/find-bugs/README.md) | Systematic bug hunting in codebase | Structured approach to finding and documenting bugs. |
+
+**💡 Tip:** Skills work together! Common workflow: `spec-driven` → `create-github-issues` → `tdd-hybrid` (per issue) → `diagnose` (if bugs found)
+
+---
+
+## 📦 Available Skills (Detailed Reference)
+
+This collection includes **20 skills** organized into workflows and utilities.
+
+> **💡 Note on Triggers:** When you mention any of the trigger keywords in your conversation with Claude, the skill automatically activates. For example, saying "I'm getting rate limit warnings" activates `rescue-tokens`.
+
+### 🎯 Core Development Workflow
+
+**Recommended workflow:** `/spec-driven` → `/create-github-issues` → `/tdd-hybrid` (per issue)
+
+#### 1. [spec-driven](./skills/spec-driven/README.md)
+
+**Spec-driven development with enforced pipeline and token budgets.**
+
+Activates structured spec-first workflow (SPEC→PLAN→IMPL→VERIF→SYNTHESE) with 3-way triage (FULL/LIGHT/SHIP), token budgets, and explicit gates. Use when starting features or complex tasks.
+
+**Triggers:** `spec-driven`, `/spec-driven`, `mode spec`, `spec first`, `pipeline complet`
+
+#### 2. [create-github-issues](./skills/create-github-issues/README.md)
+
+**Break plans into vertical-slice GitHub issues.**
+
+Converts plans, specs, or PRDs into independently-grabbable GitHub issues using tracer-bullet vertical slices. Each issue is a complete feature slice (UI → API → DB).
+
+**Triggers:** User wants to convert plan into issues, create implementation tickets, or break down work
+
+#### 3. [tdd-hybrid](./skills/tdd-hybrid/README.md)
+
+**Test-driven development with strict discipline and intelligent workflow.**
+
+Combines TDD rigor (Iron Law, mandatory verification) with intelligent planning, vertical slicing, and domain awareness. Includes LIGHT/FULL triage and optional spec/verify gates.
+
+**Triggers:** Implementing features or fixing bugs with TDD, `/tdd-hybrid`
+
+#### 4. [diagnose](./skills/diagnose/README.md)
+
+**Disciplined diagnosis loop for hard bugs and performance regressions.**
+
+Structured debugging: reproduce → minimize → hypothesize → instrument → fix → regression-test. Prevents premature conclusions and ensures reproducible fixes.
+
+**Triggers:** `diagnose this`, `debug this`, bug reports, something broken/failing, performance regressions
+
+#### 5. [improve-codebase-architecture](./skills/improve-codebase-architecture/README.md)
+
+**Find deepening opportunities in codebases.**
+
+Analyzes codebases for architectural improvements informed by domain language (CONTEXT.md) and architectural decisions (docs/adr/). Suggests consolidation of tightly-coupled modules and testability improvements.
+
+**Triggers:** Improve architecture, find refactoring opportunities, periodic codebase review
+
+---
+
+### 🛠️ Supporting Skills
+
+#### Setup & Configuration
+
+##### [setup-matt-pocock-skills](./skills/setup-matt-pocock-skills/README.md)
+
+**Initial repository configuration (run once, manually invoked only).**
+
+Explores the repo first (git remote, existing CLAUDE.md/AGENTS.md, CONTEXT.md), then walks through three decisions one at a time: issue tracker (GitHub, GitLab, local markdown under `.scratch/`, or other), triage label vocabulary mapped to the five canonical roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), and domain doc layout (single-context `CONTEXT.md` or multi-context `CONTEXT-MAP.md` for monorepos). Writes an `## Agent skills` block plus `docs/agents/*.md` files that other engineering skills read from.
+
+---
+
+#### Token & Context Optimization
+
+##### [rescue-tokens](./skills/rescue-tokens/README.md)
+
+**Prevents token exhaustion through 9 optimization patterns.**
+
+Automatically detects and fixes token waste: eternal conversations, verbose output, wrong model choice, MCP bloat, expensive files. Activates when context ≥40%, rate limits, or 5+ MCPs loaded.
+
+**Verified results:** 90% token reduction in emergency scenarios.
+
+[📖 Full Documentation](./skills/rescue-tokens/SKILL.md)
+
+##### [token-optimization](./skills/token-optimization/README.md)
+
+**Systematic token optimization across 4 critical axes.**
+
+Optimizes Claude Code token consumption through cache management (prevent invalidation), context forking (isolated agents), model/effort selection (appropriate reasoning), and input filtering (RTK, Stagehand). Includes session auditing, CLAUDE.md templates, and monitoring tools.
+
+**Documented results:** $750/month → $100/month (85% reduction).
+
+**Triggers:** `tokens`, `cost`, `expensive`, `context`, `cache`, `slow session`, `optimize`
+
+[📖 Full Documentation](./skills/token-optimization/SKILL.md)
+
+##### [standardize-github-repo](./skills/standardize-github-repo/README.md)
+
+**Standardize GitHub repositories with bilingual READMEs and CI linting.**
+
+Creates comprehensive bilingual READMEs (EN/FR) with pedagogical content, GitHub About optimization (<350 chars, 20 topics), contextual badges, and CI Markdown linting with zero violations. Interactive 5-phase workflow.
+
+**Triggers:** `/standardize-github-repo`, or automatic when saying "on va faire un repo GitHub", "je vais publier sur GitHub", "git push origin"
+
+---
+
+#### Advanced Decision-Making
+
+##### [grill-me](./skills/grill-me/README.md)
+
+**Relentless decision-tree interview to stress-test a plan or design.**
+
+Interviews the user branch-by-branch through every node of a decision tree until mutual understanding is complete. Maps the decision tree upfront, challenges omissions, resolves cross-branch dependencies, then runs four stress tests (worst-case, inversion, constraint, ignorance) before delivering a synthesis of what's solid, fragile, and missing.
+
+**Triggers:** `grille-moi`, `grill me`, `stress-test this`, `challenge my plan`, presenting a plan/design/architecture and asking for critical review
+
+[📖 Full Documentation](./skills/grill-me/README.md)
+
+##### [llm-council](./skills/llm-council/README.md)
+
+**Multi-perspective decision analysis via 5-advisor council.**
+
+Runs questions through a council of 5 AI advisors who independently analyze, peer-review anonymously, and synthesize a verdict. Based on Karpathy's LLM Council methodology.
+
+**Mandatory triggers:** `council this`, `run the council`, `war room this`, `pressure-test this`
+
+##### [multi-llm-debate-grill-me](./skills/multi-llm-debate-grill-me/README.md)
+
+**Structured multi-LLM debate protocol with a silent grill-me framing and a final judge.**
+
+Runs a plan, design, or project idea through several LLMs (Claude, DeepSeek, GLM, Qwen, etc.) via a controlled debate: each model performs a silent "grill me" style framing (Round 0), states an independent position (Round 1), cross-reads and reacts to the other models' answers (Round 2), produces a consolidated revision (Round 3), then a separate judge model arbitrates and synthesizes. Prevents both single-model blind spots and copy-chain drift between models. Pairs well with the `grill-me` skill, which the Round 0 framing is based on.
+
+**Triggers:** `multi-llm debate`, `debate this across models`, `run this through multiple LLMs`, presenting a plan/design and asking for a cross-model stress test
+
+##### [promptor](./skills/promptor/README.md)
+
+**Generate optimized prompts via 5-circle validation pipeline.**
+
+Produces domain-agnostic, auditable, copy-paste-ready prompts using 18 optimization hacks fused with 5-circle validation.
+
+**Triggers:** `create a prompt`, `optimize this prompt`, `promptor`, `generate a system prompt`
+
+##### [promptor-council](./skills/promptor-council/README.md)
+
+**Promptor v3 with optional multi-agent council audit.**
+
+Same 5-circle validation pipeline and 18-hack filter as `promptor`, plus an optional Phase 4: when self-critique scores below 4/5 or the domain is production-critical (security, compliance, legal), it proposes routing the generated prompt through an LLM Council — 5 independent advisors, blind anonymized peer review, and a chairman synthesis — then generates a visual HTML report and a full markdown transcript. Also adds compliance-aware checks (correlated proxy variable detection, mandatory human-escalation workflow specs) not present in base `promptor`.
+
+**Triggers:** Same as `promptor`, plus `[COUNCIL]` to force the council audit regardless of self-critique score
+
+[📖 Full Documentation](./skills/promptor-council/README.md)
+
+##### [rodin](./skills/rodin/README.md)
+
+**Socratic intellectual sparring partner for deep societal debates.**
+
+Anti-compliance debate assistant for politics, economics, and philosophy. Systematically steelmans opposing arguments, classifies claims (✓ Juste, ~ Contestable, ⚡ Simplification, ◐ Angle mort, ✗ Faux), and challenges positions with intellectual rigor. Maintains persistent bibliography tracking books and recommendations from debates.
+
+**Triggers:** `rodin`, `/rodin`, `débat socratique`, `challenge my position`, or discussing societal topics
+
+**Key features:**
+
+- Anti-compliance protocol: contradicts directly instead of validating
+- Systematic steelmanning: reconstructs opposing views in strongest form
+- Classification system: labels every major claim
+- Historically anchored: convokes relevant precedents from philosophy, economics, sociology
+- Bibliography persistence: maintains `biblio-rodin.md` with context of why each book matters
+
+[📖 Full Documentation](./skills/rodin/README.md)
+
+---
+
+#### Mathematics & Formal Proofs
+
+##### [maths-olympiad](https://github.com/valorisa/Claude-Skills/blob/main/skills/maths-olympiad/README.md)
+
+**Multi-agent workflow for rigorous competition mathematics.**
+
+Advanced pipeline for solving, verifying, and formatting proofs for math competitions (IMO, Putnam, USAMO, AIME). Runs 8–12 parallel solver agents with internal self-improvement cycles, adversarial verifiers with strict context isolation (verifier never sees solver's reasoning trace), asymmetric vote thresholds (4 HOLDS to confirm, 2 HOLE FOUND to refute), a "deep mode" for bounded computation, and a final LaTeX presentation pass. Optimizes conditional accuracy: will say "no confident solution" with partial results rather than guess.
+
+**Triggers:** `maths-olympiad`, `/maths-olympiad`, competition math problem, `solve this olympiad`, `verify this proof`, `IMO`, `Putnam`, `USAMO`, `AIME`
+
+**Key features:**
+
+- Dual context isolation: verifier blind to solver's thinking trace AND other verifiers' verdicts
+- Pattern-specific adversarial attacks (12 named checks: #4, #18, #40…)
+- Calibrated abstention with partial results documented
+- Deep mode: bounded computation (mod arithmetic, small-case enumeration) when pure reasoning abstains
+- Presentation pass: verified proof reformatted for elegance and concision in LaTeX
+
+[📖 Full Documentation](https://github.com/valorisa/Claude-Skills/blob/main/skills/maths-olympiad/SKILL.md)
+
+---
+
+#### Quality Discipline
+
+##### [fabuleux](./skills/fabuleux/README.md)
+
+**High-standard working discipline held for the full session.**
+
+Routes effort to the task type instead of applying one recipe to everything: ARTEFACT/AGENTIC (produce → screenshot → vision → fix → re-capture), PROSE (draft + mandatory subtraction pass), ANALYSIS/ADVICE (verify every claim, useful truth over flattery), AUDIT (honest diagnosis → validation → correction with real proof), SIMPLE/ONE-SHOT (direct answer, no overhead). Distilled from Fable 5's real sessions.
+
+**Triggers:** `fabuleux`, `/fabuleux`, `mode fabuleux`, `niveau Fable 5`, `qualité maximale`, `sois exigeant`, `audit fabuleux`, `relis vraiment ce que tu produis`, or any request for thorough, verified, non-bloated work
+
+[📖 Full Documentation](./skills/fabuleux/README.md)
+
+---
+
+#### Development Utilities
+
+##### [skills-smart-manager](./skills/skills-smart-manager/README.md)
+
+**Meta-skill for intelligent skill lifecycle management.**
+
+Monitors, analyzes, and optimizes all other skills loaded in Claude Code sessions. Automatically unloads stale skills (unused >15 turns), detects conflicts between skills, recommends skills based on project type, performs health checks on MCP servers and APIs, cleans up temporary files, and archives session memory per repository. Prevents context bloat and optimizes session performance.
+
+**Triggers:** `optimize skills`, `clean up context`, `manage skills`, `free tokens`, `skill health check`, `session feels slow`, or when context >60% and multiple skills loaded
+
+[📖 Full Documentation](./skills/skills-smart-manager/SKILL.md)
+
+##### [skill-creator](./skills/skill-creator/README.md)
+
+**Create new skills following best practices.**
+
+Guides skill creation process with TDD methodology, proper structure, and validation.
+
+##### [find-bugs](./skills/find-bugs/README.md)
+
+**Systematic bug detection and analysis.**
+
+Structured approach to finding and documenting bugs in codebases.
+
+---
+
+## 🔄 Complete Development Workflow
+
+This collection implements a **spec-first, test-driven, vertical-slice workflow** inspired by Matt Pocock's methodology.
+
+### Initial Repository Setup (Once)
+
+```bash
+# 1. Install skills to ~/.claude/skills/
+# 2. In your project repository:
+/setup-matt-pocock-skills
+```
+
+This creates:
+
+- Issue tracker configuration (GitHub via `gh` CLI, GitLab via `glab` CLI, or local markdown under `.scratch/`)
+- Triage label vocabulary mapped to the five canonical roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)
+- `CONTEXT.md` (or `CONTEXT-MAP.md` for multi-context monorepos) for domain documentation
+- `docs/adr/` for architectural decisions
+
+### Development Cycle (Per Feature)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Phase 1: SPECIFICATION                                      │
+│ /spec-driven                                                │
+│ → Creates detailed spec with requirements, constraints      │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Phase 2: ISSUE BREAKDOWN                                    │
+│ /create-github-issues                                       │
+│ → Converts spec into vertical-slice GitHub issues           │
+│ → Each issue = UI → API → DB (complete feature slice)       │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Phase 3: IMPLEMENTATION (Per Issue)                         │
+│ /tdd-hybrid                                                 │
+│ → Test-first development with LIGHT/FULL triage             │
+│ → RED → GREEN → REFACTOR cycle                              │
+│ → Mandatory verification before completion                  │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Phase 4: DEBUGGING (When Needed)                            │
+│ /diagnose                                                   │
+│ → Reproduce → Minimize → Hypothesize → Fix → Regression     │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Phase 5: PERIODIC MAINTENANCE                               │
+│ /improve-codebase-architecture                              │
+│ → Find deepening opportunities                              │
+│ → Consolidate tightly-coupled modules                       │
+│ → Improve testability                                       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Example Session
+
+```bash
+# Start new feature
+You: "Add user authentication with OAuth2"
+
+# 1. Create specification
+/spec-driven
+
+# 2. Break into issues (after spec approved)
+/create-github-issues
+
+# 3. Pick first issue from GitHub
+# Example: "Issue #42: OAuth2 login button UI"
+
+# 4. Implement with TDD
+/tdd-hybrid
+# → Creates failing tests
+# → Implements minimal code
+# → Refactors
+# → Verifies all tests pass
+
+# 5. If bug found
+/diagnose
+# → Reproduces issue
+# → Creates minimal reproduction
+# → Fixes root cause
+# → Adds regression test
+
+# 6. Periodic architecture review
+/improve-codebase-architecture
+```
+
+### Triage System
+
+Each skill and issue uses **5 canonical labels**:
+
+| Label | Meaning | When to Use |
+|-------|---------|-------------|
+| **LIGHT** | Simple, low-risk | Small changes, obvious fixes |
+| **FULL** | Complex, needs rigor | New features, refactors, critical bugs |
+| **SHIP** | Ready to merge | All tests pass, reviewed |
+| **BLOCKED** | Can't proceed | Missing dependencies, design unclear |
+| **WONTFIX** | Intentionally skipped | Out of scope, obsolete |
+
+**Benefits:**
+
+- Clear communication (team knows risk level)
+- Appropriate rigor (no over-engineering simple fixes)
+- Efficient workflow (skip unnecessary process for LIGHT)
+
+---
+
+## 🎯 Installation
+
+### Prerequisites
+
+- [Claude Code](https://claude.ai/code) installed (CLI, desktop app, or web)
+- Git (for cloning)
+- Basic command line knowledge
+
+### Option 1: Install Individual Skill
+
+```bash
+# Copy skill to your Claude skills directory
+cp -r skills/rescue-tokens ~/.claude/skills/
+
+# Verify installation
+# In Claude Code CLI or chat
+/skills list
+# Should show: rescue-tokens
+```
+
+### Option 2: Clone Entire Collection
+
+```bash
+# Clone this repository
+git clone https://github.com/valorisa/Claude-Skills.git
+
+# Navigate to directory
+cd Claude-Skills
+
+# Link all skills to Claude
+ln -s "$(pwd)/skills/"* ~/.claude/skills/
+```
+
+### Option 3: Manual Installation (Windows)
+
+```powershell
+# Clone repo
+git clone https://github.com/valorisa/Claude-Skills.git
+
+# Copy skills to Claude directory
+xcopy /E /I Claude-Skills\skills\rescue-tokens %USERPROFILE%\.claude\skills\rescue-tokens
+```
+
+### Verify Installation
+
+1. Open Claude Code (CLI, desktop, or web)
+2. Type `/skills list`
+3. You should see `rescue-tokens` in the list
+4. Test it: `/rescue-tokens` or mention "rate limit" in conversation
+
+---
+
+## 🧪 TDD Methodology Explained
+
+### What is TDD?
+
+**TDD = Test-Driven Development**
+
+A software development methodology where **tests are written BEFORE the code**, not after.
+
+### TDD for Documentation
+
+This collection applies TDD principles to **skill creation** (documentation):
+
+| Traditional Approach | TDD Approach |
+|---------------------|--------------|
+| 1. Write skill based on intuition | 1. Create pressure scenarios (tests) |
+| 2. Deploy to users | 2. Run tests WITHOUT skill (observe failures) |
+| 3. Users report issues | 3. Write skill to fix observed failures |
+| 4. Debug in production | 4. Run tests WITH skill (verify fixes) |
+| ❌ Unpredictable quality | ✅ Validated quality |
+
+### The Three Phases
+
+#### 🔴 RED Phase: Create Failing Tests
+
+**Goal:** Observe how agents fail WITHOUT the skill
+
+**Process:**
+
+1. Create 3+ pressure scenarios (time pressure + sunk cost + authority)
+2. Run scenarios with sub-agents (no skill loaded)
+3. Document exact behaviors and rationalizations verbatim
+
+**Example Scenario:**
+
+```
+Context: 78% full, rate limit warnings, 2-hour deadline
+User: "Don't make me lose context! Just read this 40-page PDF and fix it."
+
+Observed behavior:
+- Agent wrote 950 words with "Reasoning:" sections
+- Agent asked permission instead of acting
+- Agent read entire PDF (40K tokens wasted)
+```
+
+#### 🟢 GREEN Phase: Write Minimal Skill
+
+**Goal:** Write just enough to pass the tests
+
+**Process:**
+
+1. Create skill addressing specific failures from RED phase
+2. Add Action Matrix (what to do in each situation)
+3. Add Rationalization table (counter excuses agents made)
+4. Run same scenarios WITH skill
+5. Verify improvements
+
+**Example Result:**
+
+```
+Same scenario with skill:
+- Agent wrote 525 words (45% improvement)
+- Agent acted immediately (no permission asked)
+- Agent asked for PDF excerpts (saved 35K tokens)
+```
+
+#### 🔵 REFACTOR Phase: Close Loopholes
+
+**Goal:** Find and plug remaining weaknesses
+
+**Process:**
+
+1. Analyze GREEN results for new rationalizations
+2. Add explicit counters to skill
+3. Update Rationalization table
+4. Re-test until bulletproof
+
+**Example Result:**
+
+```
+After adding "NO Reasoning: blocks" rule:
+- Agent wrote 97 words (90% improvement)
+- Zero "Reasoning:" sections
+- Zero rationalizations found
+```
+
+### Why TDD for Skills?
+
+**Benefits:**
+
+- ✅ **Validated:** Every rule based on observed failures
+- ✅ **Bulletproof:** Tested against multiple pressure scenarios
+- ✅ **Measurable:** Clear before/after metrics
+- ✅ **Maintainable:** Tests catch regressions when updating
+
+**Without TDD:**
+
+- ❌ Rules based on assumptions (might be wrong)
+- ❌ Unknown effectiveness (no measurements)
+- ❌ Loopholes discovered in production
+- ❌ No way to verify updates
+
+---
+
+## 🔤 Acronyms & Terminology
+
+### Development Methodologies
+
+| Acronym | Full Name | Description | When to Use |
+|---------|-----------|-------------|-------------|
+| **TDD** | **T**est-**D**riven **D**evelopment | Write tests before code | All skills in this repo |
+| **BDD** | **B**ehavior-**D**riven **D**evelopment | Tests based on business behaviors | Documenting user-facing features |
+| **DDD** | **D**omain-**D**riven **D**esign | Design centered on business domain | Complex business logic |
+| **ATDD** | **A**cceptance **T**est-**D**riven **D**evelopment | Acceptance tests before implementation | User acceptance scenarios |
+
+### TDD Phases
+
+| Phase | Name | Color | Goal | Success Criteria |
+|-------|------|-------|------|------------------|
+| **Phase 1** | RED | 🔴 | Tests fail (no skill exists) | Documented baseline failures |
+| **Phase 2** | GREEN | 🟢 | Tests pass (minimal skill) | All tests pass |
+| **Phase 3** | REFACTOR | 🔵 | Improve without breaking | Tests still pass, quality improves |
+
+### Claude Code Terminology
+
+| Term | Definition | Example |
+|------|------------|---------|
+| **Skill** | Reusable process guide | `rescue-tokens`, `brainstorming` |
+| **MCP** | Model Context Protocol (plugins) | GitHub MCP, filesystem MCP |
+| **Context** | Conversation memory (tokens) | "Context at 78% full" |
+| **Token** | Unit of text (≈4 characters) | "Hello world" ≈ 2-3 tokens |
+| **Rate Limit** | Maximum messages per time period | "$20 plan = 50 messages/5 hours" |
+| **Sub-agent** | Isolated agent for specific task | Research sub-agent, analysis sub-agent |
+| **Rationalization** | Excuse agent makes to break rules | "I'll explain first" (wastes tokens) |
+
+### rescue-tokens Specific Terms
+
+| Term | Definition | Emergency Level |
+|------|------------|-----------------|
+| **Emergency Red Flag** | Condition triggering rescue mode | ⚠️ Immediate action required |
+| **Action Matrix** | Decision table (symptom → action) | Used in emergency |
+| **Response Discipline** | Rules for terse output | Active when emergency |
+| **Token Trap** | Pattern that wastes tokens | 9 patterns detected |
+| **Rationalization** | Agent's excuse to break rules | 9 countered explicitly |
+
+---
+
+## 🔧 How Skills Work
+
+### Skill Lifecycle
+
+```
+1. User mentions trigger
+   ↓
+2. Claude detects keyword (e.g., "rate limit")
+   ↓
+3. Claude invokes skill via Skill tool
+   ↓
+4. Skill content loaded into context
+   ↓
+5. Claude follows skill instructions
+   ↓
+6. Result: Optimized behavior
+```
+
+### Skill Invocation Methods
+
+#### A) Automatic (Detection-based)
+
+Claude reads skill descriptions and auto-invokes when triggers match:
+
+```
+User: "I'm getting rate limit warnings"
+Claude: [detects "rate limit" → invokes rescue-tokens → follows rules]
+```
+
+**Depends on:**
+
+- Good skill description (rich keywords)
+- Claude Code Search Optimization (CSO)
+
+#### B) Manual (Explicit)
+
+User explicitly requests skill:
+
+```bash
+# In Claude Code CLI
+/rescue-tokens
+
+# Or in chat
+"Use the rescue-tokens skill to help me optimize"
+```
+
+**Guaranteed to work.**
+
+#### C) Forced (Development/Testing)
+
+For testing purposes, force skill invocation:
+
+```
+**IMPORTANT: You MUST use the skill 'rescue-tokens' before responding.**
+```
+
+**Used during TDD testing.**
+
+### Skill Anatomy
+
+Every skill has:
+
+1. **Frontmatter (YAML)**
+
+   ```yaml
+   ---
+   name: skill-name
+   description: Use when [triggers]
+   ---
+   ```
+
+2. **Overview** (Core principle)
+3. **Quick Reference** (Action Matrix, tables)
+4. **Common Mistakes** (What to avoid)
+5. **Examples** (Before/after comparisons)
+6. **Optional:** Flowcharts, supporting files
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! All skills must follow TDD methodology.
+
+### Quick Start
+
+1. **Fork** this repository
+2. **Create pressure scenarios** (RED phase)
+3. **Test without skill** (document failures)
+4. **Write minimal skill** (GREEN phase)
+5. **Test with skill** (verify improvements)
+6. **Refactor** (close loopholes)
+7. **Submit PR** with test results
+
+### Requirements
+
+- ✅ 3+ pressure scenarios tested
+- ✅ Baseline (RED) results documented
+- ✅ Improvement metrics (GREEN/REFACTOR)
+- ✅ Rationalization table (agent excuses countered)
+- ✅ Before/after comparison
+- ✅ Skill follows structure guidelines
+
+### Full Guidelines
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for complete TDD methodology, structure requirements, and submission process.
+
+---
+
+## 📊 Metrics & Impact
+
+### rescue-tokens Performance
+
+| Metric | Baseline | GREEN | REFACTOR | Improvement |
+|--------|----------|-------|----------|-------------|
+| **Response Length** | 950 words | 525 words | 97 words | **90% reduction** |
+| **"Reasoning:" Sections** | 3-5 | 1-2 | 0 | **100% eliminated** |
+| **Markdown Tables** | 2-3 | 2-3 | 0 | **100% eliminated** |
+| **Permission Requests** | Yes | Sometimes | No | **100% decisive** |
+| **Token Efficiency** | Low | Medium | High | **Optimal** |
+| **Rationalizations** | 5 found | 9 found | 0 found | **Bulletproof** |
+
+### Real-World Impact
+
+Based on testing:
+
+- **Token savings:** ~600K tokens per refactoring task (sequential vs parallel sub-agents)
+- **Rate limit prevention:** Emergency mode activates at 40% context (before issues)
+- **Time saved:** Immediate decisive action (no back-and-forth for permission)
+
+---
+
+## 📚 Additional Resources
+
+### Learn More
+
+- [Claude Code Official Docs](https://docs.anthropic.com/en/docs/build-with-claude/claude-code)
+- [Test-Driven Development (Wikipedia)](https://en.wikipedia.org/wiki/Test-driven_development)
+- [Anthropic Skills Marketplace](https://docs.anthropic.com/en/docs/build-with-claude/claude-code) *(coming soon)*
+
+### Related Projects
+
+- [Anthropic Superpowers](https://github.com/anthropics/claude-code) - Official Claude Code skills
+- [Writing Skills Guide](https://github.com/anthropics/claude-code) - Official skill creation methodology
+
+### Community
+
+- **Issues:** [Report bugs or request features](https://github.com/valorisa/Claude-Skills/issues)
+- **Discussions:** [Ask questions or share ideas](https://github.com/valorisa/Claude-Skills/discussions)
+- **PRs:** [Contribute new skills](./CONTRIBUTING.md)
+
+---
+
+## 📜 License
+
+MIT License © 2026 [@valorisa](https://github.com/valorisa)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction.
+
+See [LICENSE](./LICENSE) for full terms.
+
+---
+
+## 🙏 Credits
+
+**Created by:** [@valorisa](https://github.com/valorisa)
+
+**Inspired by:**
+
+- [Anthropic's Superpowers](https://github.com/anthropics/claude-code) methodology
+- Test-Driven Development principles
+- Real-world Claude Code usage patterns
+
+**Special Thanks:**
+
+- Anthropic team for Claude Code platform
+- Community contributors (see [CONTRIBUTING.md](./CONTRIBUTING.md))
+- All users who test and provide feedback
+
+---
+
+## 🔮 Roadmap
+
+### Upcoming Skills
+
+- **debug-systematic:** Methodical debugging workflow (hypothesis → test → verify)
+- **brainstorm-before-code:** Requirements clarification before implementation
+- **context-hygiene:** Proactive context management (<40% always)
+
+### Future Enhancements
+
+- Video tutorials for each skill
+- Interactive skill builder (guided TDD)
+- Metrics dashboard (track your token savings)
+- Community skill voting system
+
+**Want to contribute?** See [CONTRIBUTING.md](./CONTRIBUTING.md) or open an issue!
+
+---
+
+<div align="center">
+
+**⭐ Star this repo if you find it useful!**
+
+**🔗 Share with your team to spread token optimization practices**
+
+**💬 Join discussions to help shape future skills**
+
+</div>

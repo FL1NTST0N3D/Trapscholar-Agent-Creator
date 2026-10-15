@@ -1,0 +1,53 @@
+{
+  "alerts": {
+    "critical": {
+      "qs_drop": 3,
+      "min_monthly_spend": 500,
+      "response_time": "immediate",
+      "description": "QS dropped 3+ points on keyword spending > $500/month"
+    },
+    "warning": {
+      "qs_drop": 2,
+      "min_weekly_impressions": 100,
+      "response_time": "48_hours",
+      "description": "QS dropped 2 points on keyword with > 100 impressions/week"
+    },
+    "watch": {
+      "qs_drop": 1,
+      "min_weekly_impressions": 0,
+      "response_time": "weekly_review",
+      "description": "QS dropped 1 point on any keyword"
+    },
+    "positive": {
+      "qs_increase": 2,
+      "response_time": "document",
+      "description": "QS increased 2+ points — document what changed"
+    }
+  },
+  "benchmarks": {
+    "pct_at_7_plus": {
+      "excellent": 70,
+      "good": 60,
+      "acceptable": 45,
+      "poor": 30
+    },
+    "weighted_avg_qs": {
+      "excellent": 7.5,
+      "good": 6.5,
+      "acceptable": 5.5,
+      "poor": 4.5
+    }
+  },
+  "cpc_multipliers": {
+    "1": 5.00,
+    "2": 4.00,
+    "3": 3.00,
+    "4": 2.00,
+    "5": 1.67,
+    "6": 1.25,
+    "7": 1.00,
+    "8": 0.83,
+    "9": 0.67,
+    "10": 0.50
+  }
+}

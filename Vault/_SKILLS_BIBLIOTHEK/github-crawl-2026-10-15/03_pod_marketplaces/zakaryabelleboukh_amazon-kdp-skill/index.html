@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon KDP Publishing Expert — A Claude Skill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBFBFA;
+    --surface:#FFFFFF;
+    --ink:#12141A;
+    --ink-soft:#5B5F68;
+    --ink-faint:#8A8D94;
+    --line:#E7E7E3;
+    --accent:#1D3B34;
+    --accent-soft:#E8EEEC;
+    --mark:#E1523D;
+    --mark-soft:#FCEAE6;
+    --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  h1,h2,h3{margin:0; letter-spacing:-0.02em; font-weight:800;}
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  code, .mono{font-family:'IBM Plex Mono', monospace;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(251,251,250,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 32px;}
+  .logo{display:flex; align-items:center; gap:9px; font-weight:700; font-size:15px;}
+  .logo .dot{width:9px; height:9px; border-radius:2px; background:var(--accent); flex:none;}
+  .navlinks{display:flex; align-items:center; gap:28px; font-size:14px; color:var(--ink-soft);}
+  .navlinks a:hover{color:var(--ink);}
+  @media (max-width:720px){ .navlinks .hide-sm{display:none;} }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:600;
+    padding:11px 18px;
+    border-radius:9px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .16s ease, background .16s ease, border-color .16s ease, color .16s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{background:#000;}
+  .btn-line{border-color:var(--line); color:var(--ink);}
+  .btn-line:hover{border-color:var(--ink-faint);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 40px;}
+  .kicker{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; font-weight:600; letter-spacing:0.02em;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:7px 13px; border-radius:100px;
+    margin-bottom:26px;
+  }
+  .kicker .pulse{width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:1.05;
+    max-width:16ch;
+  }
+  .hero h1 .markword{position:relative; white-space:nowrap;}
+  .hero h1 .markword svg{
+    position:absolute; left:-2%; right:-2%; bottom:-6px; width:104%; height:16px;
+    overflow:visible;
+  }
+  .hero h1 .markword path{
+    stroke:var(--mark); stroke-width:5; fill:none; stroke-linecap:round;
+    stroke-dasharray:340; stroke-dashoffset:340;
+    animation:draw 1s ease .5s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  .hero .dek{
+    margin-top:24px; max-width:52ch;
+    font-size:17.5px; color:var(--ink-soft);
+  }
+  .hero .ctas{margin-top:36px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  /* mock diff card */
+  .mockcard{
+    margin-top:64px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:0 20px 50px -20px rgba(18,20,26,0.14);
+    overflow:hidden;
+  }
+  .mockcard .bar{
+    display:flex; align-items:center; gap:8px;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+    background:#FAFAF8;
+  }
+  .mockcard .bar span{width:9px; height:9px; border-radius:50%; background:var(--line);}
+  .mockcard .bar .label{margin-inline-start:8px; font-size:12.5px; color:var(--ink-faint);}
+  .mockcard .body{display:grid; grid-template-columns:1fr 1fr;}
+  @media (max-width:720px){ .mockcard .body{grid-template-columns:1fr;} }
+  .mockcard .pane{padding:24px 26px;}
+  .mockcard .pane + .pane{border-left:1px solid var(--line);}
+  @media (max-width:720px){ .mockcard .pane + .pane{border-left:none; border-top:1px solid var(--line);} }
+  .mockcard .pane-label{font-size:11.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:14px;}
+  .mockcard .line{font-size:14.5px; line-height:1.9; font-family:'IBM Plex Mono', monospace;}
+  .mockcard .del{color:#B7473C; background:#FCEAE6; text-decoration:line-through; padding:1px 4px; border-radius:3px;}
+  .mockcard .add{color:#1D3B34; background:#E8EEEC; padding:1px 4px; border-radius:3px;}
+  .cursor{display:inline-block; width:7px; height:15px; background:var(--accent); vertical-align:-2px; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- section shell ---------- */
+  section.block{padding:88px 0; border-top:1px solid var(--line);}
+  .eyebrow{font-size:12.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;}
+  .block h2{font-size:clamp(26px,3.2vw,36px);}
+  .block .lede{margin-top:14px; max-width:60ch; color:var(--ink-soft); font-size:16.5px;}
+
+  /* ---------- pipeline stepper ---------- */
+  .stepper{
+    margin-top:52px;
+    display:flex;
+    gap:0;
+    overflow-x:auto;
+    padding-bottom:8px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .step{
+    flex:1 0 150px;
+    position:relative;
+    padding-top:28px;
+    padding-inline-end:18px;
+  }
+  .step .track{position:absolute; top:8px; left:0; right:18px; height:2px; background:var(--line);}
+  .step:last-child .track{right:100%;}
+  .step .node{
+    position:absolute; top:2px; left:0;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent);
+  }
+  .step .n{font-size:12px; color:var(--ink-faint); margin-bottom:4px;}
+  .step h3{font-size:15px; font-weight:700; margin-bottom:5px;}
+  .step p{font-size:13px; color:var(--ink-soft);}
+
+  /* ---------- features grid ---------- */
+  .grid3{margin-top:52px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  @media (max-width:860px){ .grid3{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .grid3{grid-template-columns:1fr;} }
+  .feat{background:var(--surface); padding:28px 26px; transition:background .18s ease;}
+  .feat:hover{background:#FAFAF8;}
+  .feat .icn{
+    width:38px; height:38px; border-radius:9px;
+    background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px; margin-bottom:16px;
+  }
+  .feat h3{font-size:15.5px; margin-bottom:8px;}
+  .feat p{font-size:14px; color:var(--ink-soft);}
+
+  /* ---------- installation ---------- */
+  .install{margin-top:52px; max-width:720px;}
+  .istep{display:flex; gap:20px; position:relative; padding-bottom:34px;}
+  .istep:last-child{padding-bottom:0;}
+  .istep .rail{position:absolute; left:15px; top:34px; bottom:0; width:1px; background:var(--line);}
+  .istep:last-child .rail{display:none;}
+  .istep .num{
+    flex:none; width:32px; height:32px; border-radius:9px;
+    background:var(--ink); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .istep h3{font-size:15.5px; margin-bottom:6px;}
+  .istep p{font-size:14.5px; color:var(--ink-soft);}
+  .istep code{background:var(--accent-soft); color:var(--accent); padding:2px 6px; border-radius:5px; font-size:13px;}
+
+  .terminal{
+    margin-top:32px; max-width:720px;
+    background:var(--ink); color:#E9E9E6;
+    border-radius:12px;
+    padding:18px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .terminal code{font-family:'IBM Plex Mono', monospace; font-size:13.5px; white-space:pre; overflow-x:auto;}
+  .copy-btn{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16);
+    color:#E9E9E6; padding:8px 12px; border-radius:7px; cursor:pointer; flex:none;
+    transition:background .15s ease;
+  }
+  .copy-btn:hover{background:rgba(255,255,255,0.16);}
+
+  /* ---------- examples ---------- */
+  .catalog{margin-top:52px; display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:720px){ .catalog{grid-template-columns:1fr;} }
+  .card{
+    border:1px solid var(--line); border-radius:14px; background:var(--surface);
+    padding:22px; transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .card:hover{box-shadow:0 16px 32px -18px rgba(18,20,26,0.18); transform:translateY(-2px);}
+  .card .top{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .card .tag{font-size:12px; font-weight:600; color:var(--accent); background:var(--accent-soft); padding:5px 10px; border-radius:100px;}
+  .card .mini-copy{background:none; border:none; color:var(--ink-faint); cursor:pointer; font-size:12px; font-family:'IBM Plex Mono', monospace;}
+  .card .mini-copy:hover{color:var(--ink);}
+  .card pre{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft); white-space:pre-wrap; margin:0; line-height:1.7;}
+
+  /* ---------- cta band ---------- */
+  .ctaband{
+    border-top:1px solid var(--line);
+    padding:88px 0;
+    text-align:center;
+  }
+  .ctaband h2{font-size:clamp(26px,3.6vw,40px); max-width:18ch; margin:0 auto;}
+  .ctaband p{margin-top:16px; color:var(--ink-soft); font-size:16.5px;}
+  .ctaband .ctas{margin-top:32px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:52px 0;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer .fmeta{font-size:13.5px; color:var(--ink-faint);}
+  footer .flinks{display:flex; gap:22px; font-size:13.5px; color:var(--ink-soft);}
+  footer .flinks a:hover{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="dot"></span> KDP Publishing Expert</div>
+    <div class="navlinks">
+      <a href="#pipeline" class="hide-sm">Pipeline</a>
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#install" class="hide-sm">Install</a>
+      <a href="https://github.com/zakaryabelleboukh/amazon-kdp-skill" target="_blank" rel="noopener" class="btn btn-line">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker"><span class="pulse"></span> A skill for Claude · MIT licensed</div>
+    <h1>
+      <span class="markword">Ship
+        <svg viewBox="0 0 140 16" preserveAspectRatio="none"><path d="M2,10 C 30,2 60,14 90,6 C 105,2 120,10 138,6"/></svg>
+      </span>
+      your book, not just your draft.
+    </h1>
+    <p class="dek">Amazon KDP Publishing Expert turns Claude into a structured book-production partner — planning, writing, editing, formatting, packaging and quality-checking your book for Kindle Direct Publishing, start to finish.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://github.com/zakaryabelleboukh/amazon-kdp-skill" target="_blank" rel="noopener">View on GitHub</a>
+      <a class="btn btn-line" href="#install">See installation</a>
+    </div>
+
+    <div class="mockcard reveal" id="mockcard">
+      <div class="bar"><span></span><span></span><span></span><span class="label">Claude · editing pass</span></div>
+      <div class="body">
+        <div class="pane">
+          <div class="pane-label">Before</div>
+          <div class="line">The book <span class="del">is talking about how</span> gardening can be done by anyone <span class="del">even if</span> they dont have alot of space.</div>
+        </div>
+        <div class="pane">
+          <div class="pane-label">After</div>
+          <div class="line">This book shows how anyone can garden, <span class="add">even with very little space</span>.<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="pipeline">
+  <div class="wrap">
+    <div class="eyebrow">The process</div>
+    <h2>One pipeline, nine stages</h2>
+    <p class="lede">Every project moves through the same sequence, so nothing gets skipped between a good idea and a finished, publishable book.</p>
+    <div class="stepper">
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">01</div><h3>Idea</h3><p>Concept &amp; audience</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">02</div><h3>Planning</h3><p>Structure &amp; chapters</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">03</div><h3>Manuscript</h3><p>Drafting</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">04</div><h3>Editing</h3><p>Clarity &amp; consistency</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">05</div><h3>Interior</h3><p>Print &amp; Kindle formats</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">06</div><h3>Cover</h3><p>Brief &amp; prompts</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">07</div><h3>Metadata</h3><p>Title &amp; keywords</p></div>
+      <div class="step"><div class="track"></div><div class="node"></div><div class="n">08</div><h3>QA</h3><p>Pre-publication audit</p></div>
+      <div class="step"><div class="node"></div><div class="n">09</div><h3>Checklist</h3><p>Ready for KDP</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="features">
+  <div class="wrap">
+    <div class="eyebrow">What it does</div>
+    <h2>Built like an editor, not a template</h2>
+    <p class="lede">Nine capabilities that cover the parts of publishing that are easy to get wrong.</p>
+    <div class="grid3">
+      <div class="feat"><div class="icn">📖</div><h3>Book planning</h3><p>Chapter architecture built around your subject and reader.</p></div>
+      <div class="feat"><div class="icn">✍️</div><h3>Manuscript development</h3><p>Drafting and line editing without rewriting your facts.</p></div>
+      <div class="feat"><div class="icn">🔎</div><h3>Consistency checks</h3><p>Catches contradictions and formatting drift across chapters.</p></div>
+      <div class="feat"><div class="icn">📐</div><h3>Interior prep</h3><p>Paperback, hardcover and Kindle requirements, handled per format.</p></div>
+      <div class="feat"><div class="icn">🎨</div><h3>Cover briefs</h3><p>Direction and image-generation prompts ready for an illustrator.</p></div>
+      <div class="feat"><div class="icn">📝</div><h3>KDP metadata</h3><p>Title, subtitle and description scoped to your manuscript.</p></div>
+      <div class="feat"><div class="icn">🔑</div><h3>Keyword strategy</h3><p>Search terms and categories grounded in real reader language.</p></div>
+      <div class="feat"><div class="icn">📋</div><h3>Pre-publication QA</h3><p>A full audit before you hit publish.</p></div>
+      <div class="feat"><div class="icn">🛡️</div><h3>Copyright-aware</h3><p>A clear line between your material and anything that isn't.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="install">
+  <div class="wrap">
+    <div class="eyebrow">Get started</div>
+    <h2>Installation</h2>
+    <p class="lede">Five steps from repository to a running skill inside Claude.</p>
+    <div class="install">
+      <div class="istep"><div class="rail"></div><div class="num">1</div><div><h3>Download or clone the repository</h3><p>Get the full skill folder onto your machine.</p></div></div>
+      <div class="istep"><div class="rail"></div><div class="num">2</div><div><h3>Keep <code>SKILL.md</code> at the root</h3><p>Claude reads this file to load the skill's instructions.</p></div></div>
+      <div class="istep"><div class="rail"></div><div class="num">3</div><div><h3>Package the folder as a ZIP</h3><p>Only if your Claude interface requires a ZIP upload.</p></div></div>
+      <div class="istep"><div class="rail"></div><div class="num">4</div><div><h3>Open Settings → Customize → Skills</h3><p>This is where skills get uploaded and enabled in Claude.</p></div></div>
+      <div class="istep"><div class="num">5</div><div><h3>Upload and enable it</h3><p>The skill is now active for your conversations.</p></div></div>
+    </div>
+    <div class="terminal">
+      <code id="cloneCmd">git clone https://github.com/zakaryabelleboukh/amazon-kdp-skill.git
+cd amazon-kdp-skill</code>
+      <button class="copy-btn" id="copyBtn">Copy</button>
+    </div>
+  </div>
+</section>
+
+<section class="block reveal" id="examples">
+  <div class="wrap">
+    <div class="eyebrow">Try it</div>
+    <h2>Prompts you can copy</h2>
+    <p class="lede">Hand these to Claude once the skill is enabled.</p>
+    <div class="catalog">
+      <div class="card">
+        <div class="top"><span class="tag">Create a book</span><button class="mini-copy" data-copy="0">Copy</button></div>
+        <pre id="p0">I want to create a children's activity book for ages 6–8.
+Build the complete book concept, page structure, activity plan,
+writing guidelines, cover brief, metadata and publishing checklist.</pre>
+      </div>
+      <div class="card">
+        <div class="top"><span class="tag">Improve a manuscript</span><button class="mini-copy" data-copy="1">Copy</button></div>
+        <pre id="p1">Review this manuscript as a professional editor.
+Improve clarity, structure, consistency and reader experience.
+Do not change factual claims unless they are clearly identified
+for verification.</pre>
+      </div>
+      <div class="card">
+        <div class="top"><span class="tag">Prepare metadata</span><button class="mini-copy" data-copy="2">Copy</button></div>
+        <pre id="p2">Create a complete KDP metadata package for this book:
+title, subtitle, description, seven keyword ideas, category
+suggestions, audience and publishing checklist. Keep every claim
+accurate to the actual manuscript.</pre>
+      </div>
+      <div class="card">
+        <div class="top"><span class="tag">Final QA</span><button class="mini-copy" data-copy="3">Copy</button></div>
+        <pre id="p3">Run a complete pre-publication KDP QA audit. Check manuscript
+structure, front matter, back matter, TOC, formatting consistency,
+metadata consistency, cover requirements and anything that could
+cause publishing problems.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ctaband reveal">
+  <div class="wrap">
+    <h2>Idea to publishable book, in one skill.</h2>
+    <p>Free, open source, and MIT licensed.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://github.com/zakaryabelleboukh/amazon-kdp-skill" target="_blank" rel="noopener">View on GitHub</a>
+      <a class="btn btn-line" href="#install">Install the skill</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fmeta">© 2026 Amazon KDP Publishing Expert · by Zakarya Bellebouk · Not an official Amazon product</div>
+    <div class="flinks">
+      <a href="https://github.com/zakaryabelleboukh/amazon-kdp-skill" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/zakaryabelleboukh/amazon-kdp-skill/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      <a href="https://github.com/zakaryabelleboukh/amazon-kdp-skill/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12});
+  items.forEach(i=>io.observe(i));
+
+  const copyBtn = document.getElementById('copyBtn');
+  const cloneCmd = document.getElementById('cloneCmd');
+  copyBtn.addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText(cloneCmd.textContent.trim()); copyBtn.textContent='Copied'; }
+    catch(e){ copyBtn.textContent='Select & copy'; }
+    setTimeout(()=>copyBtn.textContent='Copy', 1800);
+  });
+
+  document.querySelectorAll('.mini-copy').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const id = 'p' + btn.dataset.copy;
+      const text = document.getElementById(id).textContent.trim();
+      try{ await navigator.clipboard.writeText(text); btn.textContent='Copied'; }
+      catch(e){ btn.textContent='Select & copy'; }
+      setTimeout(()=>btn.textContent='Copy', 1600);
+    });
+  });
+</script>
+
+</body>
+</html>

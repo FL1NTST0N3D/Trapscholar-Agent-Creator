@@ -1,0 +1,70 @@
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Set Up Google Analytics 4",
+  "description": "A step-by-step guide to setting up Google Analytics 4 on your website for tracking user behavior and conversions.",
+  "image": "https://example.com/images/ga4-setup-guide.jpg",
+  "totalTime": "PT20M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Google account"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Website with admin access"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Google Tag Manager (optional)"
+    }
+  ],
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "GA4 measurement ID"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Create a GA4 Property",
+      "text": "Go to analytics.google.com, click Admin, then click Create Property. Enter your property name, select your time zone and currency.",
+      "url": "https://example.com/guide/ga4-setup#step-1",
+      "image": "https://example.com/images/ga4-step1.jpg"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Set Up a Data Stream",
+      "text": "In the property settings, click Data Streams, then Add Stream. Select Web and enter your website URL and stream name.",
+      "url": "https://example.com/guide/ga4-setup#step-2",
+      "image": "https://example.com/images/ga4-step2.jpg"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Install the Tracking Code",
+      "text": "Copy the Measurement ID (starts with G-). Add the gtag.js snippet to the <head> section of every page, or use Google Tag Manager to deploy it site-wide.",
+      "url": "https://example.com/guide/ga4-setup#step-3",
+      "image": "https://example.com/images/ga4-step3.jpg"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Verify Data Collection",
+      "text": "Open your website in a new tab, then check the GA4 Realtime report. You should see at least 1 active user. If not, check the tracking code installation and wait a few minutes.",
+      "url": "https://example.com/guide/ga4-setup#step-4",
+      "image": "https://example.com/images/ga4-step4.jpg"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Key Events",
+      "text": "Go to Admin > Events and mark important events as key events (formerly conversions). Common key events include form submissions, phone clicks, and purchase completions.",
+      "url": "https://example.com/guide/ga4-setup#step-5",
+      "image": "https://example.com/images/ga4-step5.jpg"
+    }
+  ]
+}

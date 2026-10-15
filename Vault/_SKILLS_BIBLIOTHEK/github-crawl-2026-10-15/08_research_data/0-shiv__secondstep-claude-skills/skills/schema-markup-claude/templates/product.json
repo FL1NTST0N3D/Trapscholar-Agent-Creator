@@ -1,0 +1,96 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Example Product Name",
+  "description": "Detailed product description with key features and benefits.",
+  "image": [
+    "https://example.com/images/product-front.jpg",
+    "https://example.com/images/product-side.jpg",
+    "https://example.com/images/product-lifestyle.jpg"
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": "Example Brand"
+  },
+  "sku": "EX-PROD-001",
+  "gtin13": "0012345678901",
+  "mpn": "EX001",
+  "color": "Black",
+  "material": "Aluminum",
+  "weight": {
+    "@type": "QuantitativeValue",
+    "value": "1.5",
+    "unitCode": "KGM"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://example.com/products/example-product",
+    "price": "49.99",
+    "priceCurrency": "USD",
+    "priceValidUntil": "2025-12-31",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "Example Store"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "USD"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "US"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 1,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 3,
+          "maxValue": 7,
+          "unitCode": "DAY"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.6",
+    "reviewCount": "89",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "John Doe"
+      },
+      "datePublished": "2024-08-15",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Excellent product. Great quality and fast shipping."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "campaign": "Search - Plumbing Services",
+    "ad_group": "Emergency Plumbing",
+    "final_url": "https://example.com/emergency-plumbing",
+    "path1": "Emergency",
+    "path2": "Plumbing",
+    "headlines": [
+      "24/7 Emergency Plumbing",
+      "Licensed Dallas Plumbers",
+      "Fast Plumbing Repairs",
+      "Call Now — Free Estimate",
+      "Trusted by 5,000+ Homes",
+      "Same-Day Service Available",
+      "No Hidden Fees — Ever",
+      "Burst Pipe? We're On It",
+      "4.9-Star Rated Plumber",
+      "Book Online in 60 Seconds",
+      "Senior & Military Discount",
+      "Drain Cleaning Experts",
+      "Upfront Pricing Always",
+      "Your Local Plumbing Pro",
+      "Save $50 — New Customers"
+    ],
+    "descriptions": [
+      "Burst pipe or clogged drain? Our licensed plumbers arrive in 60 minutes or less. Call now.",
+      "Rated 4.9/5 by 5,000+ Dallas homeowners. No hidden fees, upfront pricing. Book online today.",
+      "Emergency plumbing 24/7. Licensed, bonded & insured. Senior & military discounts available.",
+      "Save $50 on your first service. Same-day appointments available. Fast, reliable & affordable."
+    ],
+    "pins": {
+      "Headline 1": 1,
+      "Description 1": 1
+    }
+  }
+]
