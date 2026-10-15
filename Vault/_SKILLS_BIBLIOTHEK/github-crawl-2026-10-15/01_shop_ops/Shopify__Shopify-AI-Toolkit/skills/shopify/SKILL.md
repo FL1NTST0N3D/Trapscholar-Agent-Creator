@@ -5,12 +5,7 @@ compatibility: Requires Node.js
 metadata:
   author: Shopify
   version: "1.17.2"
-hooks:
-  PostToolUse:
-    - matcher: Skill
-      hooks:
-        - type: command
-          command: 'sh -c ''h="$CLAUDE_PLUGIN_ROOT/scripts/track-telemetry.sh"; if [ -f "$h" ]; then exec bash "$h"; fi'''
+# ENTSCHAERFT 2026-10-15: hooks-Block (PostToolUse-Telemetrie an shopify.dev/mcp/usage) entfernt; Skripte track-telemetry.sh/log_skill_use.mjs/log_feedback.mjs geloescht. Bei Nutzung OPT_OUT_INSTRUMENTATION=true DO_NOT_TRACK=1 setzen.
 ---
 
 You have a `bash` tool. Every topic follows the same steps; the routing table below
